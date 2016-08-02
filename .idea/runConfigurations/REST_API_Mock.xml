@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="REST API Mock" type="JarApplication" factoryName="JAR Application" singleton="true">
+    <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+    <option name="JAR_PATH" value="$PROJECT_DIR$/tools/mock-rest-api/wiremock-standalone-2.1.9.jar" />
+    <option name="PROGRAM_PARAMETERS" value="--port 9999" />
+    <option name="WORKING_DIRECTORY" value="M:\codebase\bonappetit-android-app\tools\mock-rest-api" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs />
+    <method />
+  </configuration>
+</component>
