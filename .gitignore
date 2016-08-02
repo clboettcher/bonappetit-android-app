@@ -1,21 +1,51 @@
-# Built application files
+####################################################
+# Gradle
+####################################################
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+####################################################
+#IntelliJ
+####################################################
+target/
+*.ipr
+*.iml
+*.iws
+*.ids
+**/.idea/*
+!.idea/runConfigurations/
+out
+classes
+
+####################################################
+# From Android.gitignore
+####################################################
+# built application files
 *.apk
 *.ap_
 
-# Files for the ART/Dalvik VM
+# files for the dex VM
 *.dex
 
 # Java class files
 *.class
 
-# Generated files
+# generated files
 bin/
 gen/
-out/
+*/gen-external-apklibs
 
-# Gradle files
-.gradle/
-build/
+# navigation XML
+.navigation
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -31,10 +61,6 @@ proguard/
 
 # Android Studio captures folder
 captures/
-
-# Intellij
-*.iml
-.idea/workspace.xml
 
 # Keystore files
 *.jks
