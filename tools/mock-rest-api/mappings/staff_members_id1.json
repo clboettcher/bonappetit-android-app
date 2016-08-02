@@ -1,0 +1,11 @@
+{
+  "priority" : 10,
+  "request": {
+    "method": "GET",
+    "urlPattern": "/staffMembers/1"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "response_staff_members_id1.json"
+  }
+}
