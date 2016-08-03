@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- ip -->
+    <EditTextPreference
+            android:key="@string/prefs_key_server_host_name"
+            android:digits="0123456789."
+            android:title="@string/prefs_title_server_host_name"
+            android:summary="@string/prefs_summary_server_host_name"
+            android:dialogTitle="@string/prefs_dialog_title_server_host_name"
+            android:dialogMessage="@string/prefs_dialog_message_server_host_name"
+            android:defaultValue="10.0.2.2"
+            />
+    <!-- port -->
+    <EditTextPreference
+            android:key="@string/prefs_key_server_port"
+            android:digits="0123456789"
+            android:title="@string/prefs_title_server_port"
+            android:summary="@string/prefs_summary_server_port"
+            android:dialogTitle="@string/prefs_dialog_title_server_port"
+            android:dialogMessage="@string/prefs_dialog_message_server_port"
+            android:defaultValue="8080"
+            />
+    <!-- port -->
+    <EditTextPreference
+            android:key="@string/prefs_key_server_context_path"
+            android:title="@string/prefs_title_server_context_path"
+            android:summary="@string/prefs_summary_server_context_path"
+            android:dialogTitle="@string/prefs_dialog_title_server_context_path"
+            android:dialogMessage="@string/prefs_dialog_message_server_context_path"
+            android:defaultValue="/"
+            />
+
+    <!-- use test data -->
+    <CheckBoxPreference
+            android:key="@string/prefs_key_use_test_data"
+            android:title="@string/prefs_title_use_test_data"
+            android:summary="@string/prefs_summary_use_test_data"
+            android:dialogTitle="@string/prefs_dialog_title_use_test_data"
+            android:dialogMessage="@string/prefs_dialog_message_use_test_data"
+            android:defaultValue="false"
+            />
+
+</PreferenceScreen>

@@ -1,16 +1,22 @@
-package com.github.clboettcher.bonappetit.app;
+package com.github.clboettcher.bonappetit.app.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BonAppetitBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void injectDependencies(DiComponent diComponent) {
+        diComponent.inject(this);
     }
 
     @Override

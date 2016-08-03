@@ -1,10 +1,11 @@
-package com.github.clboettcher.bonappetit.app;
+package com.github.clboettcher.bonappetit.app.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.github.clboettcher.bonappetit.app.R;
 
 /**
  * A placeholder fragment containing a simple view.
