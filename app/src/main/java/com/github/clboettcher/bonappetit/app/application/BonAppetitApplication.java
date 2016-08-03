@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app;
+package com.github.clboettcher.bonappetit.app.application;
 
 import android.app.Application;
 import android.widget.Toast;
@@ -27,8 +27,7 @@ public class BonAppetitApplication extends Application {
         ;
         // Invoke components that are not injected anywhere manually.
         // Otherwise they are not instantiated.
-//        this.diComponent.timestampService();
-//        this.diComponent.staffMembersService();
+        this.diComponent.staffMembersService();
 
         // Inject dependencies into this class.
         this.diComponent.inject(this);

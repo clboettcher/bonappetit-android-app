@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.util.Log;
-import com.github.clboettcher.bonappetit.app.BonAppetitApplication;
+import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.Constants;
 import com.github.clboettcher.bonappetit.app.event.BaseUrlChangedEvent;
 import com.github.clboettcher.bonappetit.app.fragment.BonAppetitPreferencesFragment;

@@ -1,8 +1,9 @@
 package com.github.clboettcher.bonappetit.app.dagger;
 
-import com.github.clboettcher.bonappetit.app.BonAppetitApplication;
+import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.activity.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.activity.MainActivity;
+import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMemberService;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -16,4 +17,6 @@ public interface DiComponent {
     void inject(BonAppetitApplication bonAppetitApplication);
 
     void inject(BonAppetitPreferencesActivity bonAppetitPreferencesActivity);
+
+    StaffMemberService staffMembersService();
 }

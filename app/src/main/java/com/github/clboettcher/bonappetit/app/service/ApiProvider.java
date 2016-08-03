@@ -4,6 +4,7 @@ import android.util.Log;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.Constants;
 import com.github.clboettcher.bonappetit.app.event.BaseUrlChangedEvent;
+import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMembersApi;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Retrofit;
@@ -21,6 +22,11 @@ public class ApiProvider {
      * The bean providing the apps config.
      */
     private ConfigProvider configProvider;
+
+    /**
+     * The API to access the staff members resource.
+     */
+    private StaffMembersApi staffMemberApi;
 
     /**
      * Constructor setting the specified properties.
@@ -47,6 +53,10 @@ public class ApiProvider {
                 .build();
 
         // Reinitialize server APIs.
-//        staffMemberApi = retrofit.create(StaffMemberApi.class);
+        staffMemberApi = retrofit.create(StaffMembersApi.class);
+    }
+
+    public StaffMembersApi getStaffMemberApi() {
+        return staffMemberApi;
     }
 }
