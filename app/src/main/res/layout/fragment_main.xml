@@ -1,16 +1,197 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context=".MainActivityFragment">
+<?xml version="1.0" encoding="utf-8"?>
+<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/fragmentMainViewSwitcher"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".MainActivity"
+        >
 
-    <TextView
-            android:text="replace me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <RelativeLayout
+            android:id="@+id/fragmentMainProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
 
-</RelativeLayout>
+        <ImageView
+                android:id="@+id/fragmentMainProgressBannerImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_burger_large"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                />
+
+        <!--style="@style/TextView.Title"-->
+        <TextView
+                android:id="@+id/fragmentMainProgressAppName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/general_app_name"
+                android:layout_alignBottom="@+id/fragmentMainProgressBannerImage"
+                android:layout_centerHorizontal="true"
+                />
+
+        <ProgressBar
+                android:id="@+id/fragmentMainProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_below="@+id/fragmentMainProgressBannerImage"
+                android:layout_centerHorizontal="true"
+                />
+
+        <TextView
+                android:id="@+id/fragmentMainProgressStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/fragment_main_progress_status"
+                android:layout_below="@+id/fragmentMainProgressBar"
+                android:layout_centerHorizontal="true"
+                />
+
+    </RelativeLayout>
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/fragmentMainProgress"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
+
+    <!--<ImageView-->
+    <!--android:id="@+id/fragmentMainProgressBannerImage"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:src="@drawable/ic_burger_large"-->
+    <!--/>-->
+
+    <!--&lt;!&ndash;style="@style/TextView.Title"&ndash;&gt;-->
+    <!--<TextView-->
+    <!--android:id="@+id/fragmentMainProgessAppName"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:text="@string/general_app_name"-->
+    <!--/>-->
+
+    <!--<ProgressBar-->
+    <!--android:id="@+id/fragmentMainProgressBar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/fragmentMainProgressStatus"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--android:gravity="center"-->
+    <!--android:text="@string/fragment_main_progress_status"-->
+    <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/LinearLayout_UpdateEventData_Error"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textview_update_data_error_label"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/update_data_textview_error_label"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textview_update_data_error"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/update_data_textview_error_text"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+    <!--/>-->
+
+    <!--<LinearLayout-->
+    <!--style="?android:attr/buttonBarStyle"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center"-->
+    <!--&gt;-->
+
+    <!--<Button-->
+    <!--android:id="@+id/button_update_data_retry"-->
+    <!--style="?android:attr/buttonBarButtonStyle"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:onClick="retryButtonHandler"-->
+    <!--android:text="@string/update_data_button_retry_text"-->
+    <!--/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/button_update_data_show_details"-->
+    <!--style="?android:attr/buttonBarButtonStyle"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:onClick="detailsButtonHandler"-->
+    <!--android:text="@string/update_data_button_show_details_text"-->
+    <!--/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/button_update_data_close_app"-->
+    <!--style="?android:attr/buttonBarButtonStyle"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:onClick="closeAppButtonHandler"-->
+    <!--android:text="@string/update_data_button_close_text"-->
+    <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/LinearLayout_updateEventData_ErrorDetails"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--android:visibility="invisible"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textview_update_data_error_details_label"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/update_data_textview_error_details_label"-->
+    <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+    <!--android:textStyle="bold"-->
+    <!--/>-->
+
+    <!--<ScrollView-->
+    <!--android:id="@+id/scrollView1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/textview_update_data_error_details"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/update_data_textview_error_details_text"-->
+    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+    <!--/>-->
+    <!--</ScrollView>-->
+    <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+</ViewSwitcher>

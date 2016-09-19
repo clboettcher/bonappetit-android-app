@@ -54,4 +54,9 @@
     <string name="prefs_key_username">prefs_key_username</string>
     <string name="prefs_key_customer">prefs_key_customer</string>
 
+    <!--***********************************************************************************************************-->
+    <!--Main-->
+    <!--***********************************************************************************************************-->
+    <string name="fragment_main_progress_status">Daten werden geladen …</string>
+
 </resources>
