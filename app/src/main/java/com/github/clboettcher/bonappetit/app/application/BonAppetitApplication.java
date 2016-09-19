@@ -9,6 +9,17 @@ import org.greenrobot.eventbus.*;
 
 import javax.inject.Inject;
 
+/**
+ * The custom {@link Application} subclass for the bonappetit app.
+ * <p>
+ * The custom application subclass is responsible for
+ * - Initialization of the dependency injection framework (dagger)
+ * - Instantiate beans manually that are not injected anywhere. Otherwise
+ * they are not created by the di framework. Such beans are typically invoked
+ * via event notifications over the event bus.
+ * - Handle global events. E.g. the event that is triggered when there is no subscriber
+ * for an event (see {@link NoSubscriberEvent}).
+ */
 public class BonAppetitApplication extends Application {
 
     @Inject
@@ -23,14 +34,15 @@ public class BonAppetitApplication extends Application {
         this.diComponent = DaggerDiComponent
                 .builder()
                 .diModule(new DiModule(this))
-                .build()
-        ;
+                .build();
+
         // Invoke components that are not injected anywhere manually.
         // Otherwise they are not instantiated.
         this.diComponent.staffMembersService();
 
         // Inject dependencies into this class.
         this.diComponent.inject(this);
+
         // Register for global events
         this.eventBus.register(this);
     }

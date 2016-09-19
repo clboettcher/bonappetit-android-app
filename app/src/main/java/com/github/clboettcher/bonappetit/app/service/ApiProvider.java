@@ -15,6 +15,13 @@ import javax.inject.Inject;
 /**
  * Provides implementations of the API interfaces that can be used
  * to perform backend calls.
+ * <p>
+ * The API implementations are not injected directly into the services
+ * which use them, because their configuration might change. E.g. the user might
+ * alter the servers backend URL. This class is responsible for detecting configuration
+ * changes and reinitializing API implementations accordingly. The service should query
+ * this class for the API implementation before performing any request. This way we
+ * can make sure that the most current (and correct) API implementation is used at all times.
  */
 public class ApiProvider {
 
