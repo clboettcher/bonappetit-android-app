@@ -8,6 +8,9 @@ import javax.inject.Inject;
 
 /**
  * Provides config values from the shared preferences.
+ * <p>
+ * It adds additional value by combining multiple configuration properties to
+ * build more high level properties.
  */
 public class ConfigProvider {
 
@@ -47,7 +50,7 @@ public class ConfigProvider {
 
         if (host == null) {
             Toast.makeText(this.context, "Missing configuration value server hostname. " +
-                    "Connecting the server will not work.", Toast.LENGTH_LONG);
+                    "Connecting the server will not work.", Toast.LENGTH_LONG).show();
         }
 
         return String.format("http://%s:%d%s", host, port, path);
