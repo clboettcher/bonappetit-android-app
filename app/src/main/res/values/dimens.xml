@@ -1,5 +1,14 @@
-<resources>
+<!--
+The dimens file contains all dimensions (things related to pixels) that are used
+throughout the app. The dimens defined here are general and have no knowledge for what
+they are used. They should also not be referenced directly from any layout definition under
+res/layout. Instead a style should be defined under res/values/styles.xml that is used in the
+layout and references this dimensions.
 
+You should not be in need to define additional dimensions. Instead try to use general dimensions defined here. This
+way the UI will be more consistent and look more badass.
+-->
+<resources>
     <!--***********************************************************************************************************-->
     <!--Screen margins-->
     <!--***********************************************************************************************************-->
