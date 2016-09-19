@@ -1,5 +1,10 @@
-package com.github.clboettcher.bonappetit.app.service.staffmembers;
+package com.github.clboettcher.bonappetit.app.event.staffmembers;
 
+/**
+ * Event that is fired when an update staff members operation completed with errors.
+ * <p>
+ * The instance carries additional details in its properties.
+ */
 public class StaffMembersUpdateFailedEvent {
     private Throwable throwable;
     private Integer httpCode;
