@@ -1,5 +1,75 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--***********************************************************************************************************-->
+    <!--Screen margins-->
+    <!--***********************************************************************************************************-->
+    <dimen name="activity_horizontal_margin">8dp</dimen>
+    <dimen name="activity_vertical_margin">8dp</dimen>
+
+    <!--***********************************************************************************************************-->
+    <!--Font sizes-->
+    <!--***********************************************************************************************************-->
+    <dimen name="font_xxl">60sp</dimen>
+    <dimen name="font_xl">40sp</dimen>
+    <dimen name="font_l">24sp</dimen>
+    <dimen name="font_m">20sp</dimen>
+    <dimen name="font_s">16sp</dimen>
+
+    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
+    <!--<dimen name="TextSize.Title">60sp</dimen>-->
+    <!--<dimen name="TextSize.Large">40sp</dimen>-->
+    <!--<dimen name="TextSize.H1">24sp</dimen>-->
+    <!--<dimen name="TextSize.H2">20sp</dimen>-->
+    <!--<dimen name="TextSize.Medium">16sp</dimen>-->
+    <!--<dimen name="TextSize.H3">16sp</dimen>-->
+    <!--<dimen name="TextSize.Small">15sp</dimen>-->
+
+    <!--***********************************************************************************************************-->
+    <!--Spacing between two views-->
+    <!--***********************************************************************************************************-->
+    <dimen name="spacing_huge">40dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_normal">14dp</dimen>
+    <dimen name="spacing_small">10dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+
+    <!--***********************************************************************************************************-->
+    <!--View sizes-->
+    <!--***********************************************************************************************************-->
+    <dimen name="button_height_tall">60dp</dimen>
+    <dimen name="button_height_normal">40dp</dimen>
+    <dimen name="button_height_short">32dp</dimen>
+    <dimen name="button_padding_left_right">10dp</dimen>
+    <dimen name="button_padding_top_bottom">15dp</dimen>
+    <dimen name="button_min_width">75dp</dimen>
+
+    <dimen name="button_grid_button_padding_left_right">15dp</dimen>
+    <dimen name="button_grid_button_padding_top_bottom">20dp</dimen>
+
+    <dimen name="button_grid_button_menu_padding_left_right">5dp</dimen>
+    <dimen name="button_grid_button_menu_padding_top_bottom">5dp</dimen>
+    <dimen name="button_grid_button_menu_margin">2dp</dimen>
+    <dimen name="button_grid_button_menu_min_height">80dp</dimen>
+
+    <dimen name="button_grid_button_table_padding_left_right">25dp</dimen>
+    <dimen name="button_grid_button_table_padding_top_bottom">30dp</dimen>
+    <dimen name="button_grid_button_table_margin">2dp</dimen>
+
+
+    <!-- TextView -->
+
+    <!-- Horizontal Spacer -->
+    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
+    <!--<dimen name="HorizontalSpacer.Height">2dp</dimen>-->
+    <!--<dimen name="HorizontalSpacer.MarginBottomTop">6dp</dimen>-->
+    <dimen name="horizontal_spacer_height">2dp</dimen>
+    <dimen name="horizontal_spacer_margin_bottom_top">6dp</dimen>
+
+    <!-- GridView -->
+    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
+    <!--<dimen name="GridView.ColumnWidth">20dp</dimen>-->
+    <!--<dimen name="GridView.VerticalHorizontalSpacing">2dp</dimen>-->
+    <dimen name="grid_view_column_width">20dp</dimen>
+    <dimen name="grid_view_vertical_horizontal_spacing">2dp</dimen>
+
 </resources>
