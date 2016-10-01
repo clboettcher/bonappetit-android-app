@@ -56,6 +56,10 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     compile group: 'com.squareup.retrofit2', name: 'converter-jackson', version: retrofitVersion
 
+    // Utils
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+
     // Testing
     testCompile "junit:junit:4.12"
     testApt "com.google.dagger:dagger-compiler:${daggerVersion}"
