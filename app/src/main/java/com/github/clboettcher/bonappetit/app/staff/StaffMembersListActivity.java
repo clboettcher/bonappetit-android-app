@@ -162,7 +162,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     }
 
     /**
-     * Triggers the switcher to show the view containing the timestamp value.
+     * Triggers the switcher to show the view containing the values.
      */
     private void showValueView() {
         showView(valueView);
