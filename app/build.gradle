@@ -35,6 +35,7 @@ android {
 ext {
     daggerVersion = '2.4'
     retrofitVersion = '2.1.0'
+    ormliteVersion = '5.0'
 }
 
 dependencies {
@@ -56,9 +57,20 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     compile group: 'com.squareup.retrofit2', name: 'converter-jackson', version: retrofitVersion
 
+    // DB
+    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-core
+    compile group: 'com.j256.ormlite', name: 'ormlite-core', version: ormliteVersion
+    // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
+    compile group: 'com.j256.ormlite', name: 'ormlite-android', version: ormliteVersion
+
     // Utils
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
     compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
 
     // Testing
     testCompile "junit:junit:4.12"
