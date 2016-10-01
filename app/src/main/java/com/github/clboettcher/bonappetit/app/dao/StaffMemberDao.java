@@ -1,16 +1,17 @@
 package com.github.clboettcher.bonappetit.app.dao;
 
 
-import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMemberDto;
+import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
 
 import java.util.*;
 
 public class StaffMemberDao {
+    // TODO: save entities not dtos when implementing the real db thing
     private Map<Long, StaffMemberDto> idToStaffMemberDto = new HashMap<>();
 
     public void save(List<StaffMemberDto> staffMemberDtos) {
-        if (staffMemberDtos == null || staffMemberDtos.isEmpty()) {
-            throw new IllegalArgumentException("staffMemberDtos null or empty.");
+        if (staffMemberDtos == null) {
+            throw new IllegalArgumentException("staffMemberDtos null.");
         }
         for (StaffMemberDto staffMemberDto : staffMemberDtos) {
             idToStaffMemberDto.put(staffMemberDto.getId(), staffMemberDto);

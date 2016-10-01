@@ -1,5 +1,6 @@
 package com.github.clboettcher.bonappetit.app.service.staffmembers;
 
+import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

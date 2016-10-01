@@ -14,6 +14,8 @@
     <!-- port -->
     <EditTextPreference
             android:key="@string/prefs_key_server_port"
+            android:inputType="number"
+            android:numeric="integer"
             android:digits="0123456789"
             android:title="@string/prefs_title_server_port"
             android:summary="@string/prefs_summary_server_port"

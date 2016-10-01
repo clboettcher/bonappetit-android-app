@@ -2,6 +2,7 @@ package com.github.clboettcher.bonappetit.app.dagger;
 
 import com.github.clboettcher.bonappetit.app.activity.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.activity.MainActivity;
+import com.github.clboettcher.bonappetit.app.activity.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMemberService;
 import dagger.Component;
@@ -23,6 +24,8 @@ public interface DiComponent {
     void inject(BonAppetitApplication bonAppetitApplication);
 
     void inject(BonAppetitPreferencesActivity bonAppetitPreferencesActivity);
+
+    void inject(StaffMembersListActivity staffMembersListActivity);
 
     StaffMemberService staffMembersService();
 }

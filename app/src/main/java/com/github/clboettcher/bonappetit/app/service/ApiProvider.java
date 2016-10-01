@@ -2,7 +2,6 @@ package com.github.clboettcher.bonappetit.app.service;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
-import com.github.clboettcher.bonappetit.app.Constants;
 import com.github.clboettcher.bonappetit.app.event.BaseUrlChangedEvent;
 import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMembersApi;
 import org.greenrobot.eventbus.EventBus;
@@ -24,6 +23,8 @@ import javax.inject.Inject;
  * can make sure that the most current (and correct) API implementation is used at all times.
  */
 public class ApiProvider {
+
+    private static final String TAG = ApiProvider.class.getName();
 
     /**
      * The bean providing the apps config.
@@ -51,7 +52,7 @@ public class ApiProvider {
 
     @Subscribe
     public void onBaseUrlChanged(BaseUrlChangedEvent ignored) {
-        Log.i(Constants.TAG, "Base URL changed. Reinitializing the APIs.");
+        Log.i(TAG, "Base URL changed. Reinitializing the APIs.");
         String baseUrl = configProvider.getBaseUrl();
 
         Retrofit retrofit = new Retrofit.Builder()

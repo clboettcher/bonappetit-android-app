@@ -45,7 +45,7 @@ public class ConfigProvider {
         String keyPath = context.getString(R.string.prefs_key_server_context_path);
 
         String host = sharedPrefs.getString(keyHost, null);
-        Integer port = sharedPrefs.getInt(keyPort, 8080);
+        Integer port = Integer.valueOf(sharedPrefs.getString(keyPort, "8080"));
         String path = sharedPrefs.getString(keyPath, "");
 
         if (host == null) {
