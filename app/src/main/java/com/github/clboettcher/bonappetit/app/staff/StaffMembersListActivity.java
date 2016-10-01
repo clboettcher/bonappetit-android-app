@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
@@ -27,6 +29,15 @@ import java.util.List;
 public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
     private static final String TAG = StaffMembersListActivity.class.getName();
+
+    @BindView(R.id.staffMembersListViewSwitcher)
+    ViewSwitcher viewSwitcher;
+
+    @BindView(R.id.staffMembersListProgressView)
+    View progressView;
+
+    @BindView(R.id.staffMembersListValueView)
+    View valueView;
 
     @Inject
     StaffMemberDao staffMemberDao;
@@ -101,6 +112,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     private void updateStaffMembers() {
         Log.i(TAG, "StaffMembersListActivity resuming. No staff members in the db. Triggering update.");
         bus.post(new PerformStaffMembersUpdateEvent());
+        this.showProgressView();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -112,6 +124,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         this.staffMemberDtos = staffMemberDao.list();
         adapter.addAll(this.staffMemberDtos);
         adapter.notifyDataSetChanged();
+        this.showValueView();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -127,6 +140,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
             errorMsg = String.format("Staff member update failed: %d %s", event.getHttpCode(), event.getHttpMessage());
         }
         Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
+        this.showValueView();
     }
 
     @OnItemClick(R.id.staffMembersListView)
@@ -138,5 +152,26 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Override
     protected void injectDependencies(DiComponent diComponent) {
         diComponent.inject(this);
+    }
+
+    /**
+     * Triggers the switcher to show the view containing the progress bar.
+     */
+    private void showProgressView() {
+        showView(progressView);
+    }
+
+    /**
+     * Triggers the switcher to show the view containing the timestamp value.
+     */
+    private void showValueView() {
+        showView(valueView);
+    }
+
+    private void showView(View view) {
+        // Show the view if not already visible
+        if (viewSwitcher.getNextView().getId() == view.getId()) {
+            viewSwitcher.showNext();
+        }
     }
 }
