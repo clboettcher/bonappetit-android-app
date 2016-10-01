@@ -13,6 +13,7 @@
     <string name="general_action_retry">Wiederholen</string>
     <string name="general_action_increment">+</string>
     <string name="general_action_decrement">-</string>
+    <string name="general_action_update">Aktualisieren</string>
     <string name="general_toast_cancel_notification">Abgebrochen</string>
     <string name="general_edit_text_hint">Antippen, um Eingabe zu machen</string>
 

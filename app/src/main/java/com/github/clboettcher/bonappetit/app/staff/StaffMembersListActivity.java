@@ -2,6 +2,8 @@ package com.github.clboettcher.bonappetit.app.staff;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -69,12 +71,36 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     protected void onResume() {
         super.onResume();
         if (staffMemberDao.list().isEmpty()) {
-            Log.i(TAG, "StaffMembersListActivity resuming. No staff members in the db. Triggering update.");
-            bus.post(new PerformStaffMembersUpdateEvent());
+            updateStaffMembers();
         } else {
             Log.i(TAG, "StaffMembersListActivity resuming. There are staff members in the db. " +
                     "No need to update.");
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_staff_member_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.actionUpdate:
+                updateStaffMembers();
+                return true;
+        }
+        return false;
+    }
+
+    private void updateStaffMembers() {
+        Log.i(TAG, "StaffMembersListActivity resuming. No staff members in the db. Triggering update.");
+        bus.post(new PerformStaffMembersUpdateEvent());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
