@@ -110,7 +110,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     }
 
     private void updateStaffMembers() {
-        Log.i(TAG, "StaffMembersListActivity resuming. No staff members in the db. Triggering update.");
+        Log.i(TAG, "Triggering data update from the server.");
         bus.post(new PerformStaffMembersUpdateEvent());
         this.showProgressView();
     }

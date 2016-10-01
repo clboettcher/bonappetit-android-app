@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntityMapper;
 import dagger.Module;
@@ -39,14 +40,20 @@ public class DiModule {
 
     @Provides
     @Singleton
-    public StaffMemberDao provideStaffMemberDao() {
-        return new StaffMemberDao();
+    public StaffMemberDao provideStaffMemberDao(BonAppetitDbHelper bonAppetitDbHelper) {
+        return new StaffMemberDao(bonAppetitDbHelper);
     }
-
 
     @Provides
     @Singleton
     public StaffMemberEntityMapper provideStaffMemberEntityMapper() {
         return new StaffMemberEntityMapper();
     }
+
+    @Provides
+    @Singleton
+    public BonAppetitDbHelper provideBonAppetitDbHelper() {
+        return new BonAppetitDbHelper(app);
+    }
+
 }

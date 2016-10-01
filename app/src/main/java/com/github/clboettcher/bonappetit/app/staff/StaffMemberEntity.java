@@ -1,11 +1,18 @@
 package com.github.clboettcher.bonappetit.app.staff;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+@DatabaseTable(tableName = "STAFF_MEMBER")
 public class StaffMemberEntity {
 
+    @DatabaseField(columnName = "STAFF_MEMBER_ID")
     private Long id;
+    @DatabaseField(columnName = "FIRST_NAME")
     private String firstName;
+    @DatabaseField(columnName = "LAST_NAME")
     private String lastName;
-
 
     public Long getId() {
         return id;
@@ -29,5 +36,14 @@ public class StaffMemberEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("firstName", firstName)
+                .append("lastName", lastName)
+                .toString();
     }
 }
