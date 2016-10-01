@@ -1,10 +1,10 @@
 package com.github.clboettcher.bonappetit.app.staff;
 
 import android.util.Log;
+import com.github.clboettcher.bonappetit.app.service.ApiProvider;
 import com.github.clboettcher.bonappetit.app.staff.event.PerformStaffMembersUpdateEvent;
 import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateSuccessfulEvent;
-import com.github.clboettcher.bonappetit.app.service.ApiProvider;
 import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -22,11 +22,16 @@ public class StaffMemberService {
     private StaffMemberDao staffMemberDao;
     private EventBus bus;
     private ApiProvider apiProvider;
+    private StaffMemberEntityMapper mapper;
 
     @Inject
-    public StaffMemberService(StaffMemberDao staffMemberDao, EventBus eventBus, ApiProvider apiProvider) {
+    public StaffMemberService(StaffMemberDao staffMemberDao,
+                              StaffMemberEntityMapper mapper,
+                              EventBus eventBus,
+                              ApiProvider apiProvider) {
         Log.i(TAG, "Creating StaffMemberService. Registering for events.");
         this.staffMemberDao = staffMemberDao;
+        this.mapper = mapper;
         this.bus = eventBus;
         this.apiProvider = apiProvider;
         bus.register(this);
@@ -44,7 +49,7 @@ public class StaffMemberService {
             @Override
             public void onResponse(Call<List<StaffMemberDto>> call, Response<List<StaffMemberDto>> response) {
                 if (response.isSuccessful()) {
-                    staffMemberDao.save(response.body());
+                    staffMemberDao.save(mapper.mapToStaffMemberEntities(response.body()));
                     Log.i(TAG, "Staff member update successful");
                     bus.post(new StaffMembersUpdateSuccessfulEvent());
                 } else {

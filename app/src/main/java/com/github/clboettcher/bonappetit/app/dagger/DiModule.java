@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
+import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntityMapper;
 import dagger.Module;
 import dagger.Provides;
 import org.greenrobot.eventbus.EventBus;
@@ -40,5 +41,12 @@ public class DiModule {
     @Singleton
     public StaffMemberDao provideStaffMemberDao() {
         return new StaffMemberDao();
+    }
+
+
+    @Provides
+    @Singleton
+    public StaffMemberEntityMapper provideStaffMemberEntityMapper() {
+        return new StaffMemberEntityMapper();
     }
 }

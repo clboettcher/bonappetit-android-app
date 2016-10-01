@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Custom {@link ArrayAdapter} for displaying {@link StaffMemberDto}s in a {@link ListView}.
  */
-public class StaffMemberAdapter extends ArrayAdapter<StaffMemberDto> {
+public class StaffMemberAdapter extends ArrayAdapter<StaffMemberEntity> {
 
     /**
      * Constructor.
@@ -22,14 +22,14 @@ public class StaffMemberAdapter extends ArrayAdapter<StaffMemberDto> {
      * @param context      The current context.
      * @param staffMembers The objects to represent in the ListView.
      */
-    public StaffMemberAdapter(Context context, List<StaffMemberDto> staffMembers) {
+    public StaffMemberAdapter(Context context, List<StaffMemberEntity> staffMembers) {
         super(context, 0, staffMembers);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        StaffMemberDto staffMember = getItem(position);
+        StaffMemberEntity staffMember = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
