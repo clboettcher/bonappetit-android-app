@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app.event.staffmembers;
+package com.github.clboettcher.bonappetit.app.staff.event;
 
 /**
  * An event that is fired when an application component wants to update the staff members

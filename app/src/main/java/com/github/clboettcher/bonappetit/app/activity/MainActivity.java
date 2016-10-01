@@ -7,6 +7,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
+import com.github.clboettcher.bonappetit.app.staff.StaffMembersListActivity;
 
 public class MainActivity extends BonAppetitBaseActivity {
 

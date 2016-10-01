@@ -3,7 +3,7 @@ package com.github.clboettcher.bonappetit.app.service;
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.event.BaseUrlChangedEvent;
-import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMembersApi;
+import com.github.clboettcher.bonappetit.app.staff.StaffMembersApi;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Retrofit;

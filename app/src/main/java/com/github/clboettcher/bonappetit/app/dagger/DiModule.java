@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import com.github.clboettcher.bonappetit.app.dao.StaffMemberDao;
+import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import dagger.Module;
 import dagger.Provides;
 import org.greenrobot.eventbus.EventBus;

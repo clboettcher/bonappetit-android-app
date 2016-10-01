@@ -1,10 +1,9 @@
-package com.github.clboettcher.bonappetit.app.service.staffmembers;
+package com.github.clboettcher.bonappetit.app.staff;
 
 import android.util.Log;
-import com.github.clboettcher.bonappetit.app.dao.StaffMemberDao;
-import com.github.clboettcher.bonappetit.app.event.staffmembers.PerformStaffMembersUpdateEvent;
-import com.github.clboettcher.bonappetit.app.event.staffmembers.StaffMembersUpdateFailedEvent;
-import com.github.clboettcher.bonappetit.app.event.staffmembers.StaffMembersUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.staff.event.PerformStaffMembersUpdateEvent;
+import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateFailedEvent;
+import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateSuccessfulEvent;
 import com.github.clboettcher.bonappetit.app.service.ApiProvider;
 import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
 import org.greenrobot.eventbus.EventBus;

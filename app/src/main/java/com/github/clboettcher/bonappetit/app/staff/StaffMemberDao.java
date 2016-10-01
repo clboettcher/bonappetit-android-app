@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app.dao;
+package com.github.clboettcher.bonappetit.app.staff;
 
 
 import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;

@@ -2,9 +2,9 @@ package com.github.clboettcher.bonappetit.app.dagger;
 
 import com.github.clboettcher.bonappetit.app.activity.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.activity.MainActivity;
-import com.github.clboettcher.bonappetit.app.activity.StaffMembersListActivity;
+import com.github.clboettcher.bonappetit.app.staff.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
-import com.github.clboettcher.bonappetit.app.service.staffmembers.StaffMemberService;
+import com.github.clboettcher.bonappetit.app.staff.StaffMemberService;
 import dagger.Component;
 
 import javax.inject.Singleton;

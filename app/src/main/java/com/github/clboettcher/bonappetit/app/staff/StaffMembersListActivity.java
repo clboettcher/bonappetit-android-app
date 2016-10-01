@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app.activity;
+package com.github.clboettcher.bonappetit.app.staff;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +9,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.activity.BonAppetitBaseActivity;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
-import com.github.clboettcher.bonappetit.app.dao.StaffMemberDao;
-import com.github.clboettcher.bonappetit.app.event.staffmembers.PerformStaffMembersUpdateEvent;
-import com.github.clboettcher.bonappetit.app.event.staffmembers.StaffMembersUpdateFailedEvent;
-import com.github.clboettcher.bonappetit.app.event.staffmembers.StaffMembersUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.staff.event.PerformStaffMembersUpdateEvent;
+import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateFailedEvent;
+import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateSuccessfulEvent;
 import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
