@@ -48,7 +48,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
         Log.i(TAG, "StaffMembersListActivity created. Initializing the adapter");
         this.staffMemberDtos = new ArrayList<>(staffMemberDao.list());
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, staffMemberDtos);
+        adapter = new StaffMemberAdapter(this, staffMemberDtos);
         staffMembersListView.setAdapter(adapter);
     }
 
