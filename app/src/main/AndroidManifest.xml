@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".staff.StaffMembersListActivity"/>
-        <activity android:name=".activity.BonAppetitPreferencesActivity"/>
+        <activity android:name=".preferences.BonAppetitPreferencesActivity"/>
     </application>
 
 </manifest>

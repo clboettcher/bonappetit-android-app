@@ -1,6 +1,6 @@
 package com.github.clboettcher.bonappetit.app.dagger;
 
-import com.github.clboettcher.bonappetit.app.activity.BonAppetitPreferencesActivity;
+import com.github.clboettcher.bonappetit.app.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.activity.MainActivity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;

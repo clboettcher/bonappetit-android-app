@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app.fragment;
+package com.github.clboettcher.bonappetit.app.preferences;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

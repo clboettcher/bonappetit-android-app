@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app.activity;
+package com.github.clboettcher.bonappetit.app.preferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -6,8 +6,6 @@ import android.preference.PreferenceActivity;
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
-import com.github.clboettcher.bonappetit.app.event.BaseUrlChangedEvent;
-import com.github.clboettcher.bonappetit.app.fragment.BonAppetitPreferencesFragment;
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
