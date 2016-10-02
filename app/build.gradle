@@ -36,6 +36,7 @@ ext {
     daggerVersion = '2.4'
     retrofitVersion = '2.1.0'
     ormliteVersion = '5.0'
+    jacksonVersion = "2.7.3"
 }
 
 dependencies {
@@ -62,6 +63,9 @@ dependencies {
     compile group: 'com.j256.ormlite', name: 'ormlite-core', version: ormliteVersion
     // https://mvnrepository.com/artifact/com.j256.ormlite/ormlite-android
     compile group: 'com.j256.ormlite', name: 'ormlite-android', version: ormliteVersion
+
+    // Object Mapping
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}"
 
     // Utils
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3

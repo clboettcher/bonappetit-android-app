@@ -4,6 +4,7 @@ import android.util.Log;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.preferences.BaseUrlChangedEvent;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersApi;
+import com.github.clboettcher.bonappetit.core.ObjectMapperFactory;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Retrofit;
@@ -57,7 +58,7 @@ public class ApiProvider {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create(ObjectMapperFactory.create()))
                 .build();
 
         // Reinitialize server APIs.
