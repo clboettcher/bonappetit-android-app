@@ -7,7 +7,7 @@ import com.github.clboettcher.bonappetit.app.service.ApiProvider;
 import com.github.clboettcher.bonappetit.app.staff.event.PerformStaffMembersUpdateEvent;
 import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateSuccessfulEvent;
-import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
+import com.github.clboettcher.bonappetit.server.staff.api.dto.StaffMemberDto;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Call;

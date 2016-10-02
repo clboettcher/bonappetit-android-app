@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
 
 import java.util.List;
 
 /**
- * Custom {@link ArrayAdapter} for displaying {@link StaffMemberDto}s in a {@link ListView}.
+ * Custom {@link ArrayAdapter} for displaying {@link StaffMemberEntity}s in a {@link ListView}.
  */
 public class StaffMemberAdapter extends ArrayAdapter<StaffMemberEntity> {
 

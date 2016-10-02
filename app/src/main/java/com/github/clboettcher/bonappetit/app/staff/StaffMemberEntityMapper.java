@@ -1,6 +1,6 @@
 package com.github.clboettcher.bonappetit.app.staff;
 
-import com.github.clboettcher.bonappetit.server.staff.to.StaffMemberDto;
+import com.github.clboettcher.bonappetit.server.staff.api.dto.StaffMemberDto;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
