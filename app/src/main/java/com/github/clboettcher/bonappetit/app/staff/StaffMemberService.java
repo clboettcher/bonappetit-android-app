@@ -1,6 +1,8 @@
 package com.github.clboettcher.bonappetit.app.staff;
 
 import android.util.Log;
+import com.github.clboettcher.bonappetit.app.ConfigProvider;
+import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.service.ApiProvider;
 import com.github.clboettcher.bonappetit.app.staff.event.PerformStaffMembersUpdateEvent;
 import com.github.clboettcher.bonappetit.app.staff.event.StaffMembersUpdateFailedEvent;
@@ -13,6 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.List;
 
 public class StaffMemberService {
@@ -22,16 +25,18 @@ public class StaffMemberService {
     private StaffMemberDao staffMemberDao;
     private EventBus bus;
     private ApiProvider apiProvider;
-    private StaffMemberEntityMapper mapper;
+    private ConfigProvider configProvider;
+    private StaffMemberEntityMapper staffMemberEntityMapper;
 
     @Inject
     public StaffMemberService(StaffMemberDao staffMemberDao,
-                              StaffMemberEntityMapper mapper,
+                              StaffMemberEntityMapper staffMemberEntityMapper,
                               EventBus eventBus,
-                              ApiProvider apiProvider) {
+                              ApiProvider apiProvider, ConfigProvider configProvider) {
         Log.i(TAG, "Creating StaffMemberService. Registering for events.");
+        this.configProvider = configProvider;
         this.staffMemberDao = staffMemberDao;
-        this.mapper = mapper;
+        this.staffMemberEntityMapper = staffMemberEntityMapper;
         this.bus = eventBus;
         this.apiProvider = apiProvider;
         bus.register(this);
@@ -39,9 +44,35 @@ public class StaffMemberService {
 
     @Subscribe
     public void onUpdateStaffMembersEvent(PerformStaffMembersUpdateEvent event) {
-        Log.i(TAG, "Reveiced PerformStaffMembersUpdateEvent. Creating UpdateStaffMembersTask to fetch" +
-                " the latest staff members from the server.");
+        if (configProvider.useTestData()) {
+            Log.i(TAG, "Test data enabled. Using local staff member test data.");
+            updateStaffMembersWithTestData();
+        } else {
+            Log.i(TAG, "Reveiced PerformStaffMembersUpdateEvent. Creating UpdateStaffMembersTask to fetch" +
+                    " the latest staff members from the server.");
+            fetchStaffMembersFromServer();
+        }
+    }
 
+    /**
+     * Updates the staff member db content with content from local files.
+     */
+    private void updateStaffMembersWithTestData() {
+        List<StaffMemberDto> staffMemberDtos;
+        try {
+            staffMemberDtos = configProvider.readRawResourceAsJsonArray(
+                    R.raw.staff_members, StaffMemberDto.class);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to read staff member test data from resources. Update aborted.", e);
+            return;
+        }
+
+        staffMemberDao.save(staffMemberEntityMapper.mapToStaffMemberEntities(staffMemberDtos));
+        bus.post(new StaffMembersUpdateSuccessfulEvent());
+    }
+
+
+    private void fetchStaffMembersFromServer() {
         Call<List<StaffMemberDto>> listCall = apiProvider
                 .getStaffMemberApi()
                 .listStaffMembers();
@@ -49,7 +80,7 @@ public class StaffMemberService {
             @Override
             public void onResponse(Call<List<StaffMemberDto>> call, Response<List<StaffMemberDto>> response) {
                 if (response.isSuccessful()) {
-                    staffMemberDao.save(mapper.mapToStaffMemberEntities(response.body()));
+                    staffMemberDao.save(staffMemberEntityMapper.mapToStaffMemberEntities(response.body()));
                     Log.i(TAG, "Staff member update successful");
                     bus.post(new StaffMembersUpdateSuccessfulEvent());
                 } else {

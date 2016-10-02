@@ -110,9 +110,9 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     }
 
     private void updateStaffMembers() {
-        Log.i(TAG, "Triggering data update from the server.");
-        bus.post(new PerformStaffMembersUpdateEvent());
+        Log.i(TAG, "Forcing staff member update");
         this.showProgressView();
+        bus.post(new PerformStaffMembersUpdateEvent());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -158,6 +158,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
      * Triggers the switcher to show the view containing the progress bar.
      */
     private void showProgressView() {
+        Log.d(TAG, "Showing progress view.");
         showView(progressView);
     }
 
@@ -165,6 +166,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
      * Triggers the switcher to show the view containing the values.
      */
     private void showValueView() {
+        Log.d(TAG, "Showing value view.");
         showView(valueView);
     }
 
