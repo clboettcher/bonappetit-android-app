@@ -4,9 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntityMapper;
+import com.github.clboettcher.bonappetit.core.ObjectMapperFactory;
 import dagger.Module;
 import dagger.Provides;
 import org.greenrobot.eventbus.EventBus;
@@ -56,4 +58,9 @@ public class DiModule {
         return new BonAppetitDbHelper(app);
     }
 
+    @Provides
+    @Singleton
+    public ObjectMapper provideObjectMapper() {
+        return ObjectMapperFactory.create();
+    }
 }

@@ -1,10 +1,10 @@
 package com.github.clboettcher.bonappetit.app.service;
 
 import android.util.Log;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.preferences.BaseUrlChangedEvent;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersApi;
-import com.github.clboettcher.bonappetit.core.ObjectMapperFactory;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Retrofit;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 /**
  * Provides implementations of the API interfaces that can be used
  * to perform backend calls.
- * <p>
+ * <p/>
  * The API implementations are not injected directly into the services
  * which use them, because their configuration might change. E.g. the user might
  * alter the servers backend URL. This class is responsible for detecting configuration
@@ -38,14 +38,21 @@ public class ApiProvider {
     private StaffMembersApi staffMemberApi;
 
     /**
+     * Jackson object mapper.
+     */
+    private ObjectMapper objectMapper;
+
+    /**
      * Constructor setting the specified properties.
      *
      * @param configProvider The bean providing the apps config.
      * @param eventBus       The bus.
+     * @param objectMapper   The object mapper.
      */
     @Inject
-    public ApiProvider(ConfigProvider configProvider, EventBus eventBus) {
+    public ApiProvider(ConfigProvider configProvider, EventBus eventBus, ObjectMapper objectMapper) {
         this.configProvider = configProvider;
+        this.objectMapper = objectMapper;
         eventBus.register(this);
         // Initialize the APIs.
         this.onBaseUrlChanged(null);
@@ -58,7 +65,7 @@ public class ApiProvider {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(JacksonConverterFactory.create(ObjectMapperFactory.create()))
+                .addConverterFactory(JacksonConverterFactory.create(objectMapper))
                 .build();
 
         // Reinitialize server APIs.
