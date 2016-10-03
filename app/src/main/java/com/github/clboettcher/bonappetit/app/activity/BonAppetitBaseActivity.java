@@ -17,5 +17,15 @@ public abstract class BonAppetitBaseActivity extends Activity {
         injectDependencies(((BonAppetitApplication) getApplication()).getDiComponent());
     }
 
+    /**
+     * Inject dependencies.
+     * <p/>
+     * Implement with
+     * <pre>
+     * diComponent.inject(this);
+     * </pre>
+     *
+     * @param diComponent The di component that provides injections.
+     */
     protected abstract void injectDependencies(DiComponent diComponent);
 }
