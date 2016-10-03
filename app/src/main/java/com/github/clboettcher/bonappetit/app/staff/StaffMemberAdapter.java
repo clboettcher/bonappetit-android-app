@@ -18,8 +18,8 @@ public class StaffMemberAdapter extends ArrayAdapter<StaffMemberEntity> {
     /**
      * Constructor.
      *
-     * @param context      The current context.
-     * @param staffMembers The objects to represent in the ListView.
+     * @param context           The current context.
+     * @param staffMembers      The objects to represent in the ListView.
      */
     public StaffMemberAdapter(Context context, List<StaffMemberEntity> staffMembers) {
         super(context, 0, staffMembers);
@@ -37,6 +37,7 @@ public class StaffMemberAdapter extends ArrayAdapter<StaffMemberEntity> {
         TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);
         // Populate the data into the template view using the data object
         text1.setText(String.format("%s %s", staffMember.getFirstName(), staffMember.getLastName()));
+        text1.setTag(staffMember);
         // Return the completed view to render on screen
         return convertView;
     }

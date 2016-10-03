@@ -5,10 +5,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
+import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
@@ -89,7 +86,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(TAG, "StaffMembersListActivity starting. Unregistering from events");
+        Log.i(TAG, "StaffMembersListActivity stopping. Unregistering from events");
         this.bus.unregister(this);
     }
 
@@ -159,8 +156,9 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     }
 
     @OnItemClick(R.id.staffMembersListView)
-    public void onItemClick(ListView view) {
-        Log.i(TAG, "Item clicked");
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        StaffMemberEntity selectedStaffMember = (StaffMemberEntity) view.getTag();
+        Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
 //        bus.post(new FetchStaffMemberByIdEvent(1L));
     }
 
