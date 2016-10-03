@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntityMapper;
+import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.core.ObjectMapperFactory;
 import dagger.Module;
 import dagger.Provides;
@@ -44,6 +45,12 @@ public class DiModule {
     @Singleton
     public StaffMemberDao provideStaffMemberDao(BonAppetitDbHelper bonAppetitDbHelper) {
         return new StaffMemberDao(bonAppetitDbHelper);
+    }
+
+    @Provides
+    @Singleton
+    public StaffMemberRefDao provideStaffMemberRefDao(BonAppetitDbHelper bonAppetitDbHelper) {
+        return new StaffMemberRefDao(bonAppetitDbHelper);
     }
 
     @Provides

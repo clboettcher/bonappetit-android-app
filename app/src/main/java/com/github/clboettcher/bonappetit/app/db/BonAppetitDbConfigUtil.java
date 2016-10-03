@@ -1,6 +1,7 @@
 package com.github.clboettcher.bonappetit.app.db;
 
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity;
+import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 
 import java.io.IOException;
@@ -13,7 +14,8 @@ public class BonAppetitDbConfigUtil extends OrmLiteConfigUtil {
      */
     public static final Class<?>[] DATABASE_CLASSES = new Class[]{
             // Staff
-            StaffMemberEntity.class
+            StaffMemberEntity.class,
+            StaffMemberRefEntity.class
     };
 
     /**

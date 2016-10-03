@@ -55,6 +55,9 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Inject
     StaffMemberDao staffMemberDao;
 
+    @Inject
+    StaffMemberRefDao staffMemberRefDao;
+
     @BindView(R.id.staffMembersListView)
     ListView staffMembersListView;
 
@@ -159,7 +162,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         StaffMemberEntity selectedStaffMember = (StaffMemberEntity) view.getTag();
         Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
-//        bus.post(new FetchStaffMemberByIdEvent(1L));
+        staffMemberRefDao.save(selectedStaffMember);
     }
 
     @Override

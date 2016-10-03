@@ -3,11 +3,12 @@ package com.github.clboettcher.bonappetit.app.staff;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 @DatabaseTable(tableName = "STAFF_MEMBER")
 public class StaffMemberEntity {
 
-    @DatabaseField(columnName = "STAFF_MEMBER_ID")
+    @DatabaseField(columnName = "STAFF_MEMBER_ID", id = true)
     private Long id;
     @DatabaseField(columnName = "FIRST_NAME")
     private String firstName;
@@ -40,7 +41,7 @@ public class StaffMemberEntity {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
                 .append("firstName", firstName)
                 .append("lastName", lastName)

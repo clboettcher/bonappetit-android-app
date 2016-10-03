@@ -47,8 +47,8 @@ public class BonAppetitDbHelper extends OrmLiteSqliteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase database, ConnectionSource connectionSource) {
+        Log.i(TAG, "onCreate called");
         try {
-            Log.i(TAG, "onCreate");
             for (Class clazz : BonAppetitDbConfigUtil.DATABASE_CLASSES) {
                 Log.i(TAG, String.format("Trying to create table for class '%s'", clazz.getName()));
                 TableUtils.createTable(connectionSource, clazz);
@@ -66,6 +66,6 @@ public class BonAppetitDbHelper extends OrmLiteSqliteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-
+        Log.i(TAG, String.format("onUpgrade called. Upgrading from v%d to v%d", oldVersion, newVersion));
     }
 }

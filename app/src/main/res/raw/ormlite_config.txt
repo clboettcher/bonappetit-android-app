@@ -1,5 +1,5 @@
 #
-# generated on 2016/10/01 06:11:11
+# generated on 2016/10/03 05:11:22
 #
 # --table-start--
 dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity
@@ -8,6 +8,7 @@ tableName=STAFF_MEMBER
 # --field-start--
 fieldName=id
 columnName=STAFF_MEMBER_ID
+id=true
 # --field-end--
 # --field-start--
 fieldName=firstName
@@ -16,6 +17,22 @@ columnName=FIRST_NAME
 # --field-start--
 fieldName=lastName
 columnName=LAST_NAME
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity
+tableName=SELECTED_STAFF_MEMBER
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=SELECTED_STAFF_MEMBER_REFERENCE_ID
+# --field-end--
+# --field-start--
+fieldName=staffMemberEntity
+canBeNull=false
+foreign=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
