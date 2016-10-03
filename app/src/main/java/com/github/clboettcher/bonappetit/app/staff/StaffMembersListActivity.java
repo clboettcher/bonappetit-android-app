@@ -24,11 +24,27 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
     private static final String TAG = StaffMembersListActivity.class.getName();
+
+    /**
+     * Comparator for {@link StaffMemberEntity} that compares by first name, then by last name.
+     */
+    public static final Comparator<StaffMemberEntity> STAFF_MEMBER_ENTITY_COMPARATOR = new Comparator<StaffMemberEntity>() {
+        @Override
+        public int compare(StaffMemberEntity lhs, StaffMemberEntity rhs) {
+            int firstNameComparison = lhs.getFirstName().compareTo(rhs.getFirstName());
+            if (firstNameComparison == 0) {
+                return lhs.getLastName().compareTo(rhs.getLastName());
+            } else {
+                return firstNameComparison;
+            }
+        }
+    };
 
     @BindView(R.id.staffMembersListViewSwitcher)
     ViewSwitcher viewSwitcher;
@@ -62,6 +78,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         this.staffMemberDtos = new ArrayList<>(staffMemberDao.list());
         adapter = new StaffMemberAdapter(this, staffMemberDtos);
         staffMembersListView.setAdapter(adapter);
+        adapter.sort(STAFF_MEMBER_ENTITY_COMPARATOR);
     }
 
     @Override
@@ -123,6 +140,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         adapter.clear();
         this.staffMemberDtos = staffMemberDao.list();
         adapter.addAll(this.staffMemberDtos);
+        adapter.sort(STAFF_MEMBER_ENTITY_COMPARATOR);
         adapter.notifyDataSetChanged();
         this.showValueView();
     }
