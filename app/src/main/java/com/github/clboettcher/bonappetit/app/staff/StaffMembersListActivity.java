@@ -66,8 +66,6 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
     private ArrayAdapter<StaffMemberEntity> adapter;
 
-    private List<StaffMemberEntity> staffMemberDtos = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +73,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         ButterKnife.bind(this);
 
         Log.i(TAG, "StaffMembersListActivity created. Initializing the adapter");
-        this.staffMemberDtos = new ArrayList<>(staffMemberDao.list());
+        List<StaffMemberEntity> staffMemberDtos = new ArrayList<>(staffMemberDao.list());
         adapter = new StaffMemberAdapter(this, staffMemberDtos);
         staffMembersListView.setAdapter(adapter);
         adapter.sort(STAFF_MEMBER_ENTITY_COMPARATOR);
@@ -138,8 +136,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
                 "the contents from the database.");
         Toast.makeText(this, "Staff members updated, refreshing", Toast.LENGTH_SHORT).show();
         adapter.clear();
-        this.staffMemberDtos = staffMemberDao.list();
-        adapter.addAll(this.staffMemberDtos);
+        adapter.addAll(staffMemberDao.list());
         adapter.sort(STAFF_MEMBER_ENTITY_COMPARATOR);
         adapter.notifyDataSetChanged();
         this.showValueView();
