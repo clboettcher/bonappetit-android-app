@@ -22,6 +22,10 @@
         </activity>
         <activity android:name=".staff.StaffMembersListActivity"/>
         <activity android:name=".preferences.BonAppetitPreferencesActivity"/>
+        <activity
+            android:name=".takeorders.TakeOrdersActivity"
+            android:label="@string/activity_take_orders_title" >
+        </activity>
     </application>
 
 </manifest>

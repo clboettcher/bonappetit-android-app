@@ -9,6 +9,7 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
 import com.github.clboettcher.bonappetit.app.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersListActivity;
+import com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity;
 
 public class MainActivity extends BonAppetitBaseActivity {
 
@@ -42,6 +43,12 @@ public class MainActivity extends BonAppetitBaseActivity {
     @OnClick(R.id.switchToStaffMembersListActivity)
     public void onSwitchToStaffMembersListActivityButtonClicked() {
         Intent intent = new Intent(this, StaffMembersListActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.switchToTakeOrdersActivity)
+    public void onSwitchToTakeOrdersActivity() {
+        Intent intent = new Intent(this, TakeOrdersActivity.class);
         startActivity(intent);
     }
 

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity"
+        >
+    <item
+            android:id="@+id/actionSettings"
+            android:title="@string/general_action_settings"
+            android:orderInCategory="100"
+            android:showAsAction="never"
+            />
+</menu>

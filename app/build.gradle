@@ -42,6 +42,9 @@ ext {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    // Android
+    compile 'com.android.support:support-v13:23.2.1'
+
     // Bus
     compile 'org.greenrobot:eventbus:3.0.0'
 

@@ -5,6 +5,7 @@ import com.github.clboettcher.bonappetit.app.activity.MainActivity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberService;
+import com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -26,6 +27,8 @@ public interface DiComponent {
     void inject(BonAppetitPreferencesActivity bonAppetitPreferencesActivity);
 
     void inject(StaffMembersListActivity staffMembersListActivity);
+
+    void inject(TakeOrdersActivity takeOrdersActivity);
 
     StaffMemberService staffMembersService();
 }
