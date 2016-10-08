@@ -50,4 +50,10 @@ public class StaffMemberDao {
                 dao.queryForAll()
         );
     }
+
+    public long count() {
+        return dao.countOf();
+    }
+
+
 }

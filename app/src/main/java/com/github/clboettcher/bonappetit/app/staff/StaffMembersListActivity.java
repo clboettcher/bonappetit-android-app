@@ -96,7 +96,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (staffMemberDao.list().isEmpty()) {
+        if (staffMemberDao.count() == 0) {
             updateStaffMembers();
         } else {
             Log.i(TAG, "StaffMembersListActivity resuming. There are staff members in the db. " +
