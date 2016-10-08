@@ -52,15 +52,17 @@ public class MenuItemsAdapter extends BaseAdapter implements View.OnClickListene
         itemButton.setTag(item);
         itemButton.setOnClickListener(this);
         itemButton.setText(item.getTitle());
+        // See https://color.adobe.com/de/create/color-wheel/?base=2&rule=Compound&selected=4&name=Mein%20Color-Thema&mode=rgb&rgbvalues=0.25279337460610923,0.8,0.39786816443828626,0.4895950309545819,0.6,0.5188654690987887,0.6326004047060523,1,0.4159917182576365,0.9031454864406192,0.6659917182576365,1,0.49208483124324887,0.25279337460610923,0.8&swatchOrder=0,1,2,3,4
+        // for colors.
         switch (item.getType()) {
             case FOOD:
-                itemButton.setBackgroundColor(Color.MAGENTA);
+                itemButton.setBackgroundColor(Color.rgb(125, 153, 132));
                 break;
             case DRINK_ALCOHOLIC:
-                itemButton.setBackgroundColor(Color.YELLOW);
+                itemButton.setBackgroundColor(Color.rgb(230, 170, 255));
                 break;
             case DRINK_NON_ALCOHOLIC:
-                itemButton.setBackgroundColor(Color.CYAN);
+                itemButton.setBackgroundColor(Color.rgb(125, 64, 204));
                 break;
         }
 
