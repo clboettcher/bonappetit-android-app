@@ -42,7 +42,7 @@ public class MenuItemsAdapter extends BaseAdapter implements View.OnClickListene
         if (convertView != null) {
             cell = convertView;
         } else {
-            cell = LayoutInflater.from(context).inflate(R.layout.fragment_menu_grid_item,
+            cell = LayoutInflater.from(context).inflate(R.layout.fragment_menu_grid_item_button,
                     parent, false);
         }
 
