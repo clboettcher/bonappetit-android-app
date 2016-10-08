@@ -1,5 +1,7 @@
 package com.github.clboettcher.bonappetit.app.db;
 
+import com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity;
+import com.github.clboettcher.bonappetit.app.menu.entity.MenuEntity;
 import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity;
@@ -17,14 +19,20 @@ public class BonAppetitDbConfigUtil extends OrmLiteConfigUtil {
             // Staff
             StaffMemberEntity.class,
             StaffMemberRefEntity.class,
-            CustomerEntity.class
+
+            // Customer
+            CustomerEntity.class,
+
+            // Menu
+            MenuEntity.class,
+            ItemEntity.class
     };
 
     /**
      * Creates the config file that makes ORM lite fast.
-     * <p>
+     * <p/>
      * For this to work you have to:
-     * <p>
+     * <p/>
      * - Run with work dir \app\src\main
      * - Create dir res/raw
      */

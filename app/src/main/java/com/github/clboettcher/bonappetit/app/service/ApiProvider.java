@@ -3,6 +3,7 @@ package com.github.clboettcher.bonappetit.app.service;
 import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
+import com.github.clboettcher.bonappetit.app.menu.MenusApi;
 import com.github.clboettcher.bonappetit.app.preferences.BaseUrlChangedEvent;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersApi;
 import org.greenrobot.eventbus.EventBus;
@@ -15,7 +16,7 @@ import javax.inject.Inject;
 /**
  * Provides implementations of the API interfaces that can be used
  * to perform backend calls.
- * <p/>
+ * <p>
  * The API implementations are not injected directly into the services
  * which use them, because their configuration might change. E.g. the user might
  * alter the servers backend URL. This class is responsible for detecting configuration
@@ -41,6 +42,11 @@ public class ApiProvider {
      * Jackson object mapper.
      */
     private ObjectMapper objectMapper;
+
+    /**
+     * The API to access the menus.
+     */
+    private MenusApi menusApi;
 
     /**
      * Constructor setting the specified properties.
@@ -70,9 +76,14 @@ public class ApiProvider {
 
         // Reinitialize server APIs.
         staffMemberApi = retrofit.create(StaffMembersApi.class);
+        menusApi = retrofit.create(MenusApi.class);
     }
 
     public StaffMembersApi getStaffMemberApi() {
         return staffMemberApi;
+    }
+
+    public MenusApi getMenusApi() {
+        return menusApi;
     }
 }

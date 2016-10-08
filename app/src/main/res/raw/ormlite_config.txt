@@ -1,5 +1,5 @@
 #
-# generated on 2016/10/08 01:29:15
+# generated on 2016/10/08 02:53:18
 #
 # --table-start--
 dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity
@@ -49,6 +49,54 @@ id=true
 # --field-start--
 fieldName=value
 columnName=VALUE
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.clboettcher.bonappetit.app.menu.entity.MenuEntity
+tableName=MENU
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=ID
+id=true
+# --field-end--
+# --field-start--
+fieldName=items
+foreignCollection=true
+foreignCollectionEager=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity
+tableName=ITEM
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=ID
+id=true
+# --field-end--
+# --field-start--
+fieldName=name
+columnName=NAME
+# --field-end--
+# --field-start--
+fieldName=price
+columnName=PRICE
+# --field-end--
+# --field-start--
+fieldName=type
+columnName=TYPE
+# --field-end--
+# --field-start--
+fieldName=menu
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
 # --field-end--
 # --table-fields-end--
 # --table-end--

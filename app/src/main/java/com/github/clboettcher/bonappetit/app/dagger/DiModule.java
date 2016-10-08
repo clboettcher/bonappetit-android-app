@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
+import com.github.clboettcher.bonappetit.app.menu.MenuDao;
+import com.github.clboettcher.bonappetit.app.menu.MenuEntityMapper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntityMapper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefDao;
@@ -63,6 +65,18 @@ public class DiModule {
     @Singleton
     public BonAppetitDbHelper provideBonAppetitDbHelper() {
         return new BonAppetitDbHelper(app);
+    }
+
+    @Provides
+    @Singleton
+    public MenuDao provideMenuDao(BonAppetitDbHelper bonAppetitDbHelper) {
+        return new MenuDao(bonAppetitDbHelper);
+    }
+
+    @Provides
+    @Singleton
+    public MenuEntityMapper provideMenuEntityMapper() {
+        return new MenuEntityMapper();
     }
 
     @Provides

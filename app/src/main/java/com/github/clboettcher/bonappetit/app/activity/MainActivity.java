@@ -7,11 +7,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
+import com.github.clboettcher.bonappetit.app.menu.event.PerformMenuUpdateEvent;
 import com.github.clboettcher.bonappetit.app.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity;
+import org.greenrobot.eventbus.EventBus;
+
+import javax.inject.Inject;
 
 public class MainActivity extends BonAppetitBaseActivity {
+
+    @Inject
+    EventBus bus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,11 @@ public class MainActivity extends BonAppetitBaseActivity {
     public void onSwitchToTakeOrdersActivity() {
         Intent intent = new Intent(this, TakeOrdersActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.updateMenu)
+    public void onUpdateMenu() {
+        bus.post(new PerformMenuUpdateEvent());
     }
 
     @Override
