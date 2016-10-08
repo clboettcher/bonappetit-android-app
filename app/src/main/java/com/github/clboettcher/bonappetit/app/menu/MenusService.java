@@ -4,6 +4,7 @@ import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.menu.dao.MenuDao;
 import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateSuccessfulEvent;
 import com.github.clboettcher.bonappetit.app.menu.event.PerformMenuUpdateEvent;

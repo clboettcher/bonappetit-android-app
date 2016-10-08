@@ -1,4 +1,4 @@
-package com.github.clboettcher.bonappetit.app.menu;
+package com.github.clboettcher.bonappetit.app.menu.dao;
 
 
 import android.util.Log;
