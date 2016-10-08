@@ -3,10 +3,7 @@ package com.github.clboettcher.bonappetit.app.menu.dao;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
-import com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.menu.entity.MenuEntity;
-import com.github.clboettcher.bonappetit.app.menu.entity.OptionEntity;
-import com.github.clboettcher.bonappetit.app.menu.entity.RadioItemEntity;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -25,12 +22,17 @@ public class MenuDao {
     private static final String TAG = MenuDao.class.getName();
     private BonAppetitDbHelper bonAppetitDbHelper;
     private RuntimeExceptionDao<MenuEntity, Long> dao;
-    private ItemDao itemDao;
+    private final ItemDao itemDao;
+    private final OptionDao optionDao;
+    private final RadioItemDao radioItemDao;
 
     @Inject
-    public MenuDao(BonAppetitDbHelper bonAppetitDbHelper, ItemDao itemDao) {
+    public MenuDao(BonAppetitDbHelper bonAppetitDbHelper, ItemDao itemDao,
+                   OptionDao optionDao, RadioItemDao radioItemDao) {
         this.bonAppetitDbHelper = bonAppetitDbHelper;
         this.itemDao = itemDao;
+        this.optionDao = optionDao;
+        this.radioItemDao = radioItemDao;
         this.dao = bonAppetitDbHelper
                 .getRuntimeExceptionDao(MenuEntity.class);
     }
@@ -41,9 +43,9 @@ public class MenuDao {
         // Delete all stored entities. The server is the master.
         try {
             TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), MenuEntity.class);
-            TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), ItemEntity.class);
-            TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), OptionEntity.class);
-            TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), RadioItemEntity.class);
+            itemDao.deleteAll();
+            optionDao.deleteAll();
+            radioItemDao.deleteAll();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

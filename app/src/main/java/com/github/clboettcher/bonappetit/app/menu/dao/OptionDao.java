@@ -7,8 +7,10 @@ import com.github.clboettcher.bonappetit.app.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.menu.entity.OptionEntityType;
 import com.google.common.base.Preconditions;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.j256.ormlite.table.TableUtils;
 
 import javax.inject.Inject;
+import java.sql.SQLException;
 import java.util.Collection;
 
 /**
@@ -45,4 +47,7 @@ public class OptionDao {
         return dao.queryForAll();
     }
 
+    int deleteAll() throws SQLException {
+        return TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), OptionEntity.class);
+    }
 }
