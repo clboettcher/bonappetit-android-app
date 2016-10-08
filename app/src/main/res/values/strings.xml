@@ -70,7 +70,6 @@
     <!--***********************************************************************************************************-->
     <!--SelectCustomerFragment-->
     <!--***********************************************************************************************************-->
-    <string name="fragment_select_customer_title">Kunde</string>
     <string name="fragment_select_customer_tab_title">Kunde</string>
     <string name="fragment_select_customer_textview_heading_label">Bestellen -  Kunden auswählen</string>
     <string name="fragment_select_customer_freetext_label_text">Texteingabe</string>

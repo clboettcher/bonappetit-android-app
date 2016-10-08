@@ -52,26 +52,13 @@ way the UI will be more consistent and look more badass.
     <dimen name="button_padding_top_bottom">15dp</dimen>
     <dimen name="button_min_width">75dp</dimen>
 
-    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
-    <!--<dimen name="button_grid_button_menu_padding_left_right">5dp</dimen>-->
-    <!--<dimen name="button_grid_button_menu_padding_top_bottom">5dp</dimen>-->
-    <!--<dimen name="button_grid_button_menu_margin">2dp</dimen>-->
-    <!--<dimen name="button_grid_button_menu_min_height">80dp</dimen>-->
-
     <!--***********************************************************************************************************-->
     <!--Horizontal Spacer-->
     <!--***********************************************************************************************************-->
-    <!-- Horizontal Spacer -->
-    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
-    <!--<dimen name="HorizontalSpacer.Height">2dp</dimen>-->
-    <!--<dimen name="HorizontalSpacer.MarginBottomTop">6dp</dimen>-->
     <dimen name="horizontal_spacer_height">2dp</dimen>
     <dimen name="horizontal_spacer_margin_bottom_top">6dp</dimen>
 
     <!-- GridView -->
-    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
-    <!--<dimen name="GridView.ColumnWidth">20dp</dimen>-->
-    <!--<dimen name="GridView.VerticalHorizontalSpacing">2dp</dimen>-->
     <dimen name="grid_view_column_width">20dp</dimen>
     <dimen name="grid_view_vertical_horizontal_spacing">2dp</dimen>
 
