@@ -11,6 +11,7 @@ import com.j256.ormlite.table.TableUtils;
 import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Data access facade for {@link ItemEntity}.
@@ -42,7 +43,7 @@ public class ItemDao {
         }
     }
 
-    public Collection<ItemEntity> list() {
+    public List<ItemEntity> list() {
         return dao.queryForAll();
     }
 

@@ -50,8 +50,4 @@ public class StaffMemberDao {
                 dao.queryForAll()
         );
     }
-
-    public void refresh(StaffMemberEntity staffMemberEntity) {
-        dao.refresh(staffMemberEntity);
-    }
 }

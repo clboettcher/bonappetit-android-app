@@ -26,7 +26,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
      * The index of the select customer tab.
      */
     public static final int TAB_SELECT_CUSTOMER = 0;
-    
+
     /**
      * The index of the menu tab.
      */
@@ -115,7 +115,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.actionSettings) {
             return true;
         }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/staffMembersListViewSwitcher"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
-              android:id="@+id/staffMembersListViewSwitcher"
         >
     <!--The list view that contains the loaded staff members-->
     <LinearLayout
@@ -26,12 +26,12 @@
             >
 
         <ProgressBar
-                style="?android:attr/progressBarStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBar"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
+                style="?android:attr/progressBarStyleLarge"
                 />
     </RelativeLayout>
 </ViewSwitcher>

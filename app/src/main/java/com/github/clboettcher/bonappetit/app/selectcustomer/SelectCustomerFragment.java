@@ -16,7 +16,6 @@ import butterknife.ButterKnife;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.activity.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
-import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity;
@@ -53,9 +52,6 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
     @Inject
     StaffMemberRefDao staffMemberRefDao;
-
-    @Inject
-    StaffMemberDao staffMemberDao;
 
     @Inject
     CustomerDao customerDao;
@@ -133,7 +129,6 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
         Optional<StaffMemberRefEntity> staffMemberRefOpt = staffMemberRefDao.get();
         if (staffMemberRefOpt.isPresent()) {
             StaffMemberEntity staffMemberEntity = staffMemberRefOpt.get().getStaffMemberEntity();
-            staffMemberDao.refresh(staffMemberEntity);
             selectedStaffMember.setText(String.format("%s %s",
                     staffMemberEntity.getFirstName(),
                     staffMemberEntity.getLastName()));
@@ -190,8 +185,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
         // Save customer
         CustomerEntity customerEntity = new CustomerEntity();
-        // We only have one customer in the db at a time. So we can use a static, not auto
-        // generated ID.
+        // We only have one customer in the db at a time. So we can use a
+        // static, not auto generated ID.
         customerEntity.setId(1L);
         customerEntity.setValue(newCustomer);
         customerDao.save(customerEntity);

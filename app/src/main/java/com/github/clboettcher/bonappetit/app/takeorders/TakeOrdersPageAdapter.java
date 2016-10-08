@@ -2,6 +2,7 @@ package com.github.clboettcher.bonappetit.app.takeorders;
 
 import android.content.Context;
 import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.menu.ui.MenuFragment;
 import com.github.clboettcher.bonappetit.app.selectcustomer.SelectCustomerFragment;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class TakeOrdersPageAdapter extends android.support.v4.app.FragmentPagerA
 
         // set up the take orders fragments
         fragments.put(TakeOrdersActivity.TAB_SELECT_CUSTOMER, new SelectCustomerFragment());
-        fragments.put(TakeOrdersActivity.TAB_MENU, new SelectCustomerFragment());
+        fragments.put(TakeOrdersActivity.TAB_MENU, new MenuFragment());
         fragments.put(TakeOrdersActivity.TAB_OVERVIEW, new SelectCustomerFragment());
     }
 

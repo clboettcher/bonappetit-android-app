@@ -31,7 +31,8 @@ public class StaffMemberAdapter extends ArrayAdapter<StaffMemberEntity> {
         StaffMemberEntity staffMember = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_list_item_1,
+                    parent, false);
         }
         // Lookup view for data population
         TextView text1 = (TextView) convertView.findViewById(android.R.id.text1);

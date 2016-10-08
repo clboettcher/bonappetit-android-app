@@ -1,5 +1,5 @@
 #
-# generated on 2016/10/08 05:49:13
+# generated on 2016/10/08 07:14:36
 #
 # --table-start--
 dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity
@@ -33,6 +33,8 @@ columnName=SELECTED_STAFF_MEMBER_REFERENCE_ID
 fieldName=staffMemberEntity
 canBeNull=false
 foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -185,8 +187,6 @@ columnName=PRICE_DIFF
 fieldName=option
 canBeNull=false
 foreign=true
-foreignAutoRefresh=true
-maxForeignAutoRefreshLevel=2
 # --field-end--
 # --table-fields-end--
 # --table-end--

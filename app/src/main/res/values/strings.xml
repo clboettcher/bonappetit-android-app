@@ -66,6 +66,7 @@
     <!--TakeOrdersActivity-->
     <!--***********************************************************************************************************-->
     <string name="activity_take_orders_title">Bestellen</string>
+    <string name="activity_take_orders_button_switch_tab">Zum Tab \"%s\" wechseln</string>
 
     <!--***********************************************************************************************************-->
     <!--SelectCustomerFragment-->
@@ -82,7 +83,12 @@
     <!--***********************************************************************************************************-->
     <!--MenuFragment-->
     <!--***********************************************************************************************************-->
-    <string name="fragment_menu_title">Gerichte</string>
+    <string name="fragment_menu_title">Speisekarte</string>
+    <string name="fragment_menu_heading">Bestellen - Gerichte zusammenstellen</string>
+    <string name="fragment_menu_note">Tippe auf ein Gericht um es hinzuzufügen und wenn du fertig bist auf \"Zusammenfassung anzeigen\" um deine Bestellung abzuschließen und die Bons zu drucken.</string>
+    <string name="fragment_menu_button_show_overview">Zusammenfassung anzeigen</string>
+    <string name="fragment_menu_inactive_notice">Wähle zunächst im Tab \"%s\" aus, für wen du die Bestellung aufnehmen möchtest.</string>
+
 
     <!--***********************************************************************************************************-->
     <!--OrderOverviewFragment-->

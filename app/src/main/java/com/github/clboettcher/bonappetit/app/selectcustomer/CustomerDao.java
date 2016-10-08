@@ -3,12 +3,15 @@ package com.github.clboettcher.bonappetit.app.selectcustomer;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.table.TableUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Data access facade for the selected customer.
@@ -40,7 +43,12 @@ public class CustomerDao {
         Log.i(TAG, String.format("Saved customer entity %s in database", customerEntity));
     }
 
-    public CustomerEntity get() {
-        return dao.queryForAll().get(0);
+    public Optional<CustomerEntity> get() {
+        List<CustomerEntity> customerEntities = dao.queryForAll();
+        if (CollectionUtils.isEmpty(customerEntities)) {
+            return Optional.absent();
+        } else {
+            return Optional.fromNullable(customerEntities.get(0));
+        }
     }
 }

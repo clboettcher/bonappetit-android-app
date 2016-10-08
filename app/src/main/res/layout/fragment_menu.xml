@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              android:orientation="vertical"
+        >
+
+    <!-- Menu Heading -->
+    <TextView
+            android:id="@+id/fragmentMenuHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_menu_heading"
+            style="@style/TextView.Heading.H1"
+            />
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+    <ViewSwitcher
+            android:id="@+id/fragmentMenuViewSwitcher"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        <!-- Tab active -->
+        <LinearLayout
+                android:id="@+id/fragmentMenuActiveRoot"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                >
+
+            <!-- Staff member & Customer -->
+            <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                <!-- Staff member -->
+
+                <TableRow>
+
+                    <TextView
+                            android:id="@+id/fragmentMenuStaffMemberLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/general_staff_member_label"
+                            />
+
+                    <TextView
+                            android:id="@+id/fragmentMenuStaffMember"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                </TableRow>
+
+                <!-- Customer -->
+                <TableRow>
+
+                    <TextView
+                            android:id="@+id/fragmentMenuCustomerLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/general_customer_label"
+                            />
+
+                    <TextView
+                            android:id="@+id/fragmentMenuCustomer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                </TableRow>
+            </TableLayout>
+
+            <include layout="@layout/general_horizontal_spacer"/>
+
+            <!-- Menu Items-->
+            <GridView
+                    android:id="@+id/fragmentMenuGridViewItems"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="3"
+                    android:stretchMode="columnWidth"
+                    android:gravity="center"
+                    />
+
+            <include layout="@layout/general_horizontal_spacer"/>
+
+            <TextView
+                    android:id="@+id/fragmentMenuNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_menu_note"
+                    />
+
+            <include layout="@layout/general_horizontal_spacer"/>
+
+            <Button
+                    android:id="@+id/fragmentMenuButtonSwitchToOverview"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/fragment_menu_button_show_overview"
+                    style="@style/Button.Confirm"
+
+                    />
+
+        </LinearLayout>
+
+        <!-- Tab inactive -->
+        <LinearLayout
+                android:id="@+id/fragmentMenuInactiveRoot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <TextView
+                    android:id="@+id/fragmentMenuInactiveNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/fragment_menu_inactive_notice"
+                    />
+
+            <include layout="@layout/general_horizontal_spacer"/>
+
+            <Button
+                    android:id="@+id/fragmentMenuInactiveButtonSwitchToSelectCustomer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/activity_take_orders_button_switch_tab"
+                    />
+        </LinearLayout>
+
+    </ViewSwitcher>
+
+</LinearLayout>

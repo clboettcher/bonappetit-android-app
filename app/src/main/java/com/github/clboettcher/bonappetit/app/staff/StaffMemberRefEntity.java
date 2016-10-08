@@ -16,7 +16,7 @@ public class StaffMemberRefEntity {
     @DatabaseField(columnName = "SELECTED_STAFF_MEMBER_REFERENCE_ID")
     private Long id;
 
-    @DatabaseField(canBeNull = false, foreign = true)
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)
     private StaffMemberEntity staffMemberEntity;
 
     public Long getId() {

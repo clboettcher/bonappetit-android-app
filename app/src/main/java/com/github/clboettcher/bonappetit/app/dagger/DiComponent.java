@@ -3,6 +3,7 @@ package com.github.clboettcher.bonappetit.app.dagger;
 import com.github.clboettcher.bonappetit.app.activity.MainActivity;
 import com.github.clboettcher.bonappetit.app.application.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.menu.MenusService;
+import com.github.clboettcher.bonappetit.app.menu.ui.MenuFragment;
 import com.github.clboettcher.bonappetit.app.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.selectcustomer.SelectCustomerFragment;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberService;
@@ -33,6 +34,8 @@ public interface DiComponent {
     void inject(TakeOrdersActivity takeOrdersActivity);
 
     void inject(SelectCustomerFragment selectCustomerFragment);
+
+    void inject(MenuFragment menuFragment);
 
     StaffMemberService staffMembersService();
 
