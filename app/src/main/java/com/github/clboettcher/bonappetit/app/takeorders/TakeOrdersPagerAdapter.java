@@ -13,12 +13,12 @@ import java.util.HashMap;
  *
  * @see com.github.clboettcher.bonappetit.app.selectcustomer.SelectCustomerFragment
  */
-public class TakeOrdersPageAdapter extends android.support.v4.app.FragmentPagerAdapter {
+public class TakeOrdersPagerAdapter extends android.support.v4.app.FragmentPagerAdapter {
 
     private Context takeOrdersActivity;
     private HashMap<Integer, TakeOrdersFragment> fragments = new HashMap<>();
 
-    public TakeOrdersPageAdapter(Context context, android.support.v4.app.FragmentManager fm) {
+    public TakeOrdersPagerAdapter(Context context, android.support.v4.app.FragmentManager fm) {
         super(fm);
         this.takeOrdersActivity = context;
 

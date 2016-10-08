@@ -45,7 +45,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
      * may be best to switch to a
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
-    private TakeOrdersPageAdapter takeOrdersPagerAdapter;
+    private TakeOrdersPagerAdapter takeOrdersPagerAdapter;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -72,7 +72,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        takeOrdersPagerAdapter = new TakeOrdersPageAdapter(this, getSupportFragmentManager());
+        takeOrdersPagerAdapter = new TakeOrdersPagerAdapter(this, getSupportFragmentManager());
 
         // Set up the ViewPager, attaching the adapter and setting up a listener for when the
         // user swipes between sections.
