@@ -2,6 +2,8 @@ package com.github.clboettcher.bonappetit.app.db;
 
 import com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.menu.entity.MenuEntity;
+import com.github.clboettcher.bonappetit.app.menu.entity.OptionEntity;
+import com.github.clboettcher.bonappetit.app.menu.entity.RadioItemEntity;
 import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity;
@@ -25,7 +27,9 @@ public class BonAppetitDbConfigUtil extends OrmLiteConfigUtil {
 
             // Menu
             MenuEntity.class,
-            ItemEntity.class
+            ItemEntity.class,
+            OptionEntity.class,
+            RadioItemEntity.class
     };
 
     /**

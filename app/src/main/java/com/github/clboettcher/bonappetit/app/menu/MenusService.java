@@ -7,6 +7,7 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateSuccessfulEvent;
 import com.github.clboettcher.bonappetit.app.menu.event.PerformMenuUpdateEvent;
+import com.github.clboettcher.bonappetit.app.menu.mapper.MenuEntityMapper;
 import com.github.clboettcher.bonappetit.app.service.ApiProvider;
 import com.github.clboettcher.bonappetit.core.JsonUtils;
 import com.github.clboettcher.bonappetit.server.menu.api.dto.MenuDto;

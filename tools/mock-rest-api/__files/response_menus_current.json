@@ -8,8 +8,9 @@
       "type": "FOOD",
       "options": [
         {
-          "type": "checkboxOption",
           "id": 3,
+          "index": 0,
+          "type": "checkboxOption",
           "title": "Käsesoße",
           "priceDiff": 0.5,
           "defaultChecked": true
@@ -23,27 +24,28 @@
       "type": "DRINK_ALCOHOLIC",
       "options": [
         {
+          "id": 4,
+          "index": 0,
           "type": "radioOption",
-          "id": 1,
           "title": "Größe",
           "defaultSelected": {
             "id": 1,
+            "index": 0,
             "title": "groß",
-            "priceDiff": 0,
-            "index": 0
+            "priceDiff": 0
           },
           "radioItems": [
             {
               "id": 1,
+              "index": 0,
               "title": "groß",
-              "priceDiff": 0,
-              "index": 0
+              "priceDiff": 0
             },
             {
               "id": 2,
+              "index": 1,
               "title": "klein",
-              "priceDiff": 0.5,
-              "index": 1
+              "priceDiff": 0.5
             }
           ]
         }
@@ -64,6 +66,7 @@
         {
           "type": "checkboxOption",
           "id": 1,
+          "index": 0,
           "title": "Extra Salz",
           "priceDiff": 0,
           "defaultChecked": false
@@ -71,6 +74,7 @@
         {
           "type": "valueOption",
           "id": 2,
+          "index": 1,
           "title": "Ketchup",
           "priceDiff": 0,
           "defaultValue": 2

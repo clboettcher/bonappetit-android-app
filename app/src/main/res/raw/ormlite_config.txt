@@ -1,5 +1,5 @@
 #
-# generated on 2016/10/08 02:53:18
+# generated on 2016/10/08 05:49:13
 #
 # --table-start--
 dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity
@@ -80,8 +80,8 @@ columnName=ID
 id=true
 # --field-end--
 # --field-start--
-fieldName=name
-columnName=NAME
+fieldName=title
+columnName=TITLE
 # --field-end--
 # --field-start--
 fieldName=price
@@ -93,6 +93,96 @@ columnName=TYPE
 # --field-end--
 # --field-start--
 fieldName=menu
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=options
+foreignCollection=true
+foreignCollectionEager=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.clboettcher.bonappetit.app.menu.entity.OptionEntity
+tableName=OPTION
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=ID
+id=true
+# --field-end--
+# --field-start--
+fieldName=title
+columnName=TITLE
+# --field-end--
+# --field-start--
+fieldName=index
+columnName=INDEX
+# --field-end--
+# --field-start--
+fieldName=type
+columnName=OPTION_TYPE
+# --field-end--
+# --field-start--
+fieldName=priceDiff
+columnName=PRICE_DIFF
+# --field-end--
+# --field-start--
+fieldName=item
+canBeNull=false
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --field-start--
+fieldName=defaultChecked
+columnName=DEFAULT_CHECKED
+# --field-end--
+# --field-start--
+fieldName=defaultValue
+columnName=DEFAULT_VALUE
+# --field-end--
+# --field-start--
+fieldName=radioItemEntities
+foreignCollection=true
+foreignCollectionEager=true
+# --field-end--
+# --field-start--
+fieldName=defaultSelectedItem
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.clboettcher.bonappetit.app.menu.entity.RadioItemEntity
+tableName=RADIO_ITEM
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=ID
+id=true
+# --field-end--
+# --field-start--
+fieldName=index
+columnName=INDEX
+# --field-end--
+# --field-start--
+fieldName=title
+columnName=TITLE
+# --field-end--
+# --field-start--
+fieldName=priceDiff
+columnName=PRICE_DIFF
+# --field-end--
+# --field-start--
+fieldName=option
 canBeNull=false
 foreign=true
 foreignAutoRefresh=true

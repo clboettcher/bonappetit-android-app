@@ -6,8 +6,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
+import com.github.clboettcher.bonappetit.app.menu.ItemDao;
 import com.github.clboettcher.bonappetit.app.menu.MenuDao;
-import com.github.clboettcher.bonappetit.app.menu.MenuEntityMapper;
+import com.github.clboettcher.bonappetit.app.menu.OptionDao;
+import com.github.clboettcher.bonappetit.app.menu.RadioItemDao;
+import com.github.clboettcher.bonappetit.app.menu.mapper.ItemEntityMapper;
+import com.github.clboettcher.bonappetit.app.menu.mapper.MenuEntityMapper;
+import com.github.clboettcher.bonappetit.app.menu.mapper.OptionEntityMapper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntityMapper;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefDao;
@@ -69,14 +74,44 @@ public class DiModule {
 
     @Provides
     @Singleton
-    public MenuDao provideMenuDao(BonAppetitDbHelper bonAppetitDbHelper) {
-        return new MenuDao(bonAppetitDbHelper);
+    public MenuDao provideMenuDao(BonAppetitDbHelper bonAppetitDbHelper, ItemDao itemDao) {
+        return new MenuDao(bonAppetitDbHelper, itemDao);
     }
 
     @Provides
     @Singleton
-    public MenuEntityMapper provideMenuEntityMapper() {
-        return new MenuEntityMapper();
+    public ItemDao provideItemDao(BonAppetitDbHelper bonAppetitDbHelper, OptionDao optionDao) {
+        return new ItemDao(bonAppetitDbHelper, optionDao);
+    }
+
+    @Provides
+    @Singleton
+    public OptionDao provideOptionDao(BonAppetitDbHelper bonAppetitDbHelper, RadioItemDao radioItemDao) {
+        return new OptionDao(bonAppetitDbHelper, radioItemDao);
+    }
+
+    @Provides
+    @Singleton
+    public RadioItemDao provideRadioItemDao(BonAppetitDbHelper bonAppetitDbHelper) {
+        return new RadioItemDao(bonAppetitDbHelper);
+    }
+
+    @Provides
+    @Singleton
+    public OptionEntityMapper provideOptionEntityMapper() {
+        return new OptionEntityMapper();
+    }
+
+    @Provides
+    @Singleton
+    public ItemEntityMapper provideItemEntityMapper(OptionEntityMapper optionEntityMapper) {
+        return new ItemEntityMapper(optionEntityMapper);
+    }
+
+    @Provides
+    @Singleton
+    public MenuEntityMapper provideMenuEntityMapper(ItemEntityMapper itemEntityMapper) {
+        return new MenuEntityMapper(itemEntityMapper);
     }
 
     @Provides
