@@ -21,9 +21,11 @@ TODO:
 * DONE Trennung der Backend Module von deren API, damit das API Modul auch in der
 APP benutzt werden kann (--> StaffMemberDto).
 * DONE Einbindung der API-Module (--> StaffMemberDto, MenuDto, etc.) in die App (unter /libs). Atm: manuelles Kopieren.
-* Im Moment Main Activity als Startpunk mit Links auf alle Activities. 
-* Staff Member List Activity. Im Fehlerfall wird zeigt ein View Switcher eine Fehlermeldung und einen Refresh Rädchen
+* DONE Im Moment Main Activity als Startpunk mit Links auf alle Activities. 
+* DONE Staff Member List Activity. Im Fehlerfall wird zeigt ein View Switcher eine Fehlermeldung und einen Refresh Rädchen
 * DONE Preferences Activity in die Action Bar einbinden, damit in der App Einstellungen geändert werden können.
+* Fehler aus SelectCustomerFragment + layout rausmachen, styles/colors/dimens sauber runterdefinieren
+
 * irgendwann später: Main Fragment fertig machen. Idee: alle Daten vom Backend laden, die benötigt werden:
   Staff members, Menu
   erst dann: anzeige der Kundenauswahl mit Staff members popup (wie gewohnt aus dem POC) Das ist

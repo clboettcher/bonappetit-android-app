@@ -16,6 +16,8 @@
     <string name="general_action_update">Aktualisieren</string>
     <string name="general_toast_cancel_notification">Abgebrochen</string>
     <string name="general_edit_text_hint">Antippen, um Eingabe zu machen</string>
+    <string name="general_staff_member_label">Angemeldet: </string>
+    <string name="general_customer_label">Kunde:</string>
 
     <!--***********************************************************************************************************-->
     <!--Action Bar-->
@@ -56,15 +58,36 @@
     <string name="prefs_key_customer">prefs_key_customer</string>
 
     <!--***********************************************************************************************************-->
-    <!--Main-->
+    <!--MainActivity-->
     <!--***********************************************************************************************************-->
     <string name="fragment_main_progress_status">Daten werden geladen …</string>
 
     <!--***********************************************************************************************************-->
-    <!--Take Orders-->
+    <!--TakeOrdersActivity-->
     <!--***********************************************************************************************************-->
-    <string name="activity_take_orders_title">TakeOrdersActivity</string>
-    <string name="fragment_take_orders_customer_title">Kunde</string>
-    <string name="fragment_take_orders_menu_title">Gerichte</string>
-    <string name="fragment_take_orders_overview_title">Zusammenfassung</string>
+    <string name="activity_take_orders_title">Bestellen</string>
+
+    <!--***********************************************************************************************************-->
+    <!--SelectCustomerFragment-->
+    <!--***********************************************************************************************************-->
+    <string name="fragment_select_customer_title">Kunde</string>
+    <string name="fragment_select_customer_tab_title">Kunde</string>
+    <string name="fragment_select_customer_textview_heading_label">Bestellen -  Kunden auswählen</string>
+    <string name="fragment_select_customer_freetext_label_text">Texteingabe</string>
+    <string name="fragment_select_customer_freetext_hint">Tippen, um Kunden einzugeben</string>
+    <string name="fragment_select_customer_freetext_confirm_button_text">Texteingabe übernehmen</string>
+    <string name="fragment_select_customer_table_select_label_text">Tischauswahl</string>
+    <string name="fragment_select_customer_table_select_explanation_text">Tischnummer antippen.</string>
+    <string name="fragment_select_customer_table_prefix">Tisch</string>
+
+    <!--***********************************************************************************************************-->
+    <!--MenuFragment-->
+    <!--***********************************************************************************************************-->
+    <string name="fragment_menu_title">Gerichte</string>
+
+    <!--***********************************************************************************************************-->
+    <!--OrderOverviewFragment-->
+    <!--***********************************************************************************************************-->
+    <string name="fragment_order_overview_title">Zusammenfassung</string>
+
 </resources>

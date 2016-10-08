@@ -52,21 +52,15 @@ way the UI will be more consistent and look more badass.
     <dimen name="button_padding_top_bottom">15dp</dimen>
     <dimen name="button_min_width">75dp</dimen>
 
-    <dimen name="button_grid_button_padding_left_right">15dp</dimen>
-    <dimen name="button_grid_button_padding_top_bottom">20dp</dimen>
+    <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
+    <!--<dimen name="button_grid_button_menu_padding_left_right">5dp</dimen>-->
+    <!--<dimen name="button_grid_button_menu_padding_top_bottom">5dp</dimen>-->
+    <!--<dimen name="button_grid_button_menu_margin">2dp</dimen>-->
+    <!--<dimen name="button_grid_button_menu_min_height">80dp</dimen>-->
 
-    <dimen name="button_grid_button_menu_padding_left_right">5dp</dimen>
-    <dimen name="button_grid_button_menu_padding_top_bottom">5dp</dimen>
-    <dimen name="button_grid_button_menu_margin">2dp</dimen>
-    <dimen name="button_grid_button_menu_min_height">80dp</dimen>
-
-    <dimen name="button_grid_button_table_padding_left_right">25dp</dimen>
-    <dimen name="button_grid_button_table_padding_top_bottom">30dp</dimen>
-    <dimen name="button_grid_button_table_margin">2dp</dimen>
-
-
-    <!-- TextView -->
-
+    <!--***********************************************************************************************************-->
+    <!--Horizontal Spacer-->
+    <!--***********************************************************************************************************-->
     <!-- Horizontal Spacer -->
     <!-- TODO Just here for reference. Copied from POC. Delete when no longer needed. -->
     <!--<dimen name="HorizontalSpacer.Height">2dp</dimen>-->

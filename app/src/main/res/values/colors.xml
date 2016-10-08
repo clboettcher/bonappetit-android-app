@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ff0000</color>
+    <color name="grey">#777</color>
+
+    <!--***********************************************************************************************************-->
+    <!--Button-->
+    <!--***********************************************************************************************************-->
+    <color name="button_default">#dbffa1</color>
+    <color name="button_pressed">#708353</color>
+    <color name="button_focused">#9dca57</color>
+    <color name="button_disabled">#e5e5e5</color>
+    <!--TODO Colors from the poc, delete when no longer needed-->
+    <!--Button -->
+    <!--<color name="Button.Default">#dbffa1</color>-->
+    <!--<color name="Button.Pressed">#708353</color>-->
+    <!--<color name="Button.Focused">#9dca57</color>-->
+    <!--<color name="Button.Disabled">#e5e5e5</color>-->
+    <!---->
+
+    <!--***********************************************************************************************************-->
+    <!--ActionBar-->
+    <!--***********************************************************************************************************-->
+    <!--ActionBar -->
+    <color name="actionbar_background">#ffd7a1</color>
+    <!--TODO Colors from the poc, delete when no longer needed-->
+    <!--<color name="ActionBar.Background">#ffd7a1</color>-->
+</resources>

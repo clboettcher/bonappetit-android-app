@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--***********************************************************************************************************-->
+    <!-- TextView -->
+    <!--***********************************************************************************************************-->
+
+    <style name="TextView" parent="android:Widget.Holo.Light.TextView">
+    </style>
+
+    <style name="TextView.Heading">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextView.Heading.H1">
+        <item name="android:textSize">@dimen/font_l</item>
+    </style>
+
+    <style name="TextView.Heading.H2">
+        <item name="android:textSize">@dimen/font_m</item>
+    </style>
+
+    <!--***********************************************************************************************************-->
+    <!-- Button -->
+    <!--***********************************************************************************************************-->
+    <!--Defines general styles of a standard button-->
+    <style name="Button" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/general_button</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
+        <item name="android:paddingLeft">@dimen/button_padding_left_right</item>
+        <item name="android:paddingRight">@dimen/button_padding_left_right</item>
+        <item name="android:paddingTop">@dimen/button_padding_top_bottom</item>
+        <item name="android:paddingBottom">@dimen/button_padding_top_bottom</item>
+    </style>
+
+    <style name="Button.Confirm">
+        <item name="android:drawableLeft">@drawable/ic_navigation_accept</item>
+    </style>
+
+    <style name="Button.Send">
+        <item name="android:drawableLeft">@drawable/ic_social_send_now</item>
+    </style>
+
+    <style name="Button.Edit">
+        <item name="android:drawableLeft">@drawable/ic_content_edit</item>
+
+    </style>
+
+    <style name="Button.Delete">
+        <item name="android:drawableLeft">@drawable/ic_content_delete</item>
+    </style>
+
+    <!--Replaced by the styles in styles_fragment_*.xml. Just here for reference, delete when no longer needed.-->
+    <!--A button that is displayed as part of a grid of buttons-->
+    <!--<style name="Button.GridButton">-->
+    <!--<item name="android:paddingLeft">@dimen/button_grid_button_padding_left_right</item>-->
+    <!--<item name="android:paddingRight">@dimen/button_grid_button_padding_left_right</item>-->
+    <!--<item name="android:paddingTop">@dimen/button_grid_button_padding_top_bottom</item>-->
+    <!--<item name="android:paddingBottom">@dimen/button_grid_button_padding_top_bottom</item>-->
+    <!--</style>-->
+
+    <!--***********************************************************************************************************-->
+    <!-- Horizontal Spacer -->
+    <!--***********************************************************************************************************-->
+    <style name="HorizontalSpacer">
+        <item name="android:background">@color/grey</item>
+    </style>
+
+</resources>
+

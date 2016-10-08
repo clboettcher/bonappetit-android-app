@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/LinearLayout_TakeOrdersSelectCustomer"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+        >
+
+    <!-- Heading-->
+    <TextView
+            android:id="@+id/textview_take_orders_select_customer_heading_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_select_customer_textview_heading_label"
+            style="@style/TextView.Heading.H1"
+
+            />
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+
+    <!-- Staff Member -->
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+        <TextView
+                android:id="@+id/fragment_select_customer_staff_member_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general_staff_member_label"
+                />
+
+        <TextView
+                android:id="@+id/fragment_select_customer_staff_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+    </LinearLayout>
+
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+    <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <!--We need a layout container because scroll view can only have exactly one direct child -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <!-- Table selection -->
+            <!-- Heading-->
+            <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/TextView.Heading.H2"
+                    android:text="@string/fragment_select_customer_table_select_label_text"
+
+                    />
+
+            <!-- Explanation -->
+            <TextView
+                    android:id="@+id/textview_take_orders_select_customer_table_select_explanation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/fragment_select_customer_table_select_explanation_text"
+                    />
+
+            <!-- A table which contain buttons in every cell. This models the restaurant table selection.-->
+            <TableLayout
+                    android:id="@+id/take_orders_select_customer_tables_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:stretchColumns="*"
+                    >
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_04"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="4"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_03"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="3"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_02"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="2"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_01"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:text="1"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_05"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="5"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+                    <!--Placeholder-->
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_bar_backside"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:layout_span="2"
+                            android:text="Bar hinten"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_06"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="6"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <TextView
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_bar_frontside"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:layout_span="2"
+                            android:text="Bar vorn"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_13"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="13"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_11"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="11"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_09"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="9"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_07"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="7"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+                </TableRow>
+
+                <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_14"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="14"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_12"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="12"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_10"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="10"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+
+                    <Button
+                            android:id="@+id/button_take_orders_select_customer_table_08"
+                            android:layout_height="fill_parent"
+                            android:layout_width="fill_parent"
+                            android:text="8"
+                            style="@style/Button.RestaurantTableButton"
+                            />
+                </TableRow>
+            </TableLayout>
+
+            <include layout="@layout/general_horizontal_spacer"/>
+
+
+            <!-- Freetext customer input label-->
+            <TextView
+                    android:id="@+id/textview_take_orders_select_customer_freetext_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/textview_take_orders_select_customer_freetext_text"
+                    android:text="@string/fragment_select_customer_freetext_label_text"
+                    style="@style/TextView.Heading.H2"
+                    />
+
+            <!-- Freetext customer input and the OK button -->
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                <EditText
+                        android:id="@+id/textview_take_orders_select_customer_freetext_text"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:hint="@string/fragment_select_customer_freetext_hint"
+                        >
+                </EditText>
+
+                <Button
+                        android:id="@+id/button_take_orders_select_customer_freetext_confirm"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fragment_select_customer_freetext_confirm_button_text"
+                        style="@style/Button.Confirm"
+                        />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

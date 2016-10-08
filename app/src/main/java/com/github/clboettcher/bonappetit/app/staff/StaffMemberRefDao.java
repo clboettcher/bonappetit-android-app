@@ -2,12 +2,15 @@ package com.github.clboettcher.bonappetit.app.staff;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.db.BonAppetitDbHelper;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.table.TableUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
+import java.util.List;
 
 public class StaffMemberRefDao {
 
@@ -38,7 +41,12 @@ public class StaffMemberRefDao {
         Log.i(TAG, String.format("Saved reference to staff member %s to database.", staffMemberEntity));
     }
 
-    public StaffMemberRefEntity get() {
-        return dao.queryForAll().get(0);
+    public Optional<StaffMemberRefEntity> get() {
+        List<StaffMemberRefEntity> staffMemberRefEntities = dao.queryForAll();
+        if (CollectionUtils.isEmpty(staffMemberRefEntities)) {
+            return Optional.absent();
+        } else {
+            return Optional.of(staffMemberRefEntities.get(0));
+        }
     }
 }

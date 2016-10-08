@@ -1,5 +1,6 @@
 package com.github.clboettcher.bonappetit.app.db;
 
+import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
@@ -15,14 +16,15 @@ public class BonAppetitDbConfigUtil extends OrmLiteConfigUtil {
     public static final Class<?>[] DATABASE_CLASSES = new Class[]{
             // Staff
             StaffMemberEntity.class,
-            StaffMemberRefEntity.class
+            StaffMemberRefEntity.class,
+            CustomerEntity.class
     };
 
     /**
      * Creates the config file that makes ORM lite fast.
-     * <p/>
+     * <p>
      * For this to work you have to:
-     * <p/>
+     * <p>
      * - Run with work dir \app\src\main
      * - Create dir res/raw
      */
