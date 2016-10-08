@@ -1,0 +1,11 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/menus/current"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "response_menus_current.json",
+    "fixedDelayMilliseconds": 200
+  }
+}
