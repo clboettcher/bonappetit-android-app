@@ -3,7 +3,7 @@
       tools:context="com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity"
         >
     <item
-            android:id="@+id/actionSettings"
+            android:id="@id/actionSettings"
             android:title="@string/general_action_settings"
             android:orderInCategory="100"
             android:showAsAction="never"

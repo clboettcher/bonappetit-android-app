@@ -2,6 +2,7 @@ package com.github.clboettcher.bonappetit.app.takeorders;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.activity.BonAppetitBaseFragmentActivity;
 import com.github.clboettcher.bonappetit.app.activity.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
+import com.github.clboettcher.bonappetit.app.preferences.BonAppetitPreferencesActivity;
 
 public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implements ActionBar.TabListener, OnSwitchToTabListener {
 
@@ -116,6 +118,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.actionSettings) {
+            startActivity(new Intent(this, BonAppetitPreferencesActivity.class));
             return true;
         }
 

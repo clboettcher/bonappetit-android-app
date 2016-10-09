@@ -3,9 +3,7 @@ package com.github.clboettcher.bonappetit.app.menu.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -75,12 +73,32 @@ public class MenuFragment extends TakeOrdersFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setHasOptionsMenu(true);
 
         final List<ItemEntity> itemList = itemDao.list();
         Log.i(TAG, String.format("onCreate(): Initializing the fragment with %d item(s)",
                 itemList.size()));
         Collections.sort(itemList, itemEntityComparator);
         this.items = itemList;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_fragment_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        switch (item.getItemId()) {
+            case R.id.actionUpdateMenu:
+                Log.i(TAG, "Menu update requested by the user.");
+                // TODO: post event that triggers menu update
+                return true;
+        }
+        return false;
     }
 
     @Override

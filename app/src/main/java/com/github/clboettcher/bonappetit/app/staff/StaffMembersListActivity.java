@@ -107,7 +107,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_staff_member_list, menu);
+        getMenuInflater().inflate(R.menu.menu_activity_staff_member_list, menu);
         return true;
     }
 
@@ -117,7 +117,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.actionUpdate:
+            case R.id.actionUpdateStaffMembers:
                 updateStaffMembers();
                 return true;
         }

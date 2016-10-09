@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/fragment_menu_inactive_notice"
+                    android:text="@string/fragment_menu_inactive_note"
                     />
 
             <include layout="@layout/general_horizontal_spacer"/>
@@ -160,8 +160,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Daten können nicht geladen werden.\nBitte versuche es erneut."
-                    style="@style/TextView.Heading.H2"
+                    android:text="@string/fragment_menu_update_failed_note"
+                    style="@style/TextView.SizeSmall"
                     />
 
             <Button
