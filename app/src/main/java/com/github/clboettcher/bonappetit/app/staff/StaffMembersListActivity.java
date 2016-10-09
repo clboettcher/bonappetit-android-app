@@ -82,14 +82,14 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(TAG, "StaffMembersListActivity starting. Registering for events");
+        Log.i(TAG, "Starting. Registering for events");
         this.bus.register(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(TAG, "StaffMembersListActivity stopping. Unregistering from events");
+        Log.i(TAG, "Stopping. Unregistering from events");
         this.bus.unregister(this);
     }
 
