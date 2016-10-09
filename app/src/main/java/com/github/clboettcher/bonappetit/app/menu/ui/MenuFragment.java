@@ -14,6 +14,9 @@ import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
 import com.github.clboettcher.bonappetit.app.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.menu.dao.MenuDao;
 import com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity;
+import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateFailedEvent;
+import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.menu.event.PerformMenuUpdateEvent;
 import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity;
@@ -22,17 +25,20 @@ import com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+// TODO: add on click listener for update failed retry button
 public class MenuFragment extends TakeOrdersFragment {
 
     private static final String TAG = MenuFragment.class.getName();
-
-    private List<ItemEntity> items;
 
     private TextView staffMemberText;
 
@@ -42,7 +48,8 @@ public class MenuFragment extends TakeOrdersFragment {
 
     private ViewFlipper viewFlipper;
 
-    private MenuFragmentViewState viewState;
+    @Inject
+    EventBus bus;
 
     @Inject
     MenuDao menuDao;
@@ -56,8 +63,8 @@ public class MenuFragment extends TakeOrdersFragment {
     @Inject
     StaffMemberRefDao staffMemberRefDao;
 
-
     private Comparator<ItemEntity> itemEntityComparator = new ItemEntityComparator();
+    private MenuItemsAdapter menuItemsAdapter;
 
     @Override
     public void onAttach(Context context) {
@@ -74,12 +81,20 @@ public class MenuFragment extends TakeOrdersFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setHasOptionsMenu(true);
+    }
 
-        final List<ItemEntity> itemList = itemDao.list();
-        Log.i(TAG, String.format("onCreate(): Initializing the fragment with %d item(s)",
-                itemList.size()));
-        Collections.sort(itemList, itemEntityComparator);
-        this.items = itemList;
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i(TAG, "Starting. Registering for events");
+        this.bus.register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, "Stopping. Unregistering from events");
+        this.bus.unregister(this);
     }
 
     @Override
@@ -95,7 +110,8 @@ public class MenuFragment extends TakeOrdersFragment {
         switch (item.getItemId()) {
             case R.id.actionUpdateMenu:
                 Log.i(TAG, "Menu update requested by the user.");
-                // TODO: post event that triggers menu update
+                this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
+                this.bus.post(new PerformMenuUpdateEvent());
                 return true;
         }
         return false;
@@ -127,7 +143,8 @@ public class MenuFragment extends TakeOrdersFragment {
         });
 
         GridView menuItemsContainer = (GridView) rootView.findViewById(R.id.fragmentMenuGridViewItems);
-        menuItemsContainer.setAdapter(new MenuItemsAdapter(getContext(), items));
+        menuItemsAdapter = new MenuItemsAdapter(getContext(), new ArrayList<ItemEntity>());
+        menuItemsContainer.setAdapter(menuItemsAdapter);
     }
 
     private void initInactiveView(View rootView) {
@@ -165,6 +182,18 @@ public class MenuFragment extends TakeOrdersFragment {
 //        }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMenuUpdateSuccessful(MenuUpdateSuccessfulEvent ignored) {
+        this.update();
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMenuUpdateFailed(MenuUpdateFailedEvent ignored) {
+        this.update();
+    }
+
+
     @Override
     public void update() {
         final Optional<CustomerEntity> customer = customerDao.get();
@@ -172,12 +201,14 @@ public class MenuFragment extends TakeOrdersFragment {
                 customer.orNull(),
                 menuDao.getState()));
 
+        updateCustomerAndUsername();
+        refreshOrderCounts();
+
         if (customer.isPresent()) {
             // Customer is there, see if menu update went through OK
             switch (menuDao.getState()) {
                 case INITIAL:
-                    // TODO Trigger update, should not happen
-                    // Then show progress view
+                    this.bus.post(new PerformMenuUpdateEvent());
                     this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
                     break;
                 case UPDATE_FAILED:
@@ -189,7 +220,11 @@ public class MenuFragment extends TakeOrdersFragment {
                     this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
                     break;
                 case UPDATE_COMPLETED:
-                    // Show value view.
+                    final List<ItemEntity> itemList = itemDao.list();
+                    Log.i(TAG, String.format("onCreate(): Initializing the fragment with %d item(s)",
+                            itemList.size()));
+                    Collections.sort(itemList, itemEntityComparator);
+                    this.menuItemsAdapter.update(itemList);
                     this.setState(MenuFragmentViewState.OK);
                     break;
                 default:
@@ -202,9 +237,6 @@ public class MenuFragment extends TakeOrdersFragment {
             this.setState(MenuFragmentViewState.NO_CUSTOMER);
         }
 
-        updateCustomerAndUsername();
-        refreshOrderCounts();
-
         // TODO Enable switch to overview button if we have any orders.
 //        if (DatabaseAccessHelper.getInstance().getOrderCount(dbHelper) == 0) {
 //            buttonOverview.setEnabled(false);
@@ -214,7 +246,6 @@ public class MenuFragment extends TakeOrdersFragment {
     }
 
     private void setState(MenuFragmentViewState state) {
-        this.viewState = state;
         View newView = viewFlipper.findViewById(state.getViewId());
         int newIndex = viewFlipper.indexOfChild(newView);
         viewFlipper.setDisplayedChild(newIndex);

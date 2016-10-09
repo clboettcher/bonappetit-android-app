@@ -12,16 +12,25 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.order.EditOrderActivity;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MenuItemsAdapter extends BaseAdapter implements View.OnClickListener {
 
     private Context context;
     private List<ItemEntity> items;
+    private ItemEntityComparator itemEntityComparator = new ItemEntityComparator();
 
     public MenuItemsAdapter(Context context, List<ItemEntity> items) {
         this.context = context;
         this.items = items;
+    }
+
+    public void update(List<ItemEntity> newItemList) {
+        this.items.clear();
+        this.items.addAll(newItemList);
+        Collections.sort(this.items, itemEntityComparator);
+        this.notifyDataSetChanged();
     }
 
     public int getCount() {
