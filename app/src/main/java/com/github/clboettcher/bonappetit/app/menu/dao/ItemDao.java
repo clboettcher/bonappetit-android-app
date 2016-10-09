@@ -50,4 +50,8 @@ public class ItemDao {
     public int deleteAll() throws SQLException {
         return TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), ItemEntity.class);
     }
+
+    public long count() {
+        return dao.countOf();
+    }
 }

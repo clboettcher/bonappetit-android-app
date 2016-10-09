@@ -17,7 +17,6 @@ public class MenuEntityMapper {
 
     public MenuEntity mapToMenuEntity(MenuDto menuDto) {
         MenuEntity menuEntity = new MenuEntity();
-        menuEntity.setId(menuDto.getId());
         menuEntity.setItems(itemEntityMapper.mapToItemEntities(menuDto.getItems(), menuEntity));
         return menuEntity;
     }

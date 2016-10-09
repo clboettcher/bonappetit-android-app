@@ -93,7 +93,6 @@ public class ItemEntity {
                 .append("title", title)
                 .append("price", price)
                 .append("type", type)
-                .append("menu.id", menu.getId())
                 .append("options.size()", CollectionUtils.size(options))
                 .toString();
     }

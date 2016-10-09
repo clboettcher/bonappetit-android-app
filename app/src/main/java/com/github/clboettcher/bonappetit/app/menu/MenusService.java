@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.menu.dao.MenuDao;
+import com.github.clboettcher.bonappetit.app.menu.entity.MenuEntity;
+import com.github.clboettcher.bonappetit.app.menu.entity.MenuUpdateState;
 import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.menu.event.MenuUpdateSuccessfulEvent;
 import com.github.clboettcher.bonappetit.app.menu.event.PerformMenuUpdateEvent;
@@ -37,7 +39,8 @@ public class MenusService {
                         MenuEntityMapper menuEntityMapper,
                         EventBus eventBus,
                         ApiProvider apiProvider,
-                        ConfigProvider configProvider, ObjectMapper objectMapper) {
+                        ConfigProvider configProvider,
+                        ObjectMapper objectMapper) {
         Log.i(TAG, "Creating MenusService. Registering for events.");
         this.objectMapper = objectMapper;
         this.configProvider = configProvider;
@@ -73,7 +76,9 @@ public class MenusService {
             return;
         }
 
-        menuDao.save(menuEntityMapper.mapToMenuEntity(menuDto));
+        MenuEntity menu = menuEntityMapper.mapToMenuEntity(menuDto);
+        menuDao.createOrUpdate(menu);
+        menuDao.setState(MenuUpdateState.UPDATE_COMPLETED);
         bus.post(new MenuUpdateSuccessfulEvent());
     }
 
@@ -82,12 +87,16 @@ public class MenusService {
         Call<MenuDto> currentMenuCall = apiProvider
                 .getMenusApi()
                 .getCurrentMenu();
+        menuDao.setState(MenuUpdateState.UPDATE_IN_PROGRESS);
+
         currentMenuCall.enqueue(new Callback<MenuDto>() {
             @Override
             public void onResponse(Call<MenuDto> call, Response<MenuDto> response) {
                 if (response.isSuccessful()) {
-                    menuDao.save(menuEntityMapper.mapToMenuEntity(response.body()));
+                    MenuEntity fetchedMenu = menuEntityMapper.mapToMenuEntity(response.body());
+                    menuDao.createOrUpdate(fetchedMenu);
                     Log.i(TAG, "Menu update successful");
+                    menuDao.setState(MenuUpdateState.UPDATE_COMPLETED);
                     bus.post(new MenuUpdateSuccessfulEvent());
                 } else {
                     Log.e(TAG, String.format("Menu update failed: %d %s",
@@ -100,6 +109,7 @@ public class MenusService {
             @Override
             public void onFailure(Call<MenuDto> call, Throwable t) {
                 Log.e(TAG, "Menu update failed", t);
+                menuDao.setState(MenuUpdateState.UPDATE_FAILED);
                 bus.post(new MenuUpdateFailedEvent(t));
             }
         });

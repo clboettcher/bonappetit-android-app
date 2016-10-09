@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
+import android.widget.ViewFlipper;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.activity.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
 import com.github.clboettcher.bonappetit.app.menu.dao.ItemDao;
+import com.github.clboettcher.bonappetit.app.menu.dao.MenuDao;
 import com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.selectcustomer.CustomerEntity;
@@ -35,18 +36,18 @@ public class MenuFragment extends TakeOrdersFragment {
 
     private List<ItemEntity> items;
 
-    private View rootView;
-
     private TextView staffMemberText;
-
 
     private TextView customerText;
 
-    private Button buttonOverview;
-
     private OnSwitchToTabListener mListener;
 
-    private ViewSwitcher switcher;
+    private ViewFlipper viewFlipper;
+
+    private MenuFragmentViewState viewState;
+
+    @Inject
+    MenuDao menuDao;
 
     @Inject
     ItemDao itemDao;
@@ -84,8 +85,8 @@ public class MenuFragment extends TakeOrdersFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_menu, container, false);
-        switcher = (ViewSwitcher) rootView.findViewById(R.id.fragmentMenuViewSwitcher);
+        View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
+        viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentMenuViewFlipper);
         // Configure the inactive view
         initInactiveView(rootView);
 
@@ -100,7 +101,7 @@ public class MenuFragment extends TakeOrdersFragment {
         staffMemberText = (TextView) rootView.findViewById(R.id.fragmentMenuStaffMember);
         customerText = (TextView) rootView.findViewById(R.id.fragmentMenuCustomer);
 
-        buttonOverview = (Button) rootView.findViewById(R.id.fragmentMenuButtonSwitchToOverview);
+        Button buttonOverview = (Button) rootView.findViewById(R.id.fragmentMenuButtonSwitchToOverview);
         buttonOverview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 mListener.onSwitchToTab(TakeOrdersActivity.TAB_OVERVIEW);
@@ -148,20 +149,39 @@ public class MenuFragment extends TakeOrdersFragment {
 
     @Override
     public void update() {
-        Log.d(TAG, "update() called");
-
         final Optional<CustomerEntity> customer = customerDao.get();
+        Log.i(TAG, String.format("update() called. Customer is %s. Menu update state is %s",
+                customer.orNull(),
+                menuDao.getState()));
 
         if (customer.isPresent()) {
-            // show the content
-            if (switcher.getNextView().getId() == R.id.fragmentMenuActiveRoot) {
-                switcher.showNext();
+            // Customer is there, see if menu update went through OK
+            switch (menuDao.getState()) {
+                case INITIAL:
+                    // TODO Trigger update, should not happen
+                    // Then show progress view
+                    this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
+                    break;
+                case UPDATE_FAILED:
+                    // Show error view with a button to try again
+                    this.setState(MenuFragmentViewState.MENU_UPDATE_FAILED);
+                    break;
+                case UPDATE_IN_PROGRESS:
+                    // Show progress bar
+                    this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
+                    break;
+                case UPDATE_COMPLETED:
+                    // Show value view.
+                    this.setState(MenuFragmentViewState.OK);
+                    break;
+                default:
+                    throw new UnsupportedOperationException(String.format("Unknown enum constant " +
+                                    "%s.%s", MenuFragmentViewState.class.getSimpleName(),
+                            menuDao.getState()));
             }
         } else {
-            // show the warning
-            if (switcher.getNextView().getId() == R.id.fragmentMenuInactiveRoot) {
-                switcher.showNext();
-            }
+            // Show customer missing view
+            this.setState(MenuFragmentViewState.NO_CUSTOMER);
         }
 
         updateCustomerAndUsername();
@@ -173,6 +193,13 @@ public class MenuFragment extends TakeOrdersFragment {
 //        } else {
 //            buttonOverview.setEnabled(true);
 //        }
+    }
+
+    private void setState(MenuFragmentViewState state) {
+        this.viewState = state;
+        View newView = viewFlipper.findViewById(state.getViewId());
+        int newIndex = viewFlipper.indexOfChild(newView);
+        viewFlipper.setDisplayedChild(newIndex);
     }
 
     private void updateCustomerAndUsername() {

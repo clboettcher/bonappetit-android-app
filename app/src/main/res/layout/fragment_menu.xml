@@ -20,12 +20,12 @@
 
     <include layout="@layout/general_horizontal_spacer"/>
 
-    <ViewSwitcher
-            android:id="@+id/fragmentMenuViewSwitcher"
+    <ViewFlipper
+            android:id="@+id/fragmentMenuViewFlipper"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             >
-        <!-- Tab active -->
+        <!-- State: ok -->
         <LinearLayout
                 android:id="@+id/fragmentMenuActiveRoot"
                 android:layout_width="fill_parent"
@@ -110,7 +110,7 @@
 
         </LinearLayout>
 
-        <!-- Tab inactive -->
+        <!-- State: no customer -->
         <LinearLayout
                 android:id="@+id/fragmentMenuInactiveRoot"
                 android:layout_width="wrap_content"
@@ -137,6 +137,41 @@
                     />
         </LinearLayout>
 
-    </ViewSwitcher>
+        <!-- State: Update in progress-->
+        <RelativeLayout
+                android:id="@+id/fragmentMenuUpdateInProgressRoot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            <include layout="@layout/general_progress_view"/>
+        </RelativeLayout>
+
+        <!--State: update failed-->
+        <RelativeLayout
+                android:id="@+id/fragmentMenuUpdateFailedRoot"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            <TextView
+                    android:id="@+id/fragmentMenuUpdateFailedLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="Daten können nicht geladen werden.\nBitte versuche es erneut."
+                    style="@style/TextView.Heading.H2"
+                    />
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fragmentMenuUpdateFailedLabel"
+                    android:layout_centerHorizontal="true"
+                    android:text="Wiederholen"
+                    />
+        </RelativeLayout>
+    </ViewFlipper>
 
 </LinearLayout>

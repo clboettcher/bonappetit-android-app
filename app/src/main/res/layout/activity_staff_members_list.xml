@@ -20,18 +20,12 @@
     </LinearLayout>
     <!--The progress bar that is displayed while data is loading-->
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/staffMembersListProgressView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             >
 
-        <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                style="?android:attr/progressBarStyleLarge"
-                />
+        <include layout="@layout/general_progress_view"/>
     </RelativeLayout>
+
 </ViewSwitcher>
