@@ -4,10 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
+import android.widget.*;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.activity.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.dagger.DiComponent;
@@ -189,7 +186,17 @@ public class MenuFragment extends TakeOrdersFragment {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMenuUpdateFailed(MenuUpdateFailedEvent ignored) {
+    public void onMenuUpdateFailed(MenuUpdateFailedEvent event) {
+        String errorMsg;
+        Throwable throwable = event.getThrowable();
+        if (throwable != null) {
+            errorMsg = String.format("Menu update failed: %s (%s)",
+                    throwable.getMessage(),
+                    throwable.getClass().getName());
+        } else {
+            errorMsg = String.format("Menu update failed: %d %s", event.getHttpCode(), event.getHttpMessage());
+        }
+        Toast.makeText(getContext(), errorMsg, Toast.LENGTH_LONG).show();
         this.update();
     }
 
