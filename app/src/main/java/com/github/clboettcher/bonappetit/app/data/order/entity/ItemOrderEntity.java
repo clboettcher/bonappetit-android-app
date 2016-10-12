@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @DatabaseTable(tableName = "ITEM_ORDER")
-public class ItemOrder {
+public class ItemOrderEntity {
 
     @DatabaseField(generatedId = true, columnName = "ID")
     private Long id;

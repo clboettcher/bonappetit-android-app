@@ -18,10 +18,10 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
     private Long id;
 
     /**
-     * Required by ORMLite to be able to query the foreign collection {@link ItemOrder#getOptionOrderEntities()}.
+     * Required by ORMLite to be able to query the foreign collection {@link ItemOrderEntity#getOptionOrderEntities()}.
      */
     @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false)
-    private ItemOrder itemOrder;
+    private ItemOrderEntity itemOrderEntity;
 
     @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true)
     private Long optionId;
@@ -62,12 +62,12 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
         this.id = id;
     }
 
-    public ItemOrder getItemOrder() {
-        return itemOrder;
+    public ItemOrderEntity getItemOrderEntity() {
+        return itemOrderEntity;
     }
 
-    public void setItemOrder(ItemOrder itemOrder) {
-        this.itemOrder = itemOrder;
+    public void setItemOrderEntity(ItemOrderEntity itemOrderEntity) {
+        this.itemOrderEntity = itemOrderEntity;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("itemOrder", itemOrder)
+                .append("itemOrderEntity", itemOrderEntity)
                 .append("optionId", optionId)
                 .append("checked", checked)
                 .append("value", value)
