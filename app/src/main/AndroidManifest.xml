@@ -9,10 +9,10 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/general_app_name"
             android:theme="@style/AppTheme"
-            android:name=".application.BonAppetitApplication"
+            android:name=".core.BonAppetitApplication"
             >
         <activity
-                android:name=".activity.MainActivity"
+                android:name=".ui.main.MainActivity"
                 android:label="@string/general_app_name"
                 >
             <intent-filter>
@@ -20,10 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".staff.StaffMembersListActivity"/>
-        <activity android:name=".preferences.BonAppetitPreferencesActivity"/>
+        <activity android:name=".ui.selectstaffmember.StaffMembersListActivity"/>
+        <activity android:name=".ui.preferences.BonAppetitPreferencesActivity"/>
         <activity
-            android:name=".takeorders.TakeOrdersActivity"
+            android:name=".ui.takeorders.TakeOrdersActivity"
             android:label="@string/activity_take_orders_title" >
         </activity>
     </application>

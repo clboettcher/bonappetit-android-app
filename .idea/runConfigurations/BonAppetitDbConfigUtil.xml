@@ -2,11 +2,11 @@
   <configuration default="false" name="BonAppetitDbConfigUtil" type="Application" factoryName="Application" nameIsGenerated="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
       <pattern>
-        <option name="PATTERN" value="com.github.clboettcher.bonappetit.app.db.*" />
+        <option name="PATTERN" value="com.github.clboettcher.bonappetit.app.data.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
-    <option name="MAIN_CLASS_NAME" value="com.github.clboettcher.bonappetit.app.db.BonAppetitDbConfigUtil" />
+    <option name="MAIN_CLASS_NAME" value="com.github.clboettcher.bonappetit.app.data.BonAppetitDbConfigUtil" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/app/src/main" />

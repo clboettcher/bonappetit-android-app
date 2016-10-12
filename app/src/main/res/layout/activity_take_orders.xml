@@ -3,4 +3,4 @@
                                    android:id="@+id/takeOrdersActivityPager"
                                    android:layout_width="match_parent"
                                    android:layout_height="match_parent"
-                                   tools:context="com.github.clboettcher.bonappetit.app.takeorders.TakeOrdersActivity"/>
+                                   tools:context="com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity"/>

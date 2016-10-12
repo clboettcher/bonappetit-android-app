@@ -2,7 +2,7 @@
 # generated on 2016/10/08 07:14:36
 #
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberEntity
+dataClass=StaffMemberEntity
 tableName=STAFF_MEMBER
 # --table-fields-start--
 # --field-start--
@@ -22,7 +22,7 @@ columnName=LAST_NAME
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.staff.StaffMemberRefEntity
+dataClass=StaffMemberRefEntity
 tableName=SELECTED_STAFF_MEMBER
 # --table-fields-start--
 # --field-start--
@@ -40,7 +40,7 @@ maxForeignAutoRefreshLevel=2
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.selectcustomer.CustomerEntity
+dataClass=CustomerEntity
 tableName=CUSTOMER
 # --table-fields-start--
 # --field-start--
@@ -56,7 +56,7 @@ columnName=VALUE
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.menu.entity.MenuEntity
+dataClass=MenuEntity
 tableName=MENU
 # --table-fields-start--
 # --field-start--
@@ -73,7 +73,7 @@ foreignCollectionEager=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.menu.entity.ItemEntity
+dataClass=ItemEntity
 tableName=ITEM
 # --table-fields-start--
 # --field-start--
@@ -109,7 +109,7 @@ foreignCollectionEager=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.menu.entity.OptionEntity
+dataClass=OptionEntity
 tableName=OPTION
 # --table-fields-start--
 # --field-start--
@@ -163,7 +163,7 @@ maxForeignAutoRefreshLevel=2
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.github.clboettcher.bonappetit.app.menu.entity.RadioItemEntity
+dataClass=RadioItemEntity
 tableName=RADIO_ITEM
 # --table-fields-start--
 # --field-start--

@@ -1,0 +1,7 @@
+package com.github.clboettcher.bonappetit.app.data.menu.event;
+
+/**
+ * Fired when the menu has been updated successfully.
+ */
+public class MenuUpdateSuccessfulEvent {
+}
