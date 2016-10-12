@@ -1,10 +1,12 @@
 package com.github.clboettcher.bonappetit.app.data;
 
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
-import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
+import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
+import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
@@ -29,7 +31,11 @@ public class BonAppetitDbConfigUtil extends OrmLiteConfigUtil {
             MenuEntity.class,
             ItemEntity.class,
             OptionEntity.class,
-            RadioItemEntity.class
+            RadioItemEntity.class,
+
+            // Order
+            ItemOrderEntity.class,
+            OptionOrderEntity.class,
     };
 
     /**
