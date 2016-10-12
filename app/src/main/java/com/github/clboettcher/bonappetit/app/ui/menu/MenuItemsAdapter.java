@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
-import com.github.clboettcher.bonappetit.app.data.order.EditOrderActivity;
+import com.github.clboettcher.bonappetit.app.ui.order.EditOrderActivity;
 
 import java.util.Collections;
 import java.util.List;
