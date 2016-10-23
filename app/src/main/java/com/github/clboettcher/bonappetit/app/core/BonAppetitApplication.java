@@ -67,9 +67,9 @@ public class BonAppetitApplication extends Application {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onNoSubscriberEvent(NoSubscriberEvent event) {
-        String errorMsg = String.format("ERROR: No subscriber for event: %s", event.originalEvent);
-        Log.e(TAG, errorMsg);
-        Toast.makeText(this, errorMsg,
+        String msg = String.format("No subscriber for event: %s", event.originalEvent);
+        Log.i(TAG, msg);
+        Toast.makeText(this, msg,
                 Toast.LENGTH_LONG).show();
     }
 
