@@ -1,13 +1,13 @@
 package com.github.clboettcher.bonappetit.app.ui.menu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
@@ -84,11 +84,8 @@ public class MenuItemsAdapter extends BaseAdapter implements View.OnClickListene
      */
     public void onClick(View view) {
         ItemEntity item = (ItemEntity) view.getTag();
-        Toast.makeText(context, String.format("Starting EditOrderActivity to create order for item %s", item)
-                , Toast.LENGTH_LONG).show();
-        // TODO switch to EditOrderActivity
-//        Intent intent = new Intent(context, EditOrderActivity.class);
-//        intent.putExtra(Values.MENU_ITEM_ID_INTENT_EXTRA_KEY, ((Item) view.getTag()).getId());
-//        startActivity(intent);
+        Intent intent = new Intent(context, EditOrderActivity.class);
+        intent.putExtra(EditOrderActivity.MENU_ITEM_ID_INTENT_EXTRA_KEY, item.getId());
+        context.startActivity(intent);
     }
 }
