@@ -40,13 +40,24 @@
         <item name="android:drawableLeft">@drawable/ic_navigation_accept</item>
     </style>
 
+    <style name="Button.Discard">
+        <item name="android:drawableLeft">@drawable/ic_content_discard</item>
+    </style>
+
+    <style name="Button.Decrement">
+        <item name="android:drawableLeft">@drawable/ic_content_decrement</item>
+    </style>
+
+    <style name="Button.Increment">
+        <item name="android:drawableLeft">@drawable/ic_content_increment</item>
+    </style>
+
     <style name="Button.Send">
         <item name="android:drawableLeft">@drawable/ic_social_send_now</item>
     </style>
 
     <style name="Button.Edit">
         <item name="android:drawableLeft">@drawable/ic_content_edit</item>
-
     </style>
 
     <style name="Button.Delete">

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        >
+    <!-- Option Name -->
+    <TextView
+            android:id="@+id/textview_order_option_type_radio_name"
+            android:text="@string/general_placeholder_short"
+            android:paddingEnd="20dp"
+            />
+
+    <!-- The Radio Items (Radio-Buttons) -->
+    <LinearLayout android:orientation="horizontal">
+
+        <RadioGroup
+                android:id="@+id/radiogroup_order_options_type_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+        </RadioGroup>
+
+    </LinearLayout>
+</TableRow>

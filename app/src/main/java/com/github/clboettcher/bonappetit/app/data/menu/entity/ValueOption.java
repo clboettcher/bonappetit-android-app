@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  *
  */
-public interface IntegerOption extends Option{
+public interface ValueOption extends Option{
     BigDecimal getPriceDiff();
 
     Integer getDefaultValue();

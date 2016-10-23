@@ -1,5 +1,5 @@
 #
-# generated on 2016/10/12 06:09:26
+# generated on 2016/10/23 08:03:24
 #
 # --table-start--
 dataClass=com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity
@@ -28,6 +28,7 @@ tableName=SELECTED_STAFF_MEMBER
 # --field-start--
 fieldName=id
 columnName=SELECTED_STAFF_MEMBER_REFERENCE_ID
+id=true
 # --field-end--
 # --field-start--
 fieldName=staffMemberEntity
@@ -202,9 +203,9 @@ columnName=ID
 generatedId=true
 # --field-end--
 # --field-start--
-fieldName=itemId
-columnName=ITEM_ID
+fieldName=item
 canBeNull=false
+foreign=true
 # --field-end--
 # --field-start--
 fieldName=optionOrderEntities
@@ -219,8 +220,6 @@ columnName=NOTE
 fieldName=customer
 canBeNull=false
 foreign=true
-foreignAutoRefresh=true
-maxForeignAutoRefreshLevel=2
 # --field-end--
 # --field-start--
 fieldName=orderTime
@@ -229,9 +228,9 @@ dataPersister=DATE_TIME
 canBeNull=false
 # --field-end--
 # --field-start--
-fieldName=staffMemberId
-columnName=STAFF_MEMBER_ID
+fieldName=staffMember
 canBeNull=false
+foreign=true
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -253,11 +252,9 @@ foreignAutoRefresh=true
 maxForeignAutoRefreshLevel=2
 # --field-end--
 # --field-start--
-fieldName=optionId
+fieldName=option
 canBeNull=false
 foreign=true
-foreignAutoRefresh=true
-maxForeignAutoRefreshLevel=2
 # --field-end--
 # --field-start--
 fieldName=checked
@@ -268,8 +265,10 @@ fieldName=value
 columnName=VALUE
 # --field-end--
 # --field-start--
-fieldName=selectedRadioItemId
-columnName=SELECTED_RADIO_ITEM_ID
+fieldName=selectedRadioItem
+foreign=true
+foreignAutoRefresh=true
+maxForeignAutoRefreshLevel=2
 # --field-end--
 # --table-fields-end--
 # --table-end--

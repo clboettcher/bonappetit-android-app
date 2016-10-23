@@ -5,7 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * This table contains the currently selected staff member.
- * <p/>
+ * <p>
  * This is modeled as a table (not shared preferences, etc.) to favor uniform data access. In
  * the future we might provide a list of the n last selected staff members. This use case
  * is best supported with a table.
@@ -13,7 +13,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "SELECTED_STAFF_MEMBER")
 public class StaffMemberRefEntity {
 
-    @DatabaseField(columnName = "SELECTED_STAFF_MEMBER_REFERENCE_ID")
+    @DatabaseField(columnName = "SELECTED_STAFF_MEMBER_REFERENCE_ID", id = true)
     private Long id;
 
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true)

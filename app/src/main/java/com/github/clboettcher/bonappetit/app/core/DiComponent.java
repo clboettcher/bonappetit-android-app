@@ -1,5 +1,6 @@
 package com.github.clboettcher.bonappetit.app.core;
 
+import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
 import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
 import com.github.clboettcher.bonappetit.app.data.menu.MenusService;
 import com.github.clboettcher.bonappetit.app.ui.menu.MenuFragment;
@@ -35,6 +36,8 @@ public interface DiComponent {
     void inject(SelectCustomerFragment selectCustomerFragment);
 
     void inject(MenuFragment menuFragment);
+
+    void inject(EditOrderActivity editOrderActivity);
 
     StaffMemberService staffMembersService();
 

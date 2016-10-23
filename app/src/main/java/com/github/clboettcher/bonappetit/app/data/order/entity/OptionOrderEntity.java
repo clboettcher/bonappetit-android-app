@@ -1,12 +1,13 @@
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
+import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 @DatabaseTable(tableName = "OPTION_ORDER")
-public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrder, RadioOptionOrder {
+public class OptionOrderEntity implements CheckboxOptionOrder, ValueOptionOrder, RadioOptionOrder {
 
     /*
      *****************************************************************************************************************
@@ -23,8 +24,8 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
     @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false)
     private ItemOrderEntity itemOrderEntity;
 
-    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true)
-    private Long optionId;
+    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = false)
+    private OptionEntity option;
 
     /*
      *****************************************************************************************************************
@@ -50,8 +51,8 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
      *****************************************************************************************************************
      */
 
-    @DatabaseField(columnName = "SELECTED_RADIO_ITEM_ID")
-    private Long selectedRadioItemId;
+    @DatabaseField(foreign = true, canBeNull = true, foreignAutoRefresh = true)
+    private RadioItemEntity selectedRadioItem;
 
     @Override
     public Long getId() {
@@ -70,13 +71,12 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
         this.itemOrderEntity = itemOrderEntity;
     }
 
-    @Override
-    public Long getOptionId() {
-        return optionId;
+    public OptionEntity getOption() {
+        return option;
     }
 
-    public void setOptionId(Long optionId) {
-        this.optionId = optionId;
+    public void setOption(OptionEntity option) {
+        this.option = option;
     }
 
     @Override
@@ -99,23 +99,26 @@ public class OptionOrderEntity implements CheckboxOptionOrder, IntegerOptionOrde
         this.value = value;
     }
 
-    public Long getSelectedRadioItemId() {
-        return selectedRadioItemId;
+    @Override
+    public RadioItemEntity getSelectedRadioItem() {
+        return selectedRadioItem;
     }
 
-    public void setSelectedRadioItemId(Long selectedRadioItemId) {
-        this.selectedRadioItemId = selectedRadioItemId;
+    public void setSelectedRadioItem(RadioItemEntity selectedRadioItem) {
+        this.selectedRadioItem = selectedRadioItem;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        return new ToStringBuilder(this)
                 .append("id", id)
-                .append("itemOrderEntity", itemOrderEntity)
-                .append("optionId", optionId)
+                .append("itemOrderEntity.id", itemOrderEntity.getId())
+                .append("option", option)
                 .append("checked", checked)
                 .append("value", value)
-                .append("selectedRadioItemId", selectedRadioItemId)
+                .append("selectedRadioItem.id",
+                        selectedRadioItem != null ?
+                                selectedRadioItem.getId() : "--")
                 .toString();
     }
 }

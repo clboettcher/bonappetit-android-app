@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/LinearLayout_TakeOrdersAddItem"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+        >
+
+    <!--Heading-->
+    <TextView
+            android:id="@+id/activityEditOrderHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/general_placeholder_medium"
+            style="@style/TextView.Heading.H1"
+            />
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+    <!--Everything below the heading and the spacer is scrollable-->
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <!--Need to add wrapper to content because scroll view can only have exactly one direct child -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <LinearLayout
+                    android:id="@+id/activityEditOrderOptionSectionWrapper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                <!-- Heading for options-->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:labelFor="@+id/activityEditOrderOptionsTable"
+                        android:text="@string/activity_edit_order_options_heading"
+                        style="@style/TextView.Heading.H2"
+                        />
+
+                <!-- The options as table-->
+                <TableLayout
+                        android:id="@+id/activityEditOrderOptionsTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="true"
+                        >
+                </TableLayout>
+
+                <include layout="@layout/general_horizontal_spacer"/>
+            </LinearLayout>
+
+            <!--Note and price as table-->
+            <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                <!-- Note -->
+                <TableRow
+                        android:id="@+id/TableRow_TakeOrdersEditItem_Note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <TextView
+                            android:id="@+id/textview_take_orders_edit_item_note_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@+id/edittext_take_orders_edit_item_note"
+                            android:text="@string/take_orders_edit_item_textview_note_label_text"
+                            style="@style/TextView.Heading.H2"
+                            android:paddingEnd="20dp"
+                            />
+
+                    <EditText
+                            android:id="@id/edittext_take_orders_edit_item_note"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="text"
+                            >
+                    </EditText>
+
+                </TableRow>
+
+                <!-- horizontal spacer, direct declaration here, because include wont work  -->
+                <!--<View-->
+                <!--android:layout_height="@dimen/HorizontalSpacer.Height"-->
+                <!--android:layout_marginBottom="@dimen/HorizontalSpacer.MarginBottomTop"-->
+                <!--android:layout_marginTop="@dimen/HorizontalSpacer.MarginBottomTop"-->
+                <!--android:background="@color/HorizontalSpacer.Background"-->
+                <!--/>-->
+                <include layout="@layout/general_horizontal_spacer"/>
+
+                <!-- Price -->
+                <TableRow
+                        android:id="@+id/TableRow_TakeOrdersEditItem_TotalPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                    <TextView
+                            android:id="@+id/textview_take_orders_edit_item_total_price_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:labelFor="@+id/textview_take_orders_edit_item_total_price"
+                            android:text="@string/take_orders_edit_item_textview_total_price_label_text"
+                            style="@style/TextView.Heading.H2"
+                            android:paddingEnd="20dp"
+
+                            />
+
+                    <TextView
+                            android:id="@+id/textview_take_orders_edit_item_total_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
+
+                </TableRow>
+            </TableLayout>
+
+            <include layout="@layout/general_horizontal_spacer"/>
+
+            <!-- The Buttons (Discard and Confirm)-->
+            <LinearLayout
+                    android:id="@+id/LinearLayout_TakeOrdersEditItem_Buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/buttonBarStyle"
+                    android:orientation="horizontal"
+                    >
+
+                <!--Discard Button-->
+                <Button
+                        android:id="@+id/activityEditOrderButtonCancel"
+                        style="@style/Button.Discard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="cancelButtonHandler"
+                        android:text="@string/activity_edit_order_action_abort_create"
+                        />
+                <!--Confirm Button-->
+                <Button
+                        android:id="@+id/activityEditOrderButtonConfirm"
+                        style="@style/Button.Confirm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="confirmButtonHandler"
+                        android:text="@string/activty_edit_order_action_confirm_create"
+                        />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

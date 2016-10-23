@@ -49,7 +49,6 @@
     <include layout="@layout/general_horizontal_spacer"/>
 
     <ScrollView
-            android:id="@+id/scrollView1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >

@@ -14,15 +14,15 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.github.clboettcher.bonappetit.app.R;
-import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
+import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;
 
@@ -130,7 +130,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     private void updateStaffMember() {
         Optional<StaffMemberRefEntity> staffMemberRefOpt = staffMemberRefDao.get();
         if (staffMemberRefOpt.isPresent()) {
-            StaffMemberEntity staffMemberEntity = staffMemberRefOpt.get().getStaffMemberEntity();
+            StaffMemberEntity staffMemberEntity = staffMemberRefOpt.get()
+                    .getStaffMemberEntity();
             selectedStaffMember.setText(String.format("%s %s",
                     staffMemberEntity.getFirstName(),
                     staffMemberEntity.getLastName()));

@@ -50,4 +50,12 @@ public class OptionDao {
     int deleteAll() throws SQLException {
         return TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), OptionEntity.class);
     }
+
+    public OptionEntity get(Long optionId) {
+        return dao.queryForId(optionId);
+    }
+
+    public void refresh(OptionEntity option) {
+        dao.refresh(option);
+    }
 }

@@ -1,8 +1,10 @@
 package com.github.clboettcher.bonappetit.app.core;
 
 import android.app.Application;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
+import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
 import org.greenrobot.eventbus.*;
 
@@ -33,6 +35,11 @@ public class BonAppetitApplication extends Application {
         super.onCreate();
         Log.i(TAG, String.format("%s created. Initializing DI framework.",
                 this.getClass().getSimpleName()));
+
+        // Set default values of preferences
+        // TODO: move to the actual main activity when this activity is deleted.
+        Log.i(TAG, "Setting default preferences from R.xml.preferences");
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         this.diComponent = DaggerDiComponent
                 .builder()

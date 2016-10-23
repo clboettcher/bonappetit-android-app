@@ -15,7 +15,7 @@ import java.util.Collection;
  * support hierarchy mapping (like hibernates table per subclass, single table).
  */
 @DatabaseTable(tableName = "OPTION")
-public class OptionEntity implements CheckboxOption, IntegerOption, RadioOption {
+public class OptionEntity implements CheckboxOption, ValueOption, RadioOption {
 
     /*
      *****************************************************************************************************************

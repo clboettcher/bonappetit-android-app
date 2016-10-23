@@ -4,6 +4,7 @@ package com.github.clboettcher.bonappetit.app.data.menu.dao;
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.data.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.table.TableUtils;
@@ -53,5 +54,10 @@ public class ItemDao {
 
     public long count() {
         return dao.countOf();
+    }
+
+    public Optional<ItemEntity> get(Long itemId) {
+        return Optional.fromNullable(dao.queryForId(itemId));
+
     }
 }

@@ -13,6 +13,7 @@ import com.github.clboettcher.bonappetit.app.data.menu.dao.RadioItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.mapper.ItemEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.menu.mapper.MenuEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.menu.mapper.OptionEntityMapper;
+import com.github.clboettcher.bonappetit.app.data.order.OptionOrderDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
@@ -98,6 +99,12 @@ public class DiModule {
     @Singleton
     public RadioItemDao provideRadioItemDao(BonAppetitDbHelper bonAppetitDbHelper) {
         return new RadioItemDao(bonAppetitDbHelper);
+    }
+
+    @Provides
+    @Singleton
+    public OptionOrderDao provideOptionOrderDao(BonAppetitDbHelper bonAppetitDbHelper) {
+        return new OptionOrderDao(bonAppetitDbHelper);
     }
 
     @Provides

@@ -26,6 +26,7 @@
             android:name=".ui.takeorders.TakeOrdersActivity"
             android:label="@string/activity_take_orders_title" >
         </activity>
+        <activity android:name=".ui.editorder.EditOrderActivity"/>
     </application>
 
 </manifest>

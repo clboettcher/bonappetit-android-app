@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingBottom="10dp"
+          android:paddingTop="10dp"
+        >
+    <!-- Option Name -->
+    <TextView
+            android:id="@+id/textview_order_option_type_integer_name"
+            android:text="@string/general_placeholder_short"
+            android:paddingEnd="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        <!-- Option Count -->
+        <TextView
+                android:id="@+id/textview_order_option_type_integer_count"
+                android:text="@string/general_placeholder_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <!-- Option Count Indicator (this is the 'x' character behind the option value) -->
+        <TextView
+                android:id="@+id/textview_order_option_type_integer_count_indicator"
+                android:text="@string/textview_order_option_type_integer_count_indicator_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="20dp"
+
+                />
+        <!-- Increment Decrement Buttons -->
+        <LinearLayout
+                android:id="@+id/LinearLayout_OrderOptionsButtons"
+                style="?android:attr/buttonBarStyle"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            <!-- Decrement Button -->
+            <Button
+                    android:id="@+id/button_order_option_type_integer_decrement"
+                    style="@style/Button.Decrement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+
+            <!-- Increment Button -->
+            <Button
+                    android:id="@+id/button_order_option_type_integer_increment"
+                    style="@style/Button.Increment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+        </LinearLayout>
+    </LinearLayout>
+</TableRow>

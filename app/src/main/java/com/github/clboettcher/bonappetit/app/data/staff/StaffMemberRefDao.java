@@ -41,6 +41,12 @@ public class StaffMemberRefDao {
         Log.i(TAG, String.format("Saved reference to staff member %s to database.", staffMemberEntity));
     }
 
+    /**
+     * Queries for the saved staff member. This method takes no id param since we only
+     * have one staff member at a time at the moment.
+     *
+     * @return The staff member.
+     */
     public Optional<StaffMemberRefEntity> get() {
         List<StaffMemberRefEntity> staffMemberRefEntities = dao.queryForAll();
         if (CollectionUtils.isEmpty(staffMemberRefEntities)) {

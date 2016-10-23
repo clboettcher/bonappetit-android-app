@@ -1,8 +1,10 @@
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
+import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
+
 public interface RadioOptionOrder extends OptionOrder {
 
-    public Long getSelectedRadioItemId();
+    RadioItemEntity getSelectedRadioItem();
 
-    public void setSelectedRadioItemId(Long id);
+    void setSelectedRadioItem(RadioItemEntity id);
 }
