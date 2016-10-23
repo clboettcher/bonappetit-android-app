@@ -21,7 +21,7 @@
             android:summary="@string/prefs_summary_server_port"
             android:dialogTitle="@string/prefs_dialog_title_server_port"
             android:dialogMessage="@string/prefs_dialog_message_server_port"
-            android:defaultValue="8080"
+            android:defaultValue="8888"
             />
     <!-- port -->
     <EditTextPreference
