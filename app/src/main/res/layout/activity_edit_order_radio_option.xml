@@ -6,23 +6,20 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         >
-    <!-- Option Name -->
+    <!-- Option title -->
     <TextView
-            android:id="@+id/textview_order_option_type_radio_name"
+            android:id="@+id/activityEditOrderRadioOptionTitle"
             android:text="@string/general_placeholder_short"
             android:paddingEnd="20dp"
             />
 
-    <!-- The Radio Items (Radio-Buttons) -->
-    <LinearLayout android:orientation="horizontal">
 
-        <RadioGroup
-                android:id="@+id/radiogroup_order_options_type_radio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-        </RadioGroup>
-
-    </LinearLayout>
+    <!--The Radio Items (Radio-Buttons) -->
+    <RadioGroup
+            android:id="@+id/activityEditOrderRadioOptionRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+    </RadioGroup>
 </TableRow>

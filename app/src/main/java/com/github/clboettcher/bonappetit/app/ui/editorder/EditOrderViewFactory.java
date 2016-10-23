@@ -162,20 +162,21 @@ public class EditOrderViewFactory {
         RadioOption option = optionOrder.getOption();
         Log.d(TAG, "Creating wrapper for RADIO-Option " + option.getTitle());
 
-        TableRow radioOptionWrapperTableRow = (TableRow) layoutInflater.inflate(
+        TableRow radioOptionWrapper = (TableRow) layoutInflater.inflate(
                 R.layout.activity_edit_order_radio_option, viewGroup, false);
-        radioOptionWrapperTableRow.setLayoutParams(new TableLayout.LayoutParams(
+        // TODO: do we need to provide layout params when inflating xml passing a view group?
+        radioOptionWrapper.setLayoutParams(new TableLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // Title
-        TextView optionName = (TextView) radioOptionWrapperTableRow.findViewById(
-                R.id.textview_order_option_type_radio_name);
+        TextView optionName = (TextView) radioOptionWrapper.findViewById(
+                R.id.activityEditOrderRadioOptionTitle);
         optionName.setText(option.getTitle());
 
         // Items
-        RadioGroup radioGroup = (RadioGroup) radioOptionWrapperTableRow.findViewById(
-                R.id.radiogroup_order_options_type_radio);
+        RadioGroup radioGroup = (RadioGroup) radioOptionWrapper.findViewById(
+                R.id.activityEditOrderRadioOptionRadioGroup);
 
         // Sort the radio items
         Collection<RadioItemEntity> radioItems = option.getRadioItemEntities();
@@ -188,27 +189,52 @@ public class EditOrderViewFactory {
 
         RadioItemEntity selectedItem = optionOrder.getSelectedRadioItem();
         for (final RadioItemEntity radioItem : radioItemsSorted) {
-            // Each RadioItem is one RadioButton in the RadioGroup; first create the RadioButton corresponding to the RadioItem
+            // Each RadioItem is one RadioButton in the RadioGroup; first create the RadioButton
+            // corresponding to the RadioItem.
             RadioButton radioButton = (RadioButton) layoutInflater.inflate(
                     R.layout.activity_edit_order_radio_option_item, radioGroup, false);
             radioButton.setTag(radioItem);
             radioButton.setText(radioItem.getTitle());
+            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Log.i(TAG, String.format("Changing checked to '%s' for radio item %s", isChecked, buttonView.getTag()));
+                }
+            });
             radioButton.setOnClickListener(new RadioButton.OnClickListener() {
                 public void onClick(View radioButton) {
-                    optionOrder.setSelectedRadioItem(((RadioItemEntity) radioButton.getTag()));
-                    // The total price might change due to the selection of another radio button
+                    RadioItemEntity radioItem = (RadioItemEntity) radioButton.getTag();
+                    Log.i(TAG, String.format("Selected %s", radioItem));
+                    optionOrder.setSelectedRadioItem(radioItem);
+                    // The total price might change due to the selection of another radio item.
                     callback.updateTotalPrice();
                 }
             });
-            if (radioItem.getId().equals(selectedItem.getId())) {
-                radioButton.setChecked(true);
-            }
 
             // Add the RadioButton to the RadioGroup
+            Log.i(TAG, String.format("Adding radio button for %s to %s", radioButton.getTag(), radioGroup));
             radioGroup.addView(radioButton);
         }
 
-        return radioOptionWrapperTableRow;
+        // Initial check the correct radio button. Note that this must be done _after_ all the radio buttons
+        // have been added to the radio group. Otherwise the checking/un-checking of radio buttons when the user
+        // selects another option won't work correctly.
+        for (int i = 0; i < radioGroup.getChildCount(); i++) {
+            RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+            RadioItemEntity selectedRadioItem = optionOrder.getSelectedRadioItem();
+            RadioItemEntity currentRadioItem = (RadioItemEntity) radioButton.getTag();
+
+            Log.i(TAG, String.format("Trying to determine if radio item %s should be checked" +
+                            " based on the selected radio item %s",
+                    currentRadioItem, selectedItem));
+
+            if (selectedRadioItem.getId().equals(currentRadioItem.getId())) {
+                Log.i(TAG, String.format("Setting initial checked = true for %s", currentRadioItem));
+                radioButton.setChecked(true);
+            }
+        }
+
+        return radioOptionWrapper;
     }
 
 }
