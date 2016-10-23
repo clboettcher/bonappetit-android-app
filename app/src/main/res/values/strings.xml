@@ -103,22 +103,20 @@
     <!--EditOrderActivity-->
     <!--***********************************************************************************************************-->
     <string name="activity_edit_order_item_removed">Das Gericht wurde von der Speisekarte gestrichen. Deine Bestellung wurde gelöscht.</string>
-    <string name="take_orders_edit_item_textview_note_label_text">Bemerkung</string>
-    <string name="take_orders_edit_item_textview_total_price_label_text">Gesamtpreis</string>
-    <string name="take_orders_edit_item_textview_count_label_text">Anzahl</string>
-    <string name="activity_edit_order_options_heading">Optionen</string>
-    <string name="textview_order_option_type_integer_count_indicator_text">x</string>
-    <string name="activity_edit_order_create_header"><![CDATA[Bestellung aufnehmen -]]></string>
-    <string name="activity_edit_order_edit_header"><![CDATA[Bestellung bearbeiten -]]></string>
-
+    <string name="activity_edit_order_note_label">Bemerkung</string>
+    <string name="activity_edit_order_total_price_label">Gesamtpreis</string>
+    <string name="activity_edit_order_count_label">Anzahl</string>
+    <string name="activity_edit_order_options_label">Optionen</string>
+    <string name="activity_edit_order_count_indicator">x</string>
+    <string name="activity_edit_order_create_heading"><![CDATA[Bestellung aufnehmen -]]></string>
+    <string name="activity_edit_order_edit_heading"><![CDATA[Bestellung bearbeiten -]]></string>
     <string name="activity_edit_order_action_abort_create">Bestellung verwerfen</string>
     <string name="activity_edit_order_abort_edit">Änderungen verwerfen</string>
-    <string name="activity_edit_order_toast_caneled_edit">Änderungen verworfen</string>
-    <string name="activity_edit_order_toast_canceled_create">Bestellung verworfen</string>
-    <string name="activty_edit_order_action_confirm_create">Bestellung aufnehmen</string>
+    <string name="activity_edit_order_action_confirm_create">Bestellung aufnehmen</string>
     <string name="activity_edit_order_confirm_edit">Bestellung ändern</string>
-    <string name="take_orders_edit_item_button_confirm_toast_edit_text">Änderungen erfolgreich gespeichert</string>
-    <string name="take_orders_edit_item_button_confirm_toast_create_text">Bestellung erfolgreich aufgenommen</string>
-
+    <string name="activity_edit_order_toast_cancel_edit">Änderungen verworfen</string>
+    <string name="activity_edit_order_toast_cancel_create">Bestellung verworfen</string>
+    <string name="activity_edit_order_toast_confirm_edit">Änderungen erfolgreich gespeichert</string>
+    <string name="activity_edit_order_toast_confirm_create">Bestellung erfolgreich aufgenommen</string>
 
 </resources>

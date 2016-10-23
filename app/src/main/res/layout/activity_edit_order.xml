@@ -45,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:labelFor="@+id/activityEditOrderOptionsTable"
-                        android:text="@string/activity_edit_order_options_heading"
+                        android:text="@string/activity_edit_order_options_label"
                         style="@style/TextView.Heading.H2"
                         />
 
@@ -78,7 +78,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:labelFor="@+id/edittext_take_orders_edit_item_note"
-                            android:text="@string/take_orders_edit_item_textview_note_label_text"
+                            android:text="@string/activity_edit_order_note_label"
                             style="@style/TextView.Heading.H2"
                             android:paddingEnd="20dp"
                             />
@@ -116,7 +116,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:labelFor="@+id/textview_take_orders_edit_item_total_price"
-                            android:text="@string/take_orders_edit_item_textview_total_price_label_text"
+                            android:text="@string/activity_edit_order_total_price_label"
                             style="@style/TextView.Heading.H2"
                             android:paddingEnd="20dp"
 
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:onClick="confirmButtonHandler"
-                        android:text="@string/activty_edit_order_action_confirm_create"
+                        android:text="@string/activity_edit_order_action_confirm_create"
                         />
             </LinearLayout>
         </LinearLayout>

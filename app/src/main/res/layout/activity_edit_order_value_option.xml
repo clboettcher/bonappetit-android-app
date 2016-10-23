@@ -31,7 +31,7 @@
         <!-- Option Count Indicator (this is the 'x' character behind the option value) -->
         <TextView
                 android:id="@+id/textview_order_option_type_integer_count_indicator"
-                android:text="@string/textview_order_option_type_integer_count_indicator_text"
+                android:text="@string/activity_edit_order_count_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="20dp"

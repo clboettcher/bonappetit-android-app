@@ -205,12 +205,12 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         String headingPrefix;
         switch (mode) {
             case CREATE:
-                headingPrefix = getString(R.string.activity_edit_order_create_header);
-                confirmButton.setText(getString(R.string.activty_edit_order_action_confirm_create));
+                headingPrefix = getString(R.string.activity_edit_order_create_heading);
+                confirmButton.setText(getString(R.string.activity_edit_order_action_confirm_create));
                 cancelButton.setText(getString(R.string.activity_edit_order_action_abort_create));
                 break;
             case EDIT:
-                headingPrefix = getString(R.string.activity_edit_order_edit_header);
+                headingPrefix = getString(R.string.activity_edit_order_edit_heading);
                 confirmButton.setText(getString(R.string.activity_edit_order_confirm_edit));
                 cancelButton.setText(getString(R.string.activity_edit_order_abort_edit));
                 break;
@@ -240,10 +240,10 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         Toast t = null;
         switch (mode) {
             case EDIT:
-                t = Toast.makeText(this, getString(R.string.activity_edit_order_toast_caneled_edit), Toast.LENGTH_SHORT);
+                t = Toast.makeText(this, getString(R.string.activity_edit_order_toast_cancel_edit), Toast.LENGTH_SHORT);
                 break;
             case CREATE:
-                t = Toast.makeText(this, getString(R.string.activity_edit_order_toast_canceled_create), Toast.LENGTH_SHORT);
+                t = Toast.makeText(this, getString(R.string.activity_edit_order_toast_cancel_create), Toast.LENGTH_SHORT);
                 break;
         }
         t.show();
@@ -264,12 +264,12 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         switch (mode) {
             case EDIT:
                 orderDao.update(itemOrder);
-                t = Toast.makeText(this, getString(R.string.take_orders_edit_item_button_confirm_toast_edit_text),
+                t = Toast.makeText(this, getString(R.string.activity_edit_order_toast_confirm_edit),
                         Toast.LENGTH_SHORT);
                 break;
             case CREATE:
                 orderDao.save(itemOrder);
-                t = Toast.makeText(this, getString(R.string.take_orders_edit_item_button_confirm_toast_create_text),
+                t = Toast.makeText(this, getString(R.string.activity_edit_order_toast_confirm_create),
                         Toast.LENGTH_SHORT);
                 break;
             default:

@@ -190,7 +190,7 @@ public class EditOrderViewFactory {
         for (final RadioItemEntity radioItem : radioItemsSorted) {
             // Each RadioItem is one RadioButton in the RadioGroup; first create the RadioButton corresponding to the RadioItem
             RadioButton radioButton = (RadioButton) layoutInflater.inflate(
-                    R.layout.activity_edit_order_radio_option_item, radioGroup);
+                    R.layout.activity_edit_order_radio_option_item, radioGroup, false);
             radioButton.setTag(radioItem);
             radioButton.setText(radioItem.getTitle());
             radioButton.setOnClickListener(new RadioButton.OnClickListener() {
