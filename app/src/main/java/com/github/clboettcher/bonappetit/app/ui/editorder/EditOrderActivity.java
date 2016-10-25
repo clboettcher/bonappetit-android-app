@@ -106,7 +106,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         initOptions();
 
         // The edit text field for notes
-        note = (EditText) findViewById(R.id.edittext_take_orders_edit_item_note);
+        note = (EditText) findViewById(R.id.activityEditOrderEditTextNote);
         note.setText(itemOrder.getNote());
 
         // Total Price
@@ -225,7 +225,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
 
     public void updateTotalPrice() {
         // The total price
-        TextView totalPriceView = (TextView) findViewById(R.id.textview_take_orders_edit_item_total_price);
+        TextView totalPriceView = (TextView) findViewById(R.id.activityEditOrderTextViewTotalPrice);
 //        TODO: fix price calculation.
 //        BigDecimal totalPrice = PriceCalculationUtil.calculateTotalPrice(item.getPrice(), PricesMapper.mapToItemOrderDto(itemOrder, true).getOrderOptionDtos());
 //        BigDecimal totalPrice = priceCalculator.calculateTotalPrice(PricesMapper.mapToItemOrderPrices(itemOrder));
