@@ -10,7 +10,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import com.github.clboettcher.bonappetit.app.R;
-import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
@@ -18,6 +17,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.event.PerformStaffMembersUpdateEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -166,6 +166,9 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         StaffMemberEntity selectedStaffMember = (StaffMemberEntity) view.getTag();
         Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
         staffMemberRefDao.save(selectedStaffMember);
+
+        // We are done here when the user selected who he/she is.
+        finish();
     }
 
     @Override
