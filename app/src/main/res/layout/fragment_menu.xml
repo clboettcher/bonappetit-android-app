@@ -9,17 +9,6 @@
               android:orientation="vertical"
         >
 
-    <!-- Menu Heading -->
-    <TextView
-            android:id="@+id/fragmentMenuHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_menu_heading"
-            style="@style/TextView.Heading.H1"
-            />
-
-    <include layout="@layout/general_horizontal_spacer"/>
-
     <ViewFlipper
             android:id="@+id/fragmentMenuViewFlipper"
             android:layout_width="fill_parent"

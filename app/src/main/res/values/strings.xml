@@ -86,7 +86,6 @@
     <!--MenuFragment-->
     <!--***********************************************************************************************************-->
     <string name="fragment_menu_title">Speisekarte</string>
-    <string name="fragment_menu_heading">Bestellen - Gerichte zusammenstellen</string>
     <string name="fragment_menu_note">Tippe auf ein Gericht um es hinzuzufügen und wenn du fertig bist auf \"Zusammenfassung anzeigen\" um deine Bestellung abzuschließen und die Bons zu drucken.</string>
     <string name="fragment_menu_button_show_overview">Zusammenfassung anzeigen</string>
     <string name="fragment_menu_inactive_note">Wähle zunächst im Tab \"%s\" aus, für wen du die Bestellung aufnehmen möchtest.</string>
