@@ -75,7 +75,6 @@
     <!--SelectCustomerFragment-->
     <!--***********************************************************************************************************-->
     <string name="fragment_select_customer_tab_title">Kunde</string>
-    <string name="fragment_select_customer_textview_heading_label">Bestellen -  Kunden auswählen</string>
     <string name="fragment_select_customer_freetext_label_text">Texteingabe</string>
     <string name="fragment_select_customer_freetext_hint">Tippen, um Kunden einzugeben</string>
     <string name="fragment_select_customer_freetext_confirm_button_text">Texteingabe übernehmen</string>
