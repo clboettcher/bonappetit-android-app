@@ -183,16 +183,10 @@ public class EditOrderViewFactory {
                     R.layout.activity_edit_order_radio_option_item, radioGroup, false);
             radioButton.setTag(radioItem);
             radioButton.setText(radioItem.getTitle());
-            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    Log.i(TAG, String.format("Changing checked to '%s' for radio item %s", isChecked, buttonView.getTag()));
-                }
-            });
             radioButton.setOnClickListener(new RadioButton.OnClickListener() {
                 public void onClick(View radioButton) {
                     RadioItemEntity radioItem = (RadioItemEntity) radioButton.getTag();
-                    Log.i(TAG, String.format("Selected %s", radioItem));
+                    Log.d(TAG, String.format("Selected %s", radioItem));
                     optionOrder.setSelectedRadioItem(radioItem);
                     // The total price might change due to the selection of another radio item.
                     callback.updateTotalPrice();
@@ -212,12 +206,12 @@ public class EditOrderViewFactory {
             RadioItemEntity selectedRadioItem = optionOrder.getSelectedRadioItem();
             RadioItemEntity currentRadioItem = (RadioItemEntity) radioButton.getTag();
 
-            Log.i(TAG, String.format("Trying to determine if radio item %s should be checked" +
+            Log.d(TAG, String.format("Trying to determine if radio item %s should be checked" +
                             " based on the selected radio item %s",
                     currentRadioItem, selectedItem));
 
             if (selectedRadioItem.getId().equals(currentRadioItem.getId())) {
-                Log.i(TAG, String.format("Setting initial checked = true for %s", currentRadioItem));
+                Log.d(TAG, String.format("Setting initial checked = true for %s", currentRadioItem));
                 radioButton.setChecked(true);
             }
         }
