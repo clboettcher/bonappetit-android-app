@@ -71,10 +71,6 @@ public class EditOrderViewFactory {
                                                              final EditOrderActivityCallback callback) {
         TableRow checkboxRoot = (TableRow) layoutInflater
                 .inflate(R.layout.activity_edit_order_checkbox_order, viewGroup, false);
-        checkboxRoot.setLayoutParams(new TableLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
         // The checkbox
         CheckBox checkbox = (CheckBox)
                 checkboxRoot.findViewById(R.id.activityEditOrderCheckboxOrder);
@@ -96,9 +92,6 @@ public class EditOrderViewFactory {
     private static TableRow createViewForValueOptionOrder(final ValueOptionOrder optionOrder, LayoutInflater layoutInflater, ViewGroup viewGroup) {
         TableRow integerOptionWrapperTableRow = (TableRow) layoutInflater
                 .inflate(R.layout.activity_edit_order_value_option, viewGroup, false);
-        integerOptionWrapperTableRow.setLayoutParams(new TableLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // Name
         TextView optionName = (TextView) integerOptionWrapperTableRow
@@ -163,10 +156,6 @@ public class EditOrderViewFactory {
 
         TableRow radioOptionWrapper = (TableRow) layoutInflater.inflate(
                 R.layout.activity_edit_order_radio_option, viewGroup, false);
-        // TODO: do we need to provide layout params when inflating xml passing a view group?
-        radioOptionWrapper.setLayoutParams(new TableLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // Title
         TextView optionName = (TextView) radioOptionWrapper.findViewById(
