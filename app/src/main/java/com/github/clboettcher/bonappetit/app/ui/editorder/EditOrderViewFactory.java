@@ -69,7 +69,6 @@ public class EditOrderViewFactory {
                                                              LayoutInflater layoutInflater,
                                                              ViewGroup viewGroup,
                                                              final EditOrderActivityCallback callback) {
-        // TODO: evaluate CheckboxOptionView instead of creating the view here.
         TableRow checkboxRoot = (TableRow) layoutInflater
                 .inflate(R.layout.activity_edit_order_checkbox_order, viewGroup, false);
         checkboxRoot.setLayoutParams(new TableLayout.LayoutParams(
