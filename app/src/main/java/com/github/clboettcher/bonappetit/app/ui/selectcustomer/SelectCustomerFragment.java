@@ -41,15 +41,15 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
      */
     private static final String TAG = SelectCustomerFragment.class.getName();
 
-    @BindView(R.id.fragment_select_customer_staff_member)
+    @BindView(R.id.fragmentSelectCustomerStaffMember)
     TextView selectedStaffMember;
 
     private OnSwitchToTabListener switchToTabListener;
 
-    @BindView(R.id.button_take_orders_select_customer_freetext_confirm)
+    @BindView(R.id.fragmentSelectCustomerButtonFreeTextConfirm)
     Button buttonFreetextConfirm;
 
-    @BindView(R.id.textview_take_orders_select_customer_freetext_text)
+    @BindView(R.id.fragmentSelectCustomerFreeText)
     EditText freetextCustomer;
 
     @Inject
@@ -95,24 +95,24 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
         // TODO: refactor id to be consistent with naming
         // Create the grid view for the table-customers
-        TableLayout tablesContainer = (TableLayout) rootView.findViewById(R.id.take_orders_select_customer_tables_table);
+        TableLayout tablesContainer = (TableLayout) rootView.findViewById(R.id.fragmentSelectCustomerTables);
         List<Button> buttons = Arrays.asList(
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_01)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_02)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_03)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_04)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_05)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_06)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_07)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_08)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_09)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_10)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_11)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_12)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_13)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_14)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_bar_backside)),
-                ((Button) tablesContainer.findViewById(R.id.button_take_orders_select_customer_table_bar_frontside))
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable01)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable02)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable03)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable04)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable05)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable06)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable07)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable08)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable09)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable10)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable11)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable12)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable13)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonTable14)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonBarBackside)),
+                ((Button) tablesContainer.findViewById(R.id.fragmentSelectCustomerButtonBarFrontside))
         );
 
         for (Button button : buttons) {
