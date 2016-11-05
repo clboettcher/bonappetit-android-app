@@ -3,7 +3,6 @@ package com.github.clboettcher.bonappetit.app.data.staff;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.core.ConfigProvider;
@@ -36,7 +35,6 @@ public class StaffMembersRepository {
     private StaffMemberEntityMapper staffMemberEntityMapper;
     private EventBus bus;
     private ConfigProvider configProvider;
-    private ObjectMapper objectMapper;
     private AtomicReference<Loadable<List<StaffMemberEntity>>> staffMembers = new
             AtomicReference<>(Loadable.<List<StaffMemberEntity>>initial());
 
@@ -46,15 +44,15 @@ public class StaffMembersRepository {
                                   StaffMemberDao staffMemberDao,
                                   StaffMemberEntityMapper staffMemberEntityMapper,
                                   EventBus bus,
-                                  ConfigProvider configProvider,
-                                  ObjectMapper objectMapper) {
+                                  ConfigProvider configProvider) {
         this.context = context;
         this.staffMemberService = staffMemberService;
         this.staffMemberDao = staffMemberDao;
         this.staffMemberEntityMapper = staffMemberEntityMapper;
         this.bus = bus;
         this.configProvider = configProvider;
-        this.objectMapper = objectMapper;
+
+        bus.register(this);
     }
 
     public Loadable<List<StaffMemberEntity>> getStaffMembers() {
