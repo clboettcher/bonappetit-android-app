@@ -123,15 +123,10 @@
     </LinearLayout>
 
     <!-- State: Update in progress-->
-    <!--TODO: drop obsolete layout container-->
-    <RelativeLayout
+    <include
             android:id="@+id/fragmentMenuUpdateInProgressRoot"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
-        <include layout="@layout/general_progress_view"/>
-    </RelativeLayout>
+            layout="@layout/general_progress_view"
+            />
 
     <!--State: update failed-->
     <include
