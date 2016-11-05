@@ -9,8 +9,7 @@ import com.github.clboettcher.bonappetit.app.data.ErrorMapper;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.MenuDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateFailedEvent;
-import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.mapper.MenuEntityMapper;
 import com.github.clboettcher.bonappetit.core.JsonUtils;
@@ -86,13 +85,13 @@ public class MenuRepository {
                     menuDao.createOrUpdate(fetchedMenu);
                     Log.i(TAG, "Menu update successful");
                     menuLoadable.set(Loadable.loaded(fetchedMenu));
-                    bus.post(new MenuUpdateSuccessfulEvent());
+                    bus.post(new MenuUpdateCompletedEvent());
                 } else {
                     Log.e(TAG, String.format("Menu update failed: %d %s",
                             response.code(),
                             response.message()));
                     menuLoadable.set(Loadable.<MenuEntity>failed(ErrorCode.ERR_GENERAL));
-                    bus.post(new MenuUpdateFailedEvent(response.code(), response.message()));
+                    bus.post(new MenuUpdateCompletedEvent());
                 }
             }
 
@@ -101,7 +100,7 @@ public class MenuRepository {
                 Log.e(TAG, "Menu update failed", t);
                 ErrorCode errorCode = ErrorMapper.toErrorCode(t);
                 menuLoadable.set(Loadable.<MenuEntity>failed(errorCode));
-                bus.post(new MenuUpdateFailedEvent(t));
+                bus.post(new MenuUpdateCompletedEvent());
             }
         });
     }
@@ -119,14 +118,14 @@ public class MenuRepository {
             String errorMsg = "Failed to read menu test data from resources. Update aborted.";
             Log.e(TAG, errorMsg, e);
             menuLoadable.set(Loadable.<MenuEntity>failed(ErrorCode.ERR_RESOURCE_ACCESS_FAILED));
-            bus.post(new MenuUpdateFailedEvent(null, errorMsg));
+            bus.post(new MenuUpdateCompletedEvent());
             return;
         }
 
         MenuEntity menu = menuEntityMapper.mapToMenuEntity(menuDto);
         menuDao.createOrUpdate(menu);
         menuLoadable.set(Loadable.loaded(menu));
-        bus.post(new MenuUpdateSuccessfulEvent());
+        bus.post(new MenuUpdateCompletedEvent());
     }
 }
 

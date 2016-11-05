@@ -14,8 +14,7 @@ import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateFailedEvent;
-import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
@@ -197,23 +196,7 @@ public class MenuFragment extends TakeOrdersFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMenuUpdateSuccessful(MenuUpdateSuccessfulEvent ignored) {
-        this.update();
-    }
-
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMenuUpdateFailed(MenuUpdateFailedEvent event) {
-        String errorMsg;
-        Throwable throwable = event.getThrowable();
-        if (throwable != null) {
-            errorMsg = String.format("Menu update failed: %s (%s)",
-                    throwable.getMessage(),
-                    throwable.getClass().getName());
-        } else {
-            errorMsg = String.format("Menu update failed: %d %s", event.getHttpCode(), event.getHttpMessage());
-        }
-        Toast.makeText(getContext(), errorMsg, Toast.LENGTH_LONG).show();
+    public void onMenuUpdateFailed(MenuUpdateCompletedEvent event) {
         this.update();
     }
 
