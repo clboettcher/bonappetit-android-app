@@ -25,19 +25,16 @@
                 android:id="@+id/staffMembersListView"
                 />
     </LinearLayout>
-    <!--TODO: drop relative layout and set id directly on include tag-->
     <!--The progress bar that is displayed while data is loading-->
-    <RelativeLayout
+    <include
             android:id="@+id/staffMembersListProgressView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            >
-
-        <include layout="@layout/general_progress_view"/>
-    </RelativeLayout>
+            layout="@layout/general_progress_view"
+            />
 
     <!--State: Update failed-->
-    <include android:id="@+id/staffMembersListFailedView"
-            layout="@layout/fragment_menu_update_failed"/>
+    <include
+            android:id="@+id/staffMembersListFailedView"
+            layout="@layout/fragment_menu_update_failed"
+            />
 
 </ViewFlipper>
