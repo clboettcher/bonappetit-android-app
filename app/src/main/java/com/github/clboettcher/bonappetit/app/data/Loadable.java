@@ -59,10 +59,23 @@ public class Loadable<T> {
     }
 
     public T getValue() {
+        if (this.loadingState != LoadingState.LOADED) {
+            throw new IllegalStateException(String.format("The value can only be queried if %s is %s. Check" +
+                            "with #isLoaded() before calling this method.",
+                    LoadingState.class.getSimpleName(),
+                    LoadingState.LOADED));
+        }
         return value;
     }
 
     public ErrorCode getErrorCode() {
+        if (this.loadingState != LoadingState.FAILED) {
+            throw new IllegalStateException(String.format("%s can only be queried if %s is %s. Check" +
+                            "with #isFailed() before calling this method.",
+                    ErrorCode.class.getSimpleName(),
+                    LoadingState.class.getSimpleName(),
+                    LoadingState.FAILED));
+        }
         return errorCode;
     }
 

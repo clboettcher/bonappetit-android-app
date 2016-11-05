@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
+import com.github.clboettcher.bonappetit.app.data.staff.event.PerformStaffMembersUpdateEvent;
 import org.greenrobot.eventbus.*;
 
 import javax.inject.Inject;
@@ -57,6 +58,7 @@ public class BonAppetitApplication extends Application {
         this.diComponent.staffMembersService();
         this.diComponent.menusService();
         this.diComponent.menuRepository();
+        this.diComponent.staffMembersRepository();
 
         // Inject dependencies into this class.
         this.diComponent.inject(this);
@@ -66,6 +68,7 @@ public class BonAppetitApplication extends Application {
 
         // Trigger data update from the server to minimize waiting.
         this.eventBus.post(new PerformMenuUpdateEvent());
+        this.eventBus.post(new PerformStaffMembersUpdateEvent());
     }
 
     public DiComponent getDiComponent() {

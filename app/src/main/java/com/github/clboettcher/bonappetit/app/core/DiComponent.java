@@ -3,6 +3,7 @@ package com.github.clboettcher.bonappetit.app.core;
 import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
 import com.github.clboettcher.bonappetit.app.data.menu.MenusService;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberService;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
 import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
 import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
 import com.github.clboettcher.bonappetit.app.ui.menu.MenuFragment;
@@ -45,4 +46,6 @@ public interface DiComponent {
     MenusService menusService();
 
     MenuRepository menuRepository();
+
+    StaffMembersRepository staffMembersRepository();
 }

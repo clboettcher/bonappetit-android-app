@@ -11,12 +11,12 @@ import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
+import com.github.clboettcher.bonappetit.app.data.ErrorCode;
+import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
-import com.github.clboettcher.bonappetit.app.data.staff.event.PerformStaffMembersUpdateEvent;
-import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateFailedEvent;
-import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateSuccessfulEvent;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
+import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -24,27 +24,11 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
     private static final String TAG = StaffMembersListActivity.class.getName();
-
-    /**
-     * Comparator for {@link StaffMemberEntity} that compares by first name, then by last name.
-     */
-    public static final Comparator<StaffMemberEntity> STAFF_MEMBER_ENTITY_COMPARATOR = new Comparator<StaffMemberEntity>() {
-        @Override
-        public int compare(StaffMemberEntity lhs, StaffMemberEntity rhs) {
-            int firstNameComparison = lhs.getFirstName().compareTo(rhs.getFirstName());
-            if (firstNameComparison == 0) {
-                return lhs.getLastName().compareTo(rhs.getLastName());
-            } else {
-                return firstNameComparison;
-            }
-        }
-    };
 
     @BindView(R.id.staffMembersListViewSwitcher)
     ViewSwitcher viewSwitcher;
@@ -56,7 +40,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     View valueView;
 
     @Inject
-    StaffMemberDao staffMemberDao;
+    StaffMembersRepository staffMembersRepository;
 
     @Inject
     StaffMemberRefDao staffMemberRefDao;
@@ -76,10 +60,11 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         ButterKnife.bind(this);
 
         Log.i(TAG, "StaffMembersListActivity created. Initializing the adapter");
-        List<StaffMemberEntity> staffMemberDtos = new ArrayList<>(staffMemberDao.list());
-        adapter = new StaffMemberAdapter(this, staffMemberDtos);
+
+        adapter = new StaffMemberAdapter(this, new ArrayList<StaffMemberEntity>());
         staffMembersListView.setAdapter(adapter);
-        adapter.sort(STAFF_MEMBER_ENTITY_COMPARATOR);
+
+        this.update();
     }
 
     @Override
@@ -99,11 +84,30 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (staffMemberDao.count() == 0) {
-            updateStaffMembers();
-        } else {
-            Log.i(TAG, "StaffMembersListActivity resuming. There are staff members in the db. " +
-                    "No need to update.");
+        this.update();
+    }
+
+    private void update() {
+        Loadable<List<StaffMemberEntity>> staffMembersLoadable = staffMembersRepository.getStaffMembers();
+
+        if (staffMembersLoadable.isLoading()) {
+            this.showProgressView();
+        } else if (staffMembersLoadable.isLoaded()) {
+            Log.i(TAG, "Updating the list view with the contents from the repository.");
+            Toast.makeText(this, "Staff members updated, refreshing", Toast.LENGTH_SHORT).show();
+            adapter.clear();
+            adapter.addAll(staffMembersRepository.getStaffMembers().getValue());
+            adapter.sort(StaffMemberEntityComparator.INSTANCE);
+            adapter.notifyDataSetChanged();
+            this.showValueView();
+        } else if (staffMembersLoadable.isFailed()) {
+            Log.e(TAG, "Staff members update failed ");
+            String errorMsg;
+            ErrorCode errorCode = staffMembersLoadable.getErrorCode();
+            errorMsg = String.format("Staff members update failed: %s",
+                    errorCode);
+            Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
+            this.showValueView();
         }
     }
 
@@ -130,35 +134,17 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     private void updateStaffMembers() {
         Log.i(TAG, "Forcing staff member update");
         this.showProgressView();
-        bus.post(new PerformStaffMembersUpdateEvent());
+        staffMembersRepository.updateStaffMembers();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStaffMembersUpdatedEvent(StaffMembersUpdateSuccessfulEvent event) {
-        Log.i(TAG, "Received StaffMembersUpdatedEvent. Updating the list view with " +
-                "the contents from the database.");
-        Toast.makeText(this, "Staff members updated, refreshing", Toast.LENGTH_SHORT).show();
-        adapter.clear();
-        adapter.addAll(staffMemberDao.list());
-        adapter.sort(STAFF_MEMBER_ENTITY_COMPARATOR);
-        adapter.notifyDataSetChanged();
-        this.showValueView();
+    public void onStaffMembersUpdatedEvent(StaffMembersUpdateCompletedEvent event) {
+        this.update();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStaffMembersUpdateFailedEvent(StaffMembersUpdateFailedEvent event) {
-        Log.e(TAG, "Staff members update failed " + event);
-        String errorMsg;
-        Throwable throwable = event.getThrowable();
-        if (throwable != null) {
-            errorMsg = String.format("Staff member update failed: %s (%s)",
-                    throwable.getMessage(),
-                    throwable.getClass().getName());
-        } else {
-            errorMsg = String.format("Staff member update failed: %d %s", event.getHttpCode(), event.getHttpMessage());
-        }
-        Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
-        this.showValueView();
+    public void onStaffMembersUpdateFailedEvent(StaffMembersUpdateCompletedEvent event) {
+        this.update();
     }
 
     @OnItemClick(R.id.staffMembersListView)
