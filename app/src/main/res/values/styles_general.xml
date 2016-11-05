@@ -19,8 +19,17 @@
         <item name="android:textSize">@dimen/font_m</item>
     </style>
 
+    <style name="TextView.SizeMedium">
+        <item name="android:textSize">@dimen/font_m</item>
+    </style>
+
     <style name="TextView.SizeSmall">
         <item name="android:textSize">@dimen/font_s</item>
+    </style>
+
+    <style name="TextView.ErrorCode">
+        <item name="android:textSize">@dimen/font_s</item>
+        <item name="android:color">@color/light_grey</item>
     </style>
 
     <!--***********************************************************************************************************-->

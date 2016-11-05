@@ -14,9 +14,15 @@ public class Loadable<T> {
 
     private LoadingState loadingState;
     private T value;
+    private ErrorCode errorCode;
 
     private Loadable(LoadingState loadingState) {
         this.loadingState = loadingState;
+    }
+
+    public Loadable(LoadingState loadingState, ErrorCode errorCode) {
+        this.loadingState = loadingState;
+        this.errorCode = errorCode;
     }
 
     private Loadable(LoadingState loadingState, T value) {
@@ -36,8 +42,8 @@ public class Loadable<T> {
         return new Loadable<>(LoadingState.LOADED, value);
     }
 
-    public static <T> Loadable<T> failed() {
-        return new Loadable<>(LoadingState.FAILED);
+    public static <T> Loadable<T> failed(ErrorCode errorCode) {
+        return new Loadable<>(LoadingState.FAILED, errorCode);
     }
 
     public boolean isLoaded() {
@@ -56,6 +62,9 @@ public class Loadable<T> {
         return value;
     }
 
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
 
     @Override
     public String toString() {

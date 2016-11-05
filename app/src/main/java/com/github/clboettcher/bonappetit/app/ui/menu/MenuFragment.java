@@ -63,6 +63,9 @@ public class MenuFragment extends TakeOrdersFragment {
     @Inject
     StaffMemberRefDao staffMemberRefDao;
 
+    private TextView errorCode;
+    private Button retryButton;
+
     private Comparator<ItemEntity> itemEntityComparator = new ItemEntityComparator();
     private MenuItemsAdapter menuItemsAdapter;
 
@@ -120,7 +123,18 @@ public class MenuFragment extends TakeOrdersFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
-        viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentMenuViewFlipper);
+        this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentMenuViewFlipper);
+        this.errorCode = (TextView) rootView.findViewById(R.id.fragmentMenuUpdateFailedErrorCode);
+        this.retryButton = (Button) rootView.findViewById(R.id.fragmentMenuUpdateFailedButtonRetry);
+
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
+                menuRepository.updateMenu();
+            }
+        });
+
         // Configure the inactive view
         initInactiveView(rootView);
 
@@ -222,6 +236,7 @@ public class MenuFragment extends TakeOrdersFragment {
                 this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
             } else if (menuLoadable.isFailed()) {
                 // Show error view with a button to try again
+                this.errorCode.setText(menuLoadable.getErrorCode().toString());
                 this.setState(MenuFragmentViewState.MENU_UPDATE_FAILED);
             } else if (menuLoadable.isLoaded()) {
                 MenuEntity menuEntity = menuLoadable.getValue();

@@ -1,166 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              android:orientation="vertical"
+<ViewFlipper
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragmentMenuViewFlipper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
         >
-
-    <ViewFlipper
-            android:id="@+id/fragmentMenuViewFlipper"
+    <!-- State: ok -->
+    <LinearLayout
+            android:id="@+id/fragmentMenuActiveRoot"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:orientation="vertical"
             >
-        <!-- State: ok -->
-        <LinearLayout
-                android:id="@+id/fragmentMenuActiveRoot"
+
+        <!-- Staff member & Customer -->
+        <TableLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
                 >
 
-            <!-- Staff member & Customer -->
-            <TableLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    >
+            <!-- Staff member -->
 
-                <!-- Staff member -->
+            <TableRow>
 
-                <TableRow>
+                <TextView
+                        android:id="@+id/fragmentMenuStaffMemberLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/general_staff_member_label"
+                        />
 
-                    <TextView
-                            android:id="@+id/fragmentMenuStaffMemberLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/general_staff_member_label"
-                            />
+                <TextView
+                        android:id="@+id/fragmentMenuStaffMember"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+            </TableRow>
 
-                    <TextView
-                            android:id="@+id/fragmentMenuStaffMember"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                </TableRow>
+            <!-- Customer -->
+            <TableRow>
 
-                <!-- Customer -->
-                <TableRow>
+                <TextView
+                        android:id="@+id/fragmentMenuCustomerLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/general_customer_label"
+                        />
 
-                    <TextView
-                            android:id="@+id/fragmentMenuCustomerLabel"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/general_customer_label"
-                            />
+                <TextView
+                        android:id="@+id/fragmentMenuCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+            </TableRow>
+        </TableLayout>
 
-                    <TextView
-                            android:id="@+id/fragmentMenuCustomer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                </TableRow>
-            </TableLayout>
+        <include layout="@layout/general_horizontal_spacer"/>
 
-            <include layout="@layout/general_horizontal_spacer"/>
+        <!-- Menu Items-->
+        <GridView
+                android:id="@+id/fragmentMenuGridViewItems"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:gravity="center"
+                />
 
-            <!-- Menu Items-->
-            <GridView
-                    android:id="@+id/fragmentMenuGridViewItems"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:numColumns="3"
-                    android:stretchMode="columnWidth"
-                    android:gravity="center"
-                    />
+        <include layout="@layout/general_horizontal_spacer"/>
 
-            <include layout="@layout/general_horizontal_spacer"/>
-
-            <TextView
-                    android:id="@+id/fragmentMenuNote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fragment_menu_note"
-                    />
-
-            <include layout="@layout/general_horizontal_spacer"/>
-
-            <Button
-                    android:id="@+id/fragmentMenuButtonSwitchToOverview"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/fragment_menu_button_show_overview"
-                    style="@style/Button.Confirm"
-
-                    />
-
-        </LinearLayout>
-
-        <!-- State: no customer -->
-        <LinearLayout
-                android:id="@+id/fragmentMenuInactiveRoot"
+        <TextView
+                android:id="@+id/fragmentMenuNote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:text="@string/fragment_menu_note"
+                />
 
-            <TextView
-                    android:id="@+id/fragmentMenuInactiveNote"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/fragment_menu_inactive_note"
-                    />
+        <include layout="@layout/general_horizontal_spacer"/>
 
-            <include layout="@layout/general_horizontal_spacer"/>
-
-            <Button
-                    android:id="@+id/fragmentMenuInactiveButtonSwitchToSelectCustomer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/activity_take_orders_button_switch_tab"
-                    />
-        </LinearLayout>
-
-        <!-- State: Update in progress-->
-        <RelativeLayout
-                android:id="@+id/fragmentMenuUpdateInProgressRoot"
+        <Button
+                android:id="@+id/fragmentMenuButtonSwitchToOverview"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+                android:layout_gravity="center_horizontal"
+                android:text="@string/fragment_menu_button_show_overview"
+                style="@style/Button.Confirm"
 
-            <include layout="@layout/general_progress_view"/>
-        </RelativeLayout>
+                />
 
-        <!--State: update failed-->
-        <RelativeLayout
-                android:id="@+id/fragmentMenuUpdateFailedRoot"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
+    </LinearLayout>
 
-            <TextView
-                    android:id="@+id/fragmentMenuUpdateFailedLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="@string/fragment_menu_update_failed_note"
-                    style="@style/TextView.SizeSmall"
-                    />
+    <!-- State: no customer -->
+    <LinearLayout
+            android:id="@+id/fragmentMenuInactiveRoot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
 
-            <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/fragmentMenuUpdateFailedLabel"
-                    android:layout_centerHorizontal="true"
-                    android:text="Wiederholen"
-                    />
-        </RelativeLayout>
-    </ViewFlipper>
+        <TextView
+                android:id="@+id/fragmentMenuInactiveNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/fragment_menu_inactive_note"
+                />
 
-</LinearLayout>
+        <include layout="@layout/general_horizontal_spacer"/>
+
+        <Button
+                android:id="@+id/fragmentMenuInactiveButtonSwitchToSelectCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/activity_take_orders_button_switch_tab"
+                />
+    </LinearLayout>
+
+    <!-- State: Update in progress-->
+    <RelativeLayout
+            android:id="@+id/fragmentMenuUpdateInProgressRoot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <include layout="@layout/general_progress_view"/>
+    </RelativeLayout>
+
+    <!--State: update failed-->
+    <include layout="@layout/fragment_menu_update_failed"/>
+</ViewFlipper>
