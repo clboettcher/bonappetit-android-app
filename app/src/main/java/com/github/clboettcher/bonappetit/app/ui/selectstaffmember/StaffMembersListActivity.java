@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
@@ -31,13 +32,16 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     private static final String TAG = StaffMembersListActivity.class.getName();
 
     @BindView(R.id.staffMembersListViewSwitcher)
-    ViewSwitcher viewSwitcher;
+    ViewFlipper viewFlipper;
 
     @BindView(R.id.staffMembersListProgressView)
     View progressView;
 
     @BindView(R.id.staffMembersListValueView)
     View valueView;
+
+    @BindView(R.id.fragmentMenuUpdateFailedErrorCode)
+    TextView errorCode;
 
     @Inject
     StaffMembersRepository staffMembersRepository;
@@ -90,24 +94,22 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     private void update() {
         Loadable<List<StaffMemberEntity>> staffMembersLoadable = staffMembersRepository.getStaffMembers();
 
+        Log.i(TAG, String.format("Updating. Staff members loadable is %s", staffMembersLoadable));
+
         if (staffMembersLoadable.isLoading()) {
-            this.showProgressView();
+            this.setState(StaffMembersListActivityViewState.UPDATE_IN_PROGRESS);
         } else if (staffMembersLoadable.isLoaded()) {
             Log.i(TAG, "Updating the list view with the contents from the repository.");
-            Toast.makeText(this, "Staff members updated, refreshing", Toast.LENGTH_SHORT).show();
             adapter.clear();
             adapter.addAll(staffMembersRepository.getStaffMembers().getValue());
             adapter.sort(StaffMemberEntityComparator.INSTANCE);
             adapter.notifyDataSetChanged();
-            this.showValueView();
+            this.setState(StaffMembersListActivityViewState.OK);
         } else if (staffMembersLoadable.isFailed()) {
             Log.e(TAG, "Staff members update failed ");
-            String errorMsg;
             ErrorCode errorCode = staffMembersLoadable.getErrorCode();
-            errorMsg = String.format("Staff members update failed: %s",
-                    errorCode);
-            Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
-            this.showValueView();
+            this.errorCode.setText(errorCode.toString());
+            this.setState(StaffMembersListActivityViewState.UPDATE_FAILED);
         }
     }
 
@@ -133,17 +135,12 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
     private void updateStaffMembers() {
         Log.i(TAG, "Forcing staff member update");
-        this.showProgressView();
+        this.setState(StaffMembersListActivityViewState.UPDATE_IN_PROGRESS);
         staffMembersRepository.updateStaffMembers();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStaffMembersUpdatedEvent(StaffMembersUpdateCompletedEvent event) {
-        this.update();
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStaffMembersUpdateFailedEvent(StaffMembersUpdateCompletedEvent event) {
+    public void onStaffMembersUpdateCompletedEvent(StaffMembersUpdateCompletedEvent event) {
         this.update();
     }
 
@@ -157,31 +154,20 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         finish();
     }
 
+    @OnClick(R.id.fragmentMenuUpdateFailedButtonRetry)
+    public void onRetryClicked() {
+        this.updateStaffMembers();
+    }
+
+
     @Override
     protected void injectDependencies(DiComponent diComponent) {
         diComponent.inject(this);
     }
 
-    /**
-     * Triggers the switcher to show the view containing the progress bar.
-     */
-    private void showProgressView() {
-        Log.d(TAG, "Showing progress view.");
-        showView(progressView);
-    }
-
-    /**
-     * Triggers the switcher to show the view containing the values.
-     */
-    private void showValueView() {
-        Log.d(TAG, "Showing value view.");
-        showView(valueView);
-    }
-
-    private void showView(View view) {
-        // Show the view if not already visible
-        if (viewSwitcher.getNextView().getId() == view.getId()) {
-            viewSwitcher.showNext();
-        }
+    private void setState(StaffMembersListActivityViewState state) {
+        View newView = viewFlipper.findViewById(state.getViewId());
+        int newIndex = viewFlipper.indexOfChild(newView);
+        viewFlipper.setDisplayedChild(newIndex);
     }
 }
