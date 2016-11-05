@@ -25,6 +25,12 @@ public class BonAppetitApplication extends Application {
 
     private static final String TAG = BonAppetitApplication.class.getName();
 
+    /**
+     * Whether the application shows debug toasts. This can be helpful to quickly debug
+     * errors. It should be set to false in release builds obviously.
+     */
+    public static final boolean DEBUG_TOASTS_ENABLED = true;
+
     @Inject
     EventBus eventBus;
 

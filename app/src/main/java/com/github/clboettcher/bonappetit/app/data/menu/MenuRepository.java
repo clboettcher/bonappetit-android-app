@@ -1,8 +1,11 @@
 package com.github.clboettcher.bonappetit.app.data.menu;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.core.BonAppetitApplication;
 import com.github.clboettcher.bonappetit.app.core.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.ErrorMapper;
@@ -30,6 +33,7 @@ public class MenuRepository {
 
     private static final String TAG = MenuRepository.class.getName();
 
+    private Context context;
     private MenusService menuService;
     private MenuDao menuDao;
     private MenuEntityMapper menuEntityMapper;
@@ -41,10 +45,14 @@ public class MenuRepository {
             new AtomicReference<>(Loadable.<MenuEntity>initial());
 
     @Inject
-    public MenuRepository(MenusService menuService,
+    public MenuRepository(Context context,
+                          MenusService menuService,
                           MenuDao menuDao,
                           MenuEntityMapper menuEntityMapper,
-                          EventBus bus, ConfigProvider configProvider, ObjectMapper objectMapper) {
+                          EventBus bus,
+                          ConfigProvider configProvider,
+                          ObjectMapper objectMapper) {
+        this.context = context;
         this.menuService = menuService;
         this.menuDao = menuDao;
         this.menuEntityMapper = menuEntityMapper;
@@ -87,11 +95,16 @@ public class MenuRepository {
                     menuLoadable.set(Loadable.loaded(fetchedMenu));
                     bus.post(new MenuUpdateCompletedEvent());
                 } else {
-                    Log.e(TAG, String.format("Menu update failed: %d %s",
+                    String errorMsg = String.format("Menu update failed: %d %s",
                             response.code(),
-                            response.message()));
+                            response.message());
+                    Log.e(TAG, errorMsg);
                     menuLoadable.set(Loadable.<MenuEntity>failed(ErrorCode.ERR_GENERAL));
                     bus.post(new MenuUpdateCompletedEvent());
+
+                    if (BonAppetitApplication.DEBUG_TOASTS_ENABLED) {
+                        Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
@@ -101,6 +114,13 @@ public class MenuRepository {
                 ErrorCode errorCode = ErrorMapper.toErrorCode(t);
                 menuLoadable.set(Loadable.<MenuEntity>failed(errorCode));
                 bus.post(new MenuUpdateCompletedEvent());
+
+                if (BonAppetitApplication.DEBUG_TOASTS_ENABLED) {
+                    String errorMsg = String.format("Menu update failed: %s (%s)",
+                            t.getMessage(),
+                            t.getClass().getName());
+                    Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
