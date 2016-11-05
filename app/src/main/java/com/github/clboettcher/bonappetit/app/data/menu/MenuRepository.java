@@ -99,12 +99,9 @@ public class MenuRepository {
                             response.code(),
                             response.message());
                     Log.e(TAG, errorMsg);
-                    menuLoadable.set(Loadable.<MenuEntity>failed(ErrorCode.ERR_GENERAL));
+                    ErrorCode errorCode = ErrorMapper.toErrorCode(response.code());
+                    menuLoadable.set(Loadable.<MenuEntity>failed(errorCode));
                     bus.post(new MenuUpdateCompletedEvent());
-
-                    if (BonAppetitApplication.DEBUG_TOASTS_ENABLED) {
-                        Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
-                    }
                 }
             }
 

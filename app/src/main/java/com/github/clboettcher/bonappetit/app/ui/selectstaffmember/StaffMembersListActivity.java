@@ -40,7 +40,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     @BindView(R.id.staffMembersListValueView)
     View valueView;
 
-    @BindView(R.id.fragmentMenuUpdateFailedErrorCode)
+    @BindView(R.id.generalFailedViewErrorCode)
     TextView errorCode;
 
     @Inject
@@ -154,7 +154,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         finish();
     }
 
-    @OnClick(R.id.fragmentMenuUpdateFailedButtonRetry)
+    @OnClick(R.id.generalFailedViewButtonRetry)
     public void onRetryClicked() {
         this.updateStaffMembers();
     }

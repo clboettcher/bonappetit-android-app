@@ -34,7 +34,7 @@
     <!--State: Update failed-->
     <include
             android:id="@+id/staffMembersListFailedView"
-            layout="@layout/fragment_menu_update_failed"
+            layout="@layout/general_failed_view"
             />
 
 </ViewFlipper>

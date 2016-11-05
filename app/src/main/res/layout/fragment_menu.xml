@@ -123,6 +123,7 @@
     </LinearLayout>
 
     <!-- State: Update in progress-->
+    <!--TODO: drop obsolete layout container-->
     <RelativeLayout
             android:id="@+id/fragmentMenuUpdateInProgressRoot"
             android:layout_width="match_parent"
@@ -133,5 +134,8 @@
     </RelativeLayout>
 
     <!--State: update failed-->
-    <include layout="@layout/fragment_menu_update_failed"/>
+    <include
+            android:id="@+id/fragmentMenuUpdateFailedRoot"
+            layout="@layout/general_failed_view"
+            />
 </ViewFlipper>

@@ -122,8 +122,8 @@ public class MenuFragment extends TakeOrdersFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
         this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentMenuViewFlipper);
-        this.errorCode = (TextView) rootView.findViewById(R.id.fragmentMenuUpdateFailedErrorCode);
-        this.retryButton = (Button) rootView.findViewById(R.id.fragmentMenuUpdateFailedButtonRetry);
+        this.errorCode = (TextView) rootView.findViewById(R.id.generalFailedViewErrorCode);
+        this.retryButton = (Button) rootView.findViewById(R.id.generalFailedViewButtonRetry);
 
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override

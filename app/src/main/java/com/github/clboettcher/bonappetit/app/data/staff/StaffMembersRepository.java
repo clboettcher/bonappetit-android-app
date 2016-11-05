@@ -115,13 +115,12 @@ public class StaffMembersRepository {
                             response.code(),
                             response.message());
                     Log.e(TAG, errorMsg);
-                    StaffMembersRepository.this.staffMembers.set(
-                            Loadable.<List<StaffMemberEntity>>failed(ErrorCode.ERR_GENERAL));
-                    bus.post(new StaffMembersUpdateCompletedEvent());
 
-                    if (BonAppetitApplication.DEBUG_TOASTS_ENABLED) {
-                        Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
-                    }
+                    ErrorCode errorCode = ErrorMapper.toErrorCode(response.code());
+
+                    StaffMembersRepository.this.staffMembers.set(
+                            Loadable.<List<StaffMemberEntity>>failed(errorCode));
+                    bus.post(new StaffMembersUpdateCompletedEvent());
                 }
             }
 

@@ -5,7 +5,7 @@
     "urlPattern": "/staffMembers.*"
   },
   "response": {
-    "status": 200,
+    "status": 403,
     "bodyFileName": "response_staff_members.json",
     "fixedDelayMilliseconds": 200
   }

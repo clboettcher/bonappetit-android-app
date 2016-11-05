@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/fragmentMenuUpdateFailedRoot"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
         >
 
     <TextView
-            android:id="@+id/fragmentMenuUpdateFailedLabel"
+            android:id="@+id/generalFailedLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -17,21 +16,21 @@
 
     <!--Error Code-->
     <TextView
+            android:id="@+id/generalFailedViewErrorCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextView.ErrorCode"
             android:text="@string/general_placeholder_short"
-            android:id="@+id/fragmentMenuUpdateFailedErrorCode"
-            android:layout_below="@+id/fragmentMenuUpdateFailedLabel"
-            android:layout_alignEnd="@+id/fragmentMenuUpdateFailedButtonRetry"
+            android:layout_below="@+id/generalFailedLabel"
+            android:layout_centerHorizontal="true"
             />
 
     <Button
+            android:id="@+id/generalFailedViewButtonRetry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/general_action_retry"
-            android:id="@+id/fragmentMenuUpdateFailedButtonRetry"
-            android:layout_below="@+id/fragmentMenuUpdateFailedErrorCode"
+            android:layout_below="@+id/generalFailedViewErrorCode"
             android:layout_centerHorizontal="true"
             />
 
