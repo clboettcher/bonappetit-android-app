@@ -50,6 +50,7 @@ public class BonAppetitApplication extends Application {
         // Otherwise they are not instantiated.
         this.diComponent.staffMembersService();
         this.diComponent.menusService();
+        this.diComponent.menuRepository();
 
         // Inject dependencies into this class.
         this.diComponent.inject(this);

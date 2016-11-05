@@ -15,9 +15,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.List;
 
+@Singleton
 public class StaffMemberService {
 
     private static final String TAG = StaffMemberService.class.getName();

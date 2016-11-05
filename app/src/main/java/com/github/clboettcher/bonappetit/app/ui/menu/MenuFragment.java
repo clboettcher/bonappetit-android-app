@@ -6,22 +6,25 @@ import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import com.github.clboettcher.bonappetit.app.R;
-import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
+import com.github.clboettcher.bonappetit.app.data.Loadable;
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
-import com.github.clboettcher.bonappetit.app.data.menu.dao.MenuDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateFailedEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateSuccessfulEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
-import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
-import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
+import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -49,7 +52,7 @@ public class MenuFragment extends TakeOrdersFragment {
     EventBus bus;
 
     @Inject
-    MenuDao menuDao;
+    MenuRepository menuRepository;
 
     @Inject
     ItemDao itemDao;
@@ -204,40 +207,30 @@ public class MenuFragment extends TakeOrdersFragment {
     @Override
     public void update() {
         final Optional<CustomerEntity> customer = customerDao.get();
-        Log.i(TAG, String.format("update() called. Customer is %s. Menu update state is %s",
+        Loadable<MenuEntity> menuLoadable = menuRepository.getMenu();
+        Log.i(TAG, String.format("update() called. Customer is %s. Menu is %s",
                 customer.orNull(),
-                menuDao.getState()));
+                menuLoadable));
 
         updateCustomerAndUsername();
         refreshOrderCounts();
 
         if (customer.isPresent()) {
             // Customer is there, see if menu update went through OK
-            switch (menuDao.getState()) {
-                case INITIAL:
-                    this.bus.post(new PerformMenuUpdateEvent());
-                    this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
-                    break;
-                case UPDATE_FAILED:
-                    // Show error view with a button to try again
-                    this.setState(MenuFragmentViewState.MENU_UPDATE_FAILED);
-                    break;
-                case UPDATE_IN_PROGRESS:
-                    // Show progress bar
-                    this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
-                    break;
-                case UPDATE_COMPLETED:
-                    final List<ItemEntity> itemList = itemDao.list();
-                    Log.i(TAG, String.format("onCreate(): Initializing the fragment with %d item(s)",
-                            itemList.size()));
-                    Collections.sort(itemList, itemEntityComparator);
-                    this.menuItemsAdapter.update(itemList);
-                    this.setState(MenuFragmentViewState.OK);
-                    break;
-                default:
-                    throw new UnsupportedOperationException(String.format("Unknown enum constant " +
-                                    "%s.%s", MenuFragmentViewState.class.getSimpleName(),
-                            menuDao.getState()));
+            if (menuLoadable.isLoading()) {
+                // Show progress bar
+                this.setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
+            } else if (menuLoadable.isFailed()) {
+                // Show error view with a button to try again
+                this.setState(MenuFragmentViewState.MENU_UPDATE_FAILED);
+            } else if (menuLoadable.isLoaded()) {
+                MenuEntity menuEntity = menuLoadable.getValue();
+                final List<ItemEntity> itemList = Lists.newArrayList(menuEntity.getItems());
+                Log.i(TAG, String.format("onCreate(): Initializing the fragment with %d item(s)",
+                        itemList.size()));
+                Collections.sort(itemList, itemEntityComparator);
+                this.menuItemsAdapter.update(itemList);
+                this.setState(MenuFragmentViewState.OK);
             }
         } else {
             // Show customer missing view

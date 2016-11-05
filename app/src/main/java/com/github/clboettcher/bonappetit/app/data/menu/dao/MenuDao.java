@@ -4,7 +4,6 @@ package com.github.clboettcher.bonappetit.app.data.menu.dao;
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.data.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuUpdateState;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -14,7 +13,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Data access facade for {@link MenuEntity}.
@@ -23,14 +21,11 @@ public class MenuDao {
 
     private static final String TAG = MenuDao.class.getName();
 
-    private AtomicReference<MenuUpdateState> menuUpdateState;
-
     private BonAppetitDbHelper bonAppetitDbHelper;
     private RuntimeExceptionDao<MenuEntity, Long> dao;
     private final ItemDao itemDao;
     private final OptionDao optionDao;
     private final RadioItemDao radioItemDao;
-
 
     @Inject
     public MenuDao(BonAppetitDbHelper bonAppetitDbHelper, ItemDao itemDao,
@@ -41,8 +36,6 @@ public class MenuDao {
         this.radioItemDao = radioItemDao;
         this.dao = bonAppetitDbHelper
                 .getRuntimeExceptionDao(MenuEntity.class);
-
-        this.menuUpdateState = new AtomicReference<>(MenuUpdateState.INITIAL);
     }
 
     /**
@@ -68,14 +61,6 @@ public class MenuDao {
 
         itemDao.save(menu.getItems());
         dao.createOrUpdate(menu);
-    }
-
-    public void setState(MenuUpdateState menuUpdateState) {
-        this.menuUpdateState.set(menuUpdateState);
-    }
-
-    public MenuUpdateState getState() {
-        return this.menuUpdateState.get();
     }
 
     public Optional<MenuEntity> getFirst() {

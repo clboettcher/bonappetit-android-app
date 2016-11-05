@@ -1,12 +1,13 @@
 package com.github.clboettcher.bonappetit.app.core;
 
+import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
+import com.github.clboettcher.bonappetit.app.data.menu.MenusService;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberService;
 import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
 import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
-import com.github.clboettcher.bonappetit.app.data.menu.MenusService;
 import com.github.clboettcher.bonappetit.app.ui.menu.MenuFragment;
 import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.ui.selectcustomer.SelectCustomerFragment;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberService;
 import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import dagger.Component;
@@ -42,4 +43,6 @@ public interface DiComponent {
     StaffMemberService staffMembersService();
 
     MenusService menusService();
+
+    MenuRepository menuRepository();
 }
