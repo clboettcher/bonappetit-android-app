@@ -34,7 +34,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-// TODO: add on click listener for update failed retry button
 public class MenuFragment extends TakeOrdersFragment {
 
     private static final String TAG = MenuFragment.class.getName();
