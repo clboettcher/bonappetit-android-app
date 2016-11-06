@@ -5,18 +5,18 @@
           android:layout_width="wrap_content"
         >
     <item
-            android:drawable="@color/button_disabled"
+            android:drawable="@color/button_dismissive_disabled"
             android:state_enabled="false"
             />
     <item
-            android:drawable="@color/button_pressed"
+            android:drawable="@color/button_dismissive_pressed"
             android:state_pressed="true"
             />
     <item
-            android:drawable="@color/button_focused"
+            android:drawable="@color/button_dismissive_focused"
             android:state_focused="true"
             />
     <item
-            android:drawable="@color/button_default"
+            android:drawable="@color/button_dismissive_default"
             />
 </selector>

@@ -7,12 +7,22 @@
     <color name="light_grey">#CCD1D1D1</color>
 
     <!--***********************************************************************************************************-->
-    <!--Button-->
+    <!--Button (affirmative)-->
     <!--***********************************************************************************************************-->
-    <color name="button_default">#dbffa1</color>
-    <color name="button_pressed">#708353</color>
-    <color name="button_focused">#9dca57</color>
-    <color name="button_disabled">#e5e5e5</color>
+    <color name="button_affirmative_default">#dbffa1</color>
+    <color name="button_affirmative_pressed">#708353</color>
+    <color name="button_affirmative_focused">#9dca57</color>
+    <color name="button_affirmative_disabled">#e5e5e5</color>
+
+    <!--***********************************************************************************************************-->
+    <!--Button (dismissive)-->
+    <!--https://color.adobe.com/de/create/color-wheel/?base=2&rule=Shades&selected=0&name=Mein%20Color-Thema&mode=rgb&rgbvalues=0.75,0.32262954859474696,0.2783958663412447,0.5,0.2150863657298313,0.18559724422749646,1,0.4301727314596626,0.3711944884549929,0.25,0.10754318286491565,0.09279862211374823,0.9,0.38715545831369635,0.33407503960949364&swatchOrder=0,1,2,3,4-->
+    <!--***********************************************************************************************************-->
+    <color name="button_dismissive_default">#FF5C55</color>
+    <color name="button_dismissive_pressed">#7F2E2B</color>
+    <color name="button_dismissive_focused">#BF4540</color>
+    <color name="button_dismissive_disabled">#BF7B74</color>
+
 
     <!--***********************************************************************************************************-->
     <!--ActionBar-->

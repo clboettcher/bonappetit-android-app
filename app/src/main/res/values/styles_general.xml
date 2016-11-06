@@ -37,7 +37,6 @@
     <!--***********************************************************************************************************-->
     <!--Defines general styles of a standard button-->
     <style name="Button" parent="android:Widget.Holo.Light.Button">
-        <item name="android:background">@drawable/general_button</item>
         <item name="android:minWidth">@dimen/button_min_width</item>
         <item name="android:paddingLeft">@dimen/button_padding_left_right</item>
         <item name="android:paddingRight">@dimen/button_padding_left_right</item>
@@ -46,30 +45,37 @@
     </style>
 
     <style name="Button.Confirm">
+        <item name="android:background">@drawable/general_button_affirmative</item>
         <item name="android:drawableLeft">@drawable/ic_navigation_accept</item>
     </style>
 
     <style name="Button.Discard">
+        <item name="android:background">@drawable/general_button_dismissive</item>
         <item name="android:drawableLeft">@drawable/ic_content_discard</item>
     </style>
 
     <style name="Button.Decrement">
+        <item name="android:background">@drawable/general_button_affirmative</item>
         <item name="android:drawableLeft">@drawable/ic_content_decrement</item>
     </style>
 
     <style name="Button.Increment">
+        <item name="android:background">@drawable/general_button_affirmative</item>
         <item name="android:drawableLeft">@drawable/ic_content_increment</item>
     </style>
 
     <style name="Button.Send">
+        <item name="android:background">@drawable/general_button_affirmative</item>
         <item name="android:drawableLeft">@drawable/ic_social_send_now</item>
     </style>
 
     <style name="Button.Edit">
+        <item name="android:background">@drawable/general_button_affirmative</item>
         <item name="android:drawableLeft">@drawable/ic_content_edit</item>
     </style>
 
     <style name="Button.Delete">
+        <item name="android:background">@drawable/general_button_dismissive</item>
         <item name="android:drawableLeft">@drawable/ic_content_delete</item>
     </style>
 
