@@ -234,7 +234,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         // The total price
         TextView totalPriceView = (TextView) findViewById(R.id.activityEditOrderTextViewTotalPrice);
         BigDecimal totalPrice = priceCalculator.calculateTotalPrice(PricesMapper.mapToItemOrderPrices(itemOrder));
-        String priceFormatted = NumberFormat.getCurrencyInstance().format(totalPrice);
+        String priceFormatted = NumberFormat.getCurrencyInstance(Locale.GERMANY).format(totalPrice);
         totalPriceView.setText(priceFormatted);
     }
 
