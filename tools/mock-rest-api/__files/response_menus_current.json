@@ -45,7 +45,7 @@
               "id": 2,
               "index": 1,
               "title": "klein",
-              "priceDiff": 0.5
+              "priceDiff": -0.5
             }
           ]
         }
@@ -76,8 +76,24 @@
           "id": 2,
           "index": 1,
           "title": "Ketchup",
-          "priceDiff": 0,
-          "defaultValue": 2
+          "priceDiff": 0.25,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 5,
+          "index": 2,
+          "title": "Mayonnaise",
+          "priceDiff": 0.25,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 6,
+          "index": 3,
+          "title": "Kräuterbutter",
+          "priceDiff": 0.25,
+          "defaultValue": 0
         }
       ]
     }
