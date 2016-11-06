@@ -36,15 +36,25 @@ public class EditOrderViewFactory {
         TableRow wrapper;
         switch (option.getType()) {
             case CHECKBOX:
-                wrapper = createViewForCheckboxOptionOrder(optionOrder, layoutInflater,
+                wrapper = createViewForCheckboxOptionOrder(
+                        optionOrder,
+                        layoutInflater,
                         viewGroup,
                         callback);
                 break;
             case VALUE:
-                wrapper = createViewForValueOptionOrder(optionOrder, layoutInflater, viewGroup);
+                wrapper = createViewForValueOptionOrder(
+                        optionOrder,
+                        layoutInflater,
+                        viewGroup,
+                        callback
+                );
                 break;
             case RADIO:
-                wrapper = createViewForRadioOptionOrder(optionOrder, layoutInflater, viewGroup,
+                wrapper = createViewForRadioOptionOrder(
+                        optionOrder,
+                        layoutInflater,
+                        viewGroup,
                         callback);
                 break;
             default:
@@ -89,7 +99,10 @@ public class EditOrderViewFactory {
         return checkboxRoot;
     }
 
-    private static TableRow createViewForValueOptionOrder(final ValueOptionOrder optionOrder, LayoutInflater layoutInflater, ViewGroup viewGroup) {
+    private static TableRow createViewForValueOptionOrder(final ValueOptionOrder optionOrder,
+                                                          LayoutInflater layoutInflater,
+                                                          ViewGroup viewGroup,
+                                                          final EditOrderActivityCallback callback) {
         TableRow integerOptionWrapperTableRow = (TableRow) layoutInflater
                 .inflate(R.layout.activity_edit_order_value_option, viewGroup, false);
 
@@ -119,6 +132,7 @@ public class EditOrderViewFactory {
                 decrement.setEnabled(true);
 
                 optionOrder.setValue(Integer.valueOf((String) optionCount.getText()));
+                callback.updateTotalPrice();
             }
         });
 
@@ -140,9 +154,9 @@ public class EditOrderViewFactory {
                 }
 
                 optionOrder.setValue(Integer.valueOf((String) optionCount.getText()));
+                callback.updateTotalPrice();
             }
         });
-        // TODO: need to register callback to update the total price?
 
         return integerOptionWrapperTableRow;
     }
