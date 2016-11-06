@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gihub.clboettcher.price_calculation.api.PriceCalculator;
+import com.gihub.clboettcher.price_calculation.impl.PriceCalculatorImpl;
 import com.github.clboettcher.bonappetit.app.data.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.MenuDao;
@@ -24,6 +26,10 @@ import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
 
+/**
+ * The module provides dependencies for the DI framework to use. Its similar to
+ * a spring @Context class.
+ */
 @Module
 public class DiModule {
 
@@ -129,5 +135,11 @@ public class DiModule {
     @Singleton
     public ObjectMapper provideObjectMapper() {
         return ObjectMapperFactory.create();
+    }
+
+    @Provides
+    @Singleton
+    public PriceCalculator providePriceCalculator() {
+        return new PriceCalculatorImpl();
     }
 }

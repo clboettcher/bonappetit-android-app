@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.gihub.clboettcher.price_calculation.api.PriceCalculator;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
@@ -22,11 +23,14 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
+import com.github.clboettcher.bonappetit.app.util.PricesMapper;
 import com.google.common.base.Optional;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrderActivityCallback {
@@ -51,6 +55,9 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
 
     @Inject
     CustomerDao customerDao;
+
+    @Inject
+    PriceCalculator priceCalculator;
 
     // TODO: initialize item in on create or when it is accessed. Reasoning: need to check if item still present.
 //    private ItemEntity item;
@@ -226,11 +233,8 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
     public void updateTotalPrice() {
         // The total price
         TextView totalPriceView = (TextView) findViewById(R.id.activityEditOrderTextViewTotalPrice);
-//        TODO: fix price calculation.
-//        BigDecimal totalPrice = PriceCalculationUtil.calculateTotalPrice(item.getPrice(), PricesMapper.mapToItemOrderDto(itemOrder, true).getOrderOptionDtos());
-//        BigDecimal totalPrice = priceCalculator.calculateTotalPrice(PricesMapper.mapToItemOrderPrices(itemOrder));
-//        String priceFormatted = NumberFormat.getCurrencyInstance().format(totalPrice);
-        String priceFormatted = "13.37€ trololol";
+        BigDecimal totalPrice = priceCalculator.calculateTotalPrice(PricesMapper.mapToItemOrderPrices(itemOrder));
+        String priceFormatted = NumberFormat.getCurrencyInstance().format(totalPrice);
         totalPriceView.setText(priceFormatted);
     }
 

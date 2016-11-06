@@ -4,5 +4,4 @@ public enum OptionEntityType {
     CHECKBOX,
     VALUE,
     RADIO
-
 }
