@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+    <!-- Username & Customer -->
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+        <!-- Username -->
+
+        <TableRow>
+
+            <TextView
+                    android:id="@+id/textview_take_orders_overview_username_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/general_staff_member_label"
+                    />
+
+            <TextView
+                    android:id="@+id/take_orders_overview_textview_username_label_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+        </TableRow>
+
+
+        <!-- Customer -->
+
+        <TableRow>
+
+            <TextView
+                    android:id="@+id/textview_take_orders_overview_customer_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/general_customer_label"
+                    />
+
+            <TextView
+                    android:id="@+id/take_orders_overview_textview_customer_label_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+        </TableRow>
+    </TableLayout>
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+    <!-- Print button -->
+
+    <Button
+            android:id="@+id/fragmentOrdersOverviewButtonFinish"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/fragment_orders_overview_button_finish"
+            style="@style/Button.Send"
+            />
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+
+    <!-- The orders -->
+
+    <ListView
+            android:id="@+id/fragmentOrdersOverviewListViewOrders"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:verticalSpacing="10dp"
+            android:gravity="center"
+            />
+</LinearLayout>

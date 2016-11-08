@@ -85,7 +85,7 @@
     <!--***********************************************************************************************************-->
     <!--MenuFragment-->
     <!--***********************************************************************************************************-->
-    <string name="fragment_menu_title">Speisekarte</string>
+    <string name="fragment_menu_tab_title">Speisekarte</string>
     <string name="fragment_menu_note">Tippe auf ein Gericht um es hinzuzufügen und wenn du fertig bist auf \"Zusammenfassung anzeigen\" um deine Bestellung abzuschließen und die Bons zu drucken.</string>
     <string name="fragment_menu_button_show_overview">Zusammenfassung anzeigen</string>
     <string name="fragment_menu_inactive_note">Wähle zunächst im Tab \"%s\" aus, für wen du die Bestellung aufnehmen möchtest.</string>
@@ -93,14 +93,37 @@
 
 
     <!--***********************************************************************************************************-->
-    <!--OrderOverviewFragment-->
+    <!--OrdersOverviewFragment-->
     <!--***********************************************************************************************************-->
-    <string name="fragment_order_overview_title">Zusammenfassung</string>
+    <string name="fragment_orders_overview_tab_title">Zusammenfassung</string>
+    <string name="fragment_orders_overview_dialog_finish_title">Bestellung abschließen</string>
+    <string name="fragment_orders_overview_dialog_finish_safeguard_question">
+        <![CDATA[Bist du sicher, dass du diese Bestellung abschließen & drucken möchtest?]]></string>
+    <string name="fragment_orders_overview_button_finish">Bestellung abschließen &amp; Bons drucken</string>
+    <string name="fragment_orders_overview_dialog_finish_toast_confirm_success">Bons erfolgreich gedruckt</string>
+    <string name="fragment_orders_overview_dialog_operation_in_progress_body">Bestellung wird abgeschlossen …</string>
+    <string name="fragment_orders_overview_button_edit_order">Bearbeiten</string>
+    <string name="fragment_orders_overview_button_delete_order">Löschen</string>
+    <string name="fragment_orders_overview_dialog_delete_order_title">Gericht löschen</string>
+    <string name="fragment_orders_overview_dialog_delete_order_safeguard_question">
+        <![CDATA[Möchtest du diese Bestellung für \"%s\" wirklich löschen?]]></string>
+    <string name="fragment_orders_overview_dialog_delete_order_toast_success">Gericht erfolgreich gelöscht</string>
+    <string name="fragment_orders_overview_orders_table_column_header_name">Gericht</string>
+    <string name="fragment_orders_overview_orders_table_column_header_count">Anzahl</string>
+    <string name="fragment_orders_overview_orders_table_column_header_options">Optionen</string>
+    <string name="fragment_orders_overview_orders_table_column_header_note">Bemerkung</string>
+    <string name="fragment_orders_overview_orders_table_column_header_actions">Aktion</string>
+    <string name="fragment_orders_overview_inactive_explanation" formatted="false">
+        Wähle bitte zunächst im Tab \"%s\" aus für wen du die Bestellung aufnehmen möchtest und stelle
+        sie im Tab \"%s\" zusammen.
+    </string>
+    <string name="fragment_orders_overview_inactive_button_switch_to_tab">Zum Tab \"%s\" wechseln</string>
+
 
     <!--***********************************************************************************************************-->
     <!--EditOrderActivity-->
     <!--***********************************************************************************************************-->
-    <string name="activity_edit_order_item_removed">Das Gericht wurde von der Speisekarte gestrichen. Deine Bestellung wurde gelöscht.</string>
+    <string name="activity_edit_order_item_removed">Eine oder mehrere bestellte Gerichte wurden von der Speisekarte gestrichen. Die Bestellungen wurden gelöscht.</string>
     <string name="activity_edit_order_note_label">Bemerkung</string>
     <string name="activity_edit_order_total_price_label">Gesamtpreis</string>
     <string name="activity_edit_order_count_label">Anzahl</string>

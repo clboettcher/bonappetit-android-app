@@ -56,4 +56,7 @@ public class StaffMemberDao {
     }
 
 
+    public void refresh(StaffMemberEntity staffMember) {
+        dao.refresh(staffMember);
+    }
 }

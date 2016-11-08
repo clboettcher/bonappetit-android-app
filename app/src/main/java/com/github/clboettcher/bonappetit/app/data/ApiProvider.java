@@ -4,6 +4,7 @@ import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.core.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.data.menu.MenusApi;
+import com.github.clboettcher.bonappetit.app.data.order.OrdersApi;
 import com.github.clboettcher.bonappetit.app.data.preferences.BaseUrlChangedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersApi;
 import org.greenrobot.eventbus.EventBus;
@@ -16,7 +17,7 @@ import javax.inject.Inject;
 /**
  * Provides implementations of the API interfaces that can be used
  * to perform backend calls.
- * <p>
+ * <p/>
  * The API implementations are not injected directly into the services
  * which use them, because their configuration might change. E.g. the user might
  * alter the servers backend URL. This class is responsible for detecting configuration
@@ -49,6 +50,11 @@ public class ApiProvider {
     private MenusApi menusApi;
 
     /**
+     * The API to create orders.
+     */
+    private OrdersApi ordersApi;
+
+    /**
      * Constructor setting the specified properties.
      *
      * @param configProvider The bean providing the apps config.
@@ -77,6 +83,7 @@ public class ApiProvider {
         // Reinitialize server APIs.
         staffMemberApi = retrofit.create(StaffMembersApi.class);
         menusApi = retrofit.create(MenusApi.class);
+        ordersApi = retrofit.create(OrdersApi.class);
     }
 
     public StaffMembersApi getStaffMemberApi() {
@@ -85,5 +92,9 @@ public class ApiProvider {
 
     public MenusApi getMenusApi() {
         return menusApi;
+    }
+
+    public OrdersApi getOrdersApi() {
+        return ordersApi;
     }
 }

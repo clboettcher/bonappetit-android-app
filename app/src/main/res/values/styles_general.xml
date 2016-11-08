@@ -19,6 +19,10 @@
         <item name="android:textSize">@dimen/font_m</item>
     </style>
 
+    <style name="TextView.Heading.H3">
+        <item name="android:textSize">@dimen/font_s</item>
+    </style>
+
     <style name="TextView.SizeMedium">
         <item name="android:textSize">@dimen/font_m</item>
     </style>
@@ -42,6 +46,10 @@
         <item name="android:paddingRight">@dimen/button_padding_left_right</item>
         <item name="android:paddingTop">@dimen/button_padding_top_bottom</item>
         <item name="android:paddingBottom">@dimen/button_padding_top_bottom</item>
+    </style>
+
+    <style name="Button.Affirmative">
+        <item name="android:background">@drawable/general_button_affirmative</item>
     </style>
 
     <style name="Button.Confirm">

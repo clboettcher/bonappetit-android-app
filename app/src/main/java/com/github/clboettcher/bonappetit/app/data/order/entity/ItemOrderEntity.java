@@ -30,7 +30,7 @@ public class ItemOrderEntity {
     @DatabaseField(columnName = "NOTE")
     private String note = "";
 
-    @DatabaseField(foreign = true, canBeNull = false)
+    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true)
     private CustomerEntity customer;
 
     @DatabaseField(columnName = "ORDER_TIME", dataType = DataType.DATE_TIME, canBeNull = false)

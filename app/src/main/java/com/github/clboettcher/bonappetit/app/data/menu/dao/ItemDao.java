@@ -58,6 +58,13 @@ public class ItemDao {
 
     public Optional<ItemEntity> get(Long itemId) {
         return Optional.fromNullable(dao.queryForId(itemId));
+    }
 
+    public boolean exists(long id) {
+        return dao.idExists(id);
+    }
+
+    public void refresh(ItemEntity item) {
+        dao.refresh(item);
     }
 }

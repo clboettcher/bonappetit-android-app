@@ -1,0 +1,10 @@
+{
+  "request": {
+    "method": "POST",
+    "urlPattern": "/orders"
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 200
+  }
+}

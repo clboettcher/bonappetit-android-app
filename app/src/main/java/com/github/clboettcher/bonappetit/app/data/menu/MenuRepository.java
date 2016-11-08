@@ -28,6 +28,7 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
+// TODO: rename to resource
 @Singleton
 public class MenuRepository {
 

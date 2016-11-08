@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+        >
+    <!-- Title -->
+    <TextView
+            android:id="@+id/fragmentOrdersOverviewOrderTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_alignParentTop="true"
+            style="@style/TextView.Heading.H3"
+            />
+
+    <!-- Note -->
+    <TextView
+            android:id="@+id/fragmentOrdersOverviewOrderNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Note"
+            android:layout_below="@id/fragmentOrdersOverviewOrderTitle"
+            />
+
+    <!-- Actions (EDIT/Delete) -->
+    <LinearLayout
+            android:id="@+id/fragmentOrdersOverviewOrderActionButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            style="?android:attr/buttonBarStyle"
+
+            >
+
+        <!-- EDIT Button -->
+        <Button
+                android:id="@+id/fragmentOrdersOverviewOrderButtonEdit"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                style="@style/Button.Edit"
+                />
+
+        <!-- Delete Button -->
+        <Button
+                android:id="@+id/fragmentOrdersOverviewOrderButtonDelete"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                style="@style/Button.Delete"
+                />
+
+    </LinearLayout>
+
+    <!-- Options -->
+    <TextView
+            android:id="@+id/fragmentOrdersOverviewOrderOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Options"
+            android:layout_toLeftOf="@id/fragmentOrdersOverviewOrderActionButtons"
+            android:paddingRight="10dp"
+            android:gravity="right"
+            />
+</RelativeLayout>

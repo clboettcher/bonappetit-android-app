@@ -3,6 +3,7 @@ package com.github.clboettcher.bonappetit.app.ui.editorder;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.gihub.clboettcher.price_calculation.api.PriceCalculator;
@@ -71,6 +72,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
     private ItemEntity item;
 
     public void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, String.format("onCreate()"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_order);
 
@@ -84,7 +86,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         Bundle extras = getIntent().getExtras();
         itemId = extras.getLong(MENU_ITEM_ID_INTENT_EXTRA_KEY);
 
-        ItemEntity item = getItemOrFinishIfNotPresent(itemId);
+        ItemEntity item = getRefreshedItemOrFinishIfNotPresent(itemId);
         if (item == null) {
             // The activity is finishing ...
             return;
@@ -103,6 +105,13 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
             mode = EditOrderActivityMode.CREATE;
         } else {
             itemOrder = orderDao.get(orderId);
+            // Make sure the item and options are refreshed. Those properties are guaranteed to be present
+            // at this point.
+            itemDao.refresh(itemOrder.getItem());
+            Collection<OptionOrderEntity> optionOrderEntities = itemOrder.getOptionOrderEntities();
+            for (OptionOrderEntity optionOrderEntity : optionOrderEntities) {
+                optionDao.refresh(optionOrderEntity.getOption());
+            }
             mode = EditOrderActivityMode.EDIT;
         }
 
@@ -129,7 +138,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
      * @param itemId The item ID.
      * @return The retrieved item.
      */
-    private ItemEntity getItemOrFinishIfNotPresent(Long itemId) {
+    private ItemEntity getRefreshedItemOrFinishIfNotPresent(Long itemId) {
         Optional<ItemEntity> itemOpt = itemDao.get(itemId);
         if (!itemOpt.isPresent()) {
             Toast.makeText(this, getString(R.string.activity_edit_order_item_removed),

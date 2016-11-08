@@ -51,4 +51,8 @@ public class CustomerDao {
             return Optional.fromNullable(customerEntities.get(0));
         }
     }
+
+    public void refresh(CustomerEntity customer) {
+        dao.refresh(customer);
+    }
 }

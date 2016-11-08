@@ -9,10 +9,11 @@ public class Loadable<T> {
         INITIAL,
         LOADING,
         LOADED,
-        FAILED
+        FAILED;
     }
 
     private LoadingState loadingState;
+
     private T value;
     private ErrorCode errorCode;
 
@@ -44,6 +45,10 @@ public class Loadable<T> {
 
     public static <T> Loadable<T> failed(ErrorCode errorCode) {
         return new Loadable<>(LoadingState.FAILED, errorCode);
+    }
+
+    public boolean isInitial() {
+        return this.loadingState == LoadingState.INITIAL;
     }
 
     public boolean isLoaded() {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+        >
+
+    <TextView
+            android:id="@+id/fragmentOrdersOverviewInactiveTextViewExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/fragment_orders_overview_inactive_explanation"
+            />
+
+    <include layout="@layout/general_horizontal_spacer"/>
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="?android:attr/buttonBarStyle"
+            >
+
+        <Button
+                android:id="@+id/fragmentOrdersOverviewInactiveButtonSwitchToSelectCustomer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Button.Affirmative"
+                android:text="@string/fragment_orders_overview_inactive_button_switch_to_tab"
+                />
+
+        <Button
+                android:id="@+id/fragmentOrdersOverviewInactiveButtonSwitchToMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/fragment_orders_overview_inactive_button_switch_to_tab"
+                style="@style/Button.Affirmative"
+                />
+    </LinearLayout>
+
+</LinearLayout>

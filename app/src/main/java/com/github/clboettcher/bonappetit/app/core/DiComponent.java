@@ -7,6 +7,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
 import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
 import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
 import com.github.clboettcher.bonappetit.app.ui.menu.MenuFragment;
+import com.github.clboettcher.bonappetit.app.ui.ordersoverview.OrdersOverviewFragment;
 import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.ui.selectcustomer.SelectCustomerFragment;
 import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
@@ -40,6 +41,8 @@ public interface DiComponent {
     void inject(MenuFragment menuFragment);
 
     void inject(EditOrderActivity editOrderActivity);
+
+    void inject(OrdersOverviewFragment ordersOverviewFragment);
 
     StaffMemberService staffMembersService();
 

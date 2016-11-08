@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+// TODO: rename to resource
 @Singleton
 public class StaffMembersRepository {
 
