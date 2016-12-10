@@ -1,7 +1,12 @@
 {
   "request": {
     "method": "POST",
-    "urlPattern": "/orders"
+    "urlPattern": "/orders",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Basic dGVzdHVzZXI6czNjcmV0"
+      }
+    }
   },
   "response": {
     "status": 200,

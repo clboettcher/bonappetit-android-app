@@ -1,18 +1,24 @@
 package com.github.clboettcher.bonappetit.app.data;
 
+import android.util.Base64;
 import android.util.Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.clboettcher.bonappetit.app.core.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.data.menu.MenusApi;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersApi;
-import com.github.clboettcher.bonappetit.app.data.preferences.BaseUrlChangedEvent;
+import com.github.clboettcher.bonappetit.app.data.preferences.ServerConfigChangedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersApi;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import javax.inject.Inject;
+import java.io.IOException;
 
 /**
  * Provides implementations of the API interfaces that can be used
@@ -67,16 +73,40 @@ public class ApiProvider {
         this.objectMapper = objectMapper;
         eventBus.register(this);
         // Initialize the APIs.
-        this.onBaseUrlChanged(null);
+        this.onServerConfigChanged(null);
     }
 
     @Subscribe
-    public void onBaseUrlChanged(BaseUrlChangedEvent ignored) {
+    public void onServerConfigChanged(ServerConfigChangedEvent ignored) {
         Log.i(TAG, "Base URL changed. Reinitializing the APIs.");
         String baseUrl = configProvider.getBaseUrl();
 
+        // Enable basic auth on all requests via request interceptor on the HTTP client
+        String credentials = String.format("%s:%s",
+                configProvider.getUsername(),
+                configProvider.getPassword());
+        final String basic =
+                "Basic " + Base64.encodeToString(credentials.getBytes(),
+                        Base64.NO_WRAP);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request original = chain.request();
+
+                        Request.Builder requestBuilder = original.newBuilder()
+                                .header("Authorization", basic)
+                                .header("Accept", "application/json")
+                                .method(original.method(), original.body());
+                        Request request = requestBuilder.build();
+                        return chain.proceed(request);
+                    }
+                })
+                .build();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
+                .client(okHttpClient)
                 .addConverterFactory(JacksonConverterFactory.create(objectMapper))
                 .build();
 

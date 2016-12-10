@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.github.clboettcher.bonappetit.app.R;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -106,5 +107,23 @@ public class ConfigProvider {
         try (InputStream inputStream = resources.openRawResource(resourceId)) {
             return IOUtils.toString(inputStream, "UTF-8");
         }
+    }
+
+    public String getUsername() {
+        String key = context.getString(R.string.prefs_key_username);
+        String username = sharedPrefs.getString(key, null);
+        if (StringUtils.isBlank(username)) {
+            throw new IllegalStateException("Config preference username is missing.");
+        }
+        return username;
+    }
+
+    public String getPassword() {
+        String key = context.getString(R.string.prefs_key_password);
+        String pw = sharedPrefs.getString(key, null);
+        if (StringUtils.isBlank(pw)) {
+            throw new IllegalStateException("Config preference password is missing.");
+        }
+        return pw;
     }
 }

@@ -23,7 +23,7 @@
             android:dialogMessage="@string/prefs_dialog_message_server_port"
             android:defaultValue="8888"
             />
-    <!-- port -->
+    <!-- context path -->
     <EditTextPreference
             android:key="@string/prefs_key_server_context_path"
             android:title="@string/prefs_title_server_context_path"
@@ -31,6 +31,27 @@
             android:dialogTitle="@string/prefs_dialog_title_server_context_path"
             android:dialogMessage="@string/prefs_dialog_message_server_context_path"
             android:defaultValue="/"
+            />
+
+    <!-- username -->
+    <EditTextPreference
+            android:key="@string/prefs_key_username"
+            android:title="@string/prefs_title_username"
+            android:summary="@string/prefs_summary_username"
+            android:dialogTitle="@string/prefs_dialog_title_username"
+            android:dialogMessage="@string/prefs_dialog_message_username"
+            android:defaultValue="testuser"
+            />
+
+    <!-- password -->
+    <EditTextPreference
+            android:key="@string/prefs_key_password"
+            android:title="@string/prefs_title_password"
+            android:summary="@string/prefs_summary_password"
+            android:dialogTitle="@string/prefs_dialog_title_password"
+            android:dialogMessage="@string/prefs_dialog_message_password"
+            android:defaultValue="s3cret"
+            android:inputType="textPassword"
             />
 
     <!-- use test data -->

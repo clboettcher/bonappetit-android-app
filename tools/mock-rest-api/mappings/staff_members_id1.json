@@ -2,7 +2,12 @@
   "priority" : 10,
   "request": {
     "method": "GET",
-    "urlPattern": "/staffMembers/1"
+    "urlPattern": "/staffMembers/1",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Basic dGVzdHVzZXI6czNjcmV0"
+      }
+    }
   },
   "response": {
     "status": 200,

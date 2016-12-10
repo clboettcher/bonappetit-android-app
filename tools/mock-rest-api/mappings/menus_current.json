@@ -1,7 +1,12 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/currentMenu"
+    "urlPattern": "/currentMenu",
+    "headers": {
+      "Authorization": {
+        "equalTo": "Basic dGVzdHVzZXI6czNjcmV0"
+      }
+    }
   },
   "response": {
     "status": 200,
