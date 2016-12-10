@@ -5,7 +5,7 @@ import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityFactory;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
-import com.github.clboettcher.bonappetit.server.menu.api.dto.*;
+import com.github.clboettcher.bonappetit.server.menu.api.dto.read.*;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Collection;

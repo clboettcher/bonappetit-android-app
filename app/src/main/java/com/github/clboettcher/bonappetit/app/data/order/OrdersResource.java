@@ -15,7 +15,7 @@ import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.server.order.api.dto.ItemOrderDto;
+import com.github.clboettcher.bonappetit.server.order.api.dto.read.ItemOrderDto;
 import org.apache.commons.collections4.CollectionUtils;
 import org.greenrobot.eventbus.EventBus;
 import retrofit2.Call;

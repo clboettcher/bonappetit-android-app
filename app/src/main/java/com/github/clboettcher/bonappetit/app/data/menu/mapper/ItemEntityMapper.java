@@ -3,8 +3,8 @@ package com.github.clboettcher.bonappetit.app.data.menu.mapper;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntityType;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
-import com.github.clboettcher.bonappetit.server.menu.api.dto.ItemDto;
-import com.github.clboettcher.bonappetit.server.menu.api.dto.ItemDtoType;
+import com.github.clboettcher.bonappetit.server.menu.api.dto.common.ItemDtoType;
+import com.github.clboettcher.bonappetit.server.menu.api.dto.read.ItemDto;
 import org.apache.commons.collections4.CollectionUtils;
 
 import javax.inject.Inject;

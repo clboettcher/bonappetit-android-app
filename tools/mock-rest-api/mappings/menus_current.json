@@ -1,7 +1,7 @@
 {
   "request": {
     "method": "GET",
-    "urlPattern": "/menus/current"
+    "urlPattern": "/currentMenu"
   },
   "response": {
     "status": 200,

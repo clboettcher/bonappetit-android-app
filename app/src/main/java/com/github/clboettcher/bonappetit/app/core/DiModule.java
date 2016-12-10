@@ -19,7 +19,7 @@ import com.github.clboettcher.bonappetit.app.data.order.OptionOrderDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
-import com.github.clboettcher.bonappetit.core.ObjectMapperFactory;
+import com.github.clboettcher.bonappetit.common.ObjectMapperFactory;
 import dagger.Module;
 import dagger.Provides;
 import org.greenrobot.eventbus.EventBus;

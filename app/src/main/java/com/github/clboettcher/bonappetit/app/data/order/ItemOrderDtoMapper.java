@@ -1,15 +1,17 @@
 package com.github.clboettcher.bonappetit.app.data.order;
 
 
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.*;
 import com.github.clboettcher.bonappetit.app.data.order.entity.CheckboxOptionOrder;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.RadioOptionOrder;
-import com.github.clboettcher.bonappetit.server.order.api.dto.*;
+import com.github.clboettcher.bonappetit.server.menu.api.dto.common.ItemDtoType;
+import com.github.clboettcher.bonappetit.server.order.api.dto.read.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Map item orders and related types to DTOs.
@@ -31,9 +33,13 @@ public final class ItemOrderDtoMapper {
     }
 
 
-    private static ItemOrderDto mapToItemOrderDto(ItemOrderEntity order) {
+    public static ItemOrderDto mapToItemOrderDto(ItemOrderEntity order) {
+        ItemEntity orderedItem = order.getItem();
         return ItemOrderDto.builder()
-                .itemId(order.getItem().getId())
+                .itemId(orderedItem.getId())
+                .itemType(mapType(orderedItem.getType()))
+                .itemTitle(orderedItem.getTitle())
+                .itemPrice(orderedItem.getPrice())
                 .deliverTo(order.getCustomer().getValue())
                 .note(order.getNote())
                 .orderTime(order.getOrderTime())
@@ -42,8 +48,15 @@ public final class ItemOrderDtoMapper {
                 .build();
     }
 
-    private static Set<OptionOrderDto> mapToOrderOptionDtos(Collection<OptionOrderEntity> optionOrderEntities) {
-        Set<OptionOrderDto> orderOptionDtos = new HashSet<>();
+    private static ItemDtoType mapType(ItemEntityType type) {
+        if (type == null) {
+            return null;
+        }
+        return ItemDtoType.valueOf(type.name());
+    }
+
+    private static List<OptionOrderDto> mapToOrderOptionDtos(Collection<OptionOrderEntity> optionOrderEntities) {
+        List<OptionOrderDto> orderOptionDtos = new ArrayList<>();
         if (optionOrderEntities != null) {
             for (OptionOrderEntity optionOrderEntity : optionOrderEntities) {
                 orderOptionDtos.add(mapToOrderOptionDto(optionOrderEntity));
@@ -69,22 +82,31 @@ public final class ItemOrderDtoMapper {
     }
 
     private static ValueOptionOrderDto mapToValueOptionDto(OptionOrderEntity o) {
+        OptionEntity orderedOption = o.getOption();
         return ValueOptionOrderDto.builder()
-                .optionId(o.getOption().getId())
+                .valueOptionId(orderedOption.getId())
+                .optionTitle(orderedOption.getTitle())
+                .optionPriceDiff(orderedOption.getPriceDiff())
                 .value(o.getValue())
                 .build();
     }
 
     private static CheckboxOptionOrderDto mapToCheckboxOrderOptionDto(CheckboxOptionOrder o) {
+        OptionEntity orderedOption = o.getOption();
         return CheckboxOptionOrderDto.builder()
-                .optionId(o.getOption().getId())
+                .checkboxOptionId(orderedOption.getId())
+                .optionTitle(orderedOption.getTitle())
+                .optionPriceDiff(orderedOption.getPriceDiff())
                 .checked(o.getChecked())
                 .build();
     }
 
     private static RadioOptionOrderDto mapToRadioOrderOptionDto(RadioOptionOrder o) {
+        RadioItemEntity orderedRadioItem = o.getSelectedRadioItem();
         return RadioOptionOrderDto.builder()
-                .selectedRadioItemId(o.getSelectedRadioItem().getId())
+                .selectedRadioItemId(orderedRadioItem.getId())
+                .selectedRadioItemTitle(orderedRadioItem.getTitle())
+                .selectedRadioItemPriceDiff(orderedRadioItem.getPriceDiff())
                 .build();
     }
 }

@@ -1,7 +1,7 @@
 package com.github.clboettcher.bonappetit.app.data.menu.mapper;
 
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
-import com.github.clboettcher.bonappetit.server.menu.api.dto.MenuDto;
+import com.github.clboettcher.bonappetit.server.menu.api.dto.read.MenuDto;
 
 import javax.inject.Inject;
 

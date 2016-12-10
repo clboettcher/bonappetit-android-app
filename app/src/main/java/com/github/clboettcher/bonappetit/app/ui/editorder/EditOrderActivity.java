@@ -15,6 +15,7 @@ import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.OptionDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
+import com.github.clboettcher.bonappetit.app.data.order.ItemOrderDtoMapper;
 import com.github.clboettcher.bonappetit.app.data.order.OrderDao;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
@@ -24,7 +25,6 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
-import com.github.clboettcher.bonappetit.app.util.PricesMapper;
 import com.google.common.base.Optional;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -102,6 +102,10 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
             itemOrder.setItem(item);
             Optional<CustomerEntity> customerOpt = customerDao.get();
             itemOrder.setCustomer(customerOpt.get());
+            Optional<StaffMemberRefEntity> staffMemberRefEntityOptional = staffMemberRefDao.get();
+            StaffMemberEntity staffMember = staffMemberRefEntityOptional.get()
+                    .getStaffMemberEntity();
+            itemOrder.setStaffMember(staffMember);
             mode = EditOrderActivityMode.CREATE;
         } else {
             itemOrder = orderDao.get(orderId);
@@ -131,7 +135,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
 
     /**
      * Checks whether the database contains an item with the given ID and returns it.
-     * <p/>
+     * <p>
      * If no item with the given ID is found the activity is finished. If an order exists for
      * the item it is deleted. If an item is found it is returned.
      *
@@ -242,7 +246,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
     public void updateTotalPrice() {
         // The total price
         TextView totalPriceView = (TextView) findViewById(R.id.activityEditOrderTextViewTotalPrice);
-        BigDecimal totalPrice = priceCalculator.calculateTotalPrice(PricesMapper.mapToItemOrderPrices(itemOrder));
+        BigDecimal totalPrice = priceCalculator.calculateTotalPrice(ItemOrderDtoMapper.mapToItemOrderDto(itemOrder));
         String priceFormatted = NumberFormat.getCurrencyInstance(Locale.GERMANY).format(totalPrice);
         totalPriceView.setText(priceFormatted);
     }

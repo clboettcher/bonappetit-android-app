@@ -2,7 +2,7 @@ package com.github.clboettcher.bonappetit.app.data.order;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.data.ApiProvider;
-import com.github.clboettcher.bonappetit.server.order.api.dto.ItemOrderDto;
+import com.github.clboettcher.bonappetit.server.order.api.dto.read.ItemOrderDto;
 import retrofit2.Call;
 import retrofit2.Callback;
 

@@ -2,7 +2,7 @@ package com.github.clboettcher.bonappetit.app.data.menu;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.data.ApiProvider;
-import com.github.clboettcher.bonappetit.server.menu.api.dto.MenuDto;
+import com.github.clboettcher.bonappetit.server.menu.api.dto.read.MenuDto;
 import retrofit2.Call;
 import retrofit2.Callback;
 
