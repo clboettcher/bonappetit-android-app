@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
+import com.github.clboettcher.bonappetit.app.data.preferences.ServerConfigChangedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.event.PerformStaffMembersUpdateEvent;
 import org.greenrobot.eventbus.*;
 
@@ -67,8 +68,7 @@ public class BonAppetitApplication extends Application {
         this.eventBus.register(this);
 
         // Trigger data update from the server to minimize waiting.
-        this.eventBus.post(new PerformMenuUpdateEvent());
-        this.eventBus.post(new PerformStaffMembersUpdateEvent());
+        this.fetchDataFromServer();
     }
 
     public DiComponent getDiComponent() {
@@ -89,5 +89,16 @@ public class BonAppetitApplication extends Application {
         Log.e(TAG, errorMsg);
         Toast.makeText(this, errorMsg,
                 Toast.LENGTH_LONG).show();
+    }
+
+    @Subscribe
+    public void onServerConfigChanged(ServerConfigChangedEvent event) {
+        // A server config change means usually that we need to retry to fetch the data.
+        this.fetchDataFromServer();
+    }
+
+    private void fetchDataFromServer() {
+        this.eventBus.post(new PerformMenuUpdateEvent());
+        this.eventBus.post(new PerformStaffMembersUpdateEvent());
     }
 }
