@@ -24,9 +24,6 @@ public class MainActivity extends BonAppetitBaseActivity {
 
     private static final String TAG = MainActivity.class.getName();
 
-    private static final int SELECT_STAFF_MEMBER_REQUEST = 1;
-    public static final String EXTRA_SELECTED_STAFF_MEMBER_ID = "EXTRA_SELECTED_STAFF_MEMBER_ID";
-
     @Inject
     StaffMemberRefDao staffMemberRefDao;
 
@@ -66,14 +63,14 @@ public class MainActivity extends BonAppetitBaseActivity {
     @OnClick(R.id.switchToStaffMembersListActivity)
     public void onSwitchToStaffMembersListActivityButtonClicked() {
         Intent intent = new Intent(this, StaffMembersListActivity.class);
-        startActivityForResult(intent, SELECT_STAFF_MEMBER_REQUEST);
+        startActivityForResult(intent, StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SELECT_STAFF_MEMBER_REQUEST) {
+        if (requestCode == StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Long staffMemberId = data.getLongExtra(EXTRA_SELECTED_STAFF_MEMBER_ID, -1L);
+                Long staffMemberId = data.getLongExtra(StaffMembersListActivity.EXTRA_SELECTED_STAFF_MEMBER_ID, -1L);
                 if (staffMemberId == -1) {
                     throw new IllegalStateException(String.format("Expected %s to return intent containing the " +
                                     "id of the selected staff member",

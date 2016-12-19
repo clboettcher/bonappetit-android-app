@@ -86,6 +86,8 @@
     <!--SelectCustomerFragment-->
     <!--***********************************************************************************************************-->
     <string name="fragment_select_customer_tab_title">Kunde</string>
+    <string name="fragment_select_customer_staff_member_customer">Bestellung für Mitarbeiter</string>
+    <string name="fragment_select_customer_button_select_staff_member">Mitarbeiter auswählen</string>
     <string name="fragment_select_customer_freetext_label_text">Texteingabe</string>
     <string name="fragment_select_customer_freetext_hint">Tippen, um Kunden einzugeben</string>
     <string name="fragment_select_customer_freetext_confirm_button_text">Texteingabe übernehmen</string>

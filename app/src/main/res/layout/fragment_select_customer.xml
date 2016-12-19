@@ -81,6 +81,7 @@
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="4"
+                            android:tag="4"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -89,6 +90,7 @@
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="3"
+                            android:tag="3"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -97,6 +99,7 @@
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="2"
+                            android:tag="2"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -105,6 +108,7 @@
                             android:layout_height="wrap_content"
                             android:layout_width="wrap_content"
                             android:text="1"
+                            android:tag="1"
                             style="@style/Button.RestaurantTableButton"
                             />
                 </TableRow>
@@ -119,6 +123,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="5"
+                            android:tag="5"
                             style="@style/Button.RestaurantTableButton"
                             />
                     <!--Placeholder-->
@@ -133,6 +138,7 @@
                             android:layout_width="fill_parent"
                             android:layout_span="2"
                             android:text="Bar hinten"
+                            android:tag="21"
                             style="@style/Button.RestaurantTableButton"
                             />
                 </TableRow>
@@ -147,6 +153,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="6"
+                            android:tag="6"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -161,6 +168,7 @@
                             android:layout_width="fill_parent"
                             android:layout_span="2"
                             android:text="Bar vorn"
+                            android:tag="20"
                             style="@style/Button.RestaurantTableButton"
                             />
                 </TableRow>
@@ -175,6 +183,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="13"
+                            android:tag="13"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -183,6 +192,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="11"
+                            android:tag="11"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -191,6 +201,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="9"
+                            android:tag="9"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -199,6 +210,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="7"
+                            android:tag="7"
                             style="@style/Button.RestaurantTableButton"
                             />
                 </TableRow>
@@ -213,6 +225,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="14"
+                            android:tag="14"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -221,6 +234,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="12"
+                            android:tag="12"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -229,6 +243,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="10"
+                            android:tag="10"
                             style="@style/Button.RestaurantTableButton"
                             />
 
@@ -237,6 +252,7 @@
                             android:layout_height="fill_parent"
                             android:layout_width="fill_parent"
                             android:text="8"
+                            android:tag="8"
                             style="@style/Button.RestaurantTableButton"
                             />
                 </TableRow>
@@ -244,6 +260,25 @@
 
             <include layout="@layout/general_horizontal_spacer"/>
 
+            <!-- Staff member customer input label-->
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/fragment_select_customer_button_select_staff_member"
+                    android:text="@string/fragment_select_customer_staff_member_customer"
+                    style="@style/TextView.Heading.H2"
+                    />
+
+            <Button
+                    android:id="@+id/fragmentSelectCustomerButtonSelectStaffMember"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fragment_select_customer_button_select_staff_member"
+                    style="@style/Button.Confirm"
+                    />
+
+
+            <include layout="@layout/general_horizontal_spacer"/>
 
             <!-- Freetext customer input label-->
             <TextView
@@ -280,4 +315,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

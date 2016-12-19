@@ -21,7 +21,6 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
-import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,6 +31,8 @@ import java.util.List;
 
 public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
+    public static final int SELECT_STAFF_MEMBER_REQUEST = 1;
+    public static final String EXTRA_SELECTED_STAFF_MEMBER_ID = "EXTRA_SELECTED_STAFF_MEMBER_ID";
     private static final String TAG = StaffMembersListActivity.class.getName();
 
     @BindView(R.id.staffMembersListViewSwitcher)
@@ -152,7 +153,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         // Each list item is tagged with the corresponding staff member object.
         StaffMemberEntity selectedStaffMember = (StaffMemberEntity) view.getTag();
         Intent result = new Intent();
-        result.putExtra(MainActivity.EXTRA_SELECTED_STAFF_MEMBER_ID, selectedStaffMember.getId());
+        result.putExtra(EXTRA_SELECTED_STAFF_MEMBER_ID, selectedStaffMember.getId());
         // Set result for the activity that started this one
         setResult(Activity.RESULT_OK, result);
         // Finish this activity.

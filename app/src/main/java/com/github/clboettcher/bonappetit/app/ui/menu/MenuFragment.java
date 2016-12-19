@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.*;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
 import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
@@ -139,7 +143,7 @@ public class MenuFragment extends TakeOrdersFragment {
         // Configure the active view
         initActiveView(rootView);
 
-        updateCustomerAndUsername();
+        updateCustomerAndStaffMember();
         return rootView;
     }
 
@@ -208,7 +212,7 @@ public class MenuFragment extends TakeOrdersFragment {
                 customer.orNull(),
                 menuLoadable));
 
-        updateCustomerAndUsername();
+        updateCustomerAndStaffMember();
         refreshOrderCounts();
 
         if (customer.isPresent()) {
@@ -248,10 +252,26 @@ public class MenuFragment extends TakeOrdersFragment {
         viewFlipper.setDisplayedChild(newIndex);
     }
 
-    private void updateCustomerAndUsername() {
+    private void updateCustomerAndStaffMember() {
         final Optional<CustomerEntity> customerOpt = customerDao.get();
         if (customerOpt.isPresent()) {
-            customerText.setText(String.format(" %s", customerOpt.get().getValue()));
+            CustomerEntity customer = customerOpt.get();
+            switch (customer.getType()) {
+                case TABLE:
+                    customerText.setText(customer.getTableDisplayValue());
+                    break;
+                case FREE_TEXT:
+                    customerText.setText(String.format(" %s", customer.getValue()));
+                    break;
+                case STAFF_MEMBER:
+                    StaffMemberEntity staffMember = customer.getStaffMember();
+                    customerText.setText(String.format(" %s (MA)", staffMember.getFirstName()));
+                    break;
+                default:
+                    throw new IllegalArgumentException(String.format("Unknown enum value: %s.%s",
+                            CustomerEntityType.class.getName(),
+                            customer.getType()));
+            }
         } else {
             customerText.setText("");
         }

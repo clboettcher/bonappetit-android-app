@@ -1,6 +1,8 @@
 package com.github.clboettcher.bonappetit.app.ui.selectcustomer;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,10 +19,13 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
+import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
@@ -49,8 +54,14 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     @BindView(R.id.fragmentSelectCustomerButtonFreeTextConfirm)
     Button buttonFreetextConfirm;
 
+    @BindView(R.id.fragmentSelectCustomerButtonSelectStaffMember)
+    Button buttonSelectStaffMemberCustomer;
+
     @BindView(R.id.fragmentSelectCustomerFreeText)
     EditText freetextCustomer;
+
+    @Inject
+    StaffMemberDao staffMemberDao;
 
     @Inject
     StaffMemberRefDao staffMemberRefDao;
@@ -119,10 +130,12 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
             button.setOnClickListener(this);
         }
 
+        // Staff member selection
+        buttonSelectStaffMemberCustomer.setOnClickListener(this);
+
         // Free Text input
         buttonFreetextConfirm.setOnClickListener(this);
         buttonFreetextConfirm.setEnabled(false);
-
         freetextCustomer.addTextChangedListener(new FreeTextCustomerTextWatcher(buttonFreetextConfirm));
         return rootView;
     }
@@ -140,28 +153,10 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
         }
     }
 
-    public void onClick(View view) {
-        // Check if a customer name has been entered in the freetext field
-        final String newCustomer;
-        if (view.equals(buttonFreetextConfirm)) {
-            newCustomer = freetextCustomer.getText().toString();
-        }
 
-        // Otherwise a table number has been clicked
-        else {
-            String buttonText = (String) ((Button) view).getText();
-            if (StringUtils.isNumeric(buttonText)) {
-                newCustomer = String.format("%s %s",
-                        getString(R.string.fragment_select_customer_table_prefix),
-                        buttonText);
-            } else {
-                newCustomer = buttonText;
-            }
-        }
-
-//        TODO: review warning and reenable when db setup for orders is completed
+    //        TODO: review warning and reenable when db setup for orders is completed
 //        final long orderCount = DatabaseAccessHelper.getInstance().getOrderCount(dbHelper);
-        // If unprinted orders are present, ask before overwriting the customer.
+    // If unprinted orders are present, ask before overwriting the customer.
 //        if (orderCount != 0) {
 //            new AlertDialog.Builder(getActivity())
 //                    .setTitle("Offene Bestellungen vorhanden!")
@@ -175,23 +170,78 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 //                    })
 //                    .setNegativeButton(getString(R.string.cancel), null)
 //                    .show();
-//        } else {
-        saveNewCustomerAndSwitchFragment(newCustomer);
-//        }
+    public void onClick(View view) {
+        if (this.buttonSelectStaffMemberCustomer.equals(view)) {
+            Intent intent = new Intent(getActivity(), StaffMembersListActivity.class);
+            startActivityForResult(intent, StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST);
+        } else if (this.buttonFreetextConfirm.equals(view)) {
+            // Check if a customer name has been entered in the freetext field
+            final String newCustomer;
+            newCustomer = freetextCustomer.getText().toString();
+            CustomerEntity customerEntity = new CustomerEntity();
+            customerEntity.setType(CustomerEntityType.FREE_TEXT);
+            customerEntity.setValue(newCustomer);
+            saveNewCustomerAndSwitchFragment(customerEntity);
+        } else {
+            // Otherwise a table number has been clicked
+            CustomerEntity newCustomer = new CustomerEntity();
+            String buttonText = (String) ((Button) view).getText();
+            String buttonTag = (String) view.getTag();
+
+            // The tag is always numeric
+            Long tableNumber = Long.valueOf(buttonTag);
+            String displayValue;
+            if (StringUtils.isNumeric(buttonText)) {
+                displayValue = String.format("%s %d",
+                        getString(R.string.fragment_select_customer_table_prefix),
+                        tableNumber
+                );
+            } else {
+                displayValue = buttonText;
+            }
+            newCustomer.setTableDisplayValue(displayValue);
+            newCustomer.setTableNumber(tableNumber);
+            newCustomer.setType(CustomerEntityType.TABLE);
+            saveNewCustomerAndSwitchFragment(newCustomer);
+        }
     }
 
-    private void saveNewCustomerAndSwitchFragment(String newCustomer) {
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Long staffMemberId = data.getLongExtra(StaffMembersListActivity.EXTRA_SELECTED_STAFF_MEMBER_ID, -1L);
+                if (staffMemberId == -1) {
+                    throw new IllegalStateException(String.format("Expected %s to return intent containing the " +
+                                    "id of the selected staff member",
+                            StaffMembersListActivity.class.getName()));
+                }
+                StaffMemberEntity selectedStaffMember = staffMemberDao.getById(staffMemberId);
+                Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
+                CustomerEntity customerEntity = new CustomerEntity();
+                customerEntity.setType(CustomerEntityType.STAFF_MEMBER);
+                customerEntity.setStaffMember(selectedStaffMember);
+                saveNewCustomerAndSwitchFragment(customerEntity);
+            } else {
+                Log.i(TAG, String.format("Received activity result for " +
+                        "request code SELECT_STAFF_MEMBER_REQUEST with " +
+                        "a result code different from RESULT_OK: %d", resultCode));
+            }
+        }
+    }
+
+    private void saveNewCustomerAndSwitchFragment(CustomerEntity customerEntity) {
         // hide the softkeyboard
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(freetextCustomer.getWindowToken(), 0);
 
         // Save customer
-        CustomerEntity customerEntity = new CustomerEntity();
         // We only have one customer in the db at a time. So we can use a
         // static, not auto generated ID.
         customerEntity.setId(1L);
-        customerEntity.setValue(newCustomer);
+        Log.i(TAG, String.format("Saving new customer %s", customerEntity));
         customerDao.save(customerEntity);
         // Switch to tab menu
         switchToTabListener.onSwitchToTab(TakeOrdersActivity.TAB_MENU);
