@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import com.gihub.clboettcher.price_calculation.api.PriceCalculator;
+import com.gihub.clboettcher.bonappetit.price_calculation.api.PriceCalculator;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;

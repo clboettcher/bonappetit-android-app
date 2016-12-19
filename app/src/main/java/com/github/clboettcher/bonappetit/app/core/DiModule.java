@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gihub.clboettcher.price_calculation.api.PriceCalculator;
-import com.gihub.clboettcher.price_calculation.impl.PriceCalculatorImpl;
+import com.gihub.clboettcher.bonappetit.price_calculation.api.PriceCalculator;
+import com.gihub.clboettcher.bonappetit.price_calculation.impl.PriceCalculatorImpl;
 import com.github.clboettcher.bonappetit.app.data.BonAppetitDbHelper;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.MenuDao;
@@ -25,6 +25,7 @@ import dagger.Provides;
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
+import java.math.BigDecimal;
 
 /**
  * The module provides dependencies for the DI framework to use. Its similar to
@@ -140,6 +141,6 @@ public class DiModule {
     @Provides
     @Singleton
     public PriceCalculator providePriceCalculator() {
-        return new PriceCalculatorImpl();
+        return new PriceCalculatorImpl(new BigDecimal("1"), new BigDecimal("0.5"));
     }
 }

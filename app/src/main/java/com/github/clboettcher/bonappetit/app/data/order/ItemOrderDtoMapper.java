@@ -1,6 +1,8 @@
 package com.github.clboettcher.bonappetit.app.data.order;
 
 
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.*;
 import com.github.clboettcher.bonappetit.app.data.order.entity.CheckboxOptionOrder;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
@@ -40,12 +42,33 @@ public final class ItemOrderDtoMapper {
                 .itemType(mapType(orderedItem.getType()))
                 .itemTitle(orderedItem.getTitle())
                 .itemPrice(orderedItem.getPrice())
-                .deliverTo(order.getCustomer().getValue())
+                .customer(mapToCustomerDto(order.getCustomer()))
                 .note(order.getNote())
                 .orderTime(order.getOrderTime())
                 .staffMemberId(order.getStaffMember().getId())
                 .optionOrders(mapToOrderOptionDtos(order.getOptionOrderEntities()))
                 .build();
+    }
+
+    private static CustomerDto mapToCustomerDto(CustomerEntity customer) {
+        switch (customer.getType()) {
+            case TABLE:
+                return TableCustomerDto.builder()
+                        .tableNumber(customer.getTableNumber())
+                        .build();
+            case FREE_TEXT:
+                return FreeTextCustomerDto.builder()
+                        .value(customer.getValue())
+                        .build();
+            case STAFF_MEMBER:
+                return StaffMemberCustomerDto.builder()
+                        .staffMemberId(customer.getStaffMember().getId())
+                        .build();
+            default:
+                throw new IllegalArgumentException(String.format("Unknown enum value %s.%s",
+                        CustomerEntityType.class.getName(),
+                        customer.getType()));
+        }
     }
 
     private static ItemDtoType mapType(ItemEntityType type) {
