@@ -59,4 +59,8 @@ public class StaffMemberDao {
     public void refresh(StaffMemberEntity staffMember) {
         dao.refresh(staffMember);
     }
+
+    public StaffMemberEntity getById(Long staffMemberId) {
+        return dao.queryForId(staffMemberId);
+    }
 }

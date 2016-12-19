@@ -1,5 +1,7 @@
 package com.github.clboettcher.bonappetit.app.ui.selectstaffmember;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,6 +21,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
+import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -146,11 +149,13 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
     @OnItemClick(R.id.staffMembersListView)
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // Each list item is tagged with the corresponding staff member object.
         StaffMemberEntity selectedStaffMember = (StaffMemberEntity) view.getTag();
-        Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
-        staffMemberRefDao.save(selectedStaffMember);
-
-        // We are done here when the user selected who he/she is.
+        Intent result = new Intent();
+        result.putExtra(MainActivity.EXTRA_SELECTED_STAFF_MEMBER_ID, selectedStaffMember.getId());
+        // Set result for the activity that started this one
+        setResult(Activity.RESULT_OK, result);
+        // Finish this activity.
         finish();
     }
 
