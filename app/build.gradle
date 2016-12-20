@@ -1,3 +1,7 @@
+plugins {
+    id 'net.researchgate.release' version '2.4.0'
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
@@ -13,8 +17,8 @@ android {
         applicationId "com.github.clboettcher.bonappetit.app"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode project.property('versionCode') as Integer
+        versionName version
     }
 
     compileOptions {
@@ -84,3 +88,21 @@ dependencies {
     testCompile "junit:junit:4.12"
     testApt "com.google.dagger:dagger-compiler:${daggerVersion}"
 }
+
+task incrementVersionCode {
+    description = "Increment the android versionCode property"
+    group = "release"
+    doFirst {
+        def currentCode = project.property('versionCode') as Integer
+        def nextCode = currentCode + 1
+        println "Incrementing version code from ${currentCode} to ${nextCode}. Project version is ${version}."
+        def newPropertiesFile = file('gradle.properties').text.replaceAll(
+                /versionCode=\d+/,
+                "versionCode=${nextCode}"
+        )
+        file('gradle.properties').write(newPropertiesFile)
+    }
+}
+
+// Increment version code before committing the release version
+confirmReleaseVersion.dependsOn incrementVersionCode
