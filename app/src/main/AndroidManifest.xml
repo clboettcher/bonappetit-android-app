@@ -23,8 +23,9 @@
         <activity android:name=".ui.selectstaffmember.StaffMembersListActivity"/>
         <activity android:name=".ui.preferences.BonAppetitPreferencesActivity"/>
         <activity
-            android:name=".ui.takeorders.TakeOrdersActivity"
-            android:label="@string/activity_take_orders_title" >
+                android:name=".ui.takeorders.TakeOrdersActivity"
+                android:label="@string/activity_take_orders_title"
+                >
         </activity>
         <!--Activity to create/update an order.
         Always hide the soft keyboard when starting the activity.-->
