@@ -1,41 +1,28 @@
-# bonappetit-android-app
-The native Android app client for bonappetit.
+# BonAppetit Android App
 
-Architecture notes and notes on the stuff in this repo
+BonAppetit is a free Point-of-Sale solution for small and medium restaurants. It consists of an Android App client (this project) and a 
+[Java Server Application](https://github.com/clboettcher/bonappetit) connected to a receipt printer.
 
-* Wiremock REST API mock: tools/mock-rest-api
-* Custom Application class: com.github.clboettcher.bonappetit
-.app.application.BonAppetitApplication (see javadoc for details)
-* The com.github.clboettcher.bonappetit.app.ConfigProvider provides
-config form the shared preferences. It adds additional value by 
-* A 'service' (located under com/github/clboettcher/bonappetit/app/service)
-is an application component that encapsulate backend requests. It 
-typically is not invoked directly. Instead it listens to one or 
-more events. The result of the operation is again communicated 
-via events. The actual API calls are performed using the retrofit library.
-* The com.github.clboettcher.bonappetit.app.service.ApiProvider provides 
-instances of those retrofit APIs. See javadocs for why it is needed.
+The client app provides the ability to record, edit and delete
+orders for menu items configured in the server. Orders are transferred to the server via WLAN.
 
-TODO: 
+The server saves the recorded orders to a database and prints receipts using a thermal receipt printer. The receipts
+contain all information required to further process the order consisting of table number, item name, options,
+additional free text notes as well as the service member who took the order and the time the order was registered.
 
-* DONE Trennung der Backend Module von deren API, damit das API Modul auch in der
-APP benutzt werden kann (--> StaffMemberDto).
-* DONE Einbindung der API-Module (--> StaffMemberDto, MenuDto, etc.) in die App (unter /libs). Atm: manuelles Kopieren.
-* DONE Im Moment Main Activity als Startpunk mit Links auf alle Activities. 
-* DONE Staff Member List Activity. Im Fehlerfall wird zeigt ein View Switcher eine Fehlermeldung und einen Refresh Rädchen
-* DONE Preferences Activity in die Action Bar einbinden, damit in der App Einstellungen geändert werden können.
-* Fehler aus SelectCustomerFragment + layout rausmachen, styles/colors/dimens sauber runterdefinieren
+The plan is to merge this project into the server project at one point.
 
-* irgendwann später: Main Fragment fertig machen. Idee: alle Daten vom Backend laden, die benötigt werden:
-  Staff members, Menu
-  erst dann: anzeige der Kundenauswahl mit Staff members popup (wie gewohnt aus dem POC) Das ist
-  grad das einfachste ... 
-  * Styles fertig definieren für die Loading Anzeige: Fehlt insb. Style für den App-Title unter Verwendung der dimens.xml
-  * Styles fertig definieren für die Fehler-Anzeige.
-    Fehler Anzeige vereinfachen. Fehlermeldung + Wiederholen-Button
-  * Abruf des Menus vom Server hinterlegen:
-    * Mock: /currentMenu - Fetch the current menu from the server.
-    * API * GET /currentMenu
-    * Service + Events
-  * Trigger der "Lade Zeug Events" beim Laden des Fragments / der Activity.
-  
+Please refer to the [Server Project](https://github.com/clboettcher/bonappetit) for full documentation and
+issue tracking.
+
+## GNU GPL v3 License
+
+BonAppetit is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+BonAppetit is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+[GNU General Public License](LICENSE) for more details.
