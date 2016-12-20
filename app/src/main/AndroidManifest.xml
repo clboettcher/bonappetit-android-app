@@ -26,7 +26,12 @@
             android:name=".ui.takeorders.TakeOrdersActivity"
             android:label="@string/activity_take_orders_title" >
         </activity>
-        <activity android:name=".ui.editorder.EditOrderActivity"/>
+        <!--Activity to create/update an order.
+        Always hide the soft keyboard when starting the activity.-->
+        <activity
+                android:name=".ui.editorder.EditOrderActivity"
+                android:windowSoftInputMode="stateHidden"
+                />
     </application>
 
 </manifest>
