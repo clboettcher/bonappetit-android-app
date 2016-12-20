@@ -1,5 +1,6 @@
 plugins {
     id 'net.researchgate.release' version '2.4.0'
+    id "com.github.hierynomus.license" version "0.13.1"
 }
 
 apply plugin: 'com.android.application'
@@ -34,6 +35,16 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
+}
+
+license {
+    mapping {
+        java = 'SLASHSTAR_STYLE'
+    }
+    header file("${rootProject.projectDir}/LICENSE-header")
+    strictCheck true
+    include '**/*.java'
+    exclude '**/package-info.java'
 }
 
 ext {
