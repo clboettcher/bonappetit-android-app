@@ -30,7 +30,7 @@
             android:summary="@string/prefs_summary_server_context_path"
             android:dialogTitle="@string/prefs_dialog_title_server_context_path"
             android:dialogMessage="@string/prefs_dialog_message_server_context_path"
-            android:defaultValue="/"
+            android:defaultValue="/api/"
             />
 
     <!-- username -->

@@ -31,6 +31,7 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import retrofit2.Retrofit;
@@ -98,8 +99,6 @@ public class ApiProvider {
     @Subscribe
     public void onServerConfigChanged(ServerConfigChangedEvent ignored) {
         Log.i(TAG, "Base URL changed. Reinitializing the APIs.");
-        String baseUrl = configProvider.getBaseUrl();
-
         // Enable basic auth on all requests via request interceptor on the HTTP client
         String credentials = String.format("%s:%s",
                 configProvider.getUsername(),
@@ -123,6 +122,9 @@ public class ApiProvider {
                 })
                 .build();
 
+        String baseUrl = configProvider.getBaseUrl();
+        // Retrofit requires the base url to end with /
+        baseUrl = StringUtils.appendIfMissing(baseUrl, "/");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
