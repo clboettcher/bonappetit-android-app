@@ -39,6 +39,7 @@ import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
+import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
@@ -84,8 +85,12 @@ public class MenuFragment extends TakeOrdersFragment {
     @Inject
     StaffMemberRefDao staffMemberRefDao;
 
+    @Inject
+    OrdersResource ordersResource;
+
     private TextView errorCode;
     private Button retryButton;
+    private Button switchToOverviewButton;
 
     private Comparator<ItemEntity> itemEntityComparator = new ItemEntityComparator();
     private MenuItemsAdapter menuItemsAdapter;
@@ -147,6 +152,7 @@ public class MenuFragment extends TakeOrdersFragment {
         this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentMenuViewFlipper);
         this.errorCode = (TextView) rootView.findViewById(R.id.generalFailedViewErrorCode);
         this.retryButton = (Button) rootView.findViewById(R.id.generalFailedViewButtonRetry);
+        this.switchToOverviewButton = (Button) rootView.findViewById(R.id.fragmentMenuButtonSwitchToOverview);
 
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,12 +263,12 @@ public class MenuFragment extends TakeOrdersFragment {
             this.setState(MenuFragmentViewState.NO_CUSTOMER);
         }
 
-        // TODO Enable switch to overview button if we have any orders.
-//        if (DatabaseAccessHelper.getInstance().getOrderCount(dbHelper) == 0) {
-//            buttonOverview.setEnabled(false);
-//        } else {
-//            buttonOverview.setEnabled(true);
-//        }
+        // Enable switch to overview button only if we have any orders.
+        if (this.ordersResource.count() == 0) {
+            switchToOverviewButton.setEnabled(false);
+        } else {
+            switchToOverviewButton.setEnabled(true);
+        }
     }
 
     private void setState(MenuFragmentViewState state) {
