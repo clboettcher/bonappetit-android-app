@@ -32,7 +32,6 @@ import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
-import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
 import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
@@ -44,6 +43,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
+import com.github.clboettcher.bonappetit.app.ui.UiUtils;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
@@ -278,30 +278,10 @@ public class MenuFragment extends TakeOrdersFragment {
 
     private void updateCustomerAndStaffMember() {
         final Optional<CustomerEntity> customerOpt = customerDao.get();
-        if (customerOpt.isPresent()) {
-            CustomerEntity customer = customerOpt.get();
-            switch (customer.getType()) {
-                case TABLE:
-                    customerText.setText(customer.getTableDisplayValue());
-                    break;
-                case FREE_TEXT:
-                    customerText.setText(String.format(" %s", customer.getValue()));
-                    break;
-                case STAFF_MEMBER:
-                    StaffMemberEntity staffMember = customer.getStaffMember();
-                    customerText.setText(String.format(" %s (MA)", staffMember.getFirstName()));
-                    break;
-                default:
-                    throw new IllegalArgumentException(String.format("Unknown enum value: %s.%s",
-                            CustomerEntityType.class.getName(),
-                            customer.getType()));
-            }
-        } else {
-            customerText.setText("");
-        }
+        String customerDisplayText = UiUtils.getDisplayText(customerOpt);
+        customerText.setText(customerDisplayText);
 
         Optional<StaffMemberRefEntity> staffMemRefOpt = staffMemberRefDao.get();
-
         if (staffMemRefOpt.isPresent()) {
             StaffMemberEntity staffMemberEntity = staffMemRefOpt.get().getStaffMemberEntity();
             staffMemberText.setText(String.format(" %s %s",

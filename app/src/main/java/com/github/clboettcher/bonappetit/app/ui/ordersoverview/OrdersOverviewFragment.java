@@ -41,6 +41,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
+import com.github.clboettcher.bonappetit.app.ui.UiUtils;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
@@ -278,16 +279,18 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
     }
 
     private void updateStaffMemberAndCustomer() {
-        Optional<CustomerEntity> customerOpt = customerDao.get();
+        // Customer
+        final Optional<CustomerEntity> customerOpt = customerDao.get();
+        String customerDisplayText = UiUtils.getDisplayText(customerOpt);
+        customerTextView.setText(customerDisplayText);
+
+        // Staff member
         Optional<StaffMemberRefEntity> staffMemRefOpt = staffMemberRefDao.get();
         if (staffMemRefOpt.isPresent()) {
             StaffMemberEntity staffMember = staffMemRefOpt.get().getStaffMemberEntity();
             this.staffMemberTextView.setText(String.format(" %s %s",
                     staffMember.getFirstName(),
                     staffMember.getLastName()));
-        }
-        if (customerOpt.isPresent()) {
-            customerTextView.setText(String.format(" %s", customerOpt.get().getValue()));
         }
     }
 
