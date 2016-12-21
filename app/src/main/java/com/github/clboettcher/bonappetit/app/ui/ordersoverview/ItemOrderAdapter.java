@@ -41,6 +41,7 @@ import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
+import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 
 import java.util.List;
 
@@ -52,19 +53,22 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
     private Context context;
     private OrdersResource ordersResource;
     private OnSwitchToTabListener mListener;
+    private TakeOrdersFragment takeOrdersFragment;
     public static final int NOTE_LENGTH_THRESHOLD = 30;
 
     ItemOrderAdapter(List<ItemOrderEntity> itemOrders,
                      OrdersResource ordersResource,
                      OnSwitchToTabListener mListener,
                      LayoutInflater layoutInflater,
-                     Context context) {
+                     Context context,
+                     TakeOrdersFragment takeOrdersFragment) {
         super(context, 0, itemOrders);
         this.itemOrders = itemOrders;
         this.layoutInflater = layoutInflater;
         this.context = context;
         this.ordersResource = ordersResource;
         this.mListener = mListener;
+        this.takeOrdersFragment = takeOrdersFragment;
     }
 
     @Override
@@ -184,6 +188,13 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
                         .setPositiveButton(context.getString(R.string.general_action_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 deleteOrder(itemOrder);
+                                long newOrderCount = ordersResource.count();
+                                if (newOrderCount == 0) {
+                                    mListener.onSwitchToTab(TakeOrdersActivity.TAB_MENU);
+                                } else {
+                                    // Update the fragment to reflect the order deletion
+                                    takeOrdersFragment.update();
+                                }
                             }
                         })
                         .setNegativeButton(context.getString(R.string.general_action_no), new DialogInterface.OnClickListener() {
@@ -203,13 +214,8 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
     private void deleteOrder(ItemOrderEntity order) {
         Log.d(TAG, "in delegateOrderDeletion()");
         ordersResource.deleteOrder(order);
-        long newOrderCount = ordersResource.count();
         Toast.makeText(context,
                 context.getString(R.string.fragment_orders_overview_dialog_delete_order_toast_success),
                 Toast.LENGTH_SHORT).show();
-
-        if (newOrderCount == 0) {
-            mListener.onSwitchToTab(TakeOrdersActivity.TAB_MENU);
-        }
     }
 }

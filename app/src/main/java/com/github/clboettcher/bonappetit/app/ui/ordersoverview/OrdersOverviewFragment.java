@@ -140,7 +140,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
                 ordersResource,
                 mListener,
                 getActivity().getLayoutInflater(),
-                getActivity()
+                getActivity(),
+                this
         );
         orderContainer.setAdapter(adapter);
 
