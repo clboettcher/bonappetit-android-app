@@ -93,8 +93,6 @@ public class OrdersResource {
                 } else {
                     finishOrdersLoadable.set(Loadable.<Void>failed(ErrorMapper.toErrorCode(response.code())));
                 }
-                // The orders are now saved in the server. No need for local copies anymore.
-                deleteAllOrders();
                 eventBus.post(new FinishOrdersCompletedEvent());
             }
 
@@ -120,7 +118,7 @@ public class OrdersResource {
         return orderDao.count();
     }
 
-    private void deleteAllOrders() {
+    public void deleteAllOrders() {
         try {
             orderDao.deleteAll();
         } catch (SQLException e) {

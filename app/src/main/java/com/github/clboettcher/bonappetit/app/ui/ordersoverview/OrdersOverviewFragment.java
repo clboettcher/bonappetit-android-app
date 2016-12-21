@@ -154,6 +154,15 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
                     }
                 })
                 .setNegativeButton(getString(R.string.general_action_cancel), null)
+                .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        // Reset the resource state. If the dialog is dismissed in any way that means
+                        // cancel the operation as a whole.
+                        // The error popup should not be shown when the activity is loaded again.
+                        ordersResource.reset();
+                    }
+                })
                 .create();
 
         return rootView;
@@ -250,7 +259,14 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         Log.i(TAG, String.format("update() called. Customer is %s. Order loadable is %s",
                 customerOpt, finishOrdersLoadable));
 
-        if (finishOrdersLoadable.isLoaded()) {
+        if (!customerOpt.isPresent() || !atLeastOneOrderTaken) {
+            this.setState(OrdersOverviewViewState.INACTIVE);
+        } else if (finishOrdersLoadable.isLoaded()) {
+            // The orders are now saved in the server. No need for local copies anymore.
+            ordersResource.deleteAllOrders();
+            // Clear the customer for the next set of orders
+            customerDao.clear();
+            // Reset state of the operation
             ordersResource.reset();
             // Show success-toast
             Toast.makeText(getActivity(), "Bestellung erfolgreich abgeschlossen!",
@@ -264,8 +280,6 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             this.setState(OrdersOverviewViewState.ACTIVE);
             Log.e(TAG, String.format("Finishing orders failed with code %s", finishOrdersLoadable.getErrorCode()));
             showErrorDialog(finishOrdersLoadable.getErrorCode());
-        } else if (!(customerOpt.isPresent() && atLeastOneOrderTaken)) {
-            this.setState(OrdersOverviewViewState.INACTIVE);
         } else if (finishOrdersLoadable.isInitial()) {
             this.setState(OrdersOverviewViewState.ACTIVE);
         }

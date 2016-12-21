@@ -52,14 +52,18 @@ public class CustomerDao {
         Preconditions.checkNotNull(customerEntity, "customerEntity");
 
         // Delete all entries. We only have one selected customer at a time.
+        clear();
+
+        dao.create(customerEntity);
+        Log.i(TAG, String.format("Saved customer entity %s in database", customerEntity));
+    }
+
+    public void clear() {
         try {
             TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), CustomerEntity.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        dao.create(customerEntity);
-        Log.i(TAG, String.format("Saved customer entity %s in database", customerEntity));
     }
 
     public Optional<CustomerEntity> get() {
