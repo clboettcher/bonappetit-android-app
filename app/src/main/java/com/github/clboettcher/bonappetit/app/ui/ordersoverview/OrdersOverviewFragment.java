@@ -212,26 +212,13 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         final List<ItemOrderEntity> orders = ordersResource.listRefreshedOrders();
 
         // Set the customer on all orders
-        // This is done here because the customer might change after the item order was created.
+        // This is done here because the customer might changed after the item order was created.
         // At this point, the customer must be set.
         Optional<CustomerEntity> customerOpt = customerDao.get();
         final CustomerEntity customer = customerOpt.get();
         for (ItemOrderEntity order : orders) {
             order.setCustomer(customer);
         }
-
-        // upload-in-progress dialog
-        // TODO: Refactor to androids ProgressDialog (which is a subclass of AlertDialog).
-        // TODO. move initializer to onCreateView() or so.
-        // TODO: check if cancellable(false) causes the dialog not to be cancelled form code.
-        // TODO: drop R.layout.dialog_take_orders_overview_finish_in_progress, null); if not longer needed
-//        View uploadInProgressDialogView = getActivity().getLayoutInflater().inflate(
-//                R.layout.dialog_take_orders_overview_finish_in_progress, null);
-//        uploadInProgressDialog = new AlertDialog.Builder(getActivity())
-//                .setView(uploadInProgressDialogView)
-//                .setCancelable(false)
-//                .create();
-//        uploadInProgressDialog.show();
         ordersResource.finishOrders(orders);
         this.update();
     }
@@ -270,7 +257,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             // Reset state of the operation
             ordersResource.reset();
             // Show success-toast
-            Toast.makeText(getActivity(), "Bestellung erfolgreich abgeschlossen!",
+            Toast.makeText(getActivity(), R.string.fragment_orders_overview_active_toast_finish_success,
                     Toast.LENGTH_LONG).show();
             // Switch to "select-customer"-tab
             mListener.onSwitchToTab(TakeOrdersActivity.TAB_SELECT_CUSTOMER);

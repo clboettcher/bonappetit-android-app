@@ -114,7 +114,6 @@
         <![CDATA[Bist du sicher, dass du diese Bestellung abschließen & drucken möchtest?]]></string>
     <string name="fragment_orders_overview_button_finish">Bestellung abschließen &amp; Bons drucken</string>
     <string name="fragment_orders_overview_dialog_finish_toast_confirm_success">Bons erfolgreich gedruckt</string>
-    <string name="fragment_orders_overview_dialog_operation_in_progress_body">Bestellung wird abgeschlossen …</string>
     <string name="fragment_orders_overview_button_edit_order">Bearbeiten</string>
     <string name="fragment_orders_overview_button_delete_order">Löschen</string>
     <string name="fragment_orders_overview_dialog_delete_order_title">Gericht löschen</string>
@@ -136,6 +135,7 @@
         Bitte versuche es noch einmal. Wenn es nicht funktioniert, nimm die Bestellungen bitte per Hand auf und lösche Sie
         hier.]]>
     </string>
+    <string name="fragment_orders_overview_active_toast_finish_success">Bestellung erfolgreich abgeschlossen!</string>
 
 
     <!--***********************************************************************************************************-->
