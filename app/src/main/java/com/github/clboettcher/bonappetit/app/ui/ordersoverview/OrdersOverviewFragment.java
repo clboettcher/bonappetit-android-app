@@ -305,18 +305,10 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     private void updateOrdersTable() {
         Log.i(TAG, "Updating displayed orders.");
-        // TODO: load all item orders from db
         List<ItemOrderEntity> itemOrders = ordersResource.listRefreshedOrders();
-
-        // TODO: switch if we have no orders to show
-//        if (CollectionUtils.isEmpty(itemOrders)) {
-//            mListener.onSwitchToTab(TakeOrdersActivity.TAB_MENU);
-//        }
 
         adapter.clear();
         adapter.addAll(itemOrders);
-        // TODO: implement sorting
-//        adapter.sort(StaffMemberEntityComparator.INSTANCE);
         adapter.notifyDataSetChanged();
     }
 
@@ -327,9 +319,9 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
     }
 
     private void showErrorDialog(ErrorCode errorCode) {
-        // TODO: refactor to string resources, include note on taking the orders by hand.
-        String errorMsg = String.format("Beim Abschließen der Bestellung und dem Drucken " +
-                "der Bons ist ein Fehler aufgetreten: %s", errorCode);
+        String errorMsg = String.format(getActivity().getString(
+                R.string.fragment_orders_overview_active_dialog_finish_failed_body),
+                errorCode);
         errorDialog.setMessage(errorMsg);
         errorDialog.show();
     }

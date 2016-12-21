@@ -131,6 +131,11 @@
         sie im Tab \"%s\" zusammen.
     </string>
     <string name="fragment_orders_overview_inactive_button_switch_to_tab">Zum Tab \"%s\" wechseln</string>
+    <string name="fragment_orders_overview_active_dialog_finish_failed_body">
+        <![CDATA[Beim Abschließen der Bestellung und dem Drucken der Bons ist ein Fehler aufgetreten: %s.\n\n
+        Bitte versuche es noch einmal. Wenn es nicht funktioniert, nimm die Bestellungen bitte per Hand auf und lösche Sie
+        hier.]]>
+    </string>
 
 
     <!--***********************************************************************************************************-->
