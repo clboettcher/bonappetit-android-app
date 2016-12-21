@@ -54,12 +54,13 @@ import java.util.List;
 public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     public static final String TAG = OrdersOverviewFragment.class.getName();
-    private View rootView;
+
+    private boolean initialized;
     private TextView staffMemberTextView;
     private TextView customerTextView;
     private OnSwitchToTabListener mListener;
     private ViewFlipper viewFlipper;
-//    private AlertDialog uploadInProgressDialog;
+    private AlertDialog errorDialog;
 
     @Inject
     CustomerDao customerDao;
@@ -72,8 +73,6 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     @Inject
     EventBus eventBus;
-    private AlertDialog errorDialog;
-    private boolean initialized;
 
     /**
      * The adapter that is responsible for displaying a collection of orders in a list view.
@@ -93,7 +92,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_orders_overview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_orders_overview, container, false);
 
         viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentOrdersOverviewViewSwitcher);
 
@@ -147,7 +146,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
         // Error dialog
         errorDialog = new AlertDialog.Builder(getActivity())
-                .setTitle("Bestellung abschließen fehlgeschlagen!")
+                .setTitle(R.string.fragment_orders_overview_active_dialog_finish_failed_title)
                 .setIcon(R.drawable.ic_alerts_and_states_warning)
                 .setPositiveButton(getString(R.string.general_action_retry), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -193,11 +192,13 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
     public void finishOrdersButtonHandler() {
         final long orderCount = ordersResource.count();
         // Ask for confirmation before finishing the orders.
-        // TODO: introduce string resources
+        String message = String.format(getActivity().getString(
+                R.string.fragment_orders_overview_dialog_finish_orders_confirmation_message),
+                orderCount);
         new AlertDialog.Builder(getActivity())
-                .setTitle("Bestellungen drucken")
+                .setTitle(R.string.fragment_orders_overview_dialog_finish_orders_confirmation_title)
                 .setIcon(R.drawable.ic_alerts_and_states_warning)
-                .setMessage(String.format("%d Bestellung(en) werden gedruckt", orderCount))
+                .setMessage(message)
                 .setPositiveButton(getString(R.string.general_action_confirm), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         setCustomerAndFinishOrders();
