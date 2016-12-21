@@ -24,7 +24,6 @@ import com.github.clboettcher.bonappetit.app.data.menu.MenusService;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberService;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
 import com.github.clboettcher.bonappetit.app.ui.editorder.EditOrderActivity;
-import com.github.clboettcher.bonappetit.app.ui.main.MainActivity;
 import com.github.clboettcher.bonappetit.app.ui.menu.MenuFragment;
 import com.github.clboettcher.bonappetit.app.ui.ordersoverview.OrdersOverviewFragment;
 import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
@@ -44,8 +43,6 @@ import javax.inject.Singleton;
 @Component(modules = DiModule.class)
 @Singleton
 public interface DiComponent {
-
-    void inject(MainActivity mainActivity);
 
     void inject(BonAppetitApplication bonAppetitApplication);
 

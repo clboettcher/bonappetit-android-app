@@ -31,10 +31,16 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.core.DiComponent;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseFragmentActivity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
-import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
+import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
+
+import javax.inject.Inject;
 
 public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implements ActionBar.TabListener, OnSwitchToTabListener {
 
@@ -57,6 +63,12 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
      * The index of the order overview tab.
      */
     public static final int TAB_OVERVIEW = 2;
+
+    @Inject
+    StaffMemberRefDao staffMemberRefDao;
+
+    @Inject
+    StaffMemberDao staffMemberDao;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -117,6 +129,31 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
             actionBar.addTab(
                     actionBar.newTab()
                             .setText(takeOrdersPagerAdapter.getPageTitle(i)).setTabListener(this));
+        }
+
+        // Prompt the user to select who he is on startup
+        Intent intent = new Intent(this, StaffMembersListActivity.class);
+        startActivityForResult(intent, StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Long staffMemberId = data.getLongExtra(StaffMembersListActivity.EXTRA_SELECTED_STAFF_MEMBER_ID, -1L);
+                if (staffMemberId == -1) {
+                    throw new IllegalStateException(String.format("Expected %s to return intent containing the " +
+                                    "id of the selected staff member",
+                            StaffMembersListActivity.class.getName()));
+                }
+                StaffMemberEntity selectedStaffMember = staffMemberDao.getById(staffMemberId);
+                Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
+                staffMemberRefDao.save(selectedStaffMember);
+            } else {
+                Log.i(TAG, String.format("Received activity result for " +
+                        "request code SELECT_STAFF_MEMBER_REQUEST with " +
+                        "a result code different from RESULT_OK: %d", resultCode));
+            }
         }
     }
 
