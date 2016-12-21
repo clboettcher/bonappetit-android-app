@@ -48,7 +48,7 @@ import java.math.BigDecimal;
 
 /**
  * The module provides dependencies for the DI framework to use. Its similar to
- * a spring @Context class.
+ * a spring @Configuration class.
  */
 @Module
 public class DiModule {
