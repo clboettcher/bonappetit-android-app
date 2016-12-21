@@ -89,7 +89,6 @@ public class MenuFragment extends TakeOrdersFragment {
     OrdersResource ordersResource;
 
     private TextView errorCode;
-    private Button retryButton;
     private Button switchToOverviewButton;
 
     private Comparator<ItemEntity> itemEntityComparator = new ItemEntityComparator();
@@ -102,7 +101,7 @@ public class MenuFragment extends TakeOrdersFragment {
         try {
             mListener = (OnSwitchToTabListener) context;
         } catch (ClassCastException e) {
-            throw new IllegalStateException(context + " must implement OnSwitchToTabListener", e);
+            throw new IllegalStateException(String.format("%s must implement OnSwitchToTabListener", context), e);
         }
     }
 
@@ -151,9 +150,9 @@ public class MenuFragment extends TakeOrdersFragment {
         View rootView = inflater.inflate(R.layout.fragment_menu, container, false);
         this.viewFlipper = (ViewFlipper) rootView.findViewById(R.id.fragmentMenuViewFlipper);
         this.errorCode = (TextView) rootView.findViewById(R.id.generalFailedViewErrorCode);
-        this.retryButton = (Button) rootView.findViewById(R.id.generalFailedViewButtonRetry);
         this.switchToOverviewButton = (Button) rootView.findViewById(R.id.fragmentMenuButtonSwitchToOverview);
 
+        Button retryButton = (Button) rootView.findViewById(R.id.generalFailedViewButtonRetry);
         retryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
