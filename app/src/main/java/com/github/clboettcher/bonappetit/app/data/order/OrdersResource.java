@@ -34,7 +34,7 @@ import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.server.order.api.dto.read.ItemOrderDto;
+import com.github.clboettcher.bonappetit.server.order.api.dto.write.ItemOrderCreationDto;
 import org.apache.commons.collections4.CollectionUtils;
 import org.greenrobot.eventbus.EventBus;
 import retrofit2.Call;
@@ -82,7 +82,7 @@ public class OrdersResource {
     }
 
     public void finishOrders(List<ItemOrderEntity> orders) {
-        List<ItemOrderDto> orderDtos = ItemOrderDtoMapper.mapToItemOrderDtos(orders);
+        List<ItemOrderCreationDto> orderDtos = ItemOrderCreationDtoMapper.mapToItemOrderCreationDtos(orders);
         Log.i(TAG, String.format("Finishing %d order(s).", CollectionUtils.size(orderDtos)));
         this.finishOrdersLoadable.set(Loadable.<Void>loading());
         this.ordersService.createOrders(orderDtos, new Callback<Void>() {

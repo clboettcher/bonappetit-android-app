@@ -91,7 +91,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
     private ItemEntity item;
 
     public void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, String.format("onCreate()"));
+        Log.i(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_order);
 
@@ -154,7 +154,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
 
     /**
      * Checks whether the database contains an item with the given ID and returns it.
-     * <p>
+     * <p/>
      * If no item with the given ID is found the activity is finished. If an order exists for
      * the item it is deleted. If an item is found it is returned.
      *

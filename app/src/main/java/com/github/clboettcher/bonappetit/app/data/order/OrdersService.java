@@ -21,7 +21,7 @@ package com.github.clboettcher.bonappetit.app.data.order;
 
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.data.ApiProvider;
-import com.github.clboettcher.bonappetit.server.order.api.dto.read.ItemOrderDto;
+import com.github.clboettcher.bonappetit.server.order.api.dto.write.ItemOrderCreationDto;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -41,7 +41,7 @@ public class OrdersService {
         this.apiProvider = apiProvider;
     }
 
-    public void createOrders(Collection<ItemOrderDto> orders, Callback<Void> callback) {
+    public void createOrders(Collection<ItemOrderCreationDto> orders, Callback<Void> callback) {
         Call<Void> call = apiProvider
                 .getOrdersApi()
                 .createOrders(orders);
