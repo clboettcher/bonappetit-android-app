@@ -172,13 +172,17 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.actionSettings) {
-            startActivity(new Intent(this, BonAppetitPreferencesActivity.class));
-            return true;
+        switch (id) {
+            case R.id.actionSettings:
+                startActivity(new Intent(this, BonAppetitPreferencesActivity.class));
+                return true;
+            case R.id.actionRegister:
+                Intent intent = new Intent(this, StaffMembersListActivity.class);
+                startActivityForResult(intent, StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
