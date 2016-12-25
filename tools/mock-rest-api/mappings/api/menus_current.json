@@ -1,7 +1,7 @@
 {
   "request": {
-    "method": "POST",
-    "urlPattern": "/orders",
+    "method": "GET",
+    "urlPattern": "/api/currentMenu",
     "headers": {
       "Authorization": {
         "equalTo": "Basic dGVzdHVzZXI6czNjcmV0"
@@ -10,6 +10,7 @@
   },
   "response": {
     "status": 200,
+    "bodyFileName": "api/response_menus_current.json",
     "fixedDelayMilliseconds": 200
   }
 }

@@ -28,10 +28,10 @@
     "id": 6,
     "firstName": "John",
     "lastName": "Cena"
-  },
-  {
-    "id": 7,
-    "firstName": "Chuck",
-    "lastName": "Norris"
-  }
+  }//,
+//  {
+//    "id": 7,
+//    "firstName": "Chuck",
+//    "lastName": "Norris"
+//  }
 ]

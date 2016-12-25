@@ -1,8 +1,7 @@
 {
-  "priority": 20,
   "request": {
-    "method": "GET",
-    "urlPattern": "/staffMembers.*",
+    "method": "POST",
+    "urlPattern": "/api/orders",
     "headers": {
       "Authorization": {
         "equalTo": "Basic dGVzdHVzZXI6czNjcmV0"
@@ -11,7 +10,6 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "response_staff_members.json",
     "fixedDelayMilliseconds": 200
   }
 }

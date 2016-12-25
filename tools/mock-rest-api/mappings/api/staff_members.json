@@ -1,7 +1,8 @@
 {
+  "priority": 20,
   "request": {
     "method": "GET",
-    "urlPattern": "/currentMenu",
+    "urlPattern": "/api/staffMembers.*",
     "headers": {
       "Authorization": {
         "equalTo": "Basic dGVzdHVzZXI6czNjcmV0"
@@ -10,7 +11,7 @@
   },
   "response": {
     "status": 200,
-    "bodyFileName": "response_menus_current.json",
+    "bodyFileName": "api/response_staff_members.json",
     "fixedDelayMilliseconds": 200
   }
 }
