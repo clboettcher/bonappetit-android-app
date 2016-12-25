@@ -32,7 +32,7 @@ import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.MenuRepository;
+import com.github.clboettcher.bonappetit.app.data.menu.MenuResource;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
@@ -74,7 +74,7 @@ public class MenuFragment extends TakeOrdersFragment {
     EventBus bus;
 
     @Inject
-    MenuRepository menuRepository;
+    MenuResource menuResource;
 
     @Inject
     ItemDao itemDao;
@@ -157,7 +157,7 @@ public class MenuFragment extends TakeOrdersFragment {
             @Override
             public void onClick(View v) {
                 setState(MenuFragmentViewState.MENU_UPDATE_IN_PROGRESS);
-                menuRepository.updateMenu();
+                menuResource.updateMenu();
             }
         });
 
@@ -231,7 +231,7 @@ public class MenuFragment extends TakeOrdersFragment {
     @Override
     public void update() {
         final Optional<CustomerEntity> customer = customerDao.get();
-        Loadable<MenuEntity> menuLoadable = menuRepository.getMenu();
+        Loadable<MenuEntity> menuLoadable = menuResource.getMenu();
         Log.i(TAG, String.format("update() called. Customer is %s. Menu is %s",
                 customer.orNull(),
                 menuLoadable));

@@ -37,7 +37,7 @@ import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersRepository;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import org.greenrobot.eventbus.EventBus;
@@ -67,7 +67,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     TextView errorCode;
 
     @Inject
-    StaffMembersRepository staffMembersRepository;
+    StaffMembersResource staffMembersResource;
 
     @Inject
     StaffMemberRefDao staffMemberRefDao;
@@ -115,7 +115,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     }
 
     private void update() {
-        Loadable<List<StaffMemberEntity>> staffMembersLoadable = staffMembersRepository.getStaffMembers();
+        Loadable<List<StaffMemberEntity>> staffMembersLoadable = staffMembersResource.getStaffMembers();
 
         Log.i(TAG, String.format("Updating. Staff members loadable is %s", staffMembersLoadable));
 
@@ -124,7 +124,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         } else if (staffMembersLoadable.isLoaded()) {
             Log.i(TAG, "Updating the list view with the contents from the repository.");
             adapter.clear();
-            adapter.addAll(staffMembersRepository.getStaffMembers().getValue());
+            adapter.addAll(staffMembersResource.getStaffMembers().getValue());
             adapter.sort(StaffMemberEntityComparator.INSTANCE);
             adapter.notifyDataSetChanged();
             this.setState(StaffMembersListActivityViewState.OK);
@@ -159,7 +159,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     private void updateStaffMembers() {
         Log.i(TAG, "Forcing staff member update");
         this.setState(StaffMembersListActivityViewState.UPDATE_IN_PROGRESS);
-        staffMembersRepository.updateStaffMembers();
+        staffMembersResource.updateStaffMembers();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

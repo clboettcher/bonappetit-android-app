@@ -43,11 +43,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-// TODO: rename to resource
 @Singleton
-public class StaffMembersRepository {
+public class StaffMembersResource {
 
-    private static final String TAG = StaffMembersRepository.class.getName();
+    private static final String TAG = StaffMembersResource.class.getName();
 
     private Context context;
     private StaffMemberService staffMemberService;
@@ -59,12 +58,12 @@ public class StaffMembersRepository {
             AtomicReference<>(Loadable.<List<StaffMemberEntity>>initial());
 
     @Inject
-    public StaffMembersRepository(Context context,
-                                  StaffMemberService staffMemberService,
-                                  StaffMemberDao staffMemberDao,
-                                  StaffMemberEntityMapper staffMemberEntityMapper,
-                                  EventBus bus,
-                                  ConfigProvider configProvider) {
+    public StaffMembersResource(Context context,
+                                StaffMemberService staffMemberService,
+                                StaffMemberDao staffMemberDao,
+                                StaffMemberEntityMapper staffMemberEntityMapper,
+                                EventBus bus,
+                                ConfigProvider configProvider) {
         this.context = context;
         this.staffMemberService = staffMemberService;
         this.staffMemberDao = staffMemberDao;
@@ -127,7 +126,7 @@ public class StaffMembersRepository {
                             .mapToStaffMemberEntities(response.body());
                     staffMemberDao.save(staffMemberEntities);
                     Log.i(TAG, "Staff member update successful");
-                    StaffMembersRepository.this.staffMembers.set(
+                    StaffMembersResource.this.staffMembers.set(
                             Loadable.loaded(staffMemberEntities));
                     bus.post(new StaffMembersUpdateCompletedEvent());
                 } else {
@@ -138,7 +137,7 @@ public class StaffMembersRepository {
 
                     ErrorCode errorCode = ErrorMapper.toErrorCode(response.code());
 
-                    StaffMembersRepository.this.staffMembers.set(
+                    StaffMembersResource.this.staffMembers.set(
                             Loadable.<List<StaffMemberEntity>>failed(errorCode));
                     bus.post(new StaffMembersUpdateCompletedEvent());
                 }
@@ -148,7 +147,7 @@ public class StaffMembersRepository {
             public void onFailure(Call<List<StaffMemberDto>> call, Throwable t) {
                 Log.e(TAG, "Staff member update failed", t);
                 ErrorCode errorCode = ErrorMapper.toErrorCode(t);
-                StaffMembersRepository.this.staffMembers.set(
+                StaffMembersResource.this.staffMembers.set(
                         Loadable.<List<StaffMemberEntity>>failed(errorCode));
                 bus.post(new StaffMembersUpdateCompletedEvent());
 

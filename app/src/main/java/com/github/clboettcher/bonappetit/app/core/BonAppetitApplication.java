@@ -82,7 +82,7 @@ public class BonAppetitApplication extends Application {
         this.diComponent.staffMembersService();
         this.diComponent.menusService();
         this.diComponent.menuRepository();
-        this.diComponent.staffMembersRepository();
+        this.diComponent.staffMembersResource();
 
         // Inject dependencies into this class.
         this.diComponent.inject(this);

@@ -47,11 +47,10 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-// TODO: rename to resource
 @Singleton
-public class MenuRepository {
+public class MenuResource {
 
-    private static final String TAG = MenuRepository.class.getName();
+    private static final String TAG = MenuResource.class.getName();
 
     private Context context;
     private MenusService menuService;
@@ -65,13 +64,13 @@ public class MenuRepository {
             new AtomicReference<>(Loadable.<MenuEntity>initial());
 
     @Inject
-    public MenuRepository(Context context,
-                          MenusService menuService,
-                          MenuDao menuDao,
-                          MenuEntityMapper menuEntityMapper,
-                          EventBus bus,
-                          ConfigProvider configProvider,
-                          ObjectMapper objectMapper) {
+    public MenuResource(Context context,
+                        MenusService menuService,
+                        MenuDao menuDao,
+                        MenuEntityMapper menuEntityMapper,
+                        EventBus bus,
+                        ConfigProvider configProvider,
+                        ObjectMapper objectMapper) {
         this.context = context;
         this.menuService = menuService;
         this.menuDao = menuDao;
