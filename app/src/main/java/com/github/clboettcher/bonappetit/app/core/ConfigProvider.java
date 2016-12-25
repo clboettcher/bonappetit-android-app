@@ -145,4 +145,9 @@ public class ConfigProvider {
         }
         return pw;
     }
+
+    public Boolean displayDebugMessages() {
+        String key = context.getString(R.string.prefs_key_show_debug_messages);
+        return sharedPrefs.getBoolean(key, false);
+    }
 }

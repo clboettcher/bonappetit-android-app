@@ -56,6 +56,9 @@ public class BonAppetitApplication extends Application {
     @Inject
     EventBus eventBus;
 
+    @Inject
+    ConfigProvider configProvider;
+
     private DiComponent diComponent;
 
     @Override
@@ -99,16 +102,20 @@ public class BonAppetitApplication extends Application {
     public void onNoSubscriberEvent(NoSubscriberEvent event) {
         String msg = String.format("No subscriber for event: %s", event.originalEvent);
         Log.i(TAG, msg);
-        Toast.makeText(this, msg,
-                Toast.LENGTH_LONG).show();
+        if (this.configProvider.displayDebugMessages()) {
+            Toast.makeText(this, msg,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSubscriberExceptionEvent(SubscriberExceptionEvent event) {
         String errorMsg = String.format("ERROR: Exception thrown inside @Subscribe method: %s", event.throwable);
         Log.e(TAG, errorMsg);
-        Toast.makeText(this, errorMsg,
-                Toast.LENGTH_LONG).show();
+        if (this.configProvider.displayDebugMessages()) {
+            Toast.makeText(this, errorMsg,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     @Subscribe

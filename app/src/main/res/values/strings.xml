@@ -34,7 +34,8 @@
     <!--***********************************************************************************************************-->
     <string name="prefs_key_server_host_name">prefs_key_server_host_name</string>
     <string name="prefs_title_server_host_name">Server Hostname / IP</string>
-    <string name="prefs_summary_server_host_name">Hostname oder IP-Adresse unter der der BonAppetit-Server erreichbar ist</string>
+    <string name="prefs_summary_server_host_name">Hostname oder IP-Adresse unter der der BonAppetit-Server
+        erreichbar ist</string>
     <string name="prefs_dialog_title_server_host_name">Server Hostname / IP-Adresse</string>
     <string name="prefs_dialog_message_server_host_name">Lege den Server Hostname / IP-Adresse fest</string>
 
@@ -46,27 +47,39 @@
 
     <string name="prefs_key_server_context_path">prefs_key_server_context_path</string>
     <string name="prefs_title_server_context_path">Server Kontext-Pfad</string>
-    <string name="prefs_summary_server_context_path">Kontext-Pfad unter dem der BonAppetit-Server erreichbar ist</string>
+    <string name="prefs_summary_server_context_path">Kontext-Pfad unter dem der BonAppetit-Server
+        erreichbar ist</string>
     <string name="prefs_dialog_title_server_context_path">Server Kontext-Pfad</string>
     <string name="prefs_dialog_message_server_context_path">Lege den Kontext-Pfad des Servers fest</string>
 
     <string name="prefs_key_username">prefs_key_username</string>
     <string name="prefs_title_username">Benutzername</string>
-    <string name="prefs_summary_username">Der Benutzername, mit dem sich die App beim BonAppetit-Server authentifiziert.</string>
+    <string name="prefs_summary_username">Der Benutzername, mit dem sich die App beim BonAppetit-Server
+        authentifiziert.</string>
     <string name="prefs_dialog_title_username">Benutzername</string>
     <string name="prefs_dialog_message_username">Trage einen BonAppetit-Server Benutzernamen ein</string>
 
     <string name="prefs_key_password">prefs_key_password</string>
     <string name="prefs_title_password">Passwort</string>
-    <string name="prefs_summary_password">Das Passwort, mit dem sich die App beim BonAppetit-Server authentifiziert</string>
+    <string name="prefs_summary_password">Das Passwort, mit dem sich die App beim BonAppetit-Server
+        authentifiziert</string>
     <string name="prefs_dialog_title_password">Passwort</string>
-    <string name="prefs_dialog_message_password">Trage das Passwort, das zu deinem BonAppetit-Server Benutzernamen gehört, ein</string>
+    <string name="prefs_dialog_message_password">Trage das Passwort, das zu deinem BonAppetit-Server
+        Benutzernamen gehört, ein</string>
 
     <string name="prefs_key_use_test_data">prefs_key_use_test_data</string>
     <string name="prefs_title_use_test_data">Testdaten</string>
     <string name="prefs_summary_use_test_data">App verwendet Testdaten, wenn aktiviert</string>
     <string name="prefs_dialog_title_use_test_data">Testdaten</string>
-    <string name="prefs_dialog_message_use_test_data">Lege fest, ob Testdaten verwendet werden sollen (an) oder ob echte Daten vom Server geladen werden sollen (aus)</string>
+    <string name="prefs_dialog_message_use_test_data">Lege fest, ob Testdaten verwendet werden sollen (an) oder
+        ob echte Daten vom Server geladen werden sollen (aus)</string>
+
+    <string name="prefs_key_show_debug_messages">prefs_key_show_debug_messages</string>
+    <string name="prefs_title_show_debug_messages">Debug Nachrichten</string>
+    <string name="prefs_summary_show_debug_messages">App zeigt Debug Nachrichten, wenn aktiviert</string>
+    <string name="prefs_dialog_title_show_debug_messages">Debug Messages</string>
+    <string name="prefs_dialog_message_show_debug_messages">Lege fest, ob Debug Messages angezeigt werden sollen
+        (an) oder nicht (aus)</string>
 
     <string name="prefs_filename_bonappetit">de.bonappetit.prefs_filename_bonappetit</string>
     <string name="prefs_key_customer">prefs_key_customer</string>
