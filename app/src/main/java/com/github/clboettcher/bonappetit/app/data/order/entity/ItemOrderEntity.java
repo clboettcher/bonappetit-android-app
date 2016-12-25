@@ -21,7 +21,7 @@ package com.github.clboettcher.bonappetit.app.data.order.entity;
 
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
@@ -55,8 +55,8 @@ public class ItemOrderEntity {
     @DatabaseField(columnName = "ORDER_TIME", dataType = DataType.DATE_TIME, canBeNull = false)
     private DateTime orderTime;
 
-    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = false)
-    private StaffMemberEntity staffMember;
+    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = true)
+    private SelectedStaffMemberEntity selectedStaffMember;
 
     public Long getId() {
         return id;
@@ -106,12 +106,12 @@ public class ItemOrderEntity {
         this.orderTime = orderTime;
     }
 
-    public StaffMemberEntity getStaffMember() {
-        return staffMember;
+    public SelectedStaffMemberEntity getSelectedStaffMember() {
+        return selectedStaffMember;
     }
 
-    public void setStaffMember(StaffMemberEntity staffMember) {
-        this.staffMember = staffMember;
+    public void setSelectedStaffMember(SelectedStaffMemberEntity selectedStaffMember) {
+        this.selectedStaffMember = selectedStaffMember;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class ItemOrderEntity {
                 .append("note", note)
                 .append("customer", customer)
                 .append("orderTime", orderTime)
-                .append("staffMember", staffMember)
+                .append("selectedStaffMember", selectedStaffMember)
                 .toString();
     }
 }

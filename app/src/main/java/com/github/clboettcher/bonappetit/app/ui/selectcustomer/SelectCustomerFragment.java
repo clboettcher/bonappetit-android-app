@@ -39,10 +39,10 @@ import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
@@ -83,7 +83,7 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     StaffMemberDao staffMemberDao;
 
     @Inject
-    StaffMemberRefDao staffMemberRefDao;
+    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @Inject
     CustomerDao customerDao;
@@ -160,13 +160,12 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     }
 
     private void updateStaffMember() {
-        Optional<StaffMemberRefEntity> staffMemberRefOpt = staffMemberRefDao.get();
+        Optional<SelectedStaffMemberEntity> staffMemberRefOpt = selectedStaffMemberDao.get();
         if (staffMemberRefOpt.isPresent()) {
-            StaffMemberEntity staffMemberEntity = staffMemberRefOpt.get()
-                    .getStaffMemberEntity();
+            SelectedStaffMemberEntity staffMemberEntity = staffMemberRefOpt.get();
             selectedStaffMember.setText(String.format("%s %s",
-                    staffMemberEntity.getFirstName(),
-                    staffMemberEntity.getLastName()));
+                    staffMemberEntity.getStaffMemberFirstName(),
+                    staffMemberEntity.getStaffMemberLastName()));
         } else {
             selectedStaffMember.setText("");
         }

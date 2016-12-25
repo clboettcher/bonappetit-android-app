@@ -26,8 +26,8 @@ import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class BonAppetitDbConfigUtil extends OrmLiteConfigUtil {
     public static final Class<?>[] DATABASE_CLASSES = new Class[]{
             // Staff
             StaffMemberEntity.class,
-            StaffMemberRefEntity.class,
+            SelectedStaffMemberEntity.class,
 
             // Customer
             CustomerEntity.class,

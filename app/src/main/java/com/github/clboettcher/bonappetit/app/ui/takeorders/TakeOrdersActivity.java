@@ -32,9 +32,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseFragmentActivity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
@@ -65,7 +65,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
     public static final int TAB_OVERVIEW = 2;
 
     @Inject
-    StaffMemberRefDao staffMemberRefDao;
+    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @Inject
     StaffMemberDao staffMemberDao;
@@ -148,7 +148,7 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
                 }
                 StaffMemberEntity selectedStaffMember = staffMemberDao.getById(staffMemberId);
                 Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
-                staffMemberRefDao.save(selectedStaffMember);
+                selectedStaffMemberDao.save(selectedStaffMember);
             } else {
                 Log.i(TAG, String.format("Received activity result for " +
                         "request code SELECT_STAFF_MEMBER_REQUEST with " +

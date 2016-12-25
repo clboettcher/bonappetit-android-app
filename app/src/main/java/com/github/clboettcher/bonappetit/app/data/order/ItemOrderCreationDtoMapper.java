@@ -63,7 +63,7 @@ public final class ItemOrderCreationDtoMapper {
                 .customer(mapToCustomerCreationDto(order.getCustomer()))
                 .note(order.getNote())
                 .orderTime(order.getOrderTime())
-                .staffMemberId(order.getStaffMember().getId())
+                .staffMemberId(order.getSelectedStaffMember().getStaffMemberId())
                 .optionOrders(mapToOptionOrderCreationDtos(order.getOptionOrderEntities()))
                 .build();
     }

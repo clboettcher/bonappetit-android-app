@@ -37,9 +37,8 @@ import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.UiUtils;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
@@ -67,7 +66,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
     CustomerDao customerDao;
 
     @Inject
-    StaffMemberRefDao staffMemberRefDao;
+    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @Inject
     OrdersResource ordersResource;
@@ -285,12 +284,12 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         customerTextView.setText(customerDisplayText);
 
         // Staff member
-        Optional<StaffMemberRefEntity> staffMemRefOpt = staffMemberRefDao.get();
-        if (staffMemRefOpt.isPresent()) {
-            StaffMemberEntity staffMember = staffMemRefOpt.get().getStaffMemberEntity();
+        Optional<SelectedStaffMemberEntity> selectedStaffMemberOpt = selectedStaffMemberDao.get();
+        if (selectedStaffMemberOpt.isPresent()) {
+            SelectedStaffMemberEntity staffMember = selectedStaffMemberOpt.get();
             this.staffMemberTextView.setText(String.format(" %s %s",
-                    staffMember.getFirstName(),
-                    staffMember.getLastName()));
+                    staffMember.getStaffMemberFirstName(),
+                    staffMember.getStaffMemberLastName()));
         }
     }
 

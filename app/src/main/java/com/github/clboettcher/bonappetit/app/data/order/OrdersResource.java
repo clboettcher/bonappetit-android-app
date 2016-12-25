@@ -26,14 +26,11 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.ErrorMapper;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
-import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.OptionDao;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.server.order.api.dto.write.ItemOrderCreationDto;
 import org.apache.commons.collections4.CollectionUtils;
 import org.greenrobot.eventbus.EventBus;
@@ -56,28 +53,24 @@ public class OrdersResource {
     private OrderDao orderDao;
     private OrdersService ordersService;
     private EventBus eventBus;
-    private StaffMemberDao staffMemberDao;
-    private CustomerDao customerDao;
     private ItemDao itemDao;
     private Context context;
-    private OptionOrderDao optionOrderDao;
     private OptionDao optionDao;
     private AtomicReference<Loadable<Void>> finishOrdersLoadable
             = new AtomicReference<>(Loadable.<Void>initial());
 
     @Inject
-    public OrdersResource(Context context, OrdersService ordersService, EventBus eventBus, OrderDao orderDao,
-                          StaffMemberDao staffMemberDao,
-                          CustomerDao customerDao,
-                          ItemDao itemDao, OptionOrderDao optionOrderDao, OptionDao optionDao) {
+    public OrdersResource(Context context,
+                          OrdersService ordersService,
+                          EventBus eventBus,
+                          OrderDao orderDao,
+                          ItemDao itemDao,
+                          OptionDao optionDao) {
         this.orderDao = orderDao;
         this.ordersService = ordersService;
         this.eventBus = eventBus;
-        this.staffMemberDao = staffMemberDao;
-        this.customerDao = customerDao;
         this.itemDao = itemDao;
         this.context = context;
-        this.optionOrderDao = optionOrderDao;
         this.optionDao = optionDao;
     }
 
@@ -145,10 +138,6 @@ public class OrdersResource {
         // We need to refresh the orders fields. This might fail if the referenced entity has been deleted.
         List<ItemOrderEntity> ordersToDelete = new ArrayList<>();
         for (ItemOrderEntity rawOrder : rawOrders) {
-            // Staff member must be present.
-            StaffMemberEntity staffMember = rawOrder.getStaffMember();
-            staffMemberDao.refresh(staffMember);
-
             // The referenced item might be gone
             boolean itemExists = itemDao.exists(rawOrder.getItem().getId());
             if (itemExists) {

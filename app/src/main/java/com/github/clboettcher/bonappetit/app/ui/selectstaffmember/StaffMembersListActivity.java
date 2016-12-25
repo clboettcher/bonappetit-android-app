@@ -36,7 +36,7 @@ import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
@@ -70,7 +70,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
     StaffMembersResource staffMembersResource;
 
     @Inject
-    StaffMemberRefDao staffMemberRefDao;
+    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @BindView(R.id.staffMembersListView)
     ListView staffMembersListView;

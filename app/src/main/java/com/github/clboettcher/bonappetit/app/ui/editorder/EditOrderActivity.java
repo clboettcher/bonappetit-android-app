@@ -39,9 +39,8 @@ import com.github.clboettcher.bonappetit.app.data.order.OrderDao;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderFactory;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.google.common.base.Optional;
@@ -71,7 +70,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
     OptionDao optionDao;
 
     @Inject
-    StaffMemberRefDao staffMemberRefDao;
+    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @Inject
     CustomerDao customerDao;
@@ -121,10 +120,11 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
             itemOrder.setItem(item);
             Optional<CustomerEntity> customerOpt = customerDao.get();
             itemOrder.setCustomer(customerOpt.get());
-            Optional<StaffMemberRefEntity> staffMemberRefEntityOptional = staffMemberRefDao.get();
-            StaffMemberEntity staffMember = staffMemberRefEntityOptional.get()
-                    .getStaffMemberEntity();
-            itemOrder.setStaffMember(staffMember);
+            Optional<SelectedStaffMemberEntity> selectedStaffMemberOpt = selectedStaffMemberDao.get();
+            if (selectedStaffMemberOpt.isPresent()) {
+                SelectedStaffMemberEntity staffMember = selectedStaffMemberOpt.get();
+                itemOrder.setSelectedStaffMember(staffMember);
+            }
             mode = EditOrderActivityMode.CREATE;
         } else {
             itemOrder = orderDao.get(orderId);
@@ -290,10 +290,11 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
     public void confirmButtonHandler(View target) {
         itemOrder.setNote(note.getText().toString());
 
-        Optional<StaffMemberRefEntity> staffMemberRefEntityOptional = staffMemberRefDao.get();
-        StaffMemberEntity staffMember = staffMemberRefEntityOptional.get()
-                .getStaffMemberEntity();
-        itemOrder.setStaffMember(staffMember);
+        Optional<SelectedStaffMemberEntity> selectedStaffMemberOpt = selectedStaffMemberDao.get();
+        if (selectedStaffMemberOpt.isPresent()) {
+            SelectedStaffMemberEntity staffMember = selectedStaffMemberOpt.get();
+            itemOrder.setSelectedStaffMember(staffMember);
+        }
         itemOrder.setOrderTime(DateTime.now(DateTimeZone.UTC));
 
         Toast t;

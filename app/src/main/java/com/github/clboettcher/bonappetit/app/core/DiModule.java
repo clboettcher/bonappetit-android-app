@@ -35,9 +35,9 @@ import com.github.clboettcher.bonappetit.app.data.menu.mapper.ItemEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.menu.mapper.MenuEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.menu.mapper.OptionEntityMapper;
 import com.github.clboettcher.bonappetit.app.data.order.OptionOrderDao;
+import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntityMapper;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberRefDao;
 import com.github.clboettcher.bonappetit.common.ObjectMapperFactory;
 import dagger.Module;
 import dagger.Provides;
@@ -83,8 +83,8 @@ public class DiModule {
 
     @Provides
     @Singleton
-    public StaffMemberRefDao provideStaffMemberRefDao(BonAppetitDbHelper bonAppetitDbHelper) {
-        return new StaffMemberRefDao(bonAppetitDbHelper);
+    public SelectedStaffMemberDao provideStaffMemberRefDao(BonAppetitDbHelper bonAppetitDbHelper) {
+        return new SelectedStaffMemberDao(bonAppetitDbHelper);
     }
 
     @Provides

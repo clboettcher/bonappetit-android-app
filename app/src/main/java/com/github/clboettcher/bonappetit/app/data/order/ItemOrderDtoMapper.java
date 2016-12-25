@@ -59,7 +59,7 @@ public class ItemOrderDtoMapper {
                 .customer(mapToCustomerDto(order.getCustomer()))
                 .note(order.getNote())
                 .orderTime(order.getOrderTime())
-                .staffMemberId(order.getStaffMember().getId())
+                .staffMemberId(order.getSelectedStaffMember().getStaffMemberId())
                 .optionOrders(mapToOrderOptionDtos(order.getOptionOrderEntities()))
                 .build();
     }

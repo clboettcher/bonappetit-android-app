@@ -31,17 +31,17 @@ import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.List;
 
-public class StaffMemberRefDao {
+public class SelectedStaffMemberDao {
 
-    private static final String TAG = StaffMemberRefDao.class.getName();
+    private static final String TAG = SelectedStaffMemberDao.class.getName();
     private final BonAppetitDbHelper bonAppetitDbHelper;
-    private final RuntimeExceptionDao<StaffMemberRefEntity, Long> dao;
+    private final RuntimeExceptionDao<SelectedStaffMemberEntity, Long> dao;
 
     @Inject
-    public StaffMemberRefDao(BonAppetitDbHelper bonAppetitDbHelper) {
+    public SelectedStaffMemberDao(BonAppetitDbHelper bonAppetitDbHelper) {
         this.bonAppetitDbHelper = bonAppetitDbHelper;
         this.dao = bonAppetitDbHelper
-                .getRuntimeExceptionDao(StaffMemberRefEntity.class);
+                .getRuntimeExceptionDao(SelectedStaffMemberEntity.class);
     }
 
     public void save(StaffMemberEntity staffMemberEntity) {
@@ -49,13 +49,15 @@ public class StaffMemberRefDao {
 
         // Delete all entries. We have only the reference to one staff member at the moment.
         try {
-            TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), StaffMemberRefEntity.class);
+            TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), SelectedStaffMemberEntity.class);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        StaffMemberRefEntity data = new StaffMemberRefEntity();
-        data.setStaffMemberEntity(staffMemberEntity);
+        SelectedStaffMemberEntity data = new SelectedStaffMemberEntity();
+        data.setStaffMemberId(staffMemberEntity.getId());
+        data.setStaffMemberFirstName(staffMemberEntity.getFirstName());
+        data.setStaffMemberLastName(staffMemberEntity.getLastName());
         dao.create(data);
         Log.i(TAG, String.format("Saved reference to staff member %s to database.", staffMemberEntity));
     }
@@ -66,8 +68,8 @@ public class StaffMemberRefDao {
      *
      * @return The staff member.
      */
-    public Optional<StaffMemberRefEntity> get() {
-        List<StaffMemberRefEntity> staffMemberRefEntities = dao.queryForAll();
+    public Optional<SelectedStaffMemberEntity> get() {
+        List<SelectedStaffMemberEntity> staffMemberRefEntities = dao.queryForAll();
         if (CollectionUtils.isEmpty(staffMemberRefEntities)) {
             return Optional.absent();
         } else {
