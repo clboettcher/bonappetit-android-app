@@ -25,7 +25,10 @@ import android.preference.PreferenceActivity;
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.BonAppetitApplication;
+import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
+import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.preferences.ServerConfigChangedEvent;
+import com.github.clboettcher.bonappetit.app.data.preferences.TestDataSwitchedEvent;
 import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
@@ -42,6 +45,12 @@ public class BonAppetitPreferencesActivity extends PreferenceActivity
 
     @Inject
     EventBus eventBus;
+
+    @Inject
+    OrdersResource ordersResource;
+
+    @Inject
+    CustomerDao customerDao;
 
     private final Set<String> serverConfigKeys = new HashSet<>();
 
@@ -71,6 +80,15 @@ public class BonAppetitPreferencesActivity extends PreferenceActivity
                     key,
                     ServerConfigChangedEvent.class.getSimpleName()));
             eventBus.post(new ServerConfigChangedEvent());
+        } else if (getString(R.string.prefs_key_use_test_data).equals(key)) {
+            boolean useTestData = sharedPreferences.getBoolean(getString(R.string.prefs_key_use_test_data), false);
+            Log.i(TAG, String.format("Preference value for key '%s' changed to %s",
+                    getString(R.string.prefs_key_use_test_data),
+                    useTestData));
+            Log.i(TAG, "Test data usage switched. Clearing all orders and customer.");
+            ordersResource.deleteAllOrders();
+            customerDao.clear();
+            this.eventBus.post(new TestDataSwitchedEvent());
         } else {
             Log.i(TAG, String.format("Ignoring shared preferences change for key '%s'", key));
         }

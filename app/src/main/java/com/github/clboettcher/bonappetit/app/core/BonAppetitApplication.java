@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
 import com.github.clboettcher.bonappetit.app.data.preferences.ServerConfigChangedEvent;
+import com.github.clboettcher.bonappetit.app.data.preferences.TestDataSwitchedEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.event.PerformStaffMembersUpdateEvent;
 import org.greenrobot.eventbus.*;
 
@@ -113,6 +114,11 @@ public class BonAppetitApplication extends Application {
     @Subscribe
     public void onServerConfigChanged(ServerConfigChangedEvent event) {
         // A server config change means usually that we need to retry to fetch the data.
+        this.fetchDataFromServer();
+    }
+
+    @Subscribe
+    public void onTestDataSwitched(TestDataSwitchedEvent event) {
         this.fetchDataFromServer();
     }
 
