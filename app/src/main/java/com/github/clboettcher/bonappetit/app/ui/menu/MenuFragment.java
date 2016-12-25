@@ -41,6 +41,7 @@ import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEv
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.UiUtils;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
@@ -80,6 +81,9 @@ public class MenuFragment extends TakeOrdersFragment {
 
     @Inject
     CustomerDao customerDao;
+
+    @Inject
+    StaffMemberDao staffMemberDao;
 
     @Inject
     SelectedStaffMemberDao selectedStaffMemberDao;
@@ -282,10 +286,15 @@ public class MenuFragment extends TakeOrdersFragment {
 
         Optional<SelectedStaffMemberEntity> staffMemRefOpt = selectedStaffMemberDao.get();
         if (staffMemRefOpt.isPresent()) {
-            SelectedStaffMemberEntity staffMemberEntity = staffMemRefOpt.get();
-            staffMemberText.setText(String.format(" %s %s",
-                    staffMemberEntity.getStaffMemberFirstName(),
-                    staffMemberEntity.getStaffMemberLastName()));
+            SelectedStaffMemberEntity selectedStaffMemberEntity = staffMemRefOpt.get();
+            String name = String.format(" %s %s",
+                    selectedStaffMemberEntity.getStaffMemberFirstName(),
+                    selectedStaffMemberEntity.getStaffMemberLastName());
+            if (!this.staffMemberDao.exists(selectedStaffMemberEntity.getStaffMemberId())) {
+                name += " (!)";
+            }
+
+            staffMemberText.setText(name);
         } else {
             staffMemberText.setText("");
         }

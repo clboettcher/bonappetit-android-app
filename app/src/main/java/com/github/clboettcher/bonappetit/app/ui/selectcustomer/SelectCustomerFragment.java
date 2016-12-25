@@ -162,10 +162,15 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     private void updateStaffMember() {
         Optional<SelectedStaffMemberEntity> staffMemberRefOpt = selectedStaffMemberDao.get();
         if (staffMemberRefOpt.isPresent()) {
-            SelectedStaffMemberEntity staffMemberEntity = staffMemberRefOpt.get();
-            selectedStaffMember.setText(String.format("%s %s",
-                    staffMemberEntity.getStaffMemberFirstName(),
-                    staffMemberEntity.getStaffMemberLastName()));
+            SelectedStaffMemberEntity selectedStaffMemberEntity = staffMemberRefOpt.get();
+            String name = String.format("%s %s",
+                    selectedStaffMemberEntity.getStaffMemberFirstName(),
+                    selectedStaffMemberEntity.getStaffMemberLastName());
+
+            if (!this.staffMemberDao.exists(selectedStaffMemberEntity.getStaffMemberId())) {
+                name += " (!)";
+            }
+            this.selectedStaffMember.setText(name);
         } else {
             selectedStaffMember.setText("");
         }

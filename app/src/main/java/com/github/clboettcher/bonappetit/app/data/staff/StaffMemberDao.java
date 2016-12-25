@@ -64,6 +64,10 @@ public class StaffMemberDao {
         }
     }
 
+    public boolean exists(Long id) {
+        return this.dao.idExists(id);
+    }
+
     public List<StaffMemberEntity> list() {
         return Collections.unmodifiableList(
                 dao.queryForAll()
@@ -72,11 +76,6 @@ public class StaffMemberDao {
 
     public long count() {
         return dao.countOf();
-    }
-
-
-    public void refresh(StaffMemberEntity staffMember) {
-        dao.refresh(staffMember);
     }
 
     public StaffMemberEntity getById(Long staffMemberId) {
