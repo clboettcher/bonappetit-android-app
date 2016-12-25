@@ -13,13 +13,22 @@
             style="@style/TextView.Heading.H3"
             />
 
+    <!-- Options -->
+    <TextView
+            android:id="@+id/fragmentOrdersOverviewOrderOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Options"
+            android:layout_below="@id/fragmentOrdersOverviewOrderTitle"
+            />
+
     <!-- Note -->
     <TextView
             android:id="@+id/fragmentOrdersOverviewOrderNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Note"
-            android:layout_below="@id/fragmentOrdersOverviewOrderTitle"
+            android:layout_below="@+id/fragmentOrdersOverviewOrderOptions"
             />
 
     <!-- Actions (EDIT/Delete) -->
@@ -52,15 +61,4 @@
                 />
 
     </LinearLayout>
-
-    <!-- Options -->
-    <TextView
-            android:id="@+id/fragmentOrdersOverviewOrderOptions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Options"
-            android:layout_toLeftOf="@id/fragmentOrdersOverviewOrderActionButtons"
-            android:paddingRight="10dp"
-            android:gravity="right"
-            />
 </RelativeLayout>
