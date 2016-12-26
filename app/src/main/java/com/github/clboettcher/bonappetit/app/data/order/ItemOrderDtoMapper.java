@@ -21,11 +21,9 @@ package com.github.clboettcher.bonappetit.app.data.order;
 
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.*;
-import com.github.clboettcher.bonappetit.app.data.order.entity.CheckboxOptionOrder;
-import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
-import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
-import com.github.clboettcher.bonappetit.app.data.order.entity.RadioOptionOrder;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntityType;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
+import com.github.clboettcher.bonappetit.app.data.order.entity.*;
 import com.github.clboettcher.bonappetit.server.menu.api.dto.common.ItemDtoType;
 import com.github.clboettcher.bonappetit.server.order.api.dto.read.*;
 
@@ -50,12 +48,11 @@ public class ItemOrderDtoMapper {
 
 
     public static ItemOrderDto mapToItemOrderDto(ItemOrderEntity order) {
-        ItemEntity orderedItem = order.getItem();
         return ItemOrderDto.builder()
-                .itemId(orderedItem.getId())
-                .itemType(mapType(orderedItem.getType()))
-                .itemTitle(orderedItem.getTitle())
-                .itemPrice(orderedItem.getPrice())
+                .itemId(order.getItemId())
+                .itemType(mapType(order.getItemType()))
+                .itemTitle(order.getItemTitle())
+                .itemPrice(order.getItemPrice())
                 .customer(mapToCustomerDto(order.getCustomer()))
                 .note(order.getNote())
                 .orderTime(order.getOrderTime())
@@ -103,45 +100,42 @@ public class ItemOrderDtoMapper {
         return orderOptionDtos;
     }
 
-    private static OptionOrderDto mapToOrderOptionDto(OptionOrderEntity optionOrderEntity) {
-        final OptionEntity option = optionOrderEntity.getOption();
-        if (option.getType() == OptionEntityType.VALUE) {
-            return mapToValueOptionDto(optionOrderEntity);
-        } else if (option.getType() == OptionEntityType.CHECKBOX) {
-            return mapToCheckboxOrderOptionDto(optionOrderEntity);
-        } else if (option.getType() == OptionEntityType.RADIO) {
-            return mapToRadioOrderOptionDto(optionOrderEntity);
+    private static OptionOrderDto mapToOrderOptionDto(OptionOrderEntity optionOrder) {
+        if (optionOrder.getOptionType() == OptionEntityType.VALUE) {
+            return mapToValueOptionDto(optionOrder);
+        } else if (optionOrder.getOptionType() == OptionEntityType.CHECKBOX) {
+            return mapToCheckboxOrderOptionDto(optionOrder);
+        } else if (optionOrder.getOptionType() == OptionEntityType.RADIO) {
+            return mapToRadioOrderOptionDto(optionOrder);
         } else {
             throw new IllegalStateException(String.format("Unknown enum value %s.%s",
                     OptionEntityType.class.getSimpleName(),
-                    option.getType()));
+                    optionOrder.getOptionType()));
         }
     }
 
     private static ValueOptionOrderDto mapToValueOptionDto(OptionOrderEntity o) {
-        OptionEntity orderedOption = o.getOption();
         return ValueOptionOrderDto.builder()
-                .valueOptionId(orderedOption.getId())
-                .optionTitle(orderedOption.getTitle())
-                .optionPriceDiff(orderedOption.getPriceDiff())
+                .valueOptionId(o.getOptionId())
+                .optionTitle(o.getOptionTitle())
+                .optionPriceDiff(o.getOptionPriceDiff())
                 .value(o.getValue())
                 .build();
     }
 
     private static CheckboxOptionOrderDto mapToCheckboxOrderOptionDto(CheckboxOptionOrder o) {
-        OptionEntity orderedOption = o.getOption();
         return CheckboxOptionOrderDto.builder()
-                .checkboxOptionId(orderedOption.getId())
-                .optionTitle(orderedOption.getTitle())
-                .optionPriceDiff(orderedOption.getPriceDiff())
+                .checkboxOptionId(o.getOptionId())
+                .optionTitle(o.getOptionTitle())
+                .optionPriceDiff(o.getOptionPriceDiff())
                 .checked(o.getChecked())
                 .build();
     }
 
     private static RadioOptionOrderDto mapToRadioOrderOptionDto(RadioOptionOrder o) {
-        RadioItemEntity orderedRadioItem = o.getSelectedRadioItem();
+        RadioItemOrderEntity orderedRadioItem = o.getSelectedRadioItemEntity();
         return RadioOptionOrderDto.builder()
-                .selectedRadioItemId(orderedRadioItem.getId())
+                .selectedRadioItemId(orderedRadioItem.getRadioItemId())
                 .selectedRadioItemTitle(orderedRadioItem.getTitle())
                 .selectedRadioItemPriceDiff(orderedRadioItem.getPriceDiff())
                 .build();

@@ -66,15 +66,12 @@ public class OptionDao {
         return dao.queryForAll();
     }
 
-    int deleteAll() throws SQLException {
-        return TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), OptionEntity.class);
+    void deleteAll() throws SQLException {
+        TableUtils.clearTable(bonAppetitDbHelper.getConnectionSource(), OptionEntity.class);
+        this.radioItemDao.deleteAll();
     }
 
     public OptionEntity get(Long optionId) {
         return dao.queryForId(optionId);
-    }
-
-    public void refresh(OptionEntity option) {
-        dao.refresh(option);
     }
 }

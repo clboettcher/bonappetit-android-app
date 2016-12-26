@@ -19,9 +19,13 @@
  */
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
+import java.math.BigDecimal;
+
 public interface CheckboxOptionOrder extends OptionOrder {
 
     Boolean getChecked();
 
     void setChecked(Boolean checked);
+
+    BigDecimal getOptionPriceDiff();
 }

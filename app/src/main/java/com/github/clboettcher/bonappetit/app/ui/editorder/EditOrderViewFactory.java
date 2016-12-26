@@ -25,14 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.github.clboettcher.bonappetit.app.R;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioOption;
-import com.github.clboettcher.bonappetit.app.data.order.entity.CheckboxOptionOrder;
-import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
-import com.github.clboettcher.bonappetit.app.data.order.entity.RadioOptionOrder;
-import com.github.clboettcher.bonappetit.app.data.order.entity.ValueOptionOrder;
+import com.github.clboettcher.bonappetit.app.data.order.entity.*;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -51,9 +45,8 @@ public class EditOrderViewFactory {
                                              LayoutInflater layoutInflater,
                                              ViewGroup viewGroup,
                                              EditOrderActivity callback) {
-        OptionEntity option = optionOrder.getOption();
         TableRow wrapper;
-        switch (option.getType()) {
+        switch (optionOrder.getOptionType()) {
             case CHECKBOX:
                 wrapper = createViewForCheckboxOptionOrder(
                         optionOrder,
@@ -79,7 +72,7 @@ public class EditOrderViewFactory {
             default:
                 throw new IllegalArgumentException(String.format("Unknown enum value %s.%s",
                         OptionEntityType.class.getName(),
-                        option.getType()));
+                        optionOrder.getOptionType()));
         }
         return wrapper;
     }
@@ -87,8 +80,7 @@ public class EditOrderViewFactory {
     /**
      * Creates a new {@link TableRow} to represent the given {@link CheckboxOptionOrder} in the UI.
      *
-     * @param optionOrder    The order. The entity returned by {@link CheckboxOptionOrder#getOption()} must be refreshed
-     *                       prior to calling this method.
+     * @param optionOrder    The order.
      * @param layoutInflater The layout inflater to instantiate the actual view.
      * @param viewGroup      The view group to set as parent of the inflated layout.
      * @param callback       The callback to register for changes in the checked state of the checkbox.
@@ -104,8 +96,7 @@ public class EditOrderViewFactory {
         CheckBox checkbox = (CheckBox)
                 checkboxRoot.findViewById(R.id.activityEditOrderCheckboxOrder);
 
-        OptionEntity option = optionOrder.getOption();
-        checkbox.setText(option.getTitle());
+        checkbox.setText(optionOrder.getOptionTitle());
         checkbox.setChecked(optionOrder.getChecked());
         checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -128,8 +119,7 @@ public class EditOrderViewFactory {
         // Name
         TextView optionName = (TextView) integerOptionWrapperTableRow
                 .findViewById(R.id.textview_order_option_type_integer_name);
-        OptionEntity option = optionOrder.getOption();
-        optionName.setText(option.getTitle());
+        optionName.setText(optionOrder.getOptionTitle());
 
         // Count
         final TextView optionCount = (TextView) integerOptionWrapperTableRow
@@ -184,8 +174,7 @@ public class EditOrderViewFactory {
                                                           LayoutInflater layoutInflater,
                                                           ViewGroup viewGroup,
                                                           final EditOrderActivityCallback callback) {
-        RadioOption option = optionOrder.getOption();
-        Log.d(TAG, "Creating wrapper for RADIO-Option " + option.getTitle());
+        Log.d(TAG, "Creating wrapper for RADIO-Option " + optionOrder.getOptionTitle());
 
         TableRow radioOptionWrapper = (TableRow) layoutInflater.inflate(
                 R.layout.activity_edit_order_radio_option, viewGroup, false);
@@ -193,23 +182,23 @@ public class EditOrderViewFactory {
         // Title
         TextView optionName = (TextView) radioOptionWrapper.findViewById(
                 R.id.activityEditOrderRadioOptionTitle);
-        optionName.setText(option.getTitle());
+        optionName.setText(optionOrder.getOptionTitle());
 
         // Items
         RadioGroup radioGroup = (RadioGroup) radioOptionWrapper.findViewById(
                 R.id.activityEditOrderRadioOptionRadioGroup);
 
         // Sort the radio items
-        Collection<RadioItemEntity> radioItems = option.getRadioItemEntities();
+        Collection<RadioItemOrderEntity> radioItems = optionOrder.getAvailableRadioItemEntities();
         if (CollectionUtils.sizeIsEmpty(radioItems)) {
             throw new IllegalStateException(String.format("Radio items is null or empty " +
-                    "for option %s, corresponding option order is %s", option, optionOrder));
+                    "for option order %s", optionOrder));
         }
-        List<RadioItemEntity> radioItemsSorted = new ArrayList<>(radioItems);
-        Collections.sort(radioItemsSorted, RadioItemEntityComparator.INSTANCE);
+        List<RadioItemOrderEntity> radioItemsSorted = new ArrayList<>(radioItems);
+        Collections.sort(radioItemsSorted, RadioItemOrderEntityComparator.INSTANCE);
 
-        RadioItemEntity selectedItem = optionOrder.getSelectedRadioItem();
-        for (final RadioItemEntity radioItem : radioItemsSorted) {
+        RadioItemOrderEntity selectedItem = optionOrder.getSelectedRadioItemEntity();
+        for (final RadioItemOrderEntity radioItem : radioItemsSorted) {
             // Each RadioItem is one RadioButton in the RadioGroup; first create the RadioButton
             // corresponding to the RadioItem.
             RadioButton radioButton = (RadioButton) layoutInflater.inflate(
@@ -218,9 +207,9 @@ public class EditOrderViewFactory {
             radioButton.setText(radioItem.getTitle());
             radioButton.setOnClickListener(new RadioButton.OnClickListener() {
                 public void onClick(View radioButton) {
-                    RadioItemEntity radioItem = (RadioItemEntity) radioButton.getTag();
+                    RadioItemOrderEntity radioItem = (RadioItemOrderEntity) radioButton.getTag();
                     Log.d(TAG, String.format("Selected %s", radioItem));
-                    optionOrder.setSelectedRadioItem(radioItem);
+                    optionOrder.setSelectedRadioItemEntity(radioItem);
                     // The total price might change due to the selection of another radio item.
                     callback.updateTotalPrice();
                 }
@@ -236,14 +225,14 @@ public class EditOrderViewFactory {
         // selects another option won't work correctly.
         for (int i = 0; i < radioGroup.getChildCount(); i++) {
             RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
-            RadioItemEntity selectedRadioItem = optionOrder.getSelectedRadioItem();
-            RadioItemEntity currentRadioItem = (RadioItemEntity) radioButton.getTag();
+            RadioItemOrderEntity selectedRadioItem = optionOrder.getSelectedRadioItemEntity();
+            RadioItemOrderEntity currentRadioItem = (RadioItemOrderEntity) radioButton.getTag();
 
             Log.d(TAG, String.format("Trying to determine if radio item %s should be checked" +
                             " based on the selected radio item %s",
                     currentRadioItem, selectedItem));
 
-            if (selectedRadioItem.getId().equals(currentRadioItem.getId())) {
+            if (selectedRadioItem.getRadioItemId().equals(currentRadioItem.getRadioItemId())) {
                 Log.d(TAG, String.format("Setting initial checked = true for %s", currentRadioItem));
                 radioButton.setChecked(true);
             }

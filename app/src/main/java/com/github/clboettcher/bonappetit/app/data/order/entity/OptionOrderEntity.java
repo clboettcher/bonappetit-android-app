@@ -19,11 +19,14 @@
  */
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.math.BigDecimal;
+import java.util.Collection;
 
 @DatabaseTable(tableName = "OPTION_ORDER")
 public class OptionOrderEntity implements CheckboxOptionOrder, ValueOptionOrder, RadioOptionOrder {
@@ -37,14 +40,26 @@ public class OptionOrderEntity implements CheckboxOptionOrder, ValueOptionOrder,
     @DatabaseField(generatedId = true, columnName = "ID")
     private Long id;
 
+    @DatabaseField(columnName = "OPTION_ID")
+    private Long optionId;
+
+    @DatabaseField(columnName = "OPTION_TITLE")
+    private String optionTitle;
+
+    @DatabaseField(columnName = "OPTION_TYPE")
+    private OptionEntityType optionType;
+
+    @DatabaseField(columnName = "OPTION_PRICE_DIFF")
+    private BigDecimal optionPriceDiff;
+
+    @DatabaseField(columnName = "OPTION_INDEX")
+    private Integer optionIndex;
+
     /**
      * Required by ORMLite to be able to query the foreign collection {@link ItemOrderEntity#getOptionOrderEntities()}.
      */
     @DatabaseField(foreign = true, foreignAutoRefresh = true, canBeNull = false)
     private ItemOrderEntity itemOrderEntity;
-
-    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = false)
-    private OptionEntity option;
 
     /*
      *****************************************************************************************************************
@@ -66,21 +81,21 @@ public class OptionOrderEntity implements CheckboxOptionOrder, ValueOptionOrder,
 
     /*
      *****************************************************************************************************************
-     * Properties for radio option
+     * Radio option order properties
      *****************************************************************************************************************
      */
 
-    @DatabaseField(foreign = true, canBeNull = true, foreignAutoRefresh = true)
-    private RadioItemEntity selectedRadioItem;
+    @ForeignCollectionField(eager = true)
+    private Collection<RadioItemOrderEntity> availableRadioItemEntities;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+    @DatabaseField(canBeNull = true, foreign = true, foreignAutoRefresh = true)
+    private RadioItemOrderEntity selectedRadioItemEntity;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    /*
+     *****************************************************************************************************************
+     * Accessors
+     *****************************************************************************************************************
+     */
 
     public ItemOrderEntity getItemOrderEntity() {
         return itemOrderEntity;
@@ -90,12 +105,44 @@ public class OptionOrderEntity implements CheckboxOptionOrder, ValueOptionOrder,
         this.itemOrderEntity = itemOrderEntity;
     }
 
-    public OptionEntity getOption() {
-        return option;
+    public Long getOptionId() {
+        return optionId;
     }
 
-    public void setOption(OptionEntity option) {
-        this.option = option;
+    public void setOptionId(Long optionId) {
+        this.optionId = optionId;
+    }
+
+    public OptionEntityType getOptionType() {
+        return optionType;
+    }
+
+    public String getOptionTitle() {
+        return optionTitle;
+    }
+
+    public void setOptionTitle(String optionTitle) {
+        this.optionTitle = optionTitle;
+    }
+
+    public void setOptionType(OptionEntityType optionType) {
+        this.optionType = optionType;
+    }
+
+    public BigDecimal getOptionPriceDiff() {
+        return optionPriceDiff;
+    }
+
+    public void setOptionPriceDiff(BigDecimal optionPriceDiff) {
+        this.optionPriceDiff = optionPriceDiff;
+    }
+
+    public Integer getOptionIndex() {
+        return optionIndex;
+    }
+
+    public void setOptionIndex(Integer optionIndex) {
+        this.optionIndex = optionIndex;
     }
 
     @Override
@@ -118,26 +165,31 @@ public class OptionOrderEntity implements CheckboxOptionOrder, ValueOptionOrder,
         this.value = value;
     }
 
-    @Override
-    public RadioItemEntity getSelectedRadioItem() {
-        return selectedRadioItem;
+    public Collection<RadioItemOrderEntity> getAvailableRadioItemEntities() {
+        return availableRadioItemEntities;
     }
 
-    public void setSelectedRadioItem(RadioItemEntity selectedRadioItem) {
-        this.selectedRadioItem = selectedRadioItem;
+    public void setAvailableRadioItemEntities(Collection<RadioItemOrderEntity> availableRadioItemEntities) {
+        this.availableRadioItemEntities = availableRadioItemEntities;
+    }
+
+    public RadioItemOrderEntity getSelectedRadioItemEntity() {
+        return selectedRadioItemEntity;
+    }
+
+    public void setSelectedRadioItemEntity(RadioItemOrderEntity selectedRadioItemEntity) {
+        this.selectedRadioItemEntity = selectedRadioItemEntity;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("id", id)
-                .append("itemOrderEntity.id", itemOrderEntity.getId())
-                .append("option", option)
+                .append("optionId", optionId)
                 .append("checked", checked)
                 .append("value", value)
-                .append("selectedRadioItem.id",
-                        selectedRadioItem != null ?
-                                selectedRadioItem.getId() : "--")
+                .append("availableRadioItemEntities", availableRadioItemEntities)
+                .append("selectedRadioItem", selectedRadioItemEntity)
                 .toString();
     }
 }

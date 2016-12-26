@@ -20,11 +20,13 @@
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
 
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
 
 public interface OptionOrder {
     
-    Long getId();
+    Long getOptionId();
 
-    OptionEntity getOption();
+    String getOptionTitle();
+
+    OptionEntityType getOptionType();
 }

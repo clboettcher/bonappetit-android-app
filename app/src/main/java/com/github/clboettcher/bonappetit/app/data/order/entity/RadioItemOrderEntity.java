@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BonAppetit.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.clboettcher.bonappetit.app.data.menu.entity;
+package com.github.clboettcher.bonappetit.app.data.order.entity;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -26,33 +26,37 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.math.BigDecimal;
 
-@DatabaseTable(tableName = "RADIO_ITEM")
-public class RadioItemEntity {
+@DatabaseTable(tableName = "RADIO_ITEM_ORDER")
+public class RadioItemOrderEntity {
 
-    @DatabaseField(id = true, columnName = "ID", canBeNull = false)
+    @DatabaseField(generatedId = true, columnName = "ID")
     private Long id;
 
-    @DatabaseField(columnName = "INDEX", canBeNull = false)
+    @DatabaseField(columnName = "RADIO_ITEM_ID", canBeNull = false)
+    private Long radioItemId;
+
+    @DatabaseField(columnName = "RADIO_ITEM_INDEX", canBeNull = false)
     private Integer index;
 
-    @DatabaseField(columnName = "TITLE", canBeNull = false)
+    @DatabaseField(columnName = "RADIO_ITEM_TITLE", canBeNull = false)
     private String title;
 
-    @DatabaseField(columnName = "PRICE_DIFF", canBeNull = false)
-    private BigDecimal priceDiff = new BigDecimal("0.00");
+    @DatabaseField(columnName = "RADIO_ITEM_PRICE_DIFF", canBeNull = false)
+    private BigDecimal priceDiff;
 
     /**
-     * Required by ORMLite to be able to query the foreign collection {@link RadioOption#getRadioItemEntities()}
+     * Required by ORMLite to be able to query the foreign collection
+     * {@link OptionOrderEntity#getAvailableRadioItemEntities()}.
      */
-    @DatabaseField(canBeNull = false, foreign = true)
-    private OptionEntity option;
+    @DatabaseField(canBeNull = true, foreign = true)
+    private OptionOrderEntity optionOrder;
 
-    public Long getId() {
-        return id;
+    public Long getRadioItemId() {
+        return radioItemId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRadioItemId(Long radioItemId) {
+        this.radioItemId = radioItemId;
     }
 
     public Integer getIndex() {
@@ -79,22 +83,22 @@ public class RadioItemEntity {
         this.priceDiff = priceDiff;
     }
 
-    public OptionEntity getOption() {
-        return option;
+    public OptionOrderEntity getOptionOrder() {
+        return optionOrder;
     }
 
-    public void setOption(OptionEntity option) {
-        this.option = option;
+    public void setOptionOrder(OptionOrderEntity optionOrder) {
+        this.optionOrder = optionOrder;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
+                .append("radioItemId", radioItemId)
                 .append("index", index)
                 .append("title", title)
                 .append("priceDiff", priceDiff)
-                .append("option.id", option != null ? option.getId() : "--")
                 .toString();
     }
 }

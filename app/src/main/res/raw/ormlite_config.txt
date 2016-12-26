@@ -1,5 +1,5 @@
 #
-# generated on 2016/12/25 04:32:26
+# generated on 2016/12/26 02:29:55
 #
 # --table-start--
 dataClass=com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity
@@ -198,19 +198,23 @@ tableName=RADIO_ITEM
 # --field-start--
 fieldName=id
 columnName=ID
+canBeNull=false
 id=true
 # --field-end--
 # --field-start--
 fieldName=index
 columnName=INDEX
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=title
 columnName=TITLE
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=priceDiff
 columnName=PRICE_DIFF
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=option
@@ -230,14 +234,27 @@ columnName=ID
 generatedId=true
 # --field-end--
 # --field-start--
-fieldName=item
+fieldName=itemId
+columnName=ITEM_ID
 canBeNull=false
-foreign=true
+# --field-end--
+# --field-start--
+fieldName=itemType
+columnName=ITEM_TYPE
+# --field-end--
+# --field-start--
+fieldName=itemTitle
+columnName=ITEM_TITLE
+# --field-end--
+# --field-start--
+fieldName=itemPrice
+columnName=ITEM_PRICE
 # --field-end--
 # --field-start--
 fieldName=optionOrderEntities
 foreignCollection=true
 foreignCollectionEager=true
+foreignCollectionMaxEagerLevel=2
 # --field-end--
 # --field-start--
 fieldName=note
@@ -276,16 +293,31 @@ columnName=ID
 generatedId=true
 # --field-end--
 # --field-start--
+fieldName=optionId
+columnName=OPTION_ID
+# --field-end--
+# --field-start--
+fieldName=optionTitle
+columnName=OPTION_TITLE
+# --field-end--
+# --field-start--
+fieldName=optionType
+columnName=OPTION_TYPE
+# --field-end--
+# --field-start--
+fieldName=optionPriceDiff
+columnName=OPTION_PRICE_DIFF
+# --field-end--
+# --field-start--
+fieldName=optionIndex
+columnName=OPTION_INDEX
+# --field-end--
+# --field-start--
 fieldName=itemOrderEntity
 canBeNull=false
 foreign=true
 foreignAutoRefresh=true
 maxForeignAutoRefreshLevel=2
-# --field-end--
-# --field-start--
-fieldName=option
-canBeNull=false
-foreign=true
 # --field-end--
 # --field-start--
 fieldName=checked
@@ -296,10 +328,51 @@ fieldName=value
 columnName=VALUE
 # --field-end--
 # --field-start--
-fieldName=selectedRadioItem
+fieldName=availableRadioItemEntities
+foreignCollection=true
+foreignCollectionEager=true
+# --field-end--
+# --field-start--
+fieldName=selectedRadioItemEntity
 foreign=true
 foreignAutoRefresh=true
 maxForeignAutoRefreshLevel=2
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.github.clboettcher.bonappetit.app.data.order.entity.RadioItemOrderEntity
+tableName=RADIO_ITEM_ORDER
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=ID
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=radioItemId
+columnName=RADIO_ITEM_ID
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=index
+columnName=RADIO_ITEM_INDEX
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=title
+columnName=RADIO_ITEM_TITLE
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=priceDiff
+columnName=RADIO_ITEM_PRICE_DIFF
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=optionOrder
+foreign=true
 # --field-end--
 # --table-fields-end--
 # --table-end--

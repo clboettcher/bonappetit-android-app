@@ -22,10 +22,7 @@ package com.github.clboettcher.bonappetit.app.data.order;
 
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.CheckboxOptionOrder;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
@@ -57,9 +54,8 @@ public final class ItemOrderCreationDtoMapper {
 
 
     public static ItemOrderCreationDto mapToItemOrderDto(ItemOrderEntity order) {
-        ItemEntity orderedItem = order.getItem();
         return ItemOrderCreationDto.builder()
-                .itemId(orderedItem.getId())
+                .itemId(order.getItemId())
                 .customer(mapToCustomerCreationDto(order.getCustomer()))
                 .note(order.getNote())
                 .orderTime(order.getOrderTime())
@@ -101,41 +97,37 @@ public final class ItemOrderCreationDtoMapper {
         return orderOptionDtos;
     }
 
-    private static OptionOrderCreationDto mapToOptionOrderCreationDto(OptionOrderEntity optionOrderEntity) {
-        final OptionEntity option = optionOrderEntity.getOption();
-        if (option.getType() == OptionEntityType.VALUE) {
-            return mapToValueOptionOrderCreationDto(optionOrderEntity);
-        } else if (option.getType() == OptionEntityType.CHECKBOX) {
-            return mapToCheckboxOptionOrderCreationDto(optionOrderEntity);
-        } else if (option.getType() == OptionEntityType.RADIO) {
-            return mapToRadioOptionOrderCreationDto(optionOrderEntity);
+    private static OptionOrderCreationDto mapToOptionOrderCreationDto(OptionOrderEntity optionOrder) {
+        if (optionOrder.getOptionType() == OptionEntityType.VALUE) {
+            return mapToValueOptionOrderCreationDto(optionOrder);
+        } else if (optionOrder.getOptionType() == OptionEntityType.CHECKBOX) {
+            return mapToCheckboxOptionOrderCreationDto(optionOrder);
+        } else if (optionOrder.getOptionType() == OptionEntityType.RADIO) {
+            return mapToRadioOptionOrderCreationDto(optionOrder);
         } else {
             throw new IllegalStateException(String.format("Unknown enum value %s.%s",
                     OptionEntityType.class.getSimpleName(),
-                    option.getType()));
+                    optionOrder.getOptionType()));
         }
     }
 
-    private static ValueOptionOrderCreationDto mapToValueOptionOrderCreationDto(OptionOrderEntity o) {
-        OptionEntity orderedOption = o.getOption();
+    private static ValueOptionOrderCreationDto mapToValueOptionOrderCreationDto(OptionOrderEntity optionOrder) {
         return ValueOptionOrderCreationDto.builder()
-                .optionId(orderedOption.getId())
-                .value(o.getValue())
+                .optionId(optionOrder.getOptionId())
+                .value(optionOrder.getValue())
                 .build();
     }
 
-    private static CheckboxOptionOrderCreationDto mapToCheckboxOptionOrderCreationDto(CheckboxOptionOrder o) {
-        OptionEntity orderedOption = o.getOption();
+    private static CheckboxOptionOrderCreationDto mapToCheckboxOptionOrderCreationDto(CheckboxOptionOrder optionOrder) {
         return CheckboxOptionOrderCreationDto.builder()
-                .optionId(orderedOption.getId())
-                .checked(o.getChecked())
+                .optionId(optionOrder.getOptionId())
+                .checked(optionOrder.getChecked())
                 .build();
     }
 
-    private static RadioOptionOrderCreationDto mapToRadioOptionOrderCreationDto(RadioOptionOrder o) {
-        RadioItemEntity orderedRadioItem = o.getSelectedRadioItem();
+    private static RadioOptionOrderCreationDto mapToRadioOptionOrderCreationDto(RadioOptionOrder optionOrder) {
         return RadioOptionOrderCreationDto.builder()
-                .selectedRadioItemId(orderedRadioItem.getId())
+                .selectedRadioItemId(optionOrder.getSelectedRadioItemEntity().getRadioItemId())
                 .build();
     }
 }

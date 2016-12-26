@@ -19,11 +19,13 @@
  */
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
-import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
+import java.util.Collection;
 
 public interface RadioOptionOrder extends OptionOrder {
 
-    RadioItemEntity getSelectedRadioItem();
+    RadioItemOrderEntity getSelectedRadioItemEntity();
 
-    void setSelectedRadioItem(RadioItemEntity id);
+    void setSelectedRadioItemEntity(RadioItemOrderEntity radioItemOrderEntity);
+
+    Collection<RadioItemOrderEntity> getAvailableRadioItemEntities();
 }

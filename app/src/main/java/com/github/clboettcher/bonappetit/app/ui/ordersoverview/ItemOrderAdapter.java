@@ -32,8 +32,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
@@ -84,43 +82,27 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
         }
 
         ItemOrderEntity itemOrder = itemOrders.get(position);
-        // TODO delete if the line below works, also delete method in dbaccesshelper
-//            final Item item = DatabaseAccessHelper.getInstance().loadItemById(ormLiteBaseActivity.getHelper(), itemOrder.getItem());
-        //todo refresh if not works
-        final ItemEntity item = itemOrder.getItem();
-
         // Fill the cell with life.
         // Title
         TextView itemName = (TextView) cell.findViewById(R.id.fragmentOrdersOverviewOrderTitle);
-        itemName.setText(item.getTitle());
+        itemName.setText(itemOrder.getItemTitle());
 
         // Options
         TextView options = (TextView) cell.findViewById(R.id.fragmentOrdersOverviewOrderOptions);
         StringBuilder optionsText = new StringBuilder("");
 
         for (OptionOrderEntity optionOrder : itemOrder.getOptionOrderEntities()) {
-            final OptionEntity option = optionOrder.getOption();
-            // Need to refresh fields because only the id is stored for foreign objects,
-            // see http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html#Foreign-Objects
-            // TODO Test if we need this, since foreignAutoRefresh is set to true
-//                DatabaseAccessHelper.getInstance().refresh(option, ormLiteBaseActivity.getHelper());
-
-            switch (option.getType()) {
+            switch (optionOrder.getOptionType()) {
                 case CHECKBOX:
-                    // Need to refresh fields because only the id is stored for foreign objects,
-                    // see http://ormlite.com/javadoc/ormlite-core/doc-files/ormlite_2.html#Foreign-Objects
-                    // TODO Test if we need this, since foreignAutoRefresh is set to true
-                    // TODO: need to refresh option?
-//                        DatabaseAccessHelper.getInstance().refresh(option, ormLiteBaseActivity.getHelper());
                     if (optionOrder.getChecked()) {
-                        optionsText.append(option.getTitle()).append("\n");
+                        optionsText.append(optionOrder.getOptionTitle()).append("\n");
                     }
                     break;
                 case VALUE:
                     // append the name and count of the integer option (if > 0)
                     if (optionOrder.getValue() != 0) {
                         optionsText
-                                .append(option.getTitle())
+                                .append(optionOrder.getOptionTitle())
                                 .append(" (")
                                 .append(optionOrder.getValue())
                                 .append("x)")
@@ -128,13 +110,13 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
                     }
                     break;
                 case RADIO:
-                    String selectedItemTitle = optionOrder.getSelectedRadioItem().getTitle();
+                    String selectedItemTitle = optionOrder.getSelectedRadioItemEntity().getTitle();
                     optionsText.append(selectedItemTitle).append("\n");
                     break;
                 default:
                     throw new IllegalArgumentException(String.format("Unknown enum value: %s.%s",
                             OptionEntityType.class.getName(),
-                            option.getType()));
+                            optionOrder.getOptionType()));
             }
         }
 
@@ -166,15 +148,13 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
 
     public void onClick(View view) {
         final ItemOrderEntity itemOrder = (ItemOrderEntity) view.getTag();
-//        Item item = DatabaseAccessHelper.getInstance().loadItemById(ormLiteBaseActivity.getHelper(), itemOrder.getItem()); // TODO delete if the line below works
-        ItemEntity item = itemOrder.getItem(); // TODO refresh if this does not work
         int id = view.getId();
         switch (id) {
             // Edit order button pressed
             case R.id.fragmentOrdersOverviewOrderButtonEdit:
                 Intent intent = new Intent(context, EditOrderActivity.class);
                 intent.putExtra(EditOrderActivity.ORDER_ID_INTENT_EXTRA_KEY, itemOrder.getId());
-                intent.putExtra(EditOrderActivity.MENU_ITEM_ID_INTENT_EXTRA_KEY, item.getId());
+                intent.putExtra(EditOrderActivity.MENU_ITEM_ID_INTENT_EXTRA_KEY, itemOrder.getItemId());
                 context.startActivity(intent);
                 break;
             // Delete order button pressed
@@ -183,7 +163,7 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
                         .setTitle(context.getString(R.string.fragment_orders_overview_dialog_delete_order_title))
                         .setMessage(String.format(context.getString(
                                 R.string.fragment_orders_overview_dialog_delete_order_safeguard_question),
-                                item.getTitle()))
+                                itemOrder.getItemTitle()))
                         .setIcon(R.drawable.ic_alerts_and_states_warning)
                         .setPositiveButton(context.getString(R.string.general_action_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

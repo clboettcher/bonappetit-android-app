@@ -20,18 +20,19 @@
 package com.github.clboettcher.bonappetit.app.ui.editorder;
 
 import com.github.clboettcher.bonappetit.app.data.menu.entity.RadioItemEntity;
+import com.github.clboettcher.bonappetit.app.data.order.entity.RadioItemOrderEntity;
 
 import java.util.Comparator;
 
 /**
  * {@link Comparator} that can be used to sort {@link RadioItemEntity} by index.
  */
-class RadioItemEntityComparator implements Comparator<RadioItemEntity> {
+class RadioItemOrderEntityComparator implements Comparator<RadioItemOrderEntity> {
 
-    public static final RadioItemEntityComparator INSTANCE = new RadioItemEntityComparator();
+    public static final RadioItemOrderEntityComparator INSTANCE = new RadioItemOrderEntityComparator();
 
     @Override
-    public int compare(RadioItemEntity lhs, RadioItemEntity rhs) {
+    public int compare(RadioItemOrderEntity lhs, RadioItemOrderEntity rhs) {
         final Integer i1 = lhs.getIndex();
         final Integer i2 = rhs.getIndex();
 

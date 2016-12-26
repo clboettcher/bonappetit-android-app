@@ -214,7 +214,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     private void setCustomerAndFinishOrders() {
         // Init upload
-        final List<ItemOrderEntity> orders = ordersResource.listRefreshedOrders();
+        final List<ItemOrderEntity> orders = ordersResource.list();
 
         // Set the customer on all orders
         // This is done here because the customer might changed after the item order was created.
@@ -304,7 +304,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     private void updateOrdersTable() {
         Log.i(TAG, "Updating displayed orders.");
-        List<ItemOrderEntity> itemOrders = ordersResource.listRefreshedOrders();
+        List<ItemOrderEntity> itemOrders = ordersResource.list();
 
         adapter.clear();
         adapter.addAll(itemOrders);

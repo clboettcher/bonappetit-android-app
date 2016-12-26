@@ -20,7 +20,7 @@
 package com.github.clboettcher.bonappetit.app.data.order.entity;
 
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
-import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.entity.ItemEntityType;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -31,6 +31,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -40,10 +41,19 @@ public class ItemOrderEntity {
     @DatabaseField(generatedId = true, columnName = "ID")
     private Long id;
 
-    @DatabaseField(foreign = true, canBeNull = false, foreignAutoRefresh = false)
-    private ItemEntity item;
+    @DatabaseField(columnName = "ITEM_ID", canBeNull = false)
+    private Long itemId;
 
-    @ForeignCollectionField(eager = true)
+    @DatabaseField(columnName = "ITEM_TYPE")
+    private ItemEntityType itemType;
+
+    @DatabaseField(columnName = "ITEM_TITLE")
+    private String itemTitle;
+
+    @DatabaseField(columnName = "ITEM_PRICE")
+    private BigDecimal itemPrice;
+
+    @ForeignCollectionField(eager = true, maxEagerLevel = 2)
     private Collection<OptionOrderEntity> optionOrderEntities = new ArrayList<>();
 
     @DatabaseField(columnName = "NOTE")
@@ -62,16 +72,20 @@ public class ItemOrderEntity {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public ItemEntity getItem() {
-        return item;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
-    public void setItem(ItemEntity item) {
-        this.item = item;
+    public ItemEntityType getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(ItemEntityType itemType) {
+        this.itemType = itemType;
     }
 
     public Collection<OptionOrderEntity> getOptionOrderEntities() {
@@ -80,6 +94,22 @@ public class ItemOrderEntity {
 
     public void setOptionOrderEntities(Collection<OptionOrderEntity> optionOrderEntities) {
         this.optionOrderEntities = optionOrderEntities;
+    }
+
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    public void setItemTitle(String itemTitle) {
+        this.itemTitle = itemTitle;
+    }
+
+    public BigDecimal getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(BigDecimal itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
     public String getNote() {
@@ -118,7 +148,7 @@ public class ItemOrderEntity {
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
                 .append("id", id)
-                .append("item", item)
+                .append("itemId", itemId)
                 .append("optionOrderEntities.size", CollectionUtils.size(optionOrderEntities))
                 .append("note", note)
                 .append("customer", customer)

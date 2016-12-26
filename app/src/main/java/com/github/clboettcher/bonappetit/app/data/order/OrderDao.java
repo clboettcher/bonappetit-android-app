@@ -56,6 +56,9 @@ public class OrderDao {
     public void update(ItemOrderEntity itemOrder) {
         Log.i(TAG, String.format("Updating order %s", itemOrder));
         itemOrderDao.update(itemOrder);
+        if (CollectionUtils.isNotEmpty(itemOrder.getOptionOrderEntities())) {
+            optionOrderDao.update(itemOrder.getOptionOrderEntities());
+        }
     }
 
     public ItemOrderEntity get(Long orderId) {

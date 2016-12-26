@@ -21,15 +21,12 @@ package com.github.clboettcher.bonappetit.app.data.order;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.ErrorMapper;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.dao.OptionDao;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
-import com.github.clboettcher.bonappetit.app.data.order.entity.OptionOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
 import com.github.clboettcher.bonappetit.server.order.api.dto.write.ItemOrderCreationDto;
 import org.apache.commons.collections4.CollectionUtils;
@@ -41,8 +38,6 @@ import retrofit2.Response;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -132,39 +127,7 @@ public class OrdersResource {
         this.finishOrdersLoadable.set(Loadable.<Void>initial());
     }
 
-    public List<ItemOrderEntity> listRefreshedOrders() {
-        List<ItemOrderEntity> rawOrders = orderDao.list();
-
-        // We need to refresh the orders fields. This might fail if the referenced entity has been deleted.
-        List<ItemOrderEntity> ordersToDelete = new ArrayList<>();
-        for (ItemOrderEntity rawOrder : rawOrders) {
-            // The referenced item might be gone
-            boolean itemExists = itemDao.exists(rawOrder.getItem().getId());
-            if (itemExists) {
-                itemDao.refresh(rawOrder.getItem());
-
-                // Also refresh options. No need to check for existence here. If the item exists the
-                // option is guaranteed to exist.
-                Collection<OptionOrderEntity> optionOrderEntities = rawOrder.getOptionOrderEntities();
-                for (OptionOrderEntity optionOrderEntity : optionOrderEntities) {
-                    optionDao.refresh(optionOrderEntity.getOption());
-                }
-            } else {
-                ordersToDelete.add(rawOrder);
-            }
-        }
-
-        List<ItemOrderEntity> refreshedOrders = new ArrayList<>();
-        refreshedOrders.addAll(rawOrders);
-        refreshedOrders.removeAll(ordersToDelete);
-
-        for (ItemOrderEntity itemOrderEntity : ordersToDelete) {
-            Toast.makeText(context,
-                    context.getString(R.string.activity_edit_order_item_removed),
-                    Toast.LENGTH_LONG).show();
-            orderDao.delete(itemOrderEntity);
-        }
-
-        return refreshedOrders;
+    public List<ItemOrderEntity> list() {
+        return orderDao.list();
     }
 }
