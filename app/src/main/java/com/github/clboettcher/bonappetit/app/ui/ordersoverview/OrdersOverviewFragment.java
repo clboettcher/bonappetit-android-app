@@ -34,6 +34,7 @@ import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
+import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
@@ -77,6 +78,9 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     @Inject
     EventBus eventBus;
+
+    @Inject
+    ItemDao itemDao;
 
     /**
      * The adapter that is responsible for displaying a collection of orders in a list view.
@@ -144,6 +148,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
                 mListener,
                 getActivity().getLayoutInflater(),
                 getActivity(),
+                itemDao,
                 this
         );
         orderContainer.setAdapter(adapter);

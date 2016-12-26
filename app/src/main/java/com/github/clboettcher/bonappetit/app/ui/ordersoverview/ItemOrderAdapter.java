@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.github.clboettcher.bonappetit.app.R;
+import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.menu.entity.OptionEntityType;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
@@ -52,6 +53,7 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
     private OrdersResource ordersResource;
     private OnSwitchToTabListener mListener;
     private TakeOrdersFragment takeOrdersFragment;
+    private ItemDao itemDao;
     public static final int NOTE_LENGTH_THRESHOLD = 30;
 
     ItemOrderAdapter(List<ItemOrderEntity> itemOrders,
@@ -59,6 +61,7 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
                      OnSwitchToTabListener mListener,
                      LayoutInflater layoutInflater,
                      Context context,
+                     ItemDao itemDao,
                      TakeOrdersFragment takeOrdersFragment) {
         super(context, 0, itemOrders);
         this.itemOrders = itemOrders;
@@ -67,6 +70,7 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
         this.ordersResource = ordersResource;
         this.mListener = mListener;
         this.takeOrdersFragment = takeOrdersFragment;
+        this.itemDao = itemDao;
     }
 
     @Override
@@ -85,7 +89,11 @@ public class ItemOrderAdapter extends ArrayAdapter<ItemOrderEntity> implements V
         // Fill the cell with life.
         // Title
         TextView itemName = (TextView) cell.findViewById(R.id.fragmentOrdersOverviewOrderTitle);
-        itemName.setText(itemOrder.getItemTitle());
+        String itemTitle = itemOrder.getItemTitle();
+        if (!itemDao.exists(itemOrder.getItemId())) {
+            itemTitle += " (!)";
+        }
+        itemName.setText(itemTitle);
 
         // Options
         TextView options = (TextView) cell.findViewById(R.id.fragmentOrdersOverviewOrderOptions);
