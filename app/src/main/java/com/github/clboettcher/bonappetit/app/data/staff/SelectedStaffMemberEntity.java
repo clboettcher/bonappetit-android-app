@@ -21,6 +21,8 @@ package com.github.clboettcher.bonappetit.app.data.staff;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * This table contains the data of the currently selected staff member.
@@ -62,5 +64,15 @@ public class SelectedStaffMemberEntity {
 
     public void setStaffMemberLastName(String staffMemberLastName) {
         this.staffMemberLastName = staffMemberLastName;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
+                .append("staffMemberId", staffMemberId)
+                .append("staffMemberFirstName", staffMemberFirstName)
+                .append("staffMemberLastName", staffMemberLastName)
+                .toString();
     }
 }
