@@ -31,6 +31,8 @@ import com.github.clboettcher.bonappetit.app.data.Loadable;
 import com.github.clboettcher.bonappetit.app.data.staff.event.PerformStaffMembersUpdateEvent;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.server.staff.api.dto.StaffMemberDto;
+import com.google.common.base.Optional;
+import org.apache.commons.collections4.CollectionUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -52,6 +54,7 @@ public class StaffMembersResource {
     private Context context;
     private StaffMemberService staffMemberService;
     private StaffMemberDao staffMemberDao;
+    private SelectedStaffMemberDao selectedStaffMemberDao;
     private StaffMemberEntityMapper staffMemberEntityMapper;
     private EventBus bus;
     private ConfigProvider configProvider;
@@ -62,12 +65,14 @@ public class StaffMembersResource {
     public StaffMembersResource(Context context,
                                 StaffMemberService staffMemberService,
                                 StaffMemberDao staffMemberDao,
+                                SelectedStaffMemberDao selectedStaffMemberDao,
                                 StaffMemberEntityMapper staffMemberEntityMapper,
                                 EventBus bus,
                                 ConfigProvider configProvider) {
         this.context = context;
         this.staffMemberService = staffMemberService;
         this.staffMemberDao = staffMemberDao;
+        this.selectedStaffMemberDao = selectedStaffMemberDao;
         this.staffMemberEntityMapper = staffMemberEntityMapper;
         this.bus = bus;
         this.configProvider = configProvider;
@@ -113,6 +118,10 @@ public class StaffMembersResource {
                 .mapToStaffMemberEntities(staffMemberDtos);
         staffMemberDao.save(staffMemberEntities);
         this.staffMembers.set(Loadable.loaded(staffMemberEntities));
+        // Select the first fetched staff member per default to
+        // prevent errors
+        this.selectStaffMemberIfNecessary(staffMemberEntities);
+
         bus.post(new StaffMembersUpdateCompletedEvent());
     }
 
@@ -129,6 +138,9 @@ public class StaffMembersResource {
                     Log.i(TAG, "Staff member update successful");
                     StaffMembersResource.this.staffMembers.set(
                             Loadable.loaded(staffMemberEntities));
+                    // Select the first fetched staff member per default to
+                    // prevent errors
+                    selectStaffMemberIfNecessary(staffMemberEntities);
                     bus.post(new StaffMembersUpdateCompletedEvent());
                 } else {
                     String errorMsg = String.format("Staff member update failed: %d %s",
@@ -160,6 +172,21 @@ public class StaffMembersResource {
                 }
             }
         });
+    }
+
+    public void selectStaffMemberIfNecessary(List<StaffMemberEntity> staffMemberEntities) {
+        if (CollectionUtils.isNotEmpty(staffMemberEntities)) {
+            Optional<SelectedStaffMemberEntity> selectedStaffMemberOpt = this.selectedStaffMemberDao.get();
+            if (!selectedStaffMemberOpt.isPresent() || !this.staffMemberDao.exists(selectedStaffMemberOpt
+                    .get()
+                    .getStaffMemberId())) {
+                StaffMemberEntity newSelectedStaffMember = staffMemberEntities.get(0);
+                Log.i(TAG, String.format("Auto-selecting staff member %s because currently no staff member is " +
+                                "selected or the selected staff member does not longer exist on the server.",
+                        newSelectedStaffMember));
+                this.selectedStaffMemberDao.save(newSelectedStaffMember);
+            }
+        }
     }
 
 }
