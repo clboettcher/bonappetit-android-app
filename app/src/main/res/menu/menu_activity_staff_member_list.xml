@@ -5,4 +5,10 @@
             android:showAsAction="always"
             android:title="@string/general_action_update"
             />
+    <item
+            android:id="@+id/actionSettings"
+            android:title="@string/general_action_settings"
+            android:orderInCategory="100"
+            android:showAsAction="never"
+            />
 </menu>

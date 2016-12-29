@@ -41,6 +41,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
+import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -169,8 +170,12 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
             case R.id.actionUpdateStaffMembers:
                 updateStaffMembers();
                 return true;
+            case R.id.actionSettings:
+                startActivity(new Intent(this, BonAppetitPreferencesActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return false;
     }
 
     private void updateStaffMembers() {
