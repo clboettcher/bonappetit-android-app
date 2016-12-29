@@ -4,7 +4,7 @@
         >
     <item
             android:id="@+id/actionRegister"
-            android:title="@string/general_action_bar_label_register"
+            android:title="@string/general_action_bar_sub_headline_switch_staff_member"
             android:icon="@drawable/ic_social_person"
             android:showAsAction="ifRoom|withText"
 
