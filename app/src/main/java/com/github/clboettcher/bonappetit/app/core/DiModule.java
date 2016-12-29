@@ -104,10 +104,9 @@ public class DiModule {
     @Singleton
     public MenuDao provideMenuDao(BonAppetitDbHelper bonAppetitDbHelper,
                                   ItemDao itemDao,
-                                  OptionDao optionDao,
-                                  RadioItemDao radioItemDao
+                                  OptionDao optionDao
     ) {
-        return new MenuDao(bonAppetitDbHelper, itemDao, optionDao, radioItemDao);
+        return new MenuDao(bonAppetitDbHelper, itemDao, optionDao);
     }
 
     @Provides
