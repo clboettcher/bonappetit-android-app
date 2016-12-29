@@ -274,7 +274,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/fragment_select_customer_button_select_staff_member"
-                    style="@style/Button.Confirm"
+                    style="@style/Button.Affirmative"
                     />
 
 
