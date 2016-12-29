@@ -1,535 +1,17 @@
 {
-  "id": 2,
+  "id": 1,
   "title": "Friday Lounge Junge Erwachsene",
-  "creationTimestamp": "2016-12-29T16:29:03.000Z",
+  "creationTimestamp": "2016-12-29T19:18:52.000Z",
   "items": [
     {
-      "id": 39,
-      "title": "Tee",
-      "price": 1.5,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 13,
-      "title": "Hamburger mit Salat",
-      "price": 4.5,
-      "type": "FOOD",
-      "options": []
-    },
-    {
       "id": 23,
-      "title": "Radler",
-      "price": 2.5,
-      "type": "DRINK_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 24,
-      "title": "Russ",
-      "price": 2.8,
-      "type": "DRINK_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 26,
-      "title": "Wasser",
-      "price": 2,
+      "title": "Spezi",
+      "price": 2.2,
       "type": "DRINK_NON_ALCOHOLIC",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 27,
-          "title": "Größe",
-          "index": 0,
-          "defaultSelected": {
-            "id": 40,
-            "title": "groß",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 40,
-              "title": "groß",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 41,
-              "title": "klein",
-              "priceDiff": -1,
-              "index": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 8,
-      "title": "Pommes",
-      "price": 2.5,
-      "type": "FOOD",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 7,
-          "title": "Größe",
-          "index": 0,
-          "defaultSelected": {
-            "id": 5,
-            "title": "groß",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 5,
-              "title": "groß",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 6,
-              "title": "klein",
-              "priceDiff": -1,
-              "index": 1
-            }
-          ]
-        },
-        {
-          "type": "valueOption",
-          "id": 8,
-          "title": "Ketchup",
-          "index": 1,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 9,
-          "title": "Mayonnaise",
-          "index": 2,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 10,
-          "title": "Kräuterbutter",
-          "index": 3,
-          "priceDiff": 0,
-          "defaultValue": 0
-        }
-      ]
-    },
-    {
-      "id": 15,
-      "title": "Pizza",
-      "price": 5.6,
-      "type": "FOOD",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 22,
-          "title": "Sorte",
-          "index": 0,
-          "defaultSelected": {
-            "id": 30,
-            "title": "Capricciosa",
-            "priceDiff": 0,
-            "index": 2
-          },
-          "radioItems": [
-            {
-              "id": 28,
-              "title": "Margherita",
-              "priceDiff": -1.8,
-              "index": 0
-            },
-            {
-              "id": 29,
-              "title": "Hawaii",
-              "priceDiff": 0,
-              "index": 1
-            },
-            {
-              "id": 30,
-              "title": "Capricciosa",
-              "priceDiff": 0,
-              "index": 2
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 42,
-      "title": "Latte Macchiato",
-      "price": 2,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 40,
-      "title": "Tasse Kaffee",
-      "price": 1.5,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 38,
-      "title": "Bionade",
-      "price": 1.8,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 21,
-      "title": "Schöfferhofer Grapefruit",
-      "price": 2,
-      "type": "DRINK_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 16,
-      "title": "Gemischter Salat",
-      "price": 1.9,
-      "type": "FOOD",
-      "options": []
-    },
-    {
-      "id": 37,
-      "title": "Johannisbeerschorle",
-      "price": 2.5,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 41,
-      "title": "Cappuccino",
-      "price": 1.8,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 18,
-      "title": "Eis",
-      "price": 1.2,
-      "type": "FOOD",
       "options": [
         {
           "type": "radioOption",
           "id": 24,
-          "title": "Sorte",
-          "index": 0,
-          "defaultSelected": {
-            "id": 34,
-            "title": "Nogger",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 34,
-              "title": "Nogger",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 35,
-              "title": "Cuja Mara Split",
-              "priceDiff": 0,
-              "index": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 36,
-      "title": "Orangenschorle",
-      "price": 2.5,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 37,
-          "title": "Größe",
-          "index": 0,
-          "defaultSelected": {
-            "id": 60,
-            "title": "groß",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 60,
-              "title": "groß",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 61,
-              "title": "klein",
-              "priceDiff": -1.1,
-              "index": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "title": "1+1/2",
-      "price": 3.3,
-      "type": "FOOD",
-      "options": [
-        {
-          "type": "valueOption",
-          "id": 11,
-          "title": "Ketchup",
-          "index": 0,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 12,
-          "title": "Mayonnaise",
-          "index": 1,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 13,
-          "title": "Kräuterbutter",
-          "index": 2,
-          "priceDiff": 0,
-          "defaultValue": 0
-        },
-        {
-          "type": "radioOption",
-          "id": 14,
-          "title": "Kombination",
-          "index": 3,
-          "defaultSelected": {
-            "id": 7,
-            "title": "gr. Pommes & kl. Getränk",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 7,
-              "title": "gr. Pommes & kl. Getränk",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 8,
-              "title": "kl. Pommes & gr. Getränk",
-              "priceDiff": 0,
-              "index": 1
-            }
-          ]
-        },
-        {
-          "type": "radioOption",
-          "id": 15,
-          "title": "Getränk",
-          "index": 4,
-          "defaultSelected": {
-            "id": 9,
-            "title": "Coca-Cola",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 9,
-              "title": "Coca-Cola",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 10,
-              "title": "Coca-Cola light",
-              "priceDiff": 0,
-              "index": 1
-            },
-            {
-              "id": 11,
-              "title": "Wasser",
-              "priceDiff": 0,
-              "index": 2
-            },
-            {
-              "id": 12,
-              "title": "Spezi",
-              "priceDiff": 0,
-              "index": 3
-            },
-            {
-              "id": 13,
-              "title": "Orangenlimo",
-              "priceDiff": 0,
-              "index": 4
-            },
-            {
-              "id": 14,
-              "title": "Zitronenlimo",
-              "priceDiff": 0,
-              "index": 5
-            },
-            {
-              "id": 15,
-              "title": "Bitter Lemon",
-              "priceDiff": 0,
-              "index": 6
-            },
-            {
-              "id": 16,
-              "title": "Apfelsaft",
-              "priceDiff": 0,
-              "index": 7
-            },
-            {
-              "id": 17,
-              "title": "Apfelschorle",
-              "priceDiff": 0,
-              "index": 8
-            },
-            {
-              "id": 18,
-              "title": "Orangensaft",
-              "priceDiff": 0,
-              "index": 9
-            },
-            {
-              "id": 19,
-              "title": "Orangensaftschorle",
-              "priceDiff": 0,
-              "index": 10
-            },
-            {
-              "id": 20,
-              "title": "Johannisbeerschorle",
-              "priceDiff": 0,
-              "index": 11
-            },
-            {
-              "id": 21,
-              "title": "Bionade",
-              "priceDiff": 0,
-              "index": 12
-            },
-            {
-              "id": 22,
-              "title": "Tee",
-              "priceDiff": 0,
-              "index": 13
-            },
-            {
-              "id": 23,
-              "title": "Tasse Kaffee",
-              "priceDiff": 0,
-              "index": 14
-            },
-            {
-              "id": 24,
-              "title": "Cappuccino",
-              "priceDiff": 0,
-              "index": 15
-            },
-            {
-              "id": 25,
-              "title": "Latte Macchiato",
-              "priceDiff": 0,
-              "index": 16
-            },
-            {
-              "id": 26,
-              "title": "Espresso",
-              "priceDiff": 0,
-              "index": 17
-            },
-            {
-              "id": 27,
-              "title": "Clausthaler Alkoholfrei",
-              "priceDiff": 0,
-              "index": 18
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 34,
-      "title": "Apfelschorle",
-      "price": 2.2,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 35,
-          "title": "Größe",
-          "index": 0,
-          "defaultSelected": {
-            "id": 56,
-            "title": "groß",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 56,
-              "title": "groß",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 57,
-              "title": "klein",
-              "priceDiff": -1,
-              "index": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 10,
-      "title": "Camembert",
-      "price": 3,
-      "type": "FOOD",
-      "options": []
-    },
-    {
-      "id": 22,
-      "title": "Clausthaler Alkoholfrei",
-      "price": 2.5,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 25,
-      "title": "Cola-Weizen",
-      "price": 2.8,
-      "type": "DRINK_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 27,
-      "title": "Coca-Cola",
-      "price": 2.2,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 28,
           "title": "Größe",
           "index": 0,
           "defaultSelected": {
@@ -556,131 +38,45 @@
       ]
     },
     {
-      "id": 33,
-      "title": "Apfelsaft",
-      "price": 2.2,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 34,
-          "title": "Größe",
-          "index": 0,
-          "defaultSelected": {
-            "id": 54,
-            "title": "groß",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 54,
-              "title": "groß",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 55,
-              "title": "klein",
-              "priceDiff": -1,
-              "index": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 12,
-      "title": "Hamburger mit Pommes",
-      "price": 4.5,
+      "id": 9,
+      "title": "Gemischter Salat",
+      "price": 1.9,
       "type": "FOOD",
-      "options": [
-        {
-          "type": "valueOption",
-          "id": 16,
-          "title": "Ketchup",
-          "index": 0,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 17,
-          "title": "Mayonnaise",
-          "index": 1,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 18,
-          "title": "Kräuterbutter",
-          "index": 2,
-          "priceDiff": 0,
-          "defaultValue": 0
-        }
-      ]
+      "options": []
     },
     {
-      "id": 28,
-      "title": "Coca-Cola light",
-      "price": 2.2,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 29,
-          "title": "Größe",
-          "index": 0,
-          "defaultSelected": {
-            "id": 44,
-            "title": "groß",
-            "priceDiff": 0,
-            "index": 0
-          },
-          "radioItems": [
-            {
-              "id": 44,
-              "title": "groß",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 45,
-              "title": "klein",
-              "priceDiff": -1,
-              "index": 1
-            }
-          ]
-        }
-      ]
+      "id": 18,
+      "title": "Cola-Weizen",
+      "price": 2.8,
+      "type": "DRINK_ALCOHOLIC",
+      "options": []
     },
     {
-      "id": 35,
-      "title": "Orangensaft",
+      "id": 30,
+      "title": "Orangenschorle",
       "price": 2.5,
       "type": "DRINK_NON_ALCOHOLIC",
       "options": [
         {
           "type": "radioOption",
-          "id": 36,
+          "id": 31,
           "title": "Größe",
           "index": 0,
           "defaultSelected": {
-            "id": 58,
+            "id": 56,
             "title": "groß",
             "priceDiff": 0,
             "index": 0
           },
           "radioItems": [
             {
-              "id": 58,
+              "id": 56,
               "title": "groß",
               "priceDiff": 0,
               "index": 0
             },
             {
-              "id": 59,
+              "id": 57,
               "title": "klein",
               "priceDiff": -1.1,
               "index": 1
@@ -690,14 +86,14 @@
       ]
     },
     {
-      "id": 30,
-      "title": "Orangenlimonade",
+      "id": 26,
+      "title": "Bitter Lemon",
       "price": 2.2,
       "type": "DRINK_NON_ALCOHOLIC",
       "options": [
         {
           "type": "radioOption",
-          "id": 31,
+          "id": 27,
           "title": "Größe",
           "index": 0,
           "defaultSelected": {
@@ -724,72 +120,196 @@
       ]
     },
     {
-      "id": 11,
-      "title": "Hamburger",
+      "id": 7,
+      "title": "Schnitzel mit Pommes",
+      "price": 5.3,
+      "type": "FOOD",
+      "options": [
+        {
+          "type": "valueOption",
+          "id": 13,
+          "title": "Ketchup",
+          "index": 0,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 14,
+          "title": "Mayonnaise",
+          "index": 1,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 15,
+          "title": "Kräuterbutter",
+          "index": 2,
+          "priceDiff": 0,
+          "defaultValue": 0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Camembert",
       "price": 3,
       "type": "FOOD",
       "options": []
     },
     {
-      "id": 20,
-      "title": "Erdinger Weißbier",
-      "price": 2.8,
-      "type": "DRINK_ALCOHOLIC",
+      "id": 31,
+      "title": "Johannisbeerschorle",
+      "price": 2.5,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 10,
+      "title": "Nachos mit Dip",
+      "price": 2.9,
+      "type": "FOOD",
       "options": [
         {
           "type": "radioOption",
-          "id": 26,
-          "title": "Sorte",
+          "id": 17,
+          "title": "Sauce",
           "index": 0,
           "defaultSelected": {
-            "id": 38,
-            "title": "Hell",
+            "id": 28,
+            "title": "Käse-Sauce",
             "priceDiff": 0,
-            "index": 0
+            "index": 1
           },
           "radioItems": [
             {
-              "id": 38,
-              "title": "Hell",
+              "id": 27,
+              "title": "keine",
               "priceDiff": 0,
               "index": 0
             },
             {
-              "id": 39,
-              "title": "Dunkel",
+              "id": 28,
+              "title": "Käse-Sauce",
               "priceDiff": 0,
               "index": 1
+            },
+            {
+              "id": 29,
+              "title": "Salsa-Sauce",
+              "priceDiff": 0,
+              "index": 2
             }
           ]
         }
       ]
     },
     {
-      "id": 19,
+      "id": 35,
+      "title": "Cappuccino",
+      "price": 1.8,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 1,
+      "title": "Pommes",
+      "price": 2.5,
+      "type": "FOOD",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 1,
+          "title": "Größe",
+          "index": 0,
+          "defaultSelected": {
+            "id": 1,
+            "title": "groß",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 1,
+              "title": "groß",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 2,
+              "title": "klein",
+              "priceDiff": -1,
+              "index": 1
+            }
+          ]
+        },
+        {
+          "type": "valueOption",
+          "id": 2,
+          "title": "Ketchup",
+          "index": 1,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 3,
+          "title": "Mayonnaise",
+          "index": 2,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 4,
+          "title": "Kräuterbutter",
+          "index": 3,
+          "priceDiff": 0,
+          "defaultValue": 0
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Clausthaler Alkoholfrei",
+      "price": 2.5,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 20,
+      "title": "Leitungswasser",
+      "price": 0,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 12,
       "title": "Augustiner",
       "price": 2.5,
       "type": "DRINK_ALCOHOLIC",
       "options": [
         {
           "type": "radioOption",
-          "id": 25,
+          "id": 19,
           "title": "Sorte",
           "index": 0,
           "defaultSelected": {
-            "id": 36,
+            "id": 32,
             "title": "Hell",
             "priceDiff": 0,
             "index": 0
           },
           "radioItems": [
             {
-              "id": 36,
+              "id": 32,
               "title": "Hell",
               "priceDiff": 0,
               "index": 0
             },
             {
-              "id": 37,
+              "id": 33,
               "title": "Edelstoff",
               "priceDiff": 0,
               "index": 1
@@ -799,14 +319,185 @@
       ]
     },
     {
-      "id": 32,
-      "title": "Bitter Lemon",
+      "id": 13,
+      "title": "Erdinger Weißbier",
+      "price": 2.8,
+      "type": "DRINK_ALCOHOLIC",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 20,
+          "title": "Sorte",
+          "index": 0,
+          "defaultSelected": {
+            "id": 34,
+            "title": "Hell",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 34,
+              "title": "Hell",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 35,
+              "title": "Dunkel",
+              "priceDiff": 0,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "title": "Tasse Kaffee",
+      "price": 1.5,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 19,
+      "title": "Mineralwasser",
+      "price": 2,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 21,
+          "title": "Größe",
+          "index": 0,
+          "defaultSelected": {
+            "id": 36,
+            "title": "groß",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 36,
+              "title": "groß",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 37,
+              "title": "klein",
+              "priceDiff": -1,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "title": "Latte Macchiato",
+      "price": 2,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 24,
+      "title": "Orangenlimonade",
       "price": 2.2,
       "type": "DRINK_NON_ALCOHOLIC",
       "options": [
         {
           "type": "radioOption",
-          "id": 33,
+          "id": 25,
+          "title": "Größe",
+          "index": 0,
+          "defaultSelected": {
+            "id": 44,
+            "title": "groß",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 44,
+              "title": "groß",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 45,
+              "title": "klein",
+              "priceDiff": -1,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Radler",
+      "price": 2.5,
+      "type": "DRINK_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 17,
+      "title": "Russ",
+      "price": 2.8,
+      "type": "DRINK_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 11,
+      "title": "Eis",
+      "price": 1.2,
+      "type": "FOOD",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 18,
+          "title": "Sorte",
+          "index": 0,
+          "defaultSelected": {
+            "id": 30,
+            "title": "Nogger",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 30,
+              "title": "Nogger",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 31,
+              "title": "Cuja Mara Split",
+              "priceDiff": 0,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Bionade",
+      "price": 1.8,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 28,
+      "title": "Apfelschorle",
+      "price": 2.2,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 29,
           "title": "Größe",
           "index": 0,
           "defaultSelected": {
@@ -833,46 +524,110 @@
       ]
     },
     {
-      "id": 14,
-      "title": "Schnitzel mit Pommes",
-      "price": 5.3,
+      "id": 4,
+      "title": "Hamburger",
+      "price": 3,
       "type": "FOOD",
-      "options": [
-        {
-          "type": "valueOption",
-          "id": 19,
-          "title": "Ketchup",
-          "index": 0,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 20,
-          "title": "Mayonnaise",
-          "index": 1,
-          "priceDiff": 0,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 21,
-          "title": "Kräuterbutter",
-          "index": 2,
-          "priceDiff": 0,
-          "defaultValue": 0
-        }
-      ]
+      "options": []
     },
     {
-      "id": 29,
-      "title": "Spezi",
+      "id": 6,
+      "title": "Hamburger mit Salat",
+      "price": 4.5,
+      "type": "FOOD",
+      "options": []
+    },
+    {
+      "id": 22,
+      "title": "Coca-Cola light",
       "price": 2.2,
       "type": "DRINK_NON_ALCOHOLIC",
       "options": [
         {
           "type": "radioOption",
+          "id": 23,
+          "title": "Größe",
+          "index": 0,
+          "defaultSelected": {
+            "id": 40,
+            "title": "groß",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 40,
+              "title": "groß",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 41,
+              "title": "klein",
+              "priceDiff": -1,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Orangensaft",
+      "price": 2.5,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": [
+        {
+          "type": "radioOption",
           "id": 30,
+          "title": "Größe",
+          "index": 0,
+          "defaultSelected": {
+            "id": 54,
+            "title": "groß",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 54,
+              "title": "groß",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 55,
+              "title": "klein",
+              "priceDiff": -1.1,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "title": "Espresso",
+      "price": 1.5,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 14,
+      "title": "Schöfferhofer Grapefruit",
+      "price": 2,
+      "type": "DRINK_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 25,
+      "title": "Zitronenlimonade",
+      "price": 2.2,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 26,
           "title": "Größe",
           "index": 0,
           "defaultSelected": {
@@ -899,14 +654,313 @@
       ]
     },
     {
-      "id": 31,
-      "title": "Zitronenlimonade",
+      "id": 5,
+      "title": "Hamburger mit Pommes",
+      "price": 4.5,
+      "type": "FOOD",
+      "options": [
+        {
+          "type": "valueOption",
+          "id": 10,
+          "title": "Ketchup",
+          "index": 0,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 11,
+          "title": "Mayonnaise",
+          "index": 1,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 12,
+          "title": "Kräuterbutter",
+          "index": 2,
+          "priceDiff": 0,
+          "defaultValue": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "1+1/2",
+      "price": 3.3,
+      "type": "FOOD",
+      "options": [
+        {
+          "type": "valueOption",
+          "id": 5,
+          "title": "Ketchup",
+          "index": 0,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 6,
+          "title": "Mayonnaise",
+          "index": 1,
+          "priceDiff": 0,
+          "defaultValue": 1
+        },
+        {
+          "type": "valueOption",
+          "id": 7,
+          "title": "Kräuterbutter",
+          "index": 2,
+          "priceDiff": 0,
+          "defaultValue": 0
+        },
+        {
+          "type": "radioOption",
+          "id": 8,
+          "title": "Kombination",
+          "index": 3,
+          "defaultSelected": {
+            "id": 3,
+            "title": "gr. Pommes & kl. Getränk",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 3,
+              "title": "gr. Pommes & kl. Getränk",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 4,
+              "title": "kl. Pommes & gr. Getränk",
+              "priceDiff": 0,
+              "index": 1
+            }
+          ]
+        },
+        {
+          "type": "radioOption",
+          "id": 9,
+          "title": "Getränk",
+          "index": 4,
+          "defaultSelected": {
+            "id": 5,
+            "title": "Coca-Cola",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 5,
+              "title": "Coca-Cola",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 6,
+              "title": "Coca-Cola light",
+              "priceDiff": 0,
+              "index": 1
+            },
+            {
+              "id": 7,
+              "title": "Mineralwasser",
+              "priceDiff": 0,
+              "index": 2
+            },
+            {
+              "id": 8,
+              "title": "Spezi",
+              "priceDiff": 0,
+              "index": 3
+            },
+            {
+              "id": 9,
+              "title": "Orangenlimo",
+              "priceDiff": 0,
+              "index": 4
+            },
+            {
+              "id": 10,
+              "title": "Zitronenlimo",
+              "priceDiff": 0,
+              "index": 5
+            },
+            {
+              "id": 11,
+              "title": "Bitter Lemon",
+              "priceDiff": 0,
+              "index": 6
+            },
+            {
+              "id": 12,
+              "title": "Apfelsaft",
+              "priceDiff": 0,
+              "index": 7
+            },
+            {
+              "id": 13,
+              "title": "Apfelschorle",
+              "priceDiff": 0,
+              "index": 8
+            },
+            {
+              "id": 14,
+              "title": "Orangensaft",
+              "priceDiff": 0,
+              "index": 9
+            },
+            {
+              "id": 15,
+              "title": "Orangensaftschorle",
+              "priceDiff": 0,
+              "index": 10
+            },
+            {
+              "id": 16,
+              "title": "Johannisbeerschorle",
+              "priceDiff": 0,
+              "index": 11
+            },
+            {
+              "id": 17,
+              "title": "Bionade",
+              "priceDiff": 0,
+              "index": 12
+            },
+            {
+              "id": 18,
+              "title": "Tee",
+              "priceDiff": 0,
+              "index": 13
+            },
+            {
+              "id": 19,
+              "title": "Tasse Kaffee",
+              "priceDiff": 0,
+              "index": 14
+            },
+            {
+              "id": 20,
+              "title": "Cappuccino",
+              "priceDiff": 0,
+              "index": 15
+            },
+            {
+              "id": 21,
+              "title": "Latte Macchiato",
+              "priceDiff": 0,
+              "index": 16
+            },
+            {
+              "id": 22,
+              "title": "Espresso",
+              "priceDiff": 0,
+              "index": 17
+            },
+            {
+              "id": 23,
+              "title": "Clausthaler Alkoholfrei",
+              "priceDiff": 0,
+              "index": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Coca-Cola",
       "price": 2.2,
       "type": "DRINK_NON_ALCOHOLIC",
       "options": [
         {
           "type": "radioOption",
-          "id": 32,
+          "id": 22,
+          "title": "Größe",
+          "index": 0,
+          "defaultSelected": {
+            "id": 38,
+            "title": "groß",
+            "priceDiff": 0,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "id": 38,
+              "title": "groß",
+              "priceDiff": 0,
+              "index": 0
+            },
+            {
+              "id": 39,
+              "title": "klein",
+              "priceDiff": -1,
+              "index": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "title": "Tee",
+      "price": 1.5,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": []
+    },
+    {
+      "id": 8,
+      "title": "Pizza",
+      "price": 5.6,
+      "type": "FOOD",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 16,
+          "title": "Sorte",
+          "index": 0,
+          "defaultSelected": {
+            "id": 26,
+            "title": "Capricciosa",
+            "priceDiff": 0,
+            "index": 2
+          },
+          "radioItems": [
+            {
+              "id": 24,
+              "title": "Margherita",
+              "priceDiff": -1.8,
+              "index": 0
+            },
+            {
+              "id": 25,
+              "title": "Hawaii",
+              "priceDiff": 0,
+              "index": 1
+            },
+            {
+              "id": 26,
+              "title": "Capricciosa",
+              "priceDiff": 0,
+              "index": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Apfelsaft",
+      "price": 2.2,
+      "type": "DRINK_NON_ALCOHOLIC",
+      "options": [
+        {
+          "type": "radioOption",
+          "id": 28,
           "title": "Größe",
           "index": 0,
           "defaultSelected": {
@@ -927,53 +981,6 @@
               "title": "klein",
               "priceDiff": -1,
               "index": 1
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": 43,
-      "title": "Espresso",
-      "price": 1.5,
-      "type": "DRINK_NON_ALCOHOLIC",
-      "options": []
-    },
-    {
-      "id": 17,
-      "title": "Nachos mit Dip",
-      "price": 2.9,
-      "type": "FOOD",
-      "options": [
-        {
-          "type": "radioOption",
-          "id": 23,
-          "title": "Sauce",
-          "index": 0,
-          "defaultSelected": {
-            "id": 32,
-            "title": "Käse-Sauce",
-            "priceDiff": 0,
-            "index": 1
-          },
-          "radioItems": [
-            {
-              "id": 31,
-              "title": "keine",
-              "priceDiff": 0,
-              "index": 0
-            },
-            {
-              "id": 32,
-              "title": "Käse-Sauce",
-              "priceDiff": 0,
-              "index": 1
-            },
-            {
-              "id": 33,
-              "title": "Salsa-Sauce",
-              "priceDiff": 0,
-              "index": 2
             }
           ]
         }
