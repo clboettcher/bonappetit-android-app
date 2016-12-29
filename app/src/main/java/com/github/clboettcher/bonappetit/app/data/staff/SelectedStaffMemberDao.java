@@ -59,7 +59,7 @@ public class SelectedStaffMemberDao {
         data.setStaffMemberFirstName(staffMemberEntity.getFirstName());
         data.setStaffMemberLastName(staffMemberEntity.getLastName());
         dao.create(data);
-        Log.i(TAG, String.format("Saved reference to staff member %s to database.", staffMemberEntity));
+        Log.i(TAG, String.format("Saved %s to database.", data));
     }
 
     /**
