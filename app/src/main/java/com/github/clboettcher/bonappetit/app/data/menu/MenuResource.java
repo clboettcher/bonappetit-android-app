@@ -38,6 +38,7 @@ import com.github.clboettcher.bonappetit.common.JsonUtils;
 import com.github.clboettcher.bonappetit.server.menu.api.dto.read.MenuDto;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -87,7 +88,7 @@ public class MenuResource {
         this.updateMenu(null);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     public void updateMenu(PerformMenuUpdateEvent event) {
         this.menuLoadable.set(Loadable.<MenuEntity>loading());
 

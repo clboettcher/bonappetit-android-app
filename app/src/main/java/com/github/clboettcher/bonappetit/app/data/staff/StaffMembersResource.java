@@ -33,6 +33,7 @@ import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdate
 import com.github.clboettcher.bonappetit.server.staff.api.dto.StaffMemberDto;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,7 +83,7 @@ public class StaffMembersResource {
         this.updateStaffMembers(null);
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.ASYNC)
     public void updateStaffMembers(PerformStaffMembersUpdateEvent event) {
         this.staffMembers.set(Loadable.<List<StaffMemberEntity>>loading());
         if (configProvider.useTestData()) {
