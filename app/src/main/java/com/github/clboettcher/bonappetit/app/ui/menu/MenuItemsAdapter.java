@@ -87,10 +87,10 @@ public class MenuItemsAdapter extends BaseAdapter implements View.OnClickListene
                 itemButton.setBackgroundColor(Color.rgb(125, 153, 132));
                 break;
             case DRINK_ALCOHOLIC:
-                itemButton.setBackgroundColor(Color.rgb(230, 170, 255));
+                itemButton.setBackgroundColor(Color.rgb(170, 223, 255));
                 break;
             case DRINK_NON_ALCOHOLIC:
-                itemButton.setBackgroundColor(Color.rgb(125, 64, 204));
+                itemButton.setBackgroundColor(Color.rgb(125, 128, 204));
                 break;
         }
 
