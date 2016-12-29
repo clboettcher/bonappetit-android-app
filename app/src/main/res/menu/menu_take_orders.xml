@@ -4,13 +4,13 @@
         >
     <item
             android:id="@+id/actionRegister"
-            android:title="@string/action_bar_label_register"
+            android:title="@string/general_action_bar_label_register"
             android:icon="@drawable/ic_social_person"
             android:showAsAction="ifRoom|withText"
 
             />
     <item
-            android:id="@id/actionSettings"
+            android:id="@+id/actionSettings"
             android:title="@string/general_action_settings"
             android:orderInCategory="100"
             android:showAsAction="never"
