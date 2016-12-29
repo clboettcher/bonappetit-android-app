@@ -48,6 +48,7 @@ import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -233,7 +234,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         this.update();
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFinishOrdersCompletedEvent(FinishOrdersCompletedEvent event) {
         Log.i(TAG, String.format("Received %s. Triggering update()", FinishOrdersCompletedEvent.class.getSimpleName()));
         this.update();

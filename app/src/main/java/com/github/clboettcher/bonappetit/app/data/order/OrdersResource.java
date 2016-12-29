@@ -20,6 +20,7 @@
 package com.github.clboettcher.bonappetit.app.data.order;
 
 import android.util.Log;
+import com.github.clboettcher.bonappetit.app.core.ConfigProvider;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.ErrorMapper;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
@@ -45,23 +46,35 @@ public class OrdersResource {
     private OrderDao orderDao;
     private OrdersService ordersService;
     private EventBus eventBus;
+    private ConfigProvider configProvider;
     private AtomicReference<Loadable<Void>> finishOrdersLoadable
             = new AtomicReference<>(Loadable.<Void>initial());
 
     @Inject
     public OrdersResource(OrdersService ordersService,
                           EventBus eventBus,
-                          OrderDao orderDao
+                          OrderDao orderDao,
+                          ConfigProvider configProvider
     ) {
         this.orderDao = orderDao;
         this.ordersService = ordersService;
         this.eventBus = eventBus;
+        this.configProvider = configProvider;
     }
 
     public void finishOrders(List<ItemOrderEntity> orders) {
         List<ItemOrderCreationDto> orderDtos = ItemOrderCreationDtoMapper.mapToItemOrderCreationDtos(orders);
         Log.i(TAG, String.format("Finishing %d order(s).", CollectionUtils.size(orderDtos)));
         this.finishOrdersLoadable.set(Loadable.<Void>loading());
+
+        if (configProvider.useTestData()) {
+            fakeFinishOrders();
+        } else {
+            finishOrdersWithServerCall(orderDtos);
+        }
+    }
+
+    public void finishOrdersWithServerCall(List<ItemOrderCreationDto> orderDtos) {
         this.ordersService.createOrders(orderDtos, new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -80,6 +93,23 @@ public class OrdersResource {
                 eventBus.post(new FinishOrdersCompletedEvent());
             }
         });
+    }
+
+    public void fakeFinishOrders() {
+        Log.i(TAG, "Test data enabled. Fake finish orders operation with success result.");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    return;
+                }
+                finishOrdersLoadable.set(Loadable.<Void>loaded(null));
+                eventBus.post(new FinishOrdersCompletedEvent());
+            }
+        }).start();
     }
 
     public Loadable<Void> getFinishOrdersLoadable() {
