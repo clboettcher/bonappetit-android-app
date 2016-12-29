@@ -1,99 +1,118 @@
 {
-  "id": 1,
+  "title": "Test menu 01",
   "items": [
     {
-      "id": 2,
-      "title": "Nachos",
-      "price": 2.0,
+      "title": "Food w/o options",
+      "price": "1.5",
+      "type": "FOOD"
+    },
+    {
+      "title": "Drink alc w/o options",
+      "price": "2.0",
+      "type": "DRINK_ALCOHOLIC"
+    },
+    {
+      "title": "Drink non alc w/o options",
+      "price": "2.0",
+      "type": "DRINK_NON_ALCOHOLIC"
+    },
+    {
+      "title": "Food w/ value option",
+      "price": "2.0",
       "type": "FOOD",
       "options": [
         {
-          "id": 3,
+          "type": "valueOption",
           "index": 0,
-          "type": "checkboxOption",
-          "title": "Käsesoße",
+          "title": "Test value option",
           "priceDiff": 0.5,
-          "defaultChecked": true
+          "defaultValue": 2
         }
       ]
     },
     {
-      "id": 4,
-      "title": "Augustinger",
-      "price": 2.2,
-      "type": "DRINK_ALCOHOLIC",
+      "title": "Food w/ checkbox option",
+      "price": "2.0",
+      "type": "FOOD",
       "options": [
         {
-          "id": 4,
-          "index": 0,
+          "type": "checkboxOption",
+          "title": "Test checkbox option",
+          "priceDiff": 1.0,
+          "defaultChecked": true,
+          "index": 0
+        }
+      ]
+    },
+    {
+      "title": "Food w/ radio option",
+      "price": "2.0",
+      "type": "FOOD",
+      "options": [
+        {
           "type": "radioOption",
-          "title": "Größe",
+          "index": 0,
+          "title": "Test radio option",
           "defaultSelected": {
-            "id": 1,
-            "index": 0,
-            "title": "groß",
-            "priceDiff": 0
+            "title": "Test radio item 1 (initially selected)",
+            "priceDiff": 1.5,
+            "index": 0
           },
           "radioItems": [
             {
-              "id": 1,
-              "index": 0,
-              "title": "groß",
-              "priceDiff": 0
+              "title": "Test radio item 1 (initially selected)",
+              "priceDiff": 1.5,
+              "index": 0
             },
             {
-              "id": 2,
-              "index": 1,
-              "title": "klein",
-              "priceDiff": -0.5
+              "title": "Test radio item 2",
+              "priceDiff": 1.5,
+              "index": 1
             }
           ]
         }
       ]
     },
     {
-      "id": 3,
-      "title": "Mineralwasser",
-      "price": 1.9,
-      "type": "DRINK_NON_ALCOHOLIC"
-    },
-    {
-      "id": 1,
-      "title": "Pommes",
-      "price": 2.5,
-      "type": "FOOD",
+      "title": "Drink non alc w/ all options",
+      "price": "2.0",
+      "type": "DRINK_NON_ALCOHOLIC",
       "options": [
         {
-          "type": "checkboxOption",
-          "id": 1,
+          "type": "radioOption",
           "index": 0,
-          "title": "Extra Salz",
-          "priceDiff": 0,
-          "defaultChecked": false
+          "title": "Test radio option",
+          "defaultSelected": {
+            "title": "Test radio item 1 (initially selected)",
+            "priceDiff": 1.5,
+            "index": 0
+          },
+          "radioItems": [
+            {
+              "title": "Test radio item 1 (initially selected)",
+              "priceDiff": 1.5,
+              "index": 0
+            },
+            {
+              "title": "Test radio item 2",
+              "priceDiff": 1.5,
+              "index": 1
+            }
+          ]
         },
         {
           "type": "valueOption",
-          "id": 2,
           "index": 1,
-          "title": "Ketchup",
-          "priceDiff": 0.25,
-          "defaultValue": 1
+          "title": "Test value option",
+          "priceDiff": 0.5,
+          "defaultValue": 2
         },
         {
-          "type": "valueOption",
-          "id": 5,
-          "index": 2,
-          "title": "Mayonnaise",
-          "priceDiff": 0.25,
-          "defaultValue": 1
-        },
-        {
-          "type": "valueOption",
-          "id": 6,
-          "index": 3,
-          "title": "Kräuterbutter",
-          "priceDiff": 0.25,
-          "defaultValue": 0
+          "type": "checkboxOption",
+          "title": "Test checkbox option",
+          "priceDiff": 1.0,
+          "defaultChecked": true,
+          "index": 2
         }
       ]
     }
