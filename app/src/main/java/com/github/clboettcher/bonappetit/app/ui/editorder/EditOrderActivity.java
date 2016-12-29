@@ -183,16 +183,16 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         Button confirmButton = (Button) findViewById(R.id.activityEditOrderButtonConfirm);
         Button cancelButton = (Button) findViewById(R.id.activityEditOrderButtonCancel);
 
-        // A different string is prefixed before the item name depending on the mode
-        String headingPrefix;
+        // A different string is appended to the item name depending on the mode
+        String headingSuffix;
         switch (mode) {
             case CREATE:
-                headingPrefix = getString(R.string.activity_edit_order_create_heading);
+                headingSuffix = getString(R.string.activity_edit_order_create_heading_suffix);
                 confirmButton.setText(getString(R.string.activity_edit_order_action_confirm_create));
                 cancelButton.setText(getString(R.string.activity_edit_order_action_abort_create));
                 break;
             case EDIT:
-                headingPrefix = getString(R.string.activity_edit_order_edit_heading);
+                headingSuffix = getString(R.string.activity_edit_order_edit_heading_suffix);
                 confirmButton.setText(getString(R.string.activity_edit_order_confirm_edit));
                 cancelButton.setText(getString(R.string.activity_edit_order_abort_edit));
                 break;
@@ -202,7 +202,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
                         mode));
         }
 
-        heading.setText(String.format("%s %s", headingPrefix, itemTitle));
+        heading.setText(String.format("%s %s", itemTitle, headingSuffix));
     }
 
     public void updateTotalPrice() {

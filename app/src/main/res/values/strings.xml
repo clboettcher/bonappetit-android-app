@@ -152,12 +152,12 @@
     <string name="activity_edit_order_count_label">Anzahl</string>
     <string name="activity_edit_order_options_label">Optionen</string>
     <string name="activity_edit_order_count_indicator">x</string>
-    <string name="activity_edit_order_create_heading"><![CDATA[Bestellung aufnehmen -]]></string>
-    <string name="activity_edit_order_edit_heading"><![CDATA[Bestellung bearbeiten -]]></string>
-    <string name="activity_edit_order_action_abort_create">Bestellung verwerfen</string>
+    <string name="activity_edit_order_create_heading_suffix">hinzufügen</string>
+    <string name="activity_edit_order_edit_heading_suffix">ändern</string>
+    <string name="activity_edit_order_action_abort_create">Verwerfen</string>
     <string name="activity_edit_order_abort_edit">Änderungen verwerfen</string>
-    <string name="activity_edit_order_action_confirm_create">Bestellung aufnehmen</string>
-    <string name="activity_edit_order_confirm_edit">Bestellung ändern</string>
+    <string name="activity_edit_order_action_confirm_create">Hinzufügen</string>
+    <string name="activity_edit_order_confirm_edit">Änderungen speichern</string>
     <string name="activity_edit_order_toast_cancel_edit">Änderungen verworfen</string>
     <string name="activity_edit_order_toast_cancel_create">Bestellung verworfen</string>
     <string name="activity_edit_order_toast_confirm_edit">Änderungen erfolgreich gespeichert</string>
