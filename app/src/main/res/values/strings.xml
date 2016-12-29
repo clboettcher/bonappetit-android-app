@@ -147,7 +147,6 @@
     <!--***********************************************************************************************************-->
     <!--EditOrderActivity-->
     <!--***********************************************************************************************************-->
-    <string name="activity_edit_order_item_removed">Eine oder mehrere bestellte Gerichte wurden von der Speisekarte gestrichen. Die Bestellungen wurden gelöscht.</string>
     <string name="activity_edit_order_note_label">Bemerkung</string>
     <string name="activity_edit_order_total_price_label">Gesamtpreis</string>
     <string name="activity_edit_order_count_label">Anzahl</string>
