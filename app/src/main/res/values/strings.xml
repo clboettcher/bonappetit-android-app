@@ -22,6 +22,7 @@
     <string name="general_placeholder_medium">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, incidunt.</string>
     <string name="general_placeholder_long">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cupiditate delectus deleniti doloribus eligendi perspiciatis tenetur vero voluptas voluptatem, voluptatum. Blanditiis commodi dolore hic ipsum maiores nesciunt pariatur porro quae!</string>
     <string name="general_action_bar_sub_headline_switch_staff_member">Benutzer wechseln</string>
+    <string name="general_action_bar_sub_headline_order">Bestellen</string>
 
     <!--***********************************************************************************************************-->
     <!--Preferences-->
@@ -81,7 +82,6 @@
     <!--***********************************************************************************************************-->
     <!--TakeOrdersActivity-->
     <!--***********************************************************************************************************-->
-    <string name="activity_take_orders_title">Bestellen</string>
     <string name="activity_take_orders_button_switch_tab">Zum Tab \"%s\" wechseln</string>
 
     <!--***********************************************************************************************************-->

@@ -89,7 +89,7 @@ public class EditOrderActivity extends BonAppetitBaseActivity implements EditOrd
         // Set the action bar subtitle
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            actionBar.setSubtitle(getString(R.string.activity_take_orders_title));
+            actionBar.setSubtitle(getString(R.string.general_action_bar_sub_headline_order));
         }
 
         // Load the item by the id contained in the intent extras
