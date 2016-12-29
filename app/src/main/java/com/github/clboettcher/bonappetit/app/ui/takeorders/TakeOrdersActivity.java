@@ -147,13 +147,17 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
                             StaffMembersListActivity.class.getName()));
                 }
                 StaffMemberEntity selectedStaffMember = staffMemberDao.getById(staffMemberId);
-                Log.i(TAG, String.format("Selected staff member: %s", selectedStaffMember));
+                Log.i(TAG, String.format("Saving new selected staff member: %s", selectedStaffMember));
                 selectedStaffMemberDao.save(selectedStaffMember);
             } else {
                 Log.i(TAG, String.format("Received activity result for " +
                         "request code SELECT_STAFF_MEMBER_REQUEST with " +
                         "a result code different from RESULT_OK: %d", resultCode));
             }
+        } else {
+            Log.i(TAG, String.format("Ignoring activity result for request code %d", requestCode));
+            // Give nested fragments a chance to handle the activity result.
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 

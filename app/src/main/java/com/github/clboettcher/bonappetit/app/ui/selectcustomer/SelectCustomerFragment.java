@@ -196,7 +196,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     public void onClick(View view) {
         if (this.buttonSelectStaffMemberCustomer.equals(view)) {
             Intent intent = new Intent(getActivity(), StaffMembersListActivity.class);
-            startActivityForResult(intent, StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST);
+            this.startActivityForResult(intent,
+                    StaffMembersListActivity.SELECT_STAFF_MEMBER_AS_CUSTOMER_REQUEST);
         } else if (this.buttonFreetextConfirm.equals(view)) {
             // Check if a customer name has been entered in the freetext field
             final String newCustomer;
@@ -232,10 +233,10 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == StaffMembersListActivity.SELECT_STAFF_MEMBER_REQUEST) {
+        if (requestCode == StaffMembersListActivity.SELECT_STAFF_MEMBER_AS_CUSTOMER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Long staffMemberId = data.getLongExtra(StaffMembersListActivity.EXTRA_SELECTED_STAFF_MEMBER_ID, -1L);
-                if (staffMemberId == -1) {
+                if (staffMemberId == -1L) {
                     throw new IllegalStateException(String.format("Expected %s to return intent containing the " +
                                     "id of the selected staff member",
                             StaffMembersListActivity.class.getName()));
@@ -251,6 +252,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
                         "request code SELECT_STAFF_MEMBER_REQUEST with " +
                         "a result code different from RESULT_OK: %d", resultCode));
             }
+        } else {
+            Log.i(TAG, String.format("Ignoring activity result for request code %d", requestCode));
         }
     }
 

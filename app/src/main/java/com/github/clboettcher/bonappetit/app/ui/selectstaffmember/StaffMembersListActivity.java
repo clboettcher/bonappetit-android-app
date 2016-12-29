@@ -35,8 +35,8 @@ import com.github.clboettcher.bonappetit.app.R;
 import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
+import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMembersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.event.StaffMembersUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.ui.BonAppetitBaseActivity;
@@ -50,7 +50,18 @@ import java.util.List;
 
 public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
+    /**
+     * Use as request code in {@link Activity#startActivityForResult(Intent, int)} to
+     * select the staff member that is using the app.
+     */
     public static final int SELECT_STAFF_MEMBER_REQUEST = 1;
+
+    /**
+     * Use as request code in {@link Activity#startActivityForResult(Intent, int)} to
+     * select a staff member as customer.
+     */
+    public static final int SELECT_STAFF_MEMBER_AS_CUSTOMER_REQUEST = 2;
+
     public static final String EXTRA_SELECTED_STAFF_MEMBER_ID = "EXTRA_SELECTED_STAFF_MEMBER_ID";
     private static final String TAG = StaffMembersListActivity.class.getName();
 
