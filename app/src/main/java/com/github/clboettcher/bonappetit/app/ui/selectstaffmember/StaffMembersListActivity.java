@@ -19,6 +19,7 @@
  */
 package com.github.clboettcher.bonappetit.app.ui.selectstaffmember;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,6 +102,11 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
 
         adapter = new StaffMemberAdapter(this, new ArrayList<StaffMemberEntity>());
         staffMembersListView.setAdapter(adapter);
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setSubtitle(getString(R.string.fragment_select_customer_action_bar_subtitle));
+        }
 
         this.update();
     }
