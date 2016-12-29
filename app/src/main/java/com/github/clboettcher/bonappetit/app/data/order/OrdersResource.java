@@ -19,13 +19,10 @@
  */
 package com.github.clboettcher.bonappetit.app.data.order;
 
-import android.content.Context;
 import android.util.Log;
 import com.github.clboettcher.bonappetit.app.data.ErrorCode;
 import com.github.clboettcher.bonappetit.app.data.ErrorMapper;
 import com.github.clboettcher.bonappetit.app.data.Loadable;
-import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
-import com.github.clboettcher.bonappetit.app.data.menu.dao.OptionDao;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
 import com.github.clboettcher.bonappetit.server.order.api.dto.write.ItemOrderCreationDto;
@@ -48,25 +45,17 @@ public class OrdersResource {
     private OrderDao orderDao;
     private OrdersService ordersService;
     private EventBus eventBus;
-    private ItemDao itemDao;
-    private Context context;
-    private OptionDao optionDao;
     private AtomicReference<Loadable<Void>> finishOrdersLoadable
             = new AtomicReference<>(Loadable.<Void>initial());
 
     @Inject
-    public OrdersResource(Context context,
-                          OrdersService ordersService,
+    public OrdersResource(OrdersService ordersService,
                           EventBus eventBus,
-                          OrderDao orderDao,
-                          ItemDao itemDao,
-                          OptionDao optionDao) {
+                          OrderDao orderDao
+    ) {
         this.orderDao = orderDao;
         this.ordersService = ordersService;
         this.eventBus = eventBus;
-        this.itemDao = itemDao;
-        this.context = context;
-        this.optionDao = optionDao;
     }
 
     public void finishOrders(List<ItemOrderEntity> orders) {
