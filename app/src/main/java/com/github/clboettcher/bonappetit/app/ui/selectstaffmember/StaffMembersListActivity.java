@@ -122,7 +122,7 @@ public class StaffMembersListActivity extends BonAppetitBaseActivity {
         if (staffMembersLoadable.isLoading()) {
             this.setState(StaffMembersListActivityViewState.UPDATE_IN_PROGRESS);
         } else if (staffMembersLoadable.isLoaded()) {
-            Log.i(TAG, "Updating the list view with the contents from the repository.");
+            Log.i(TAG, "Updating the list view with the contents from the resource.");
             adapter.clear();
             adapter.addAll(staffMembersResource.getStaffMembers().getValue());
             adapter.sort(StaffMemberEntityComparator.INSTANCE);
