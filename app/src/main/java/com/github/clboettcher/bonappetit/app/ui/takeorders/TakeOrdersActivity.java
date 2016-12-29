@@ -97,6 +97,9 @@ public class TakeOrdersActivity extends BonAppetitBaseFragmentActivity implement
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         this.actionBar = getActionBar();
+
+        // Set the action bar subtitle
+        this.actionBar.setSubtitle(getString(R.string.activity_take_orders_title));
         this.actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         this.actionBar.setHomeButtonEnabled(false);
         // comment this in to use the app icon as "home"
