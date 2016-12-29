@@ -202,14 +202,24 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
     public void finishOrdersButtonHandler() {
         final long orderCount = ordersResource.count();
         // Ask for confirmation before finishing the orders.
-        String message = String.format(getActivity().getString(
-                R.string.fragment_orders_overview_dialog_finish_orders_confirmation_message),
-                orderCount);
+
+        String positiveButtonText;
+        String message;
+        if (orderCount == 1) {
+            message = String.format(getActivity().getString(
+                    R.string.fragment_orders_overview_dialog_finish_orders_confirmation_message_singular),
+                    orderCount);
+        } else {
+            message = String.format(getActivity().getString(
+                    R.string.fragment_orders_overview_dialog_finish_orders_confirmation_message_plural),
+                    orderCount);
+        }
+
         new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.fragment_orders_overview_dialog_finish_orders_confirmation_title)
                 .setIcon(R.drawable.ic_alerts_and_states_warning)
                 .setMessage(message)
-                .setPositiveButton(getString(R.string.general_action_confirm), new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.fragment_orders_overview_dialog_finish_orders_confirmation_affirmative), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         setCustomerAndFinishOrders();
                     }

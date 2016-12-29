@@ -141,7 +141,9 @@
     </string>
     <string name="fragment_orders_overview_active_toast_finish_success">Bestellung erfolgreich abgeschlossen!</string>
     <string name="fragment_orders_overview_dialog_finish_orders_confirmation_title">Bestellungen drucken</string>
-    <string name="fragment_orders_overview_dialog_finish_orders_confirmation_message">%d Bestellung(en) werden gedruckt</string>
+    <string name="fragment_orders_overview_dialog_finish_orders_confirmation_message_singular">%d Bestellung drucken?</string>
+    <string name="fragment_orders_overview_dialog_finish_orders_confirmation_message_plural">%d Bestellungen drucken?</string>
+    <string name="fragment_orders_overview_dialog_finish_orders_confirmation_affirmative">Drucken</string>
 
 
     <!--***********************************************************************************************************-->
