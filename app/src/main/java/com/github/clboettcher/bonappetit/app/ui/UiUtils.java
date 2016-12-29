@@ -44,7 +44,9 @@ public final class UiUtils {
                     break;
                 case STAFF_MEMBER:
                     StaffMemberEntity staffMember = customer.getStaffMember();
-                    customerDisplayText = String.format(" %s (MA)", staffMember.getFirstName());
+                    customerDisplayText = String.format(" %s %s (MA)",
+                            staffMember.getFirstName(),
+                            staffMember.getLastName());
                     break;
                 default:
                     throw new IllegalArgumentException(String.format("Unknown enum value: %s.%s",
