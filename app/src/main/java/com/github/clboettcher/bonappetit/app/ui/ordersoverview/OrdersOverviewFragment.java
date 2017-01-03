@@ -88,6 +88,11 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
      */
     private ItemOrderAdapter adapter;
 
+    /**
+     * The button that finishes orders by sendings them to the server.
+     */
+    private Button finishOrdersButton;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -132,8 +137,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         t.setText(String.format(String.valueOf(t.getText()), selectCustomerTabTitle, menuTabTitle));
 
         // configure the active view
-        Button finishButton = (Button) rootView.findViewById(R.id.fragmentOrdersOverviewButtonFinish);
-        finishButton.setOnClickListener(new View.OnClickListener() {
+        this.finishOrdersButton = (Button) rootView.findViewById(R.id.fragmentOrdersOverviewButtonFinish);
+        finishOrdersButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 finishOrdersButtonHandler();
             }
@@ -219,16 +224,23 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
                 .setTitle(R.string.fragment_orders_overview_dialog_finish_orders_confirmation_title)
                 .setIcon(R.drawable.ic_alerts_and_states_warning)
                 .setMessage(message)
-                .setPositiveButton(getString(R.string.fragment_orders_overview_dialog_finish_orders_confirmation_affirmative), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        setCustomerAndFinishOrders();
-                    }
-                }).setNegativeButton(getString(R.string.general_action_cancel), null)
+                .setPositiveButton(
+                        getString(R.string.fragment_orders_overview_dialog_finish_orders_confirmation_affirmative),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                setCustomerAndFinishOrders();
+                            }
+                        }).setNegativeButton(getString(R.string.general_action_cancel), null)
                 .show();
     }
 
 
     private void setCustomerAndFinishOrders() {
+        Log.i(TAG, "Finishing orders and sending them to the server.");
+        // Disable finish orders button to prevent multiple requests with the same
+        // orders if the user presses multiple times.
+        this.finishOrdersButton.setEnabled(false);
+
         // Init upload
         final List<ItemOrderEntity> orders = ordersResource.list();
 
@@ -293,6 +305,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             this.setState(OrdersOverviewViewState.ACTIVE);
         }
 
+        this.finishOrdersButton.setEnabled(true);
         updateStaffMemberAndCustomer();
         updateOrdersTable();
     }
