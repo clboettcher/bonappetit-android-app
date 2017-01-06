@@ -96,6 +96,7 @@ public class MenuFragment extends TakeOrdersFragment {
 
     private Comparator<ItemEntity> itemEntityComparator = new ItemEntityComparator();
     private MenuItemsAdapter menuItemsAdapter;
+    private boolean initialized = false;
 
     @Override
     public void onAttach(Context context) {
@@ -233,6 +234,17 @@ public class MenuFragment extends TakeOrdersFragment {
 
     @Override
     public void update() {
+        Log.d(TAG, String.format("update() called. Initialized is %s customerDao is %s",
+                this.initialized, this.customerDao));
+
+        // Make sure this instance is the one that has been dependency injected. Apparently
+        // android sets all fields to null when the fragment is destroyed. Unfortunately the update() method
+        // might get called after this leading to NPE. Discovered while changing the orientation during a
+        // network operation in progress.
+        if (!initialized) {
+            return;
+        }
+
         final Optional<CustomerEntity> customer = customerDao.get();
         Loadable<MenuEntity> menuLoadable = menuResource.getMenu();
         Log.i(TAG, String.format("update() called. Customer is %s. Menu is %s",
@@ -302,7 +314,9 @@ public class MenuFragment extends TakeOrdersFragment {
 
     @Override
     protected void injectDependencies(DiComponent diComponent) {
+        Log.d(TAG, "Injecting dependencies");
         diComponent.inject(this);
+        this.initialized = true;
     }
 
 }

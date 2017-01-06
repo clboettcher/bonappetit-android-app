@@ -88,6 +88,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     @Inject
     CustomerDao customerDao;
 
+    private boolean initialized = false;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -111,6 +113,14 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
     @Override
     public void update() {
+        // Make sure this instance is the one that has been dependency injected. Apparently
+        // android sets all fields to null when the fragment is destroyed. Unfortunately the update() method
+        // might get called after this leading to NPE. Discovered while changing the orientation during a
+        // network operation in progress.
+        if (!this.initialized) {
+            return;
+        }
+
         Log.d(TAG, "update() called, getActivity(): " + getActivity() + ", isAdded(): " + isAdded());
         updateStaffMember();
     }
@@ -276,6 +286,7 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     @Override
     protected void injectDependencies(DiComponent diComponent) {
         diComponent.inject(this);
+        this.initialized = true;
     }
 
 }

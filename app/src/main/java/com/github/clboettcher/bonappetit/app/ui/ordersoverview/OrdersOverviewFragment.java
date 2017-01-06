@@ -58,7 +58,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     public static final String TAG = OrdersOverviewFragment.class.getName();
 
-    private boolean initialized;
+    private boolean initialized = false;
     private TextView staffMemberTextView;
     private TextView customerTextView;
     private OnSwitchToTabListener mListener;
