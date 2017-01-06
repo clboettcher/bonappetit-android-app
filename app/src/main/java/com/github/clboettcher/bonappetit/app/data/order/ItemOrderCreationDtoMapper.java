@@ -69,6 +69,7 @@ public final class ItemOrderCreationDtoMapper {
             case TABLE:
                 return TableCustomerCreationDto.builder()
                         .tableNumber(customer.getTableNumber())
+                        .displayValue(customer.getTableDisplayValue())
                         .build();
             case FREE_TEXT:
                 return FreeTextCustomerCreationDto.builder()
