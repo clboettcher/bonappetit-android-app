@@ -14,19 +14,27 @@
         <activity
                 android:name=".ui.takeorders.TakeOrdersActivity"
                 android:label="@string/general_app_name"
+                android:screenOrientation="portrait"
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.selectstaffmember.StaffMembersListActivity"/>
-        <activity android:name=".ui.preferences.BonAppetitPreferencesActivity"/>
+        <activity
+                android:name=".ui.selectstaffmember.StaffMembersListActivity"
+                android:screenOrientation="portrait"
+                />
+        <activity
+                android:name=".ui.preferences.BonAppetitPreferencesActivity"
+                android:screenOrientation="portrait"
+                />
         <!--Activity to create/update an order.
         Always hide the soft keyboard when starting the activity.-->
         <activity
                 android:name=".ui.editorder.EditOrderActivity"
                 android:windowSoftInputMode="stateHidden"
+                android:screenOrientation="portrait"
                 />
     </application>
 
