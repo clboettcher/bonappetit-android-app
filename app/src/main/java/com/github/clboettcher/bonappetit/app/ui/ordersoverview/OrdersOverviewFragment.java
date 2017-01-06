@@ -208,7 +208,6 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         final long orderCount = ordersResource.count();
         // Ask for confirmation before finishing the orders.
 
-        String positiveButtonText;
         String message;
         if (orderCount == 1) {
             message = String.format(getActivity().getString(
