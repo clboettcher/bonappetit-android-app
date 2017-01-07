@@ -212,7 +212,6 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
             customerEntity.setType(CustomerEntityType.FREE_TEXT);
             customerEntity.setValue(newCustomer);
-            saveNewCustomerAndSwitchFragment(customerEntity);
         } else {
             // Otherwise a table number has been clicked
             String buttonText = (String) ((Button) view).getText();
