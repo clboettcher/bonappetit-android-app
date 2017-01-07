@@ -102,8 +102,8 @@
     <string name="fragment_select_customer_table_select_explanation_text">Tischnummer antippen.</string>
     <string name="fragment_select_customer_table_prefix">Tisch</string>
     <string name="fragment_select_customer_dialog_confirm_change_customer_title">Offene Bestellungen vorhanden!</string>
-    <string name="fragment_select_customer_dialog_confirm_change_customer_message" formatted="false">
-        Der Kunde für %d nicht gedruckte Bestellung(en) wird auf \"%s\" geändert</string>
+    <string name="fragment_select_customer_dialog_confirm_change_customer_message">
+        Der Kunde für %1$d nicht gedruckte Bestellung(en) wird auf \"%2$s\" geändert</string>
 
     <!--***********************************************************************************************************-->
     <!--MenuFragment-->

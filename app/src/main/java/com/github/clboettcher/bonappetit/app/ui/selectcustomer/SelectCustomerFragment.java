@@ -247,7 +247,10 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
                     .setMessage(
                             String.format(
                                     getString(R.string.fragment_select_customer_dialog_confirm_change_customer_message),
-                                    orderCount, UiUtils.getDisplayText(Optional.of(customerEntity), true)))
+                                    orderCount,
+                                    UiUtils.getDisplayText(Optional.of(customerEntity), true)
+                            )
+                    )
                     .setPositiveButton(getString(R.string.general_action_change), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             saveNewCustomerAndSwitchFragment(customerEntity);
