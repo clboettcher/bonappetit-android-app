@@ -212,6 +212,9 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
             // Check if a customer name has been entered in the freetext field
             final String newCustomer;
             newCustomer = freetextCustomer.getText().toString();
+            // Reset text on the input text field
+            freetextCustomer.setText("");
+
             CustomerEntity customerEntity = new CustomerEntity();
             customerEntity.setType(CustomerEntityType.FREE_TEXT);
             customerEntity.setValue(newCustomer);
