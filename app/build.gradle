@@ -10,6 +10,12 @@ repositories {
     jcenter()
 }
 
+release {
+    tagCommitMessage = '#13 Gradle Release Plugin - creating tag: '
+    newVersionCommitMessage = '#13 Gradle Release Plugin - new version commit: '
+    tagTemplate = 'v${version}'
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
