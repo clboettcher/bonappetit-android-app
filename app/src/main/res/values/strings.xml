@@ -13,6 +13,7 @@
     <string name="general_action_retry">Wiederholen</string>
     <string name="general_action_increment">+</string>
     <string name="general_action_decrement">-</string>
+    <string name="general_action_change">Ändern</string>
     <string name="general_action_update">Aktualisieren</string>
     <string name="general_toast_cancel_notification">Abgebrochen</string>
     <string name="general_edit_text_hint">Antippen, um Eingabe zu machen</string>
@@ -100,15 +101,22 @@
     <string name="fragment_select_customer_table_select_label_text">Tischauswahl</string>
     <string name="fragment_select_customer_table_select_explanation_text">Tischnummer antippen.</string>
     <string name="fragment_select_customer_table_prefix">Tisch</string>
+    <string name="fragment_select_customer_dialog_confirm_change_customer_title">Offene Bestellungen vorhanden!</string>
+    <string name="fragment_select_customer_dialog_confirm_change_customer_message" formatted="false">
+        Der Kunde für %d nicht gedruckte Bestellung(en) wird auf \"%s\" geändert</string>
 
     <!--***********************************************************************************************************-->
     <!--MenuFragment-->
     <!--***********************************************************************************************************-->
     <string name="fragment_menu_tab_title">Speisekarte</string>
-    <string name="fragment_menu_note">Tippe auf ein Gericht um es hinzuzufügen und wenn du fertig bist auf \"Zusammenfassung anzeigen\" um deine Bestellung abzuschließen und die Bons zu drucken.</string>
+    <string name="fragment_menu_note">
+        Tippe auf ein Gericht um es hinzuzufügen und wenn du fertig bist auf \"Zusammenfassung anzeigen\" um
+        deine Bestellung abzuschließen und die Bons zu drucken.</string>
     <string name="fragment_menu_button_show_overview">Zusammenfassung anzeigen</string>
-    <string name="fragment_menu_inactive_note">Wähle zunächst im Tab \"%s\" aus, für wen du die Bestellung aufnehmen möchtest.</string>
-    <string name="fragment_menu_update_failed_note">Daten können nicht geladen werden.\nBitte versuche es erneut.</string>
+    <string name="fragment_menu_inactive_note">Wähle zunächst im Tab \"%s\" aus, für wen du die Bestellung
+        aufnehmen möchtest.</string>
+    <string name="fragment_menu_update_failed_note">Daten können nicht geladen werden.\nBitte
+        versuche es erneut.</string>
 
 
     <!--***********************************************************************************************************-->
@@ -147,7 +155,6 @@
     <string name="fragment_orders_overview_dialog_finish_orders_confirmation_message_singular">%d Bestellung drucken?</string>
     <string name="fragment_orders_overview_dialog_finish_orders_confirmation_message_plural">%d Bestellungen drucken?</string>
     <string name="fragment_orders_overview_dialog_finish_orders_confirmation_affirmative">Drucken</string>
-
 
     <!--***********************************************************************************************************-->
     <!--EditOrderActivity-->

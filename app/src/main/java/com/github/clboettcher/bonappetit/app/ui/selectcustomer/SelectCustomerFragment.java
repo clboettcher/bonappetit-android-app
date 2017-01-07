@@ -20,7 +20,9 @@
 package com.github.clboettcher.bonappetit.app.ui.selectcustomer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,11 +41,13 @@ import com.github.clboettcher.bonappetit.app.core.DiComponent;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerDao;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
+import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
+import com.github.clboettcher.bonappetit.app.ui.UiUtils;
 import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
@@ -87,6 +91,9 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
     @Inject
     CustomerDao customerDao;
+
+    @Inject
+    OrdersResource ordersResource;
 
     private boolean initialized = false;
 
@@ -186,42 +193,28 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
         }
     }
 
-
-    //        TODO: review warning and reenable when db setup for orders is completed
-//        final long orderCount = DatabaseAccessHelper.getInstance().getOrderCount(dbHelper);
-    // If unprinted orders are present, ask before overwriting the customer.
-//        if (orderCount != 0) {
-//            new AlertDialog.Builder(getActivity())
-//                    .setTitle("Offene Bestellungen vorhanden!")
-//                    .setIcon(R.drawable.ic_alerts_and_states_warning)
-//                    .setMessage(String.format("Der Kunde für %d nicht gedruckte Bestellung(en) wird auf \"%s\" geändert", orderCount, newCustomer))
-//                    .setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            saveNewCustomerAndSwitchFragment(newCustomer);
-//
-//                        }
-//                    })
-//                    .setNegativeButton(getString(R.string.cancel), null)
-//                    .show();
     public void onClick(View view) {
         if (this.buttonSelectStaffMemberCustomer.equals(view)) {
             Intent intent = new Intent(getActivity(), StaffMembersListActivity.class);
             this.startActivityForResult(intent,
                     StaffMembersListActivity.SELECT_STAFF_MEMBER_AS_CUSTOMER_REQUEST);
-        } else if (this.buttonFreetextConfirm.equals(view)) {
+            return;
+        }
+
+
+        final CustomerEntity customerEntity = new CustomerEntity();
+        if (this.buttonFreetextConfirm.equals(view)) {
             // Check if a customer name has been entered in the freetext field
             final String newCustomer;
             newCustomer = freetextCustomer.getText().toString();
             // Reset text on the input text field
             freetextCustomer.setText("");
 
-            CustomerEntity customerEntity = new CustomerEntity();
             customerEntity.setType(CustomerEntityType.FREE_TEXT);
             customerEntity.setValue(newCustomer);
             saveNewCustomerAndSwitchFragment(customerEntity);
         } else {
             // Otherwise a table number has been clicked
-            CustomerEntity newCustomer = new CustomerEntity();
             String buttonText = (String) ((Button) view).getText();
             String buttonTag = (String) view.getTag();
 
@@ -236,10 +229,35 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
             } else {
                 displayValue = buttonText;
             }
-            newCustomer.setTableDisplayValue(displayValue);
-            newCustomer.setTableNumber(tableNumber);
-            newCustomer.setType(CustomerEntityType.TABLE);
-            saveNewCustomerAndSwitchFragment(newCustomer);
+            customerEntity.setTableDisplayValue(displayValue);
+            customerEntity.setTableNumber(tableNumber);
+            customerEntity.setType(CustomerEntityType.TABLE);
+        }
+
+        // If unprinted orders are present, ask before overwriting the customer.
+        confirmAndChangeCustomer(customerEntity);
+    }
+
+    private void confirmAndChangeCustomer(final CustomerEntity customerEntity) {
+        final long orderCount = this.ordersResource.count();
+        if (orderCount > 0) {
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.fragment_select_customer_dialog_confirm_change_customer_title)
+                    .setIcon(R.drawable.ic_alerts_and_states_warning)
+                    .setMessage(
+                            String.format(
+                                    getString(R.string.fragment_select_customer_dialog_confirm_change_customer_message),
+                                    orderCount, UiUtils.getDisplayText(Optional.of(customerEntity), true)))
+                    .setPositiveButton(getString(R.string.general_action_change), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            saveNewCustomerAndSwitchFragment(customerEntity);
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.general_action_cancel), null)
+                    .show();
+        } else {
+            // If we have no orders we can just save the new customer without confirmation.
+            saveNewCustomerAndSwitchFragment(customerEntity);
         }
     }
 
@@ -259,7 +277,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
                 CustomerEntity customerEntity = new CustomerEntity();
                 customerEntity.setType(CustomerEntityType.STAFF_MEMBER);
                 customerEntity.setStaffMember(selectedStaffMember);
-                saveNewCustomerAndSwitchFragment(customerEntity);
+
+                confirmAndChangeCustomer(customerEntity);
             } else {
                 Log.i(TAG, String.format("Received activity result for " +
                         "request code SELECT_STAFF_MEMBER_REQUEST with " +

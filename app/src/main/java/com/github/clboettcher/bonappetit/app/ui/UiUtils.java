@@ -23,6 +23,7 @@ import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.google.common.base.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 public final class UiUtils {
     /**
@@ -32,6 +33,10 @@ public final class UiUtils {
     }
 
     public static String getDisplayText(Optional<CustomerEntity> customerOpt) {
+        return getDisplayText(customerOpt, false);
+    }
+
+    public static String getDisplayText(Optional<CustomerEntity> customerOpt, boolean trimResult) {
         String customerDisplayText;
         if (customerOpt.isPresent()) {
             CustomerEntity customer = customerOpt.get();
@@ -56,6 +61,6 @@ public final class UiUtils {
         } else {
             customerDisplayText = "";
         }
-        return customerDisplayText;
+        return trimResult ? StringUtils.trim(customerDisplayText) : customerDisplayText;
     }
 }
