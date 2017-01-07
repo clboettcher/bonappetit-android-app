@@ -166,6 +166,6 @@
     <string name="activity_edit_order_toast_cancel_edit">Änderungen verworfen</string>
     <string name="activity_edit_order_toast_cancel_create">Bestellung verworfen</string>
     <string name="activity_edit_order_toast_confirm_edit">Änderungen erfolgreich gespeichert</string>
-    <string name="activity_edit_order_toast_confirm_create">Bestellung erfolgreich aufgenommen</string>
+    <string name="activity_edit_order_toast_confirm_create">Bestellung erfolgreich hinzugefügt</string>
 
 </resources>
