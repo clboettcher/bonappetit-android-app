@@ -19,7 +19,9 @@
  */
 package com.github.clboettcher.bonappetit.app.ui.preferences;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
 import com.github.clboettcher.bonappetit.app.R;
 
@@ -29,5 +31,16 @@ public class BonAppetitPreferencesFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
+
+        // Set the read only app version preference from the manifest.
+        EditTextPreference versionPref = (EditTextPreference) findPreference(getString(R.string.prefs_key_version));
+        String version;
+        try {
+            version = getActivity().getPackageManager().getPackageInfo(
+                    getActivity().getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        versionPref.setSummary(String.format("v%s", version));
     }
 }

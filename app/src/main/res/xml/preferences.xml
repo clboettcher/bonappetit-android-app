@@ -74,4 +74,12 @@
             android:defaultValue="false"
             />
 
+    <EditTextPreference
+            android:key="@string/prefs_key_version"
+            android:title="@string/prefs_title_version"
+            android:enabled="false"
+            android:selectable="false"
+            android:persistent="false"
+            android:shouldDisableView="false"/>
+
 </PreferenceScreen>

@@ -76,6 +76,9 @@
     <string name="prefs_dialog_message_show_debug_messages">Lege fest, ob Debug Messages angezeigt werden sollen
         (an) oder nicht (aus)</string>
 
+    <string name="prefs_key_version">prefs_key_version</string>
+    <string name="prefs_title_version">App-Version</string>
+
     <string name="prefs_filename_bonappetit">de.bonappetit.prefs_filename_bonappetit</string>
     <string name="prefs_key_customer">prefs_key_customer</string>
 
