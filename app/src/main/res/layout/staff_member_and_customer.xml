@@ -21,6 +21,7 @@
                 android:id="@+id/fragmentMenuStaffMember"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/general_placeholder_short"
                 />
     </TableRow>
 
@@ -38,6 +39,7 @@
                 android:id="@+id/fragmentMenuCustomer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/general_placeholder_short"
                 />
     </TableRow>
 </TableLayout>
