@@ -140,7 +140,6 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
 
         updateStaffMember();
 
-        // TODO: refactor id to be consistent with naming
         // Create the grid view for the table-customers
         TableLayout tablesContainer = (TableLayout) rootView.findViewById(R.id.fragmentSelectCustomerTables);
         List<Button> buttons = Arrays.asList(
