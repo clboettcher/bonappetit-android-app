@@ -4,50 +4,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
         >
-    <!-- Username & Customer -->
-    <TableLayout
-            android:layout_width="fill_parent"
+
+    <com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView
+            android:id="@+id/staffMemberAndCustomerView"
             android:layout_height="wrap_content"
-            >
-
-        <!-- Username -->
-
-        <TableRow>
-
-            <TextView
-                    android:id="@+id/textview_take_orders_overview_username_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/general_staff_member_label"
-                    />
-
-            <TextView
-                    android:id="@+id/take_orders_overview_textview_username_label_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-        </TableRow>
-
-
-        <!-- Customer -->
-
-        <TableRow>
-
-            <TextView
-                    android:id="@+id/textview_take_orders_overview_customer_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/general_customer_label"
-                    />
-
-            <TextView
-                    android:id="@+id/take_orders_overview_textview_customer_label_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-
-        </TableRow>
-    </TableLayout>
+            android:layout_width="match_parent"
+            />
 
     <include layout="@layout/general_horizontal_spacer"/>
 

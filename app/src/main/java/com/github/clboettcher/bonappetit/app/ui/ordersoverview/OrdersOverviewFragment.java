@@ -38,11 +38,8 @@ import com.github.clboettcher.bonappetit.app.data.menu.dao.ItemDao;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.order.entity.ItemOrderEntity;
 import com.github.clboettcher.bonappetit.app.data.order.event.FinishOrdersCompletedEvent;
-import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
-import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
-import com.github.clboettcher.bonappetit.app.ui.UiUtils;
+import com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
@@ -59,20 +56,13 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
     public static final String TAG = OrdersOverviewFragment.class.getName();
 
     private boolean initialized = false;
-    private TextView staffMemberTextView;
-    private TextView customerTextView;
+    private StaffMemberAndCustomerView staffMemberAndCustomerView;
     private OnSwitchToTabListener mListener;
     private ViewFlipper viewFlipper;
     private AlertDialog errorDialog;
 
     @Inject
     CustomerDao customerDao;
-
-    @Inject
-    StaffMemberDao staffMemberDao;
-
-    @Inject
-    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @Inject
     OrdersResource ordersResource;
@@ -144,8 +134,7 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             }
         });
 
-        staffMemberTextView = (TextView) rootView.findViewById(R.id.take_orders_overview_textview_username_label_text);
-        customerTextView = (TextView) rootView.findViewById(R.id.take_orders_overview_textview_customer_label_text);
+        staffMemberAndCustomerView = (StaffMemberAndCustomerView) rootView.findViewById(R.id.staffMemberAndCustomerView);
 
         // Initialize the order list that displays a collection of orders with an adapter.
         ListView orderContainer = (ListView) rootView.findViewById(R.id.fragmentOrdersOverviewListViewOrders);
@@ -305,29 +294,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
         }
 
         this.finishOrdersButton.setEnabled(true);
-        updateStaffMemberAndCustomer();
+        this.staffMemberAndCustomerView.updateCustomerAndStaffMember();
         updateOrdersTable();
-    }
-
-    private void updateStaffMemberAndCustomer() {
-        // Customer
-        final Optional<CustomerEntity> customerOpt = customerDao.get();
-        String customerDisplayText = UiUtils.getDisplayText(customerOpt);
-        customerTextView.setText(customerDisplayText);
-
-        // Staff member
-        Optional<SelectedStaffMemberEntity> selectedStaffMemberOpt = selectedStaffMemberDao.get();
-        if (selectedStaffMemberOpt.isPresent()) {
-            SelectedStaffMemberEntity selectedStaffMemberEntity = selectedStaffMemberOpt.get();
-            String name = String.format(" %s %s",
-                    selectedStaffMemberEntity.getStaffMemberFirstName(),
-                    selectedStaffMemberEntity.getStaffMemberLastName());
-
-            if (!this.staffMemberDao.exists(selectedStaffMemberEntity.getStaffMemberId())) {
-                name += " (!)";
-            }
-            this.staffMemberTextView.setText(name);
-        }
     }
 
     private void updateOrdersTable() {
