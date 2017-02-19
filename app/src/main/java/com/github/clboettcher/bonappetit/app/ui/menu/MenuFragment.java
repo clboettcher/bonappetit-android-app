@@ -39,11 +39,8 @@ import com.github.clboettcher.bonappetit.app.data.menu.entity.MenuEntity;
 import com.github.clboettcher.bonappetit.app.data.menu.event.MenuUpdateCompletedEvent;
 import com.github.clboettcher.bonappetit.app.data.menu.event.PerformMenuUpdateEvent;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
-import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
-import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
-import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
-import com.github.clboettcher.bonappetit.app.ui.UiUtils;
+import com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
@@ -62,9 +59,7 @@ public class MenuFragment extends TakeOrdersFragment {
 
     private static final String TAG = MenuFragment.class.getName();
 
-    private TextView staffMemberText;
-
-    private TextView customerText;
+    private StaffMemberAndCustomerView staffMemberAndCustomerView;
 
     private OnSwitchToTabListener mListener;
 
@@ -81,12 +76,6 @@ public class MenuFragment extends TakeOrdersFragment {
 
     @Inject
     CustomerDao customerDao;
-
-    @Inject
-    StaffMemberDao staffMemberDao;
-
-    @Inject
-    SelectedStaffMemberDao selectedStaffMemberDao;
 
     @Inject
     OrdersResource ordersResource;
@@ -171,14 +160,12 @@ public class MenuFragment extends TakeOrdersFragment {
         // Configure the active view
         initActiveView(rootView);
 
-        updateCustomerAndStaffMember();
         return rootView;
     }
 
     private void initActiveView(View rootView) {
-        staffMemberText = (TextView) rootView.findViewById(R.id.fragmentMenuStaffMember);
-        customerText = (TextView) rootView.findViewById(R.id.fragmentMenuCustomer);
-
+        this.staffMemberAndCustomerView = (StaffMemberAndCustomerView) rootView
+                .findViewById(R.id.staffMemberAndCustomerView);
         Button buttonOverview = (Button) rootView.findViewById(R.id.fragmentMenuButtonSwitchToOverview);
         buttonOverview.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -251,7 +238,7 @@ public class MenuFragment extends TakeOrdersFragment {
                 customer.orNull(),
                 menuLoadable));
 
-        updateCustomerAndStaffMember();
+        this.staffMemberAndCustomerView.updateCustomerAndStaffMember();
         refreshOrderCounts();
 
         if (customer.isPresent()) {
@@ -289,27 +276,6 @@ public class MenuFragment extends TakeOrdersFragment {
         View newView = viewFlipper.findViewById(state.getViewId());
         int newIndex = viewFlipper.indexOfChild(newView);
         viewFlipper.setDisplayedChild(newIndex);
-    }
-
-    private void updateCustomerAndStaffMember() {
-        final Optional<CustomerEntity> customerOpt = customerDao.get();
-        String customerDisplayText = UiUtils.getDisplayText(customerOpt);
-        customerText.setText(customerDisplayText);
-
-        Optional<SelectedStaffMemberEntity> staffMemRefOpt = selectedStaffMemberDao.get();
-        if (staffMemRefOpt.isPresent()) {
-            SelectedStaffMemberEntity selectedStaffMemberEntity = staffMemRefOpt.get();
-            String name = String.format(" %s %s",
-                    selectedStaffMemberEntity.getStaffMemberFirstName(),
-                    selectedStaffMemberEntity.getStaffMemberLastName());
-            if (!this.staffMemberDao.exists(selectedStaffMemberEntity.getStaffMemberId())) {
-                name += " (!)";
-            }
-
-            staffMemberText.setText(name);
-        } else {
-            staffMemberText.setText("");
-        }
     }
 
     @Override

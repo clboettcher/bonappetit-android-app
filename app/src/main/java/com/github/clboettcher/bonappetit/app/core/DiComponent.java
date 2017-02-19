@@ -29,6 +29,7 @@ import com.github.clboettcher.bonappetit.app.ui.ordersoverview.OrdersOverviewFra
 import com.github.clboettcher.bonappetit.app.ui.preferences.BonAppetitPreferencesActivity;
 import com.github.clboettcher.bonappetit.app.ui.selectcustomer.SelectCustomerFragment;
 import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
+import com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import dagger.Component;
 
@@ -59,6 +60,8 @@ public interface DiComponent {
     void inject(EditOrderActivity editOrderActivity);
 
     void inject(OrdersOverviewFragment ordersOverviewFragment);
+
+    void inject(StaffMemberAndCustomerView staffMemberAndCustomerView);
 
     StaffMemberService staffMembersService();
 

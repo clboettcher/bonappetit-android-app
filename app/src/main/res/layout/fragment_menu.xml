@@ -18,47 +18,11 @@
             android:orientation="vertical"
             >
 
-        <!-- Staff member & Customer -->
-        <TableLayout
-                android:layout_width="fill_parent"
+        <com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView
+                android:id="@+id/staffMemberAndCustomerView"
                 android:layout_height="wrap_content"
-                >
-
-            <!-- Staff member -->
-
-            <TableRow>
-
-                <TextView
-                        android:id="@+id/fragmentMenuStaffMemberLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/general_staff_member_label"
-                        />
-
-                <TextView
-                        android:id="@+id/fragmentMenuStaffMember"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-            </TableRow>
-
-            <!-- Customer -->
-            <TableRow>
-
-                <TextView
-                        android:id="@+id/fragmentMenuCustomerLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/general_customer_label"
-                        />
-
-                <TextView
-                        android:id="@+id/fragmentMenuCustomer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        />
-            </TableRow>
-        </TableLayout>
+                android:layout_width="match_parent"
+                />
 
         <include layout="@layout/general_horizontal_spacer"/>
 

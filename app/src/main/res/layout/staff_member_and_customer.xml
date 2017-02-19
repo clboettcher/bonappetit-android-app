@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Staff member & Customer -->
+<TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <!-- Staff member -->
+
+    <TableRow>
+
+        <TextView
+                android:id="@+id/fragmentMenuStaffMemberLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general_staff_member_label"
+                />
+
+        <TextView
+                android:id="@+id/fragmentMenuStaffMember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+    </TableRow>
+
+    <!-- Customer -->
+    <TableRow>
+
+        <TextView
+                android:id="@+id/fragmentMenuCustomerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/general_customer_label"
+                />
+
+        <TextView
+                android:id="@+id/fragmentMenuCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+    </TableRow>
+</TableLayout>
