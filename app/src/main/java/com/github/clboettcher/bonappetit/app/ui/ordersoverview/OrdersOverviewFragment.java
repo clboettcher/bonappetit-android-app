@@ -106,7 +106,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
         Button switchToSelectCustomerButton = (Button) rootView.findViewById(
                 R.id.fragmentOrdersOverviewInactiveButtonSwitchToSelectCustomer);
-        switchToSelectCustomerButton.setText(String.format(String.valueOf(switchToSelectCustomerButton.getText()),
+        switchToSelectCustomerButton.setText(String.format(
+                String.valueOf(switchToSelectCustomerButton.getText()),
                 selectCustomerTabTitle));
         switchToSelectCustomerButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -123,7 +124,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             }
         });
 
-        TextView t = (TextView) rootView.findViewById(R.id.fragmentOrdersOverviewInactiveTextViewExplanation);
+        TextView t = (TextView) rootView
+                .findViewById(R.id.fragmentOrdersOverviewInactiveTextViewExplanation);
         t.setText(String.format(String.valueOf(t.getText()), selectCustomerTabTitle, menuTabTitle));
 
         // configure the active view
@@ -134,10 +136,12 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             }
         });
 
-        staffMemberAndCustomerView = (StaffMemberAndCustomerView) rootView.findViewById(R.id.staffMemberAndCustomerView);
+        staffMemberAndCustomerView = (StaffMemberAndCustomerView) rootView
+                .findViewById(R.id.staffMemberAndCustomerView);
 
         // Initialize the order list that displays a collection of orders with an adapter.
-        ListView orderContainer = (ListView) rootView.findViewById(R.id.fragmentOrdersOverviewListViewOrders);
+        ListView orderContainer = (ListView) rootView
+                .findViewById(R.id.fragmentOrdersOverviewListViewOrders);
         adapter = new ItemOrderAdapter(new ArrayList<ItemOrderEntity>(),
                 ordersResource,
                 mListener,
@@ -288,7 +292,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
             this.setState(OrdersOverviewViewState.LOADING);
         } else if (finishOrdersLoadable.isFailed()) {
             this.setState(OrdersOverviewViewState.ACTIVE);
-            Log.e(TAG, String.format("Finishing orders failed with code %s", finishOrdersLoadable.getErrorCode()));
+            Log.e(TAG, String.format("Finishing orders failed with code %s",
+                    finishOrdersLoadable.getErrorCode()));
             showErrorDialog(finishOrdersLoadable.getErrorCode());
         } else if (finishOrdersLoadable.isInitial()) {
             this.setState(OrdersOverviewViewState.ACTIVE);
