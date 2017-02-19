@@ -9,28 +9,11 @@
               android:paddingTop="@dimen/activity_vertical_margin"
         >
 
-    <!-- Staff Member -->
-    <LinearLayout
-            android:layout_width="wrap_content"
+    <com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView
+            android:id="@+id/staffMemberAndCustomerView"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/general_staff_member_label"
-                />
-
-        <TextView
-                android:id="@+id/fragmentSelectCustomerStaffMember"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
-
-
-    </LinearLayout>
-
+            android:layout_width="match_parent"
+            />
 
     <include layout="@layout/general_horizontal_spacer"/>
 

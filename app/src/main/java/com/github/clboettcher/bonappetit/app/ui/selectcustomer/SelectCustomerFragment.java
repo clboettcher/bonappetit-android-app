@@ -33,7 +33,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
-import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.github.clboettcher.bonappetit.app.R;
@@ -43,12 +42,12 @@ import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntity;
 import com.github.clboettcher.bonappetit.app.data.customer.CustomerEntityType;
 import com.github.clboettcher.bonappetit.app.data.order.OrdersResource;
 import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberDao;
-import com.github.clboettcher.bonappetit.app.data.staff.SelectedStaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberDao;
 import com.github.clboettcher.bonappetit.app.data.staff.StaffMemberEntity;
 import com.github.clboettcher.bonappetit.app.ui.OnSwitchToTabListener;
 import com.github.clboettcher.bonappetit.app.ui.UiUtils;
 import com.github.clboettcher.bonappetit.app.ui.selectstaffmember.StaffMembersListActivity;
+import com.github.clboettcher.bonappetit.app.ui.staffmemberandcustomer.StaffMemberAndCustomerView;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersActivity;
 import com.github.clboettcher.bonappetit.app.ui.takeorders.TakeOrdersFragment;
 import com.google.common.base.Optional;
@@ -69,8 +68,8 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
      */
     private static final String TAG = SelectCustomerFragment.class.getName();
 
-    @BindView(R.id.fragmentSelectCustomerStaffMember)
-    TextView selectedStaffMember;
+    @BindView(R.id.staffMemberAndCustomerView)
+    StaffMemberAndCustomerView staffMemberAndCustomerView;
 
     private OnSwitchToTabListener switchToTabListener;
 
@@ -115,7 +114,7 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume() Activity set to " + getActivity() + ", isAdded(): " + isAdded());
-        updateStaffMember();
+        this.update();
     }
 
     @Override
@@ -129,7 +128,7 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
         }
 
         Log.d(TAG, "update() called, getActivity(): " + getActivity() + ", isAdded(): " + isAdded());
-        updateStaffMember();
+        this.staffMemberAndCustomerView.updateCustomerAndStaffMember();
     }
 
     @Override
@@ -137,8 +136,6 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
         Log.d(TAG, "onCreateView()" + ", isAdded(): " + isAdded());
         View rootView = inflater.inflate(R.layout.fragment_select_customer, container, false);
         ButterKnife.bind(this, rootView);
-
-        updateStaffMember();
 
         // Create the grid view for the table-customers
         TableLayout tablesContainer = (TableLayout) rootView.findViewById(R.id.fragmentSelectCustomerTables);
@@ -172,24 +169,10 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
         buttonFreetextConfirm.setOnClickListener(this);
         buttonFreetextConfirm.setEnabled(false);
         freetextCustomer.addTextChangedListener(new FreeTextCustomerTextWatcher(buttonFreetextConfirm));
+
+        this.update();
+
         return rootView;
-    }
-
-    private void updateStaffMember() {
-        Optional<SelectedStaffMemberEntity> staffMemberRefOpt = selectedStaffMemberDao.get();
-        if (staffMemberRefOpt.isPresent()) {
-            SelectedStaffMemberEntity selectedStaffMemberEntity = staffMemberRefOpt.get();
-            String name = String.format("%s %s",
-                    selectedStaffMemberEntity.getStaffMemberFirstName(),
-                    selectedStaffMemberEntity.getStaffMemberLastName());
-
-            if (!this.staffMemberDao.exists(selectedStaffMemberEntity.getStaffMemberId())) {
-                name += " (!)";
-            }
-            this.selectedStaffMember.setText(name);
-        } else {
-            selectedStaffMember.setText("");
-        }
     }
 
     public void onClick(View view) {
@@ -291,7 +274,7 @@ public class SelectCustomerFragment extends TakeOrdersFragment implements View.O
     }
 
     private void saveNewCustomerAndSwitchFragment(CustomerEntity customerEntity) {
-        // hide the softkeyboard
+        // Hide the soft keyboard.
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(freetextCustomer.getWindowToken(), 0);
