@@ -69,15 +69,19 @@ public class StaffMemberAndCustomerView extends TableLayout {
     }
 
     private void init(Context context) {
-        BonAppetitApplication bonAppetitApplication = (BonAppetitApplication) context.getApplicationContext();
-        DiComponent diComponent = bonAppetitApplication.getDiComponent();
-        diComponent.inject(this);
+        if (!this.isInEditMode()) {
+            BonAppetitApplication bonAppetitApplication = (BonAppetitApplication) context.getApplicationContext();
+            DiComponent diComponent = bonAppetitApplication.getDiComponent();
+            diComponent.inject(this);
+        }
 
         inflate(getContext(), R.layout.staff_member_and_customer, this);
 
         staffMemberText = (TextView) findViewById(R.id.fragmentMenuStaffMember);
         customerText = (TextView) findViewById(R.id.fragmentMenuCustomer);
 
-        this.updateCustomerAndStaffMember();
+        if (!this.isInEditMode()) {
+            this.updateCustomerAndStaffMember();
+        }
     }
 }
