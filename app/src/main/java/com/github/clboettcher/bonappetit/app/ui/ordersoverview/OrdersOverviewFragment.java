@@ -246,7 +246,8 @@ public class OrdersOverviewFragment extends TakeOrdersFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFinishOrdersCompletedEvent(FinishOrdersCompletedEvent event) {
-        Log.i(TAG, String.format("Received %s. Triggering update()", FinishOrdersCompletedEvent.class.getSimpleName()));
+        Log.i(TAG, String.format("Received %s. Triggering update()", FinishOrdersCompletedEvent.class
+                .getSimpleName()));
         this.update();
     }
 
